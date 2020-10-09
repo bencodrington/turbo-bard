@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './App.scss';
 import SoundscapeList from './components/SoundscapeList';
 import { Soundscape } from './models/Soundscape';
 import AppHeader from './widgets/AppHeader';
