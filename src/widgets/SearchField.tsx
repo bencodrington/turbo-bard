@@ -1,5 +1,7 @@
 import React, { ChangeEvent } from "react";
 
+import "./SearchField.scss";
+
 type SearchFieldProps = {
   value: string,
   onChange: (newText: string) => void,

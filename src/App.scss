@@ -1,3 +1,5 @@
+@import "./mixins.scss";
+
 :root {
   --phanary: #FFE249;
   --azure: #2A3DE2;
@@ -41,8 +43,7 @@ h4 {
 }
 
 body, p, span {
-  font-family: var(--font--signika);
-  font-size: 1.125rem;
+  @include body;
 }
 
 @media (prefers-reduced-motion: no-preference) {
