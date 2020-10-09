@@ -1,16 +1,16 @@
 import React from "react";
 import DefaultButton from "./DefaultButton";
 
-export default function NewSoundscapeButton() {
+type NewSoundscapeButtonProps = {
+  onClick: () => void
+};
 
-  function createNewSoundscape() {
-    console.log('createNewSoundscape');
-  }
+export default function NewSoundscapeButton({onClick}: NewSoundscapeButtonProps) {
 
   return (
     <DefaultButton
       text="Create New Soundscape"
-      onClick={createNewSoundscape}
+      onClick={onClick}
     />
   );
 }

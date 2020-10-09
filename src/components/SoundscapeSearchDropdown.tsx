@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { Soundscape } from "../models/Soundscape";
 import NewSoundscapeButton from "../widgets/buttons/NewSoundscapeButton";
 import SearchField from "../widgets/SearchField";
 import SearchDropdown from "./SearchDropdown";
 
-export default function SoundscapeSearchDropdown() {
+type SoundscapeSearchDropdownProps = {
+  addSoundscape: (soundscape: Soundscape) => void
+};
+
+export default function SoundscapeSearchDropdown({addSoundscape}: SoundscapeSearchDropdownProps) {
   const [results, setResults] = useState<JSX.Element[]>([]);
   const [isFetchingResults, setIsFetchingResults] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -30,7 +35,6 @@ export default function SoundscapeSearchDropdown() {
     }
   }, [searchText]);
 
-
   const searchField = (
     <SearchField
       value={searchText}
@@ -39,13 +43,19 @@ export default function SoundscapeSearchDropdown() {
     />
   );
 
+  const trailing = (
+    <NewSoundscapeButton
+      onClick={() => addSoundscape({name: searchText, tracks: []})}
+    />
+  )
+
   return (
     <SearchDropdown
       searchField={searchField}
       results={results}
       suggestions={[]}
       isFetchingResults={isFetchingResults}
-      trailing={<NewSoundscapeButton />}
+      trailing={trailing}
     />
   );
 }
