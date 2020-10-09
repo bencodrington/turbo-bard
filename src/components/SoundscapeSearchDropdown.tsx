@@ -4,34 +4,32 @@ import NewSoundscapeButton from "../widgets/buttons/NewSoundscapeButton";
 import SearchField from "../widgets/SearchField";
 import SearchDropdown from "./SearchDropdown";
 
+import { fetchSoundscapes } from "../services/database";
+
 type SoundscapeSearchDropdownProps = {
-  addSoundscape: (soundscape: Soundscape) => void
+  addSoundscape: (soundscape: Soundscape) => void,
+  nextId: string
 };
 
-export default function SoundscapeSearchDropdown({addSoundscape}: SoundscapeSearchDropdownProps) {
+export default function SoundscapeSearchDropdown({ addSoundscape, nextId }: SoundscapeSearchDropdownProps) {
   const [results, setResults] = useState<JSX.Element[]>([]);
   const [isFetchingResults, setIsFetchingResults] = useState(false);
   const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
-
-    let request: NodeJS.Timeout;
-    
-    async function fetchSoundscapes() {
-      // TODO: replace with actual fetch
-      const results: string[] = await new Promise((resolve) => {
-        request = setTimeout(() => {
-          resolve([`results for "${searchText}": ` + Math.random()]);
-        }, 1000);
-      });
-      setResults(results.map(result => <li key={result}>{result}</li>));
+    let isCancelled = false;
+    async function fetch() {
+      const results = await fetchSoundscapes(searchText);
+      if (isCancelled) return;
+      setResults(results.map(soundscape => <li key={soundscape.id}>{soundscape.name}</li>));
       setIsFetchingResults(false);
     }
 
     setIsFetchingResults(true);
-    fetchSoundscapes();
+    fetch();
+
     return () => {
-      clearTimeout(request);
+      isCancelled = true;
     }
   }, [searchText]);
 
@@ -45,7 +43,7 @@ export default function SoundscapeSearchDropdown({addSoundscape}: SoundscapeSear
 
   const trailing = (
     <NewSoundscapeButton
-      onClick={() => addSoundscape({name: searchText, tracks: []})}
+      onClick={() => addSoundscape({ id: nextId, name: searchText, tracks: [] })}
     />
   )
 

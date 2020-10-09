@@ -33,7 +33,10 @@ export default function SoundscapeList({
       {soundscapeListItems}
       <AddSoundscapeButton onClick={toggleIsSearchOpen} />
       {isSearchOpen
-        ? <SoundscapeSearchDropdown addSoundscape={addSoundscape} />
+        ? <SoundscapeSearchDropdown
+          addSoundscape={addSoundscape}
+          nextId={soundscapes.length.toString()}
+        />
         : null
       }
     </div>
