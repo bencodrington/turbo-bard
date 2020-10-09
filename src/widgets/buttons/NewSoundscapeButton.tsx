@@ -9,7 +9,7 @@ export default function NewSoundscapeButton({onClick}: NewSoundscapeButtonProps)
 
   return (
     <DefaultButton
-      text="Create New Soundscape"
+      text="Create new soundscape"
       onClick={onClick}
     />
   );
