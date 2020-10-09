@@ -2,7 +2,6 @@ import React from "react";
 
 type SearchDropdownProps = {
   isFetchingResults: Boolean,
-  onSearchTextUpdated: (newText: string) => void,
   searchField: JSX.Element,
   results: JSX.Element[],
   suggestions: JSX.Element[],
@@ -17,12 +16,16 @@ export default function SearchDropdown(props: SearchDropdownProps) {
       </div>
     )
     : null;
+
+  const results = props.isFetchingResults
+    ? <p>Loading...</p>
+    : props.results;
   return (
     <div className="search-dropdown-container">
       Search Dropdown
       {props.searchField}
       {/* TODO: suggestions */}
-      {props.results}
+      {results}
       {trailing}
     </div>
   );
