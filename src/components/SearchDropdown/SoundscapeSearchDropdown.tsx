@@ -40,7 +40,7 @@ export default function SoundscapeSearchDropdown({ addSoundscape, nextId }: Soun
     return () => {
       isCancelled = true;
     }
-  }, [searchText]);
+  }, [searchText, addSoundscape]);
 
   const searchField = (
     <SearchField
