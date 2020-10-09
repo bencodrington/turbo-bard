@@ -21,10 +21,10 @@ export default function SoundscapeList({
   }
 
   const soundscapeListItems = soundscapes.map(
-    (soundscape, index) => (
+    soundscape => (
       <SoundscapeListItem
         data={soundscape}
-        key={index} //TODO: key should be a unique ID
+        key={soundscape.id}
       />
     )
   );
