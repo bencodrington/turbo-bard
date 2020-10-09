@@ -5,6 +5,7 @@ import SearchField from "../../widgets/SearchField";
 import SearchDropdown from "./SearchDropdown";
 
 import { fetchSoundscapes } from "../../services/database";
+import SoundscapeSearchItem from "./SoundscapeSearchItem";
 
 type SoundscapeSearchDropdownProps = {
   addSoundscape: (soundscape: Soundscape) => void,
@@ -21,7 +22,15 @@ export default function SoundscapeSearchDropdown({ addSoundscape, nextId }: Soun
     async function fetch() {
       const results = await fetchSoundscapes(searchText);
       if (isCancelled) return;
-      setResults(results.map(soundscape => <li key={soundscape.id}>{soundscape.name}</li>));
+      setResults(results
+        .map(soundscape => (
+          <SoundscapeSearchItem
+            key={soundscape.id}
+            data={soundscape}
+            onClick={() => addSoundscape(soundscape)}
+          />
+        ))
+      );
       setIsFetchingResults(false);
     }
 
