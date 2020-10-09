@@ -1,0 +1,12 @@
+@import "../mixins.scss";
+
+.soundscape-list-item-container {
+  @include shadow;
+  border-radius: .25rem;
+  padding: .25rem;
+  margin-bottom: 1rem;
+
+  h4 {
+    color: var(--azure);
+  }
+}

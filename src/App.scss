@@ -14,6 +14,13 @@
   --font--signika: 'Signika Negative', sans-serif;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: normal;
+}
+
 h1 {
   font-family: var(--font--signika);
   font-size: 2.5rem;
@@ -58,10 +65,4 @@ button {
   border: none;
   background: none;
   cursor: pointer;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }

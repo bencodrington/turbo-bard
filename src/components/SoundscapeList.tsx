@@ -3,6 +3,7 @@ import { Soundscape } from "../models/Soundscape";
 import AddSoundscapeButton from "../widgets/buttons/AddSoundscapeButton";
 import SoundscapeListItem from "./SoundscapeListItem";
 import SoundscapeSearchDropdown from "./SearchDropdown/SoundscapeSearchDropdown";
+import "./SoundscapeList.scss";
 
 type SoundscapeListProps = {
   soundscapes: Soundscape[],
