@@ -10,6 +10,26 @@
   --one-shot: #F57E10;
   --one-shot--light: #FFECDA;
   --track: linear-gradient(45deg, var(--loop) 0%,var(--one-shot) 100%);
+  --font--miriam: 'Miriam Libre', sans-serif;
+  --font--signika: 'Signika Negative', sans-serif;
+}
+
+h1 {
+  font-family: var(--font--signika);
+  font-size: 2.5rem;
+}
+
+// The only difference between h2 and h3 is that
+// h2 should be in all caps
+h2, h3 {
+  font-family: var(--font--miriam);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-family: var(--font--signika);
+  font-size: 1.375rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {
