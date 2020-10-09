@@ -1,3 +1,16 @@
 .app-header-container {
-  background: blue;
+  display: flex;
+  align-items: center;
+  padding: .5rem;
+
+  .logo {
+    pointer-events: none;
+    margin-right: .5rem;
+  }
+
+  h1 {
+    color: var(--phanary);
+  }
+  
+  background: var(--azure);
 }
