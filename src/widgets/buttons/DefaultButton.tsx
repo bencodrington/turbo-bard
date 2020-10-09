@@ -1,7 +1,7 @@
 import React from "react";
 
 type DefaultButtonProps = {
-  text: String,
+  text: string,
   onClick: () => void
 };
 
