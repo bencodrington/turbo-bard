@@ -17,6 +17,7 @@
 h1 {
   font-family: var(--font--signika);
   font-size: 2.5rem;
+  font-weight: normal;
 }
 
 // The only difference between h2 and h3 is that
@@ -30,6 +31,11 @@ h2, h3 {
 h4 {
   font-family: var(--font--signika);
   font-size: 1.375rem;
+}
+
+body {
+  font-family: var(--font--signika);
+  font-size: 1.125rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {
