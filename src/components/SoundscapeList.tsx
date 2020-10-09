@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Soundscape } from "../models/Soundscape";
 import AddSoundscapeButton from "../widgets/buttons/AddSoundscapeButton";
 import SoundscapeListItem from "./SoundscapeListItem";
-import SoundscapeSearchDropdown from "./SoundscapeSearchDropdown";
+import SoundscapeSearchDropdown from "./SearchDropdown/SoundscapeSearchDropdown";
 
 type SoundscapeListProps = {
   soundscapes: Soundscape[],

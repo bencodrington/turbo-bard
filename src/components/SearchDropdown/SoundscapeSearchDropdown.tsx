@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Soundscape } from "../models/Soundscape";
-import NewSoundscapeButton from "../widgets/buttons/NewSoundscapeButton";
-import SearchField from "../widgets/SearchField";
+import { Soundscape } from "../../models/Soundscape";
+import NewSoundscapeButton from "../../widgets/buttons/NewSoundscapeButton";
+import SearchField from "../../widgets/SearchField";
 import SearchDropdown from "./SearchDropdown";
 
-import { fetchSoundscapes } from "../services/database";
+import { fetchSoundscapes } from "../../services/database";
 
 type SoundscapeSearchDropdownProps = {
   addSoundscape: (soundscape: Soundscape) => void,
