@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DefaultButton from "../widgets/buttons/DefaultButton";
 import NewSoundscapeButton from "../widgets/buttons/NewSoundscapeButton";
 import SearchDropdown from "./SearchDropdown";
 

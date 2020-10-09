@@ -1,8 +1,15 @@
 import React from "react";
 
-export default function AddSoundscapeButton() {
+type AddSoundscapeButtonProps = {
+  onClick: () => void
+};
+
+export default function AddSoundscapeButton({ onClick }: AddSoundscapeButtonProps) {
   return (
-    <button className="add-soundscape-button-container">
+    <button
+      className="add-soundscape-button-container"
+      onClick={onClick}
+    >
       Add Soundscape
     </button>
   );
