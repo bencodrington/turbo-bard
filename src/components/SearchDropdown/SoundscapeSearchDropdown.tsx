@@ -23,13 +23,16 @@ export default function SoundscapeSearchDropdown({ addSoundscape, nextId }: Soun
       const results = await fetchSoundscapes(searchText);
       if (isCancelled) return;
       setResults(results
-        .map(soundscape => (
-          <SoundscapeSearchItem
-            key={soundscape.id}
-            data={soundscape}
-            onClick={() => addSoundscape(soundscape)}
-          />
-        ))
+        .map(soundscape => {
+          const { name, tracks } = soundscape;
+          return (
+            <SoundscapeSearchItem
+              key={soundscape.id}
+              data={soundscape}
+              onClick={() => addSoundscape({ id: nextId, name, tracks })}
+            />
+          )
+        })
       );
       setIsFetchingResults(false);
     }
