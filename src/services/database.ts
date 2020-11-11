@@ -1,15 +1,16 @@
 import { Soundscape } from "../models/Soundscape";
+import { SoundscapeSearchResult } from "../models/SoundscapeSearchResult";
 
-const DUMMY_SOUNDSCAPE_DATA: Soundscape[] = [
+const DUMMY_SOUNDSCAPE_DATA: SoundscapeSearchResult[] = [
   {
     id: "1",
-    name: 'Test Soundscape 1',
-    tracks: []
+    name: 'Graveyard',
+    tags: []
   },
   {
     id: "2",
-    name: 'Test Soundscape 2',
-    tracks: []
+    name: 'Crowded Tavern',
+    tags: []
   }
 ];
 

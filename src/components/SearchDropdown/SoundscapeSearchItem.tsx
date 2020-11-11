@@ -1,8 +1,8 @@
 import React from "react";
-import { Soundscape } from "../../models/Soundscape";
+import { SoundscapeSearchResult } from "../../models/SoundscapeSearchResult";
 
 type SoundscapeSearchItemProps = {
-  data: Soundscape,
+  data: SoundscapeSearchResult,
   onClick: () => void
 };
 
