@@ -1,7 +1,7 @@
 import { Track } from "./Track";
 
 export type Soundscape = {
-  id: string,
+  id: number,
   name: string,
   tracks: Track[],
   cloneFrom?: string

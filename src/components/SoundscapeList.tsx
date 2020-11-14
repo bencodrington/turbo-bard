@@ -22,7 +22,7 @@ export default function SoundscapeList({
 
   function cloneSoundscape(name: string, sourceId: string) {
     addSoundscape({
-      id: soundscapes.length.toString(),
+      id: soundscapes.length,
       name,
       tracks: [],
       cloneFrom: sourceId
@@ -31,7 +31,7 @@ export default function SoundscapeList({
 
   function newSoundscape(name: string) {
     addSoundscape({
-      id: soundscapes.length.toString(),
+      id: soundscapes.length,
       name,
       tracks: []
     });
