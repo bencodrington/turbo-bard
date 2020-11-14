@@ -32,7 +32,7 @@ export default function SoundscapeListItem({ cloneFrom, name }: SoundscapeListIt
     setIsLoading(true);
     fetch(cloneFrom);
     // TODO: isCancelled
-  }, [cloneFrom, isLoading, tracks.length]);
+  }, [cloneFrom, hasLoaded, isLoading, tracks.length]);
 
   return (
     <div className="soundscape-list-item-container">

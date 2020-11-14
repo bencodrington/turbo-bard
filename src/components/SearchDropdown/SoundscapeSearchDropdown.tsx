@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Soundscape } from "../../models/Soundscape";
 import NewSoundscapeButton from "../../widgets/buttons/NewSoundscapeButton";
 import SearchField from "../../widgets/SearchField";
 import SearchDropdown from "./SearchDropdown";
