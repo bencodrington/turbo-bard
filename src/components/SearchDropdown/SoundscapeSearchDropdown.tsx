@@ -4,15 +4,16 @@ import NewSoundscapeButton from "../../widgets/buttons/NewSoundscapeButton";
 import SearchField from "../../widgets/SearchField";
 import SearchDropdown from "./SearchDropdown";
 
-import { fetchSoundscapes } from "../../services/database";
+import { fetchSoundscapeResults } from "../../services/database";
 import SoundscapeSearchItem from "./SoundscapeSearchItem";
 
 type SoundscapeSearchDropdownProps = {
-  addSoundscape: (soundscape: Soundscape) => void,
+  cloneSoundscape: (name: string, sourceId: string) => void,
+  newSoundscape: (name: string) => void,
   nextId: string
 };
 
-export default function SoundscapeSearchDropdown({ addSoundscape, nextId }: SoundscapeSearchDropdownProps) {
+export default function SoundscapeSearchDropdown({ cloneSoundscape, newSoundscape }: SoundscapeSearchDropdownProps) {
   const [results, setResults] = useState<JSX.Element[]>([]);
   const [isFetchingResults, setIsFetchingResults] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -20,21 +21,22 @@ export default function SoundscapeSearchDropdown({ addSoundscape, nextId }: Soun
   useEffect(() => {
     let isCancelled = false;
     async function fetch() {
-      const results = await fetchSoundscapes(searchText);
+      const results = await fetchSoundscapeResults(searchText);
       if (isCancelled) return;
 
-      const onSearchItemClick = (name: string) => {
+      const onSearchItemClick = (name: string, sourceId: string) => {
         setSearchText('');
-        addSoundscape({ id: nextId, name, tracks: [] })
+        cloneSoundscape(name, sourceId)
       };
 
       setResults(results
         .map(soundscapeSearchItem => {
+          const { id, name } = soundscapeSearchItem;
           return (
             <SoundscapeSearchItem
-              key={soundscapeSearchItem.id}
+              key={id}
               data={soundscapeSearchItem}
-              onClick={() => onSearchItemClick(soundscapeSearchItem.name)}
+              onClick={() => onSearchItemClick(name, id)}
             />
           );
         })
@@ -48,7 +50,7 @@ export default function SoundscapeSearchDropdown({ addSoundscape, nextId }: Soun
     return () => {
       isCancelled = true;
     }
-  }, [searchText, addSoundscape]);
+  }, [searchText, cloneSoundscape]);
 
   const searchField = (
     <SearchField
@@ -60,7 +62,7 @@ export default function SoundscapeSearchDropdown({ addSoundscape, nextId }: Soun
 
   const trailing = (
     <NewSoundscapeButton
-      onClick={() => addSoundscape({ id: nextId, name: searchText, tracks: [] })}
+      onClick={() => newSoundscape(searchText)}
     />
   )
 

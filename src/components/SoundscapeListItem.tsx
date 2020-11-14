@@ -1,17 +1,44 @@
-import React from "react";
-import { Soundscape } from "../models/Soundscape";
+import React, { useEffect, useState } from "react";
+import { fetchTracksForSoundscape } from "../services/database";
 
 import "./SoundscapeListItem.scss";
 
 type SoundscapeListItemProps = {
-  data: Soundscape
+  name: string,
+  cloneFrom?: string
 };
 
-export default function SoundscapeListItem ({data}: SoundscapeListItemProps) {
+export default function SoundscapeListItem({ cloneFrom, name }: SoundscapeListItemProps) {
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const [tracks, setTracks] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (
+      hasLoaded ||
+      isLoading ||
+      cloneFrom === undefined ||
+      tracks.length > 0
+    ) return;
+    // If we're not loading and we have a cloneId and have no tracks, we should fetch
+    async function fetch(soundscapeId: string) {
+      const result = await fetchTracksForSoundscape(soundscapeId);
+      setHasLoaded(true);
+      setIsLoading(false);
+      if (result === undefined) return;
+      setTracks(result.tracks);
+    }
+    setIsLoading(true);
+    fetch(cloneFrom);
+    // TODO: isCancelled
+  }, [cloneFrom, isLoading, tracks.length]);
+
   return (
     <div className="soundscape-list-item-container">
-      <h4>{data.name}</h4>
-      <p>Track count: {data.tracks.length}</p>
+      <h4>{name}</h4>
+      <p>isLoading: {isLoading.toString()}</p>
+      <p>Track count: {tracks.length}</p>
     </div>
   );
 }

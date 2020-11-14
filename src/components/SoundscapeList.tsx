@@ -20,10 +20,28 @@ export default function SoundscapeList({
     setIsSearchOpen(!isSearchOpen);
   }
 
+  function cloneSoundscape(name: string, sourceId: string) {
+    addSoundscape({
+      id: soundscapes.length.toString(),
+      name,
+      tracks: [],
+      cloneFrom: sourceId
+    });
+  }
+
+  function newSoundscape(name: string) {
+    addSoundscape({
+      id: soundscapes.length.toString(),
+      name,
+      tracks: []
+    });
+  }
+
   const soundscapeListItems = soundscapes.map(
     soundscape => (
       <SoundscapeListItem
-        data={soundscape}
+        name={soundscape.name}
+        cloneFrom={soundscape.cloneFrom}
         key={soundscape.id}
       />
     )
@@ -35,7 +53,8 @@ export default function SoundscapeList({
       <AddSoundscapeButton onClick={toggleIsSearchOpen} />
       {isSearchOpen
         ? <SoundscapeSearchDropdown
-          addSoundscape={addSoundscape}
+          newSoundscape={newSoundscape}
+          cloneSoundscape={cloneSoundscape}
           nextId={soundscapes.length.toString()}
         />
         : null
