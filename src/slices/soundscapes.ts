@@ -9,7 +9,8 @@ const soundscapesSlice = createSlice({
       state.push({
         name: payload,
         id: state.length,
-        tracks: []
+        tracks: [],
+        isOpen: true
       });
     },
     cloneSoundscape(state, { payload }: PayloadAction<{ name: string, sourceId: string }>) {
@@ -18,12 +19,16 @@ const soundscapesSlice = createSlice({
         name,
         id: state.length,
         tracks: [],
-        sourceId
+        sourceId,
+        isOpen: true
       });
+    },
+    closeAllSoundscapes(state) {
+      state.map(soundscape => Object.assign(soundscape, {isOpen: false}));
     }
   }
 });
 
-export const { newSoundscape, cloneSoundscape } = soundscapesSlice.actions;
+export const { newSoundscape, cloneSoundscape, closeAllSoundscapes } = soundscapesSlice.actions;
 
 export default soundscapesSlice.reducer;

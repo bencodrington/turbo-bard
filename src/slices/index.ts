@@ -9,3 +9,6 @@ export const rootReducer = combineReducers({
 export type RootState = ReturnType<typeof rootReducer>;
 
 export const useSoundscapes = () => useSelector((state: RootState) => state.soundscapes);
+export const useOpenSoundscape = () => useSelector(
+  (state: RootState) => state.soundscapes.find(soundscape => soundscape.isOpen)
+)

@@ -4,5 +4,6 @@ export type Soundscape = {
   id: number,
   name: string,
   tracks: Track[],
-  sourceId?: string
+  sourceId?: string,
+  isOpen: boolean
 };

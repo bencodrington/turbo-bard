@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
 import SoundscapeList from './components/SoundscapeList/SoundscapeList';
+import TrackList from './components/TrackList/TrackList';
 import AppHeader from './widgets/AppHeader';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <div className="App">
       <AppHeader />
       <SoundscapeList />
+      <TrackList />
     </div>
   );
 }
