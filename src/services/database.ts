@@ -22,7 +22,7 @@ const DUMMY_TRACK_DATA: {id: string, tracks: string[]}[] = [
   {
     id: "2",
     // name: 'Crowded Tavern',
-    tracks: ['drink']
+    tracks: ['drink', 'slurp']
   }
 ];
 
