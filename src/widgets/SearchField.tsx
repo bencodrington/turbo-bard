@@ -19,6 +19,7 @@ export default function SearchField(props: SearchFieldProps) {
       type="text"
       className="search-field-container"
       placeholder={props.placeholderText}
+      value={props.value}
       onChange={changeHandler}
     />
   );
