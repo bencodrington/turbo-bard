@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchTracksForSoundscape } from "../services/database";
+import { fetchTracksForSoundscape } from "../../services/database";
 
 import "./SoundscapeListItem.scss";
 

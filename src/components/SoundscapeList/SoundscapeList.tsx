@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import AddSoundscapeButton from "../widgets/buttons/AddSoundscapeButton";
+import AddSoundscapeButton from "../../widgets/buttons/AddSoundscapeButton";
 import SoundscapeListItem from "./SoundscapeListItem";
-import SoundscapeSearchDropdown from "./SearchDropdown/SoundscapeSearchDropdown";
+import SoundscapeSearchDropdown from "../SearchDropdown/SoundscapeSearchDropdown";
 import "./SoundscapeList.scss";
-import { useSoundscapes } from "../slices";
+import { useSoundscapes } from "../../slices";
 
 export default function SoundscapeList() {
   const soundscapes = useSoundscapes();
