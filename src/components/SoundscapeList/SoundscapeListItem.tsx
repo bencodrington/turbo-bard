@@ -1,38 +1,40 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Soundscape } from "../../models/Soundscape";
 import { fetchTracksForSoundscape } from "../../services/database";
+import { setTracks } from "../../slices/soundscapes";
 
 import "./SoundscapeListItem.scss";
 
 type SoundscapeListItemProps = {
-  name: string,
-  cloneFrom?: string
+  soundscape: Soundscape
 };
 
-export default function SoundscapeListItem({ cloneFrom, name }: SoundscapeListItemProps) {
-
+export default function SoundscapeListItem({ soundscape }: SoundscapeListItemProps) {
+  const { sourceId, name, tracks, id: soundscapeId } = soundscape;
   const [isLoading, setIsLoading] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
-  const [tracks, setTracks] = useState<string[]>([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (
       hasLoaded ||
       isLoading ||
-      cloneFrom === undefined ||
+      sourceId === undefined ||
       tracks.length > 0
     ) return;
     // If we're not loading and we have a cloneId and have no tracks, we should fetch
-    async function fetch(soundscapeId: string) {
-      const result = await fetchTracksForSoundscape(soundscapeId);
+    async function fetch(sourceSoundscapeId: string) {
+      const result = await fetchTracksForSoundscape(sourceSoundscapeId);
       setHasLoaded(true);
       setIsLoading(false);
       if (result === undefined) return;
-      setTracks(result.tracks);
+      dispatch(setTracks({ soundscapeId, tracks: result.tracks }));
     }
     setIsLoading(true);
-    fetch(cloneFrom);
+    fetch(sourceId);
     // TODO: isCancelled
-  }, [cloneFrom, hasLoaded, isLoading, tracks.length]);
+  }, [sourceId, hasLoaded, isLoading, tracks.length, dispatch, soundscapeId]);
 
   return (
     <div className="soundscape-list-item-container">

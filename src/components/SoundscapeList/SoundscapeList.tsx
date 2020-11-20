@@ -16,9 +16,8 @@ export default function SoundscapeList() {
   const soundscapeListItems = soundscapes.map(
     soundscape => (
       <SoundscapeListItem
-        name={soundscape.name}
-        cloneFrom={soundscape.sourceId}
         key={soundscape.id}
+        soundscape={soundscape}
       />
     )
   );

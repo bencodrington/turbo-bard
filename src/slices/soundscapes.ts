@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Soundscape } from "../models/Soundscape";
+import { Track } from "../models/Track";
 
 const soundscapesSlice = createSlice({
   name: 'soundscapes',
@@ -24,11 +25,22 @@ const soundscapesSlice = createSlice({
       });
     },
     closeAllSoundscapes(state) {
-      state.map(soundscape => Object.assign(soundscape, {isOpen: false}));
+      state.map(soundscape => Object.assign(soundscape, { isOpen: false }));
+    },
+    setTracks(state, { payload }: PayloadAction<{ soundscapeId: number, tracks: Track[] }>) {
+      const { soundscapeId, tracks } = payload;
+      const soundscape = state.find(soundscape => soundscape.id === soundscapeId);
+      if (soundscape === undefined) return;
+      soundscape.tracks = tracks;
     }
   }
 });
 
-export const { newSoundscape, cloneSoundscape, closeAllSoundscapes } = soundscapesSlice.actions;
+export const {
+  newSoundscape,
+  cloneSoundscape,
+  closeAllSoundscapes,
+  setTracks
+} = soundscapesSlice.actions;
 
 export default soundscapesSlice.reducer;

@@ -7,7 +7,7 @@ export default function TrackList() {
 
   return (
     <div className="track-list-container">
-      {tracks.map((track, index) => <p key={index}>{track}</p>)}
+      {tracks.map(track => <p key={track.id}>{track.name}</p>)}
     </div>
   );
 }

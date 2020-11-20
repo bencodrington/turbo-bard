@@ -1,4 +1,5 @@
 import { SoundscapeSearchResult } from "../models/SoundscapeSearchResult";
+import { Track } from "../models/Track";
 
 const DUMMY_SOUNDSCAPE_RESULT_DATA: SoundscapeSearchResult[] = [
   {
@@ -13,16 +14,16 @@ const DUMMY_SOUNDSCAPE_RESULT_DATA: SoundscapeSearchResult[] = [
   }
 ];
 
-const DUMMY_TRACK_DATA: {id: string, tracks: string[]}[] = [
+const DUMMY_TRACK_DATA: {id: string, tracks: Track[]}[] = [
   {
     id: "1",
     // name: 'Graveyard',
-    tracks: ['cheese']
+    tracks: [{name: 'cheese', id: '111111'}]
   },
   {
     id: "2",
     // name: 'Crowded Tavern',
-    tracks: ['drink', 'slurp']
+    tracks: [{name: 'drink', id: '222222'}, {name: 'slurp', id: '33333'}]
   }
 ];
 
