@@ -1,13 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Soundscape } from "../models/Soundscape";
 
 const soundscapesSlice = createSlice({
   name: 'soundscapes',
   initialState: [] as Soundscape[],
   reducers: {
-    // TODO: cleanup
-    newSoundscape: (state, action) => [...state, { name: action.payload, id: state.length, tracks: [] }]
+    newSoundscape(state, { payload }: { payload: string }) {
+      state.push({
+        name: payload,
+        id: state.length,
+        tracks: []
+      });
+    },
+    cloneSoundscape(state, { payload }: PayloadAction<{ name: string, sourceId: string }>) {
+      const { name, sourceId } = payload;
+      state.push({
+        name,
+        id: state.length,
+        tracks: [],
+        sourceId
+      });
+    }
   }
 });
 
-export default soundscapesSlice;
+export const { newSoundscape, cloneSoundscape } = soundscapesSlice.actions;
+
+export default soundscapesSlice.reducer;

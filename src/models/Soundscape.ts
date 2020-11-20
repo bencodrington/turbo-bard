@@ -4,5 +4,5 @@ export type Soundscape = {
   id: number,
   name: string,
   tracks: Track[],
-  cloneFrom?: string
+  sourceId?: string
 };

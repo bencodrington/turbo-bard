@@ -5,17 +5,14 @@ import SearchDropdown from "./SearchDropdown";
 
 import { fetchSoundscapeResults } from "../../services/database";
 import SoundscapeSearchItem from "./SoundscapeSearchItem";
+import { cloneSoundscape, newSoundscape } from "../../slices/soundscapes";
+import { useDispatch } from "react-redux";
 
-type SoundscapeSearchDropdownProps = {
-  cloneSoundscape: (name: string, sourceId: string) => void,
-  newSoundscape: (name: string) => void,
-  nextId: string
-};
-
-export default function SoundscapeSearchDropdown({ cloneSoundscape, newSoundscape }: SoundscapeSearchDropdownProps) {
+export default function SoundscapeSearchDropdown() {
   const [results, setResults] = useState<JSX.Element[]>([]);
   const [isFetchingResults, setIsFetchingResults] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let isCancelled = false;
@@ -25,7 +22,7 @@ export default function SoundscapeSearchDropdown({ cloneSoundscape, newSoundscap
 
       const onSearchItemClick = (name: string, sourceId: string) => {
         setSearchText('');
-        cloneSoundscape(name, sourceId)
+        dispatch(cloneSoundscape({name, sourceId}));
       };
 
       setResults(results
@@ -49,7 +46,7 @@ export default function SoundscapeSearchDropdown({ cloneSoundscape, newSoundscap
     return () => {
       isCancelled = true;
     }
-  }, [searchText, cloneSoundscape]);
+  }, [searchText, dispatch]);
 
   const searchField = (
     <SearchField
@@ -61,7 +58,7 @@ export default function SoundscapeSearchDropdown({ cloneSoundscape, newSoundscap
 
   const trailing = (
     <NewSoundscapeButton
-      onClick={() => newSoundscape(searchText)}
+      onClick={() => dispatch(newSoundscape(searchText))}
     />
   )
 

@@ -1,47 +1,23 @@
 import React, { useState } from "react";
-import { Soundscape } from "../models/Soundscape";
 import AddSoundscapeButton from "../widgets/buttons/AddSoundscapeButton";
 import SoundscapeListItem from "./SoundscapeListItem";
 import SoundscapeSearchDropdown from "./SearchDropdown/SoundscapeSearchDropdown";
 import "./SoundscapeList.scss";
+import { useSoundscapes } from "../slices";
 
-type SoundscapeListProps = {
-  soundscapes: Soundscape[],
-  addSoundscape: (newSoundscape: Soundscape) => void
-};
-
-export default function SoundscapeList({
-  soundscapes,
-  addSoundscape
-}: SoundscapeListProps) {
+export default function SoundscapeList() {
+  const soundscapes = useSoundscapes();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   function toggleIsSearchOpen() {
     setIsSearchOpen(!isSearchOpen);
   }
 
-  function cloneSoundscape(name: string, sourceId: string) {
-    addSoundscape({
-      id: soundscapes.length,
-      name,
-      tracks: [],
-      cloneFrom: sourceId
-    });
-  }
-
-  function newSoundscape(name: string) {
-    addSoundscape({
-      id: soundscapes.length,
-      name,
-      tracks: []
-    });
-  }
-
   const soundscapeListItems = soundscapes.map(
     soundscape => (
       <SoundscapeListItem
         name={soundscape.name}
-        cloneFrom={soundscape.cloneFrom}
+        cloneFrom={soundscape.sourceId}
         key={soundscape.id}
       />
     )
@@ -52,11 +28,7 @@ export default function SoundscapeList({
       {soundscapeListItems}
       <AddSoundscapeButton onClick={toggleIsSearchOpen} />
       {isSearchOpen
-        ? <SoundscapeSearchDropdown
-          newSoundscape={newSoundscape}
-          cloneSoundscape={cloneSoundscape}
-          nextId={soundscapes.length.toString()}
-        />
+        ? <SoundscapeSearchDropdown />
         : null
       }
     </div>
