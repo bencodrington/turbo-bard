@@ -1,3 +1,7 @@
 .soundscape-list-container {
   padding: 1rem .5rem;
+
+  &.hidden--mobile {
+    display: none;
+  }
 }

@@ -3,10 +3,11 @@ import AddSoundscapeButton from "../../widgets/buttons/AddSoundscapeButton";
 import SoundscapeListItem from "./SoundscapeListItem";
 import SoundscapeSearchDropdown from "../SearchDropdown/SoundscapeSearchDropdown";
 import "./SoundscapeList.scss";
-import { useSoundscapes } from "../../slices";
+import { useOpenSoundscape, useSoundscapes } from "../../slices";
 
 export default function SoundscapeList() {
   const soundscapes = useSoundscapes();
+  const isSoundscapeOpen = useOpenSoundscape() !== undefined;
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   function toggleIsSearchOpen() {
@@ -22,8 +23,11 @@ export default function SoundscapeList() {
     )
   );
 
+  let className = 'soundscape-list-container';
+  className += isSoundscapeOpen ? ' hidden--mobile' : '';
+
   return (
-    <div className="soundscape-list-container">
+    <div className={className}>
       {soundscapeListItems}
       <AddSoundscapeButton onClick={toggleIsSearchOpen} />
       {isSearchOpen
