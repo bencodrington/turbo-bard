@@ -1,5 +1,7 @@
 import React from "react";
 
+import './SearchDropdown.scss';
+
 type SearchDropdownProps = {
   isFetchingResults: Boolean,
   searchField: JSX.Element,
@@ -9,20 +11,13 @@ type SearchDropdownProps = {
 };
 
 export default function SearchDropdown(props: SearchDropdownProps) {
-  const trailing = props.trailing !== undefined
-    ? (
-      <div className="trailing">
-        {props.trailing}
-      </div>
-    )
-    : null;
+  const trailing = props.trailing ?? null;
 
   const results = props.isFetchingResults
     ? <p>Loading...</p>
     : props.results;
   return (
     <div className="search-dropdown-container">
-      Search Dropdown
       {props.searchField}
       {/* TODO: suggestions */}
       {results}
