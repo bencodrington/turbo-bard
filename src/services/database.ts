@@ -62,7 +62,7 @@ export async function fetchSoundscapeResults(searchText: string) {
   await new Promise((resolve) => {
     setTimeout(() => {
       resolve();
-    }, 1000);
+    }, 400);
   });
   return DUMMY_SOUNDSCAPE_RESULT_DATA;
 }
@@ -109,7 +109,7 @@ export async function fetchTracksForSoundscape(soundscapeId: string) {
   await new Promise((resolve) => {
     setTimeout(() => {
       resolve();
-    }, 1000);
+    }, 400);
   });
   const tracks = DUMMY_SOUNDSCAPE_DATA.find(result => result.id === soundscapeId)?.tracks;
   if (tracks === undefined) {
