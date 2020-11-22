@@ -1,0 +1,5 @@
+export const OBJECT_TYPES = {
+  LOOP: 'LOOP',
+  ONESHOT: 'ONESHOT',
+  SOUNDSCAPE: 'SOUNDSCAPE'
+};

@@ -1,21 +1,19 @@
-import { SoundscapeSearchResult } from "../models/SoundscapeSearchResult";
+import { OBJECT_TYPES } from "../models/ObjectTypes";
+import { SearchResult } from "../models/SearchResult";
 import { Loop, OneShot, Track, TrackMetadata } from "../models/Track";
 
-const TRACK_TYPES = {
-  LOOP: 'LOOP',
-  ONESHOT: 'ONESHOT'
-};
-
-const DUMMY_SOUNDSCAPE_RESULT_DATA: SoundscapeSearchResult[] = [
+const DUMMY_SOUNDSCAPE_RESULT_DATA: SearchResult[] = [
   {
     id: "1",
     name: 'Graveyard',
-    tags: []
+    tags: [],
+    type: OBJECT_TYPES.SOUNDSCAPE
   },
   {
     id: "2",
     name: 'Crowded Tavern',
-    tags: []
+    tags: [],
+    type: OBJECT_TYPES.SOUNDSCAPE
   }
 ];
 
@@ -70,7 +68,7 @@ export async function fetchSoundscapeResults(searchText: string) {
 function trackFromTrackData(data: TrackData): Track | null {
   const { id, name, source, type, fileSource, fileSources } = data;
   switch (type) {
-    case TRACK_TYPES.LOOP:
+    case OBJECT_TYPES.LOOP:
       if (fileSource === undefined) {
         console.error(`Server returned loop (id ${id}) with undefined fileSource.`);
         return null;
@@ -84,7 +82,7 @@ function trackFromTrackData(data: TrackData): Track | null {
         isPlaying: false,
         fileSource: fileSource
       } as Loop;
-    case TRACK_TYPES.ONESHOT:
+    case OBJECT_TYPES.ONESHOT:
       if (fileSources?.length === undefined || fileSources.length === 0) {
         console.error(`Server returned oneshot (id ${id}) without fileSources.`);
         console.error(fileSources);

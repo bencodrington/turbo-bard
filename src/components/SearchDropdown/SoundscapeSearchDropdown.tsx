@@ -4,7 +4,7 @@ import SearchField from "../../widgets/SearchField";
 import SearchDropdown from "./SearchDropdown";
 
 import { fetchSoundscapeResults } from "../../services/database";
-import SoundscapeSearchItem from "./SoundscapeSearchItem";
+import SoundscapeSearchItem from "./SearchItem";
 import { cloneSoundscape, closeAllSoundscapes, newSoundscape } from "../../slices/soundscapes";
 import { useDispatch } from "react-redux";
 

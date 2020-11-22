@@ -46,8 +46,7 @@ h2, h3 {
 }
 
 h4 {
-  font-family: var(--font--signika);
-  font-size: 1.375rem;
+  @include heading;
 }
 
 body, p, span {
