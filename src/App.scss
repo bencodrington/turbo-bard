@@ -53,6 +53,11 @@ body, p, span {
   @include body;
 }
 
+ul li{
+  list-style: none;
+  display: block;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -4,7 +4,7 @@ import SearchField from "../../widgets/SearchField";
 import SearchDropdown from "./SearchDropdown";
 
 import { fetchSoundscapeResults } from "../../services/database";
-import SoundscapeSearchItem from "./SearchItem";
+import SearchItem from "./SearchItem";
 import { cloneSoundscape, closeAllSoundscapes, newSoundscape } from "../../slices/soundscapes";
 import { useDispatch } from "react-redux";
 
@@ -27,12 +27,12 @@ export default function SoundscapeSearchDropdown() {
       };
 
       setResults(results
-        .map(soundscapeSearchItem => {
-          const { id, name } = soundscapeSearchItem;
+        .map(searchItem => {
+          const { id, name } = searchItem;
           return (
-            <SoundscapeSearchItem
+            <SearchItem
               key={id}
-              data={soundscapeSearchItem}
+              data={searchItem}
               onClick={() => onSearchItemClick(name, id)}
             />
           );

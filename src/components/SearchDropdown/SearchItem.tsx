@@ -1,5 +1,6 @@
 import React from "react";
 import { SearchResult } from "../../models/SearchResult";
+import "./SearchItem.scss";
 
 type SearchItemProps = {
   data: SearchResult,
@@ -9,10 +10,13 @@ type SearchItemProps = {
 export default function SearchItem({ data, onClick }: SearchItemProps) {
   return (
     <li
-      className="search-dropdown-item-container"
+      className="search-item-container"
       onClick={onClick}
     >
-      {data.name}
+      <h4>{data.name}</h4>
+      {data.tags.map((tag, index) =>
+        <span key={index}>{tag}</span>
+      )}
     </li>
   );
 }

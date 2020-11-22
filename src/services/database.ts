@@ -6,13 +6,13 @@ const DUMMY_SOUNDSCAPE_RESULT_DATA: SearchResult[] = [
   {
     id: "1",
     name: 'Graveyard',
-    tags: [],
+    tags: ['spooky', 'scary', 'eerie', 'haunted', 'ghosts', 'spirits', 'cemetery', 'crypt'],
     type: OBJECT_TYPES.SOUNDSCAPE
   },
   {
     id: "2",
     name: 'Crowded Tavern',
-    tags: [],
+    tags: ['lively', 'ale', 'beer', 'inn', 'warm', 'cozy', 'busy', 'happy', 'drinks', 'merry'],
     type: OBJECT_TYPES.SOUNDSCAPE
   }
 ];
