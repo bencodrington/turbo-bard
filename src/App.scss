@@ -1,19 +1,26 @@
 @import "./mixins.scss";
 
 :root {
+  --background: #131629;
+  --canary: #FFC700;
+  --turbo-blue: #06CCF8;
+  --azure: #081D68;
+  --azure--glass: #10183C;
+  --loop: #F13BF4;
+  --one-shot: #FF7A00;
+  --track: linear-gradient(45deg, var(--loop) 0%,var(--one-shot) 100%);
   --phanary: #FFE249;
-  --azure: #2A3DE2;
   --azure--light: #EBEFFF;
   --charcoal: #1E3B42;
   --danger: #AE0C29;
   --danger--light: #FFD8DF;
-  --loop: #C65FEB;
   --loop--light: #F7E0FF;
-  --one-shot: #F57E10;
   --one-shot--light: #FFECDA;
-  --track: linear-gradient(45deg, var(--loop) 0%,var(--one-shot) 100%);
   --font--miriam: 'Miriam Libre', sans-serif;
   --font--signika: 'Signika Negative', sans-serif;
+  --font--shrikhand: 'Shrikhand';
+  background: var(--background);
+  color: var(--turbo-blue);
 }
 
 * {
