@@ -6,6 +6,8 @@
   border-radius: 1rem;
   height: 6rem;
   background: var(--azure--glass);
+  z-index: 1;
+  position: relative;
 
   h2 {
     color: var(--canary);
