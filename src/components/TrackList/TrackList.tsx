@@ -1,5 +1,6 @@
 import React from "react";
 import { useOpenSoundscape } from "../../slices";
+import TrackListItem from "./TrackListItem";
 
 export default function TrackList() {
   const openSoundscape = useOpenSoundscape();
@@ -7,7 +8,7 @@ export default function TrackList() {
 
   return (
     <div className="track-list-container">
-      {tracks.map(track => <p key={track.id}>{track.trackMetadata.name}</p>)}
+      {tracks.map(track => <TrackListItem key={track.id} track={track} />)}
     </div>
   );
 }
