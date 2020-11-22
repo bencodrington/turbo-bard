@@ -1,5 +1,6 @@
 import React from "react";
 import { SearchResult } from "../../models/SearchResult";
+import Tag from "../../widgets/Tag";
 import "./SearchItem.scss";
 
 type SearchItemProps = {
@@ -15,7 +16,7 @@ export default function SearchItem({ data, onClick }: SearchItemProps) {
     >
       <h4>{data.name}</h4>
       {data.tags.map((tag, index) =>
-        <span key={index}>{tag}</span>
+        <Tag key={index} text={tag} />
       )}
     </li>
   );
