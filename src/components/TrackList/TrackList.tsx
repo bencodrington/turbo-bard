@@ -7,7 +7,7 @@ export default function TrackList() {
 
   return (
     <div className="track-list-container">
-      {tracks.map(track => <p key={track.id}>{track.name}</p>)}
+      {tracks.map(track => <p key={track.id}>{track.trackMetadata.name}</p>)}
     </div>
   );
 }

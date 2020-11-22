@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Soundscape } from "../../models/Soundscape";
+import { Track } from "../../models/Track";
 import { fetchTracksForSoundscape } from "../../services/database";
 import { setTracks } from "../../slices/soundscapes";
 
@@ -28,8 +29,7 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
       const result = await fetchTracksForSoundscape(sourceSoundscapeId);
       setHasLoaded(true);
       setIsLoading(false);
-      if (result === undefined) return;
-      dispatch(setTracks({ soundscapeId, tracks: result.tracks }));
+      dispatch(setTracks({ soundscapeId, tracks: result as Track[] }));
     }
     setIsLoading(true);
     fetch(sourceId);
