@@ -6,8 +6,8 @@ import "./AppHeader.scss";
 export default function AppHeader(props: any) {
   return (
     <div className="app-header-container">
-      <img src={logo} className="logo" alt="Phanary logo" />
-      <h1 className="logotype">Phanary</h1>
+      {/* TODO: <img src={logo} className="logo" alt="TurboBard logo" /> */}
+      <h1 className="logotype">TurboBard</h1>
       {/* TODO: help button */}
     </div>
   );

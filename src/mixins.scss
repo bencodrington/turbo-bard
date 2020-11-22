@@ -6,3 +6,10 @@
   font-family: var(--font--signika);
   font-size: 1.125rem;
 }
+
+@mixin heading {
+  font-family: var(--font--shrikhand);
+  font-weight: normal;
+  font-size: 1.5rem;
+  font-kerning: none;
+}

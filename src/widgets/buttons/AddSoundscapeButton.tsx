@@ -12,7 +12,7 @@ export default function AddSoundscapeButton({ onClick }: AddSoundscapeButtonProp
       className="add-soundscape-button-container"
       onClick={onClick}
     >
-      <h2>ADD SOUNDSCAPE</h2>
+      <h2>Add Soundscape</h2>
     </button>
   );
 }
