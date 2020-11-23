@@ -31,7 +31,9 @@ export default function SoundscapeList() {
       {soundscapeListItems}
       <AddSoundscapeButton onClick={toggleIsSearchOpen} />
       {isSearchOpen
-        ? <SoundscapeSearchDropdown />
+        ? <SoundscapeSearchDropdown
+          closeSearchDropdown={() => { setIsSearchOpen(false) }}
+        />
         : null
       }
     </div>

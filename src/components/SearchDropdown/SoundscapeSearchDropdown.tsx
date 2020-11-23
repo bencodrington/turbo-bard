@@ -8,7 +8,13 @@ import SearchItem from "./SearchItem";
 import { cloneSoundscape, closeAllSoundscapes, newSoundscape } from "../../slices/soundscapes";
 import { useDispatch } from "react-redux";
 
-export default function SoundscapeSearchDropdown() {
+type SoundscapeSearchDropdownProps = {
+  closeSearchDropdown: () => void
+};
+
+export default function SoundscapeSearchDropdown({
+  closeSearchDropdown
+}: SoundscapeSearchDropdownProps) {
   const [results, setResults] = useState<JSX.Element[]>([]);
   const [isFetchingResults, setIsFetchingResults] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -23,7 +29,8 @@ export default function SoundscapeSearchDropdown() {
       const onSearchItemClick = (name: string, sourceId: string) => {
         setSearchText('');
         dispatch(closeAllSoundscapes());
-        dispatch(cloneSoundscape({name, sourceId}));
+        dispatch(cloneSoundscape({ name, sourceId }));
+        closeSearchDropdown();
       };
 
       setResults(results
@@ -47,7 +54,7 @@ export default function SoundscapeSearchDropdown() {
     return () => {
       isCancelled = true;
     }
-  }, [searchText, dispatch]);
+  }, [searchText, dispatch, closeSearchDropdown]);
 
   const searchField = (
     <SearchField
@@ -61,6 +68,7 @@ export default function SoundscapeSearchDropdown() {
     dispatch(closeAllSoundscapes());
     dispatch(newSoundscape(searchText));
     setSearchText('');
+    closeSearchDropdown();
   };
 
   const trailing = (
