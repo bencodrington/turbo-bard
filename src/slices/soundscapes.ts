@@ -42,6 +42,15 @@ const soundscapesSlice = createSlice({
         index++;
         return trackWithIndex;
       });
+    },
+    removeTrack(state, { payload }: PayloadAction<{ soundscapeId: number, trackIndex: number }>) {
+      const { soundscapeId, trackIndex } = payload;
+      const soundscape = state.find(soundscape => soundscape.id === soundscapeId);
+      if (soundscape === undefined) return;
+      soundscape.tracks = soundscape.tracks.filter(track => track.index !== trackIndex);
+      if (soundscape.tracks.length === 0) {
+        soundscape.isOpen = false;
+      }
     }
   }
 });
@@ -50,7 +59,8 @@ export const {
   newSoundscape,
   cloneSoundscape,
   closeAllSoundscapes,
-  setTracks
+  setTracks,
+  removeTrack
 } = soundscapesSlice.actions;
 
 export default soundscapesSlice.reducer;
