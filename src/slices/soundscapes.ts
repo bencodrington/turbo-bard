@@ -37,13 +37,11 @@ const soundscapesSlice = createSlice({
       if (soundscape === undefined) return;
       let index = getNextTrackIndex(soundscape);
       // Give each track an index to uniquely identify it
-      tracks.map(track => {
+      soundscape.tracks = tracks.map(track => {
         const trackWithIndex = Object.assign(track, { index });
         index++;
         return trackWithIndex;
       });
-      soundscape.tracks = tracks;
-      audioService.reconcile(tracks, soundscape.audio);
     }
   }
 });
