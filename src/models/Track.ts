@@ -8,6 +8,7 @@ export type TrackMetadata = {
 
 export type Loop = {
   id: string,
+  index: number,
   trackMetadata: TrackMetadata
   volume: number,
   isMuted: boolean,
@@ -17,6 +18,7 @@ export type Loop = {
 
 export type OneShot = {
   id: string,
+  index: number,
   trackMetadata: TrackMetadata
   volume: number,
   isMuted: boolean,
