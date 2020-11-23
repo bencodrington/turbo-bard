@@ -26,4 +26,12 @@ export type OneShot = {
   fileSources: string[]
 }
 
+export function isLoop(track: Track): track is Loop {
+  return (track as Loop).fileSource !== undefined;
+}
+
+export function isOneShot(track: Track): track is OneShot {
+  return (track as OneShot).fileSources !== undefined;
+}
+
 export type Track = Loop | OneShot;
