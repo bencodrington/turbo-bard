@@ -29,7 +29,6 @@ export default function LoopTrackListItem({ loop }: LoopTrackListItemProps) {
   // TODO: extract to LoopTrackListItem
   const [ sound, setSound ] = useState<Howl | null>(null)
   useEffect(() => {
-    // TODO: should only run once per loop
     setSound(createHowl(fileSource, volume));
     return () => {
       if (sound !== null) {
@@ -37,6 +36,8 @@ export default function LoopTrackListItem({ loop }: LoopTrackListItemProps) {
         sound.unload();
       }
     }
+    // This effect should only run once for each track item
+    // eslint-disable-next-line
   }, []);
   function displaySource() {
     console.log('TODO');
