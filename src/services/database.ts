@@ -26,11 +26,11 @@ const DUMMY_SOUNDSCAPE_DATA: SoundscapeData[] = [
     // name: 'Graveyard',
     tracks: [
       {
-        name: 'cheese',
+        name: 'Ominous Ambience',
         id: '111111',
         source: { author: 'Alice', url: 'alice@alice.com' },
         type: 'LOOP',
-        fileSource: 'https://filesource.fake'
+        fileSource: 'ominous-ambience'
       }
     ]
   },
@@ -39,18 +39,18 @@ const DUMMY_SOUNDSCAPE_DATA: SoundscapeData[] = [
     // name: 'Crowded Tavern',
     tracks: [
       {
-        name: 'drink',
+        name: 'Carefree Whistling',
         id: '222222',
         source: { author: 'Bob', url: 'bob@bob.com' },
         type: 'LOOP',
-        fileSource: 'https://filesource.fake'
+        fileSource: 'carefree-whistling'
       },
       {
-        name: 'slurp',
+        name: 'The Jig of Slurs',
         id: '33333',
         source: { author: 'Charlie', url: 'charlie@charlie.com' },
         type: 'LOOP',
-        fileSource: 'https://filesource.fake'
+        fileSource: 'jig-of-slurs'
       }
     ]
   }
@@ -77,7 +77,7 @@ function trackFromTrackData(data: TrackData): Track | null {
         id,
         trackMetadata: { name, source },
         // TODO: volume and isMuted should be saved in the state
-        volume: 60,
+        volume: .6,
         isMuted: false,
         isPlaying: false,
         fileSource: fileSource
@@ -92,7 +92,7 @@ function trackFromTrackData(data: TrackData): Track | null {
         id,
         trackMetadata: { name, source },
         // TODO: volume and isMuted should be saved in the state
-        volume: 60,
+        volume: .6,
         isMuted: false,
         isPlaying: false,
         fileSources: fileSources
