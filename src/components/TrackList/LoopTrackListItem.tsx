@@ -1,12 +1,15 @@
 import { Howl } from "howler";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Loop } from "../../models/Track";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
+import { removeTrack } from "../../slices/soundscapes";
 
 // import "./LoopTrackListItem.scss";
 
 type LoopTrackListItemProps = {
-  loop: Loop
+  loop: Loop,
+  soundscapeIndex: number
 };
 
 
@@ -24,17 +27,16 @@ function createHowl(fileSource: string, volume: number) {
   });
 }
 
-export default function LoopTrackListItem({ loop }: LoopTrackListItemProps) {
+export default function LoopTrackListItem({ soundscapeIndex, loop }: LoopTrackListItemProps) {
   const { trackMetadata, volume, fileSource } = loop;
-  // TODO: extract to LoopTrackListItem
-  const [ sound, setSound ] = useState<Howl | null>(null)
+  const [sound, setSound] = useState<Howl | null>(null);
+  const dispatch = useDispatch();
   useEffect(() => {
-    setSound(createHowl(fileSource, volume));
+    const howl = createHowl(fileSource, volume);
+    setSound(howl);
     return () => {
-      if (sound !== null) {
-        // TODO: fade out
-        sound.unload();
-      }
+      // TODO: fade out
+      howl.unload();
     }
     // This effect should only run once for each track item
     // eslint-disable-next-line
@@ -49,7 +51,7 @@ export default function LoopTrackListItem({ loop }: LoopTrackListItemProps) {
     console.log('TODO');
   }
   function remove() {
-    console.log('TODO');
+    dispatch(removeTrack({ soundscapeId: soundscapeIndex, trackIndex: loop.index }))
   }
   return (
     <div>

@@ -5,12 +5,16 @@ import LoopTrackListItem from "./LoopTrackListItem";
 import "./TrackListItem.scss";
 
 type TrackListItemProps = {
-  track: Track
+  track: Track,
+  soundscapeIndex: number
 };
 
-export default function TrackListItem({ track }: TrackListItemProps) {
+export default function TrackListItem({ track, soundscapeIndex }: TrackListItemProps) {
   if (isLoop(track)) {
-    return <LoopTrackListItem loop={track} />
+    return <LoopTrackListItem
+      soundscapeIndex={soundscapeIndex}
+      loop={track}
+    />
   }
   return null;
 }
