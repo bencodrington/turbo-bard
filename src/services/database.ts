@@ -17,6 +17,27 @@ const DUMMY_SOUNDSCAPE_RESULT_DATA: SearchResult[] = [
   }
 ];
 
+const DUMMY_TRACK_RESULT_DATA: SearchResult[] = [
+  {
+    id: "111111",
+    name: 'Ominous Ambience',
+    tags: ['loop', 'spooky', 'graveyard', 'horror', 'ghosts', 'spirits', 'crypt'],
+    type: OBJECT_TYPES.LOOP
+  },
+  {
+    id: "222222",
+    name: 'Carefree Whistling',
+    tags: ['loop', 'music', 'tinkerer', 'happy', 'pleasant', 'cottage', 'cooking', 'guard'],
+    type: OBJECT_TYPES.LOOP
+  },
+  {
+    id: "33333",
+    name: 'The Jig of Slurs',
+    tags: ['loop', 'music', 'tavern', 'upbeat', 'jovial', 'celtic', 'happy', 'pleasant', 'fiddle', 'flute', 'merry', 'halfling', 'village', 'town'],
+    type: OBJECT_TYPES.LOOP
+  }
+];
+
 type SoundscapeData = { id: string, tracks: TrackData[] }
 type TrackData = { id: string, type: string, fileSource?: string, fileSources?: string[] } & TrackMetadata;
 
@@ -63,6 +84,15 @@ export async function fetchSoundscapeResults(searchText: string) {
     }, 400);
   });
   return DUMMY_SOUNDSCAPE_RESULT_DATA;
+}
+
+export async function fetchTrackResults(searchText: string) {
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 400);
+  });
+  return DUMMY_TRACK_RESULT_DATA;
 }
 
 function trackFromTrackData(data: TrackData): Track | null {
