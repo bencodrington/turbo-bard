@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Soundscape } from "../../models/Soundscape";
-import { Track } from "../../models/Track";
+import { isLoop, isOneShot, Track } from "../../models/Track";
 import { fetchTracksForSoundscape } from "../../services/database";
 import { setTracks } from "../../slices/soundscapes";
 
@@ -36,11 +36,15 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
     // TODO: isCancelled
   }, [sourceId, hasLoaded, isLoading, tracks.length, dispatch, soundscapeId]);
 
+  const loopCount = tracks.filter(track => isLoop(track)).length;
+  const oneShotCount = tracks.filter(track => isOneShot(track)).length;
+
   return (
     <div className="soundscape-list-item-container">
       <h4>{name}</h4>
       <p>isLoading: {isLoading.toString()}</p>
-      <p>Track count: {tracks.length}</p>
+      <p>Loop count: {loopCount}</p>
+      <p>One Shot count: {oneShotCount}</p>
     </div>
   );
 }
