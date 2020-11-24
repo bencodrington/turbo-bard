@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Soundscape } from "../models/Soundscape";
 import { Track } from "../models/Track";
 import audioService from "../services/audio";
-import { getNextIndex } from "../services/soundscape";
+import { getNextIndex } from "../utils/storeUtil";
 
 const soundscapesSlice = createSlice({
   name: 'soundscapes',
@@ -19,15 +19,14 @@ const soundscapesSlice = createSlice({
     },
     cloneSoundscape(state, { payload }: PayloadAction<{ name: string, sourceId: string }>) {
       const { name, sourceId } = payload;
-      const nextId =
-        state.push({
-          name,
-          index: getNextIndex(state),
-          tracks: [],
-          sourceId,
-          isOpen: true,
-          audio: audioService.newAudio()
-        });
+      state.push({
+        name,
+        index: getNextIndex(state),
+        tracks: [],
+        sourceId,
+        isOpen: true,
+        audio: audioService.newAudio()
+      });
     },
     closeAllSoundscapes(state) {
       state.map(soundscape => Object.assign(soundscape, { isOpen: false }));

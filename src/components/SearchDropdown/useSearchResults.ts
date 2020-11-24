@@ -20,7 +20,7 @@ export default function useSearchResults<T>(fetchFunction: (searchText: string) 
     return () => {
       isCancelled = true;
     }
-  }, [searchText]);
+  }, [searchText, fetchFunction]);
 
   return {
     results,
