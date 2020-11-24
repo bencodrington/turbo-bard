@@ -4,5 +4,13 @@
   h4 {
     color: var(--canary);
     display: inline-block;
+
+    &.loop {
+      color: var(--loop);
+    }
+
+    &.one-shot {
+      color: var(--oneshot);
+    }
   }
 }
