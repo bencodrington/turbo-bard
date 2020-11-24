@@ -9,7 +9,8 @@ import { removeTrack } from "../../slices/soundscapes";
 
 type LoopTrackListItemProps = {
   loop: Loop,
-  soundscapeIndex: number
+  soundscapeIndex: number,
+  isVisible: boolean
 };
 
 
@@ -27,7 +28,7 @@ function createHowl(fileSource: string, volume: number) {
   });
 }
 
-export default function LoopTrackListItem({ soundscapeIndex, loop }: LoopTrackListItemProps) {
+export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: LoopTrackListItemProps) {
   const { trackMetadata, volume, fileSource } = loop;
   const [sound, setSound] = useState<Howl | null>(null);
   const dispatch = useDispatch();
@@ -41,6 +42,9 @@ export default function LoopTrackListItem({ soundscapeIndex, loop }: LoopTrackLi
     // This effect should only run once for each track item
     // eslint-disable-next-line
   }, []);
+  if (!isVisible) {
+    return null;
+  }
   function displaySource() {
     console.log('TODO');
   }
