@@ -1,4 +1,5 @@
 import React from "react";
+import { SearchResult } from "../../models/SearchResult";
 import { fetchTrackResults } from "../../services/database";
 import SearchField from "../../widgets/SearchField";
 import SearchDropdown from "./SearchDropdown";
@@ -27,7 +28,7 @@ export default function TrackSearchDropdown({
     />
   );
 
-  function onSearchItemClick(name: string, id: string) {
+  function onSearchItemClick({ name, id }: SearchResult) {
     setSearchText('');
     closeSearchDropdown();
     console.log('adding' + name);
@@ -37,7 +38,7 @@ export default function TrackSearchDropdown({
     <SearchItem
       key={result.id}
       data={result}
-      onClick={() => onSearchItemClick(result.name, result.id)}
+      onClick={() => onSearchItemClick(result)}
     />
   )
   )

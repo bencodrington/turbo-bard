@@ -7,6 +7,8 @@ import { fetchSoundscapeResults } from "../../services/database";
 import SearchItem from "./SearchItem";
 import { cloneSoundscape, closeAllSoundscapes, newSoundscape } from "../../slices/soundscapes";
 import { useDispatch } from "react-redux";
+import useSearchResults from "./useSearchResults";
+import { SearchResult } from "../../models/SearchResult";
 
 type SoundscapeSearchDropdownProps = {
   closeSearchDropdown: () => void
@@ -15,46 +17,29 @@ type SoundscapeSearchDropdownProps = {
 export default function SoundscapeSearchDropdown({
   closeSearchDropdown
 }: SoundscapeSearchDropdownProps) {
-  const [results, setResults] = useState<JSX.Element[]>([]);
-  const [isFetchingResults, setIsFetchingResults] = useState(false);
-  const [searchText, setSearchText] = useState('');
+  const {
+    results,
+    isFetchingResults,
+    searchText,
+    setSearchText
+  } = useSearchResults(fetchSoundscapeResults);
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    let isCancelled = false;
-    async function fetch() {
-      const results = await fetchSoundscapeResults(searchText);
-      if (isCancelled) return;
+  const onSearchItemClick = ({ name, id }: SearchResult) => {
+    setSearchText('');
+    dispatch(closeAllSoundscapes());
+    dispatch(cloneSoundscape({ name, sourceId: id }));
+    closeSearchDropdown();
+  };
 
-      const onSearchItemClick = (name: string, sourceId: string) => {
-        setSearchText('');
-        dispatch(closeAllSoundscapes());
-        dispatch(cloneSoundscape({ name, sourceId }));
-        closeSearchDropdown();
-      };
-
-      setResults(results
-        .map(searchItem => {
-          const { id, name } = searchItem;
-          return (
-            <SearchItem
-              key={id}
-              data={searchItem}
-              onClick={() => onSearchItemClick(name, id)}
-            />
-          );
-        })
-      );
-      setIsFetchingResults(false);
-    }
-
-    setIsFetchingResults(true);
-    fetch();
-
-    return () => {
-      isCancelled = true;
-    }
-  }, [searchText, dispatch, closeSearchDropdown]);
+  const resultElements = results.map(result => (
+    <SearchItem
+      key={result.id}
+      data={result}
+      onClick={() => onSearchItemClick(result)}
+    />
+  ));
 
   const searchField = (
     <SearchField
@@ -80,7 +65,7 @@ export default function SoundscapeSearchDropdown({
   return (
     <SearchDropdown
       searchField={searchField}
-      results={results}
+      results={resultElements}
       suggestions={[]}
       isFetchingResults={isFetchingResults}
       trailing={trailing}

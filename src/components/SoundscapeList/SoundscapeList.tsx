@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import AddSoundscapeButton from "../../widgets/buttons/AddSoundscapeButton";
 import SoundscapeListItem from "./SoundscapeListItem";
 import SoundscapeSearchDropdown from "../SearchDropdown/SoundscapeSearchDropdown";
 import "./SoundscapeList.scss";
 import { useOpenSoundscape, useSoundscapes } from "../../slices";
+import useBoolean from "../../hooks/useBoolean";
 
 export default function SoundscapeList() {
   const soundscapes = useSoundscapes();
   const isSoundscapeOpen = useOpenSoundscape() !== undefined;
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-
-  function toggleIsSearchOpen() {
-    setIsSearchOpen(!isSearchOpen);
-  }
+  const [
+    isSearchOpen,
+    setIsSearchOpen,
+    toggleIsSearchOpen
+  ] = useBoolean(false);
 
   const soundscapeListItems = soundscapes.map(
     soundscape => (
