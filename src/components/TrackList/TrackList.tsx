@@ -1,5 +1,6 @@
 import React from "react";
 import { useSoundscapes } from "../../slices";
+import TrackListHeader from "./TrackListHeader";
 import TrackListItem from "./TrackListItem";
 
 export default function TrackList() {
@@ -7,6 +8,7 @@ export default function TrackList() {
 
   return (
     <div className="track-list-container">
+      <TrackListHeader />
       {soundscapes.map(soundscape =>
         soundscape.tracks.map(track =>
           // TODO: pass soundscape.isOpen
