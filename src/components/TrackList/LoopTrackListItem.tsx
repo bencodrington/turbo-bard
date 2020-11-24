@@ -55,7 +55,7 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
     console.log('TODO');
   }
   function remove() {
-    dispatch(removeTrack({ soundscapeId: soundscapeIndex, trackIndex: loop.index }))
+    dispatch(removeTrack({ soundscapeIndex, trackIndex: loop.index }))
   }
   return (
     <div>

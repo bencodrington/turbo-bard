@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Soundscape } from "../models/Soundscape";
 import { Track } from "../models/Track";
 import audioService from "../services/audio";
-import { getNextTrackIndex } from "../services/soundscape";
+import { getNextIndex } from "../services/soundscape";
 
 const soundscapesSlice = createSlice({
   name: 'soundscapes',
@@ -11,7 +11,7 @@ const soundscapesSlice = createSlice({
     newSoundscape(state, { payload }: { payload: string }) {
       state.push({
         name: payload,
-        id: state.length,
+        index: getNextIndex(state),
         tracks: [],
         isOpen: true,
         audio: audioService.newAudio()
@@ -19,23 +19,24 @@ const soundscapesSlice = createSlice({
     },
     cloneSoundscape(state, { payload }: PayloadAction<{ name: string, sourceId: string }>) {
       const { name, sourceId } = payload;
-      state.push({
-        name,
-        id: state.length,
-        tracks: [],
-        sourceId,
-        isOpen: true,
-        audio: audioService.newAudio()
-      });
+      const nextId =
+        state.push({
+          name,
+          index: getNextIndex(state),
+          tracks: [],
+          sourceId,
+          isOpen: true,
+          audio: audioService.newAudio()
+        });
     },
     closeAllSoundscapes(state) {
       state.map(soundscape => Object.assign(soundscape, { isOpen: false }));
     },
-    setTracks(state, { payload }: PayloadAction<{ soundscapeId: number, tracks: Track[] }>) {
-      const { soundscapeId, tracks } = payload;
-      const soundscape = state.find(soundscape => soundscape.id === soundscapeId);
+    setTracks(state, { payload }: PayloadAction<{ soundscapeIndex: number, tracks: Track[] }>) {
+      const { soundscapeIndex, tracks } = payload;
+      const soundscape = state.find(soundscape => soundscape.index === soundscapeIndex);
       if (soundscape === undefined) return;
-      let index = getNextTrackIndex(soundscape);
+      let index = getNextIndex(soundscape.tracks);
       // Give each track an index to uniquely identify it
       soundscape.tracks = tracks.map(track => {
         const trackWithIndex = Object.assign(track, { index });
@@ -43,9 +44,9 @@ const soundscapesSlice = createSlice({
         return trackWithIndex;
       });
     },
-    removeTrack(state, { payload }: PayloadAction<{ soundscapeId: number, trackIndex: number }>) {
-      const { soundscapeId, trackIndex } = payload;
-      const soundscape = state.find(soundscape => soundscape.id === soundscapeId);
+    removeTrack(state, { payload }: PayloadAction<{ soundscapeIndex: number, trackIndex: number }>) {
+      const { soundscapeIndex, trackIndex } = payload;
+      const soundscape = state.find(soundscape => soundscape.index === soundscapeIndex);
       if (soundscape === undefined) return;
       soundscape.tracks = soundscape.tracks.filter(track => track.index !== trackIndex);
       if (soundscape.tracks.length === 0) {

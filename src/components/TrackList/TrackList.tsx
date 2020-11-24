@@ -11,8 +11,8 @@ import TrackListHeader from "./TrackListHeader";
 function listItemFromTrack(track: Track, soundscape: Soundscape) {
   if (isLoop(track)) {
     return <LoopTrackListItem
-      key={soundscape.id + '-' + track.index}
-      soundscapeIndex={soundscape.id}
+      key={soundscape.index + '-' + track.index}
+      soundscapeIndex={soundscape.index}
       loop={track}
       isVisible={soundscape.isOpen}
     />

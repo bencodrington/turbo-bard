@@ -12,7 +12,7 @@ type SoundscapeListItemProps = {
 };
 
 export default function SoundscapeListItem({ soundscape }: SoundscapeListItemProps) {
-  const { sourceId, name, tracks, id: soundscapeId } = soundscape;
+  const { sourceId, name, tracks, index: soundscapeIndex } = soundscape;
   const [isLoading, setIsLoading] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -29,12 +29,12 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
       const result = await fetchTracksForSoundscape(sourceSoundscapeId);
       setHasLoaded(true);
       setIsLoading(false);
-      dispatch(setTracks({ soundscapeId, tracks: result as Track[] }));
+      dispatch(setTracks({ soundscapeIndex, tracks: result as Track[] }));
     }
     setIsLoading(true);
     fetch(sourceId);
     // TODO: isCancelled
-  }, [sourceId, hasLoaded, isLoading, tracks.length, dispatch, soundscapeId]);
+  }, [sourceId, hasLoaded, isLoading, tracks.length, dispatch, soundscapeIndex]);
 
   const loopCount = tracks.filter(track => isLoop(track)).length;
   const oneShotCount = tracks.filter(track => isOneShot(track)).length;

@@ -1,10 +1,8 @@
-import { Soundscape } from "../models/Soundscape";
-
-export function getNextTrackIndex(soundscape: Soundscape) {
+export function getNextIndex(indexedItems: { index: number }[]) {
   let maxIndex = -1;
-  soundscape.tracks.forEach(track => {
-    if (track.index > maxIndex) {
-      maxIndex = track.index;
+  indexedItems.forEach(indexedItems => {
+    if (indexedItems.index > maxIndex) {
+      maxIndex = indexedItems.index;
     }
   });
   return maxIndex + 1;
