@@ -1,3 +1,5 @@
+import { ObjectType } from "./ObjectTypes";
+
 export type TrackMetadata = {
   name: string,
   source: {
@@ -26,6 +28,14 @@ export type OneShot = {
   fileSources: string[]
 }
 
+export type UnloadedTrack = {
+  id: string,
+  index: number,
+  name: string,
+  type: ObjectType,
+  tags: string[]
+}
+
 export function isLoop(track: Track): track is Loop {
   return (track as Loop).fileSource !== undefined;
 }
@@ -34,4 +44,4 @@ export function isOneShot(track: Track): track is OneShot {
   return (track as OneShot).fileSources !== undefined;
 }
 
-export type Track = Loop | OneShot;
+export type Track = Loop | OneShot | UnloadedTrack;

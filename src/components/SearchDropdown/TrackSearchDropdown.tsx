@@ -1,6 +1,8 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { SearchResult } from "../../models/SearchResult";
 import { fetchTrackResults } from "../../services/database";
+import { addSearchResultToOpenSoundscape } from "../../slices/soundscapes";
 import SearchField from "../../widgets/SearchField";
 import SearchDropdown from "./SearchDropdown";
 import SearchItem from "./SearchItem";
@@ -19,6 +21,7 @@ export default function TrackSearchDropdown({
     searchText,
     setSearchText
   } = useSearchResults(fetchTrackResults);
+  const dispatch = useDispatch();
 
   const searchField = (
     <SearchField
@@ -28,10 +31,10 @@ export default function TrackSearchDropdown({
     />
   );
 
-  function onSearchItemClick({ name, id }: SearchResult) {
+  function onSearchItemClick(searchResult: SearchResult) {
     setSearchText('');
     closeSearchDropdown();
-    console.log('adding' + name);
+    dispatch(addSearchResultToOpenSoundscape(searchResult))
   }
 
   const resultElements = results.map(result => (

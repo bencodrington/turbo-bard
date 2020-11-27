@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { SearchResult } from "../models/SearchResult";
 import { Soundscape } from "../models/Soundscape";
 import { Track } from "../models/Track";
 import audioService from "../services/audio";
-import { getNextIndex } from "../utils/storeUtil";
+import { addSearchResultToSoundscape, getNextIndex } from "../utils/storeUtil";
 
 const soundscapesSlice = createSlice({
   name: 'soundscapes',
@@ -43,6 +44,11 @@ const soundscapesSlice = createSlice({
         return trackWithIndex;
       });
     },
+    addSearchResultToOpenSoundscape(state, { payload }: PayloadAction<SearchResult>) {
+      const soundscape = state.find(soundscape => soundscape.isOpen);
+      if (soundscape === undefined) return;
+      addSearchResultToSoundscape(payload, soundscape);
+    },
     removeTrack(state, { payload }: PayloadAction<{ soundscapeIndex: number, trackIndex: number }>) {
       const { soundscapeIndex, trackIndex } = payload;
       const soundscape = state.find(soundscape => soundscape.index === soundscapeIndex);
@@ -60,7 +66,8 @@ export const {
   cloneSoundscape,
   closeAllSoundscapes,
   setTracks,
-  removeTrack
+  removeTrack,
+  addSearchResultToOpenSoundscape
 } = soundscapesSlice.actions;
 
 export default soundscapesSlice.reducer;
