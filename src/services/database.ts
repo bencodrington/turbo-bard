@@ -1,4 +1,4 @@
-import { OBJECT_TYPES } from "../models/ObjectTypes";
+import { ObjectType } from "../models/ObjectTypes";
 import { SearchResult } from "../models/SearchResult";
 import { Loop, OneShot, Track, TrackMetadata } from "../models/Track";
 
@@ -7,13 +7,13 @@ const DUMMY_SOUNDSCAPE_RESULT_DATA: SearchResult[] = [
     id: "1",
     name: 'Graveyard',
     tags: ['spooky', 'scary', 'eerie', 'haunted', 'ghosts', 'spirits', 'cemetery', 'crypt'],
-    type: OBJECT_TYPES.SOUNDSCAPE
+    type: ObjectType.SOUNDSCAPE
   },
   {
     id: "2",
     name: 'Crowded Tavern',
     tags: ['lively', 'ale', 'beer', 'inn', 'warm', 'cozy', 'busy', 'happy', 'drinks', 'merry'],
-    type: OBJECT_TYPES.SOUNDSCAPE
+    type: ObjectType.SOUNDSCAPE
   }
 ];
 
@@ -22,19 +22,19 @@ const DUMMY_TRACK_RESULT_DATA: SearchResult[] = [
     id: "111111",
     name: 'Ominous Ambience',
     tags: ['loop', 'spooky', 'graveyard', 'horror', 'ghosts', 'spirits', 'crypt'],
-    type: OBJECT_TYPES.LOOP
+    type: ObjectType.LOOP
   },
   {
     id: "222222",
     name: 'Carefree Whistling',
     tags: ['loop', 'music', 'tinkerer', 'happy', 'pleasant', 'cottage', 'cooking', 'guard'],
-    type: OBJECT_TYPES.LOOP
+    type: ObjectType.LOOP
   },
   {
     id: "33333",
     name: 'The Jig of Slurs',
     tags: ['loop', 'music', 'tavern', 'upbeat', 'jovial', 'celtic', 'happy', 'pleasant', 'fiddle', 'flute', 'merry', 'halfling', 'village', 'town'],
-    type: OBJECT_TYPES.LOOP
+    type: ObjectType.LOOP
   }
 ];
 
@@ -98,7 +98,7 @@ export async function fetchTrackResults(searchText: string) {
 function trackFromTrackData(data: TrackData): Track | null {
   const { id, name, source, type, fileSource, fileSources } = data;
   switch (type) {
-    case OBJECT_TYPES.LOOP:
+    case ObjectType.LOOP:
       if (fileSource === undefined) {
         console.error(`Server returned loop (id ${id}) with undefined fileSource.`);
         return null;
@@ -112,7 +112,7 @@ function trackFromTrackData(data: TrackData): Track | null {
         isPlaying: false,
         fileSource: fileSource
       } as Loop;
-    case OBJECT_TYPES.ONESHOT:
+    case ObjectType.ONESHOT:
       if (fileSources?.length === undefined || fileSources.length === 0) {
         console.error(`Server returned oneshot (id ${id}) without fileSources.`);
         console.error(fileSources);

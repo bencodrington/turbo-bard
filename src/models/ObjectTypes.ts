@@ -1,5 +1,5 @@
-export const OBJECT_TYPES = {
-  LOOP: 'LOOP',
-  ONESHOT: 'ONESHOT',
-  SOUNDSCAPE: 'SOUNDSCAPE'
+export enum ObjectType {
+  LOOP = 'LOOP',
+  ONESHOT = 'ONESHOT',
+  SOUNDSCAPE = 'SOUNDSCAPE'
 };

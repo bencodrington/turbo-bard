@@ -1,7 +1,7 @@
 import React from "react";
 import { SearchResult } from "../../models/SearchResult";
 import Tag from "../../widgets/Tag";
-import { OBJECT_TYPES } from "../../models/ObjectTypes";
+import { ObjectType } from "../../models/ObjectTypes";
 
 import "./SearchItem.scss";
 
@@ -11,9 +11,9 @@ type SearchItemProps = {
 };
 
 const CLASS_NAMES = {
-  [OBJECT_TYPES.LOOP]: 'loop',
-  [OBJECT_TYPES.ONESHOT]: 'one-shot',
-  [OBJECT_TYPES.SOUNDSCAPE]: ''
+  [ObjectType.LOOP]: 'loop',
+  [ObjectType.ONESHOT]: 'one-shot',
+  [ObjectType.SOUNDSCAPE]: ''
 };
 
 export default function SearchItem({ data, onClick }: SearchItemProps) {
