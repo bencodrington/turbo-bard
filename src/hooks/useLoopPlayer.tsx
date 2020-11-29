@@ -3,13 +3,14 @@ import useBoolean from "./useBoolean";
 
 
 export default function useLoopPlayer(srcSet: string[]) {
-  // TODO: remove hardcoded value and validate that the extension is supported
-  const src = srcSet[0] || `http://phanary.com/audio/converted/ominous-ambience.webm`;
+  // TODO: validate that the extension is supported, fallback to subsequent ones
+  const src = srcSet[0];
   const [isPlaying, setIsPlaying, toggleIsPlaying] = useBoolean(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
 
   useEffect(() => {
+    if (src === undefined) return;
     const newAudio = new Audio(src);
     newAudio.oncanplaythrough = () => {
       setIsLoaded(true);
