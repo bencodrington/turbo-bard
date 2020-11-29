@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SearchResult } from "../models/SearchResult";
 import { Soundscape } from "../models/Soundscape";
-import { Track } from "../models/Track";
+import { Track, UnloadedTrack } from "../models/Track";
+import { TrackData } from "../services/database";
 import { addSearchResultToSoundscape, getNextIndex } from "../utils/storeUtil";
 
 const soundscapesSlice = createSlice({
@@ -54,6 +55,26 @@ const soundscapesSlice = createSlice({
       if (soundscape.tracks.length === 0) {
         soundscape.isOpen = false;
       }
+    },
+    setTrackData(state, { payload }: PayloadAction<{
+      soundscapeIndex: number,
+      trackIndex: number,
+      trackData: TrackData
+    }>) {
+      const { soundscapeIndex, trackIndex, trackData } = payload;
+      const soundscape = state.find(soundscape => soundscape.index === soundscapeIndex);
+      if (soundscape === undefined) return;
+      const trackPosition = soundscape.tracks.findIndex(track => track.index === trackIndex);
+      // TODO: handle the case where the track has already been loaded more gracefully than forcing
+      //  it to be an UnloadedTrack
+      const { id, index, name, type, tags } = soundscape.tracks[trackPosition] as UnloadedTrack;
+      soundscape.tracks[trackPosition] = Object.assign({
+        id,
+        index,
+        name,
+        type,
+        tags
+      }, trackData);
     }
   }
 });
@@ -64,7 +85,8 @@ export const {
   closeAllSoundscapes,
   setTracks,
   removeTrack,
-  addSearchResultToOpenSoundscape
+  addSearchResultToOpenSoundscape,
+  setTrackData
 } = soundscapesSlice.actions;
 
 export default soundscapesSlice.reducer;

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { isUnloaded, Loop, UnloadedTrack } from "../../models/Track";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
-import { removeTrack } from "../../slices/soundscapes";
+import { removeTrack, setTrackData } from "../../slices/soundscapes";
 import useLoopPlayer from "../../hooks/useLoopPlayer";
 import useBoolean from "../../hooks/useBoolean";
+import { fetchTrackById } from "../../services/database";
 
 // import "./LoopTrackListItem.scss";
 
@@ -25,12 +26,30 @@ function createSourceSet(fileSource: string) {
 // TODO: start at volume zero and transition up to `volume`
 export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: LoopTrackListItemProps) {
   const sourceSet = isUnloaded(loop) ? [] : createSourceSet(loop.fileSource);
-  const { name } = loop;
+  const { name, id, index } = loop;
 
   const [isMuted, , toggleIsMuted] = useBoolean(false);
-  const {isPlaying, toggleIsPlaying, isLoaded} = useLoopPlayer(sourceSet);
-  //   sound.on('load', () => { console.log('loaded'); setIsLoaded(true); });
+  const [isLoadingData, setIsLoadingData] = useState(false);
+  const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet);
   const dispatch = useDispatch();
+
+  // TODO: extract to useTrackData hook (should be extensible to support oneshots)
+  useEffect(() => {
+    async function fetchData() {
+      const trackData = await fetchTrackById(id);
+      if (trackData === undefined) {
+        setIsLoadingData(false);
+        return;
+      }
+      dispatch(setTrackData({ soundscapeIndex, trackIndex: index, trackData }))
+      setIsLoadingData(false);
+    }
+    if (isUnloaded(loop) && !isLoadingData) {
+      setIsLoadingData(true);
+      fetchData();
+      // TODO: check for race conditions
+    }
+  }, [loop, isLoadingData, id, dispatch, index, soundscapeIndex]);
   if (!isVisible) {
     return null;
   }
@@ -43,7 +62,7 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
   return (
     <div>
       <p>{name}</p>
-      {!isLoaded ? <p>Loading...</p> : <p>Loaded</p>}
+      {!isAudioLoaded ? <p>Loading...</p> : <p>Loaded</p>}
       {/* TODO: volume slider */}
       <DefaultButton
         onClick={toggleIsMuted}
