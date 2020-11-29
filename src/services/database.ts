@@ -2,6 +2,19 @@ import { ObjectType } from "../models/ObjectTypes";
 import { SearchResult } from "../models/SearchResult";
 import { Loop, OneShot, Track, TrackMetadata } from "../models/Track";
 
+export type LoopData = {
+  id: string,
+  type: ObjectType
+  fileSource: string
+} & TrackMetadata;
+
+export type OneShotData = {
+  id: string,
+  type: ObjectType
+  trackMetadata: TrackMetadata,
+  fileSources: string[]
+} & TrackMetadata;
+
 const DUMMY_SOUNDSCAPE_RESULT_DATA: SearchResult[] = [
   {
     id: "1",
@@ -38,6 +51,33 @@ const DUMMY_TRACK_RESULT_DATA: SearchResult[] = [
   }
 ];
 
+const DUMMY_TRACK_DATA: (LoopData | OneShotData)[] = [
+  {
+    id: '111111',
+    type: ObjectType.LOOP,
+    fileSource: 'ominous-ambience',
+    name: 'Ominous Ambience',
+    source: { author: 'Alice', url: 'alice@alice.com' },
+    tags: ['loop', 'spooky', 'graveyard', 'horror', 'ghosts', 'spirits', 'crypt']
+  },
+  {
+    id: '222222',
+    type: ObjectType.LOOP,
+    fileSource: 'carefree-whistling',
+    name: 'Carefree Whistling',
+    source: { author: 'Bob', url: 'bob@bob.com' },
+    tags: ['loop', 'music', 'tinkerer', 'happy', 'pleasant', 'cottage', 'cooking', 'guard'],
+  },
+  {
+    id: '33333',
+    type: ObjectType.LOOP,
+    fileSource: 'jig-of-slurs',
+    name: 'The Jig of Slurs',
+    source: { author: 'Charlie', url: 'charlie@charlie.com' },
+    tags: ['loop', 'music', 'tavern', 'upbeat', 'jovial', 'celtic', 'happy', 'pleasant', 'fiddle', 'flute', 'merry', 'halfling', 'village', 'town'],
+  }
+];
+
 type SoundscapeData = { id: string, tracks: TrackData[] }
 type TrackData = { id: string, type: string, fileSource?: string, fileSources?: string[] } & TrackMetadata;
 
@@ -51,7 +91,8 @@ const DUMMY_SOUNDSCAPE_DATA: SoundscapeData[] = [
         id: '111111',
         source: { author: 'Alice', url: 'alice@alice.com' },
         type: 'LOOP',
-        fileSource: 'ominous-ambience'
+        fileSource: 'ominous-ambience',
+        tags: ['loop', 'spooky', 'graveyard', 'horror', 'ghosts', 'spirits', 'crypt']
       }
     ]
   },
@@ -64,6 +105,7 @@ const DUMMY_SOUNDSCAPE_DATA: SoundscapeData[] = [
         id: '222222',
         source: { author: 'Bob', url: 'bob@bob.com' },
         type: 'LOOP',
+        tags: ['loop', 'music', 'tinkerer', 'happy', 'pleasant', 'cottage', 'cooking', 'guard'],
         fileSource: 'carefree-whistling'
       },
       {
@@ -71,6 +113,7 @@ const DUMMY_SOUNDSCAPE_DATA: SoundscapeData[] = [
         id: '33333',
         source: { author: 'Charlie', url: 'charlie@charlie.com' },
         type: 'LOOP',
+        tags: ['loop', 'music', 'tavern', 'upbeat', 'jovial', 'celtic', 'happy', 'pleasant', 'fiddle', 'flute', 'merry', 'halfling', 'village', 'town'],
         fileSource: 'jig-of-slurs'
       }
     ]
@@ -105,7 +148,8 @@ function trackFromTrackData(data: TrackData): Track | null {
       }
       return {
         id,
-        trackMetadata: { name, source },
+        name,
+        source,
         // TODO: volume and isMuted should be saved in the state
         volume: .6,
         isMuted: false,
@@ -120,7 +164,8 @@ function trackFromTrackData(data: TrackData): Track | null {
       }
       return {
         id,
-        trackMetadata: { name, source },
+        name,
+        source,
         // TODO: volume and isMuted should be saved in the state
         volume: .6,
         isMuted: false,
@@ -146,4 +191,13 @@ export async function fetchTracksForSoundscape(soundscapeId: string) {
   return tracks
     .map(trackFromTrackData)
     .filter(track => track !== null);
+}
+
+export async function fetchTrackById(trackId: string) {
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 400);
+  });
+  return DUMMY_TRACK_DATA.find(track => track.id === trackId);
 }

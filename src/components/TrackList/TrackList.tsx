@@ -1,7 +1,7 @@
 import React from "react";
 import useBoolean from "../../hooks/useBoolean";
 import { Soundscape } from "../../models/Soundscape";
-import { isLoop, isOneShot, Track } from "../../models/Track";
+import { isLoop, isOneShot, isUnloadedLoop, Track } from "../../models/Track";
 import { useSoundscapes } from "../../slices";
 import AddTrackButton from "../../widgets/buttons/AddTrackButton";
 import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
@@ -9,7 +9,7 @@ import LoopTrackListItem from "./LoopTrackListItem";
 import TrackListHeader from "./TrackListHeader";
 
 function listItemFromTrack(track: Track, soundscape: Soundscape) {
-  if (isLoop(track)) {
+  if (isLoop(track) || isUnloadedLoop(track)) {
     return <LoopTrackListItem
       key={soundscape.index + '-' + track.index}
       soundscapeIndex={soundscape.index}
