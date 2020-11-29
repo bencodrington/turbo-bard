@@ -3,7 +3,10 @@ import { SearchResult } from "../models/SearchResult";
 import { Soundscape } from "../models/Soundscape";
 import { Track, UnloadedTrack } from "../models/Track";
 import { TrackData } from "../services/database";
-import { addSearchResultToSoundscape, getNextIndex } from "../utils/storeUtil";
+import {
+  addSearchResultToSoundscape,
+  getNextIndex
+} from "../utils/storeUtil";
 
 const soundscapesSlice = createSlice({
   name: 'soundscapes',
@@ -75,6 +78,13 @@ const soundscapesSlice = createSlice({
         type,
         tags
       }, trackData);
+    },
+    openSoundscape(state, { payload }: PayloadAction<{ soundscapeIndex: number }>) {
+      const { soundscapeIndex } = payload
+      state = state.map(soundscape => {
+        soundscape.isOpen = soundscape.index === soundscapeIndex
+        return soundscape;
+      });
     }
   }
 });
@@ -86,7 +96,8 @@ export const {
   setTracks,
   removeTrack,
   addSearchResultToOpenSoundscape,
-  setTrackData
+  setTrackData,
+  openSoundscape
 } = soundscapesSlice.actions;
 
 export default soundscapesSlice.reducer;
