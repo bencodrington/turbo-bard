@@ -46,7 +46,8 @@ export function isOneShot(track: Track): track is OneShot {
 }
 
 export function isUnloaded(track: Track): track is UnloadedTrack {
-  return (track as UnloadedTrack).name !== undefined;
+  return (track as Loop).fileSource === undefined &&
+    (track as OneShot).fileSources === undefined;
 }
 
 export function isUnloadedLoop(track: Track): track is UnloadedTrack {
