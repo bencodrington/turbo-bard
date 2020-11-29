@@ -35,8 +35,10 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
 
   // TODO: extract to useTrackData hook (should be extensible to support oneshots)
   useEffect(() => {
+    let fetchingDataFor = id;
     async function fetchData() {
       const trackData = await fetchTrackById(id);
+      if (id !== fetchingDataFor) return;
       if (trackData === undefined) {
         setIsLoadingData(false);
         return;
@@ -47,7 +49,6 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
     if (isUnloaded(loop) && !isLoadingData) {
       setIsLoadingData(true);
       fetchData();
-      // TODO: check for race conditions
     }
   }, [loop, isLoadingData, id, dispatch, index, soundscapeIndex]);
   if (!isVisible) {
