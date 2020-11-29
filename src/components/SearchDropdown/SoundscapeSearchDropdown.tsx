@@ -51,7 +51,11 @@ export default function SoundscapeSearchDropdown({
 
   const onNewSoundscapeClicked = () => {
     dispatch(closeAllSoundscapes());
-    dispatch(newSoundscape(searchText));
+    const trimmedSearchText = searchText.trim();
+    const newSoundscapeName = trimmedSearchText.length > 0
+      ? trimmedSearchText
+      : 'Custom Soundscape';
+    dispatch(newSoundscape(newSoundscapeName));
     setSearchText('');
     closeSearchDropdown();
   };
