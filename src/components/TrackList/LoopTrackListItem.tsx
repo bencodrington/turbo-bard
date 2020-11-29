@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { isUnloaded, Loop, UnloadedTrack } from "../../models/Track";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
-import { removeTrack, setTrackData } from "../../slices/soundscapes";
+import { removeTrack } from "../../slices/soundscapes";
 import useLoopPlayer from "../../hooks/useLoopPlayer";
 import useBoolean from "../../hooks/useBoolean";
-import { fetchTrackById } from "../../services/database";
+import useTrackData from "../../hooks/useTrackData";
 
 // import "./LoopTrackListItem.scss";
 
@@ -29,28 +29,10 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
   const { name, id, index } = loop;
 
   const [isMuted, , toggleIsMuted] = useBoolean(false);
-  const [isLoadingData, setIsLoadingData] = useState(false);
   const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet);
+  useTrackData(id, index, soundscapeIndex, !isUnloaded(loop));
   const dispatch = useDispatch();
 
-  // TODO: extract to useTrackData hook (should be extensible to support oneshots)
-  useEffect(() => {
-    let fetchingDataFor = id;
-    async function fetchData() {
-      const trackData = await fetchTrackById(id);
-      if (id !== fetchingDataFor) return;
-      if (trackData === undefined) {
-        setIsLoadingData(false);
-        return;
-      }
-      dispatch(setTrackData({ soundscapeIndex, trackIndex: index, trackData }))
-      setIsLoadingData(false);
-    }
-    if (isUnloaded(loop) && !isLoadingData) {
-      setIsLoadingData(true);
-      fetchData();
-    }
-  }, [loop, isLoadingData, id, dispatch, index, soundscapeIndex]);
   if (!isVisible) {
     return null;
   }
