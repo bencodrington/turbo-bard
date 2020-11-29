@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SearchResult } from "../models/SearchResult";
 import { Soundscape } from "../models/Soundscape";
 import { Track } from "../models/Track";
-import audioService from "../services/audio";
 import { addSearchResultToSoundscape, getNextIndex } from "../utils/storeUtil";
 
 const soundscapesSlice = createSlice({
@@ -15,7 +14,6 @@ const soundscapesSlice = createSlice({
         index: getNextIndex(state),
         tracks: [],
         isOpen: true,
-        audio: audioService.newAudio()
       });
     },
     cloneSoundscape(state, { payload }: PayloadAction<{ name: string, sourceId: string }>) {
@@ -25,8 +23,7 @@ const soundscapesSlice = createSlice({
         index: getNextIndex(state),
         tracks: [],
         sourceId,
-        isOpen: true,
-        audio: audioService.newAudio()
+        isOpen: true
       });
     },
     closeAllSoundscapes(state) {

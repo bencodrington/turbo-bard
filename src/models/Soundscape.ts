@@ -1,5 +1,4 @@
 import { Track } from "./Track";
-import { AudioList } from "../services/audio";
 
 export type Soundscape = {
   // A unique identifier used in the app to differentiate
@@ -11,6 +10,5 @@ export type Soundscape = {
   //  predefined soundscape. It is `undefined` when a
   //  soundscape is created from scratch
   sourceId?: string,
-  isOpen: boolean,
-  audio: AudioList
+  isOpen: boolean
 };
