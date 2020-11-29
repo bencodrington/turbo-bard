@@ -1,6 +1,8 @@
 import { ObjectType } from "../models/ObjectTypes";
 import { SearchResult } from "../models/SearchResult";
-import { Loop, OneShot, Track, TrackMetadata } from "../models/Track";
+import { TrackMetadata } from "../models/Track";
+
+export const ERROR_TYPE = 'ERROR';
 
 export type LoopData = {
   id: string,
@@ -15,8 +17,12 @@ export type OneShotData = {
   fileSources: string[]
 } & TrackMetadata;
 
+export type TrackDataError = {
+  id: string,
+  type: typeof ERROR_TYPE
+}
 
-export type TrackData = LoopData | OneShotData;
+export type TrackData = TrackDataError | LoopData | OneShotData;
 
 export function isLoopData(trackData: TrackData): trackData is LoopData {
   return (trackData as LoopData).fileSource !== undefined &&
@@ -30,13 +36,13 @@ export function isOneShotData(trackData: TrackData): trackData is OneShotData {
 
 const DUMMY_SOUNDSCAPE_RESULT_DATA: SearchResult[] = [
   {
-    id: "1",
+    id: 'XXXXX',
     name: 'Graveyard',
     tags: ['spooky', 'scary', 'eerie', 'haunted', 'ghosts', 'spirits', 'cemetery', 'crypt'],
     type: ObjectType.SOUNDSCAPE
   },
   {
-    id: "2",
+    id: 'YYYYY',
     name: 'Crowded Tavern',
     tags: ['lively', 'ale', 'beer', 'inn', 'warm', 'cozy', 'busy', 'happy', 'drinks', 'merry'],
     type: ObjectType.SOUNDSCAPE
@@ -57,7 +63,7 @@ const DUMMY_TRACK_RESULT_DATA: SearchResult[] = [
     type: ObjectType.LOOP
   },
   {
-    id: "33333",
+    id: "333333",
     name: 'The Jig of Slurs',
     tags: ['loop', 'music', 'tavern', 'upbeat', 'jovial', 'celtic', 'happy', 'pleasant', 'fiddle', 'flute', 'merry', 'halfling', 'village', 'town'],
     type: ObjectType.LOOP
@@ -82,7 +88,7 @@ const DUMMY_TRACK_DATA: (LoopData | OneShotData)[] = [
     tags: ['loop', 'music', 'tinkerer', 'happy', 'pleasant', 'cottage', 'cooking', 'guard'],
   },
   {
-    id: '33333',
+    id: '333333',
     type: ObjectType.LOOP,
     fileSource: 'jig-of-slurs',
     name: 'The Jig of Slurs',
@@ -91,45 +97,18 @@ const DUMMY_TRACK_DATA: (LoopData | OneShotData)[] = [
   }
 ];
 
-type SoundscapeData = { id: string, tracks: TrackData[] }
-// type TrackData = { id: string, type: string, fileSource?: string, fileSources?: string[] } & TrackMetadata;
+type SoundscapeData = { id: string, trackIds: string[] }
 
 const DUMMY_SOUNDSCAPE_DATA: SoundscapeData[] = [
   {
-    id: "1",
+    id: 'XXXXX',
     // name: 'Graveyard',
-    tracks: [
-      {
-        name: 'Ominous Ambience',
-        id: '111111',
-        source: { author: 'Alice', url: 'alice@alice.com' },
-        type: ObjectType.LOOP,
-        fileSource: 'ominous-ambience',
-        tags: ['loop', 'spooky', 'graveyard', 'horror', 'ghosts', 'spirits', 'crypt']
-      }
-    ]
+    trackIds: [ '111111' ]
   },
   {
-    id: "2",
+    id: 'YYYYY',
     // name: 'Crowded Tavern',
-    tracks: [
-      {
-        name: 'Carefree Whistling',
-        id: '222222',
-        source: { author: 'Bob', url: 'bob@bob.com' },
-        type: ObjectType.LOOP,
-        tags: ['loop', 'music', 'tinkerer', 'happy', 'pleasant', 'cottage', 'cooking', 'guard'],
-        fileSource: 'carefree-whistling'
-      },
-      {
-        name: 'The Jig of Slurs',
-        id: '33333',
-        source: { author: 'Charlie', url: 'charlie@charlie.com' },
-        type: ObjectType.LOOP,
-        tags: ['loop', 'music', 'tavern', 'upbeat', 'jovial', 'celtic', 'happy', 'pleasant', 'fiddle', 'flute', 'merry', 'halfling', 'village', 'town'],
-        fileSource: 'jig-of-slurs'
-      }
-    ]
+    trackIds: ['222222', '333333' ]
   }
 ];
 
@@ -151,49 +130,17 @@ export async function fetchTrackResults(searchText: string) {
   return DUMMY_TRACK_RESULT_DATA;
 }
 
-function trackFromTrackData(trackData: TrackData): Track | null {
-  const { id, name, source } = trackData;
-  if (isLoopData(trackData)) {
-    return {
-      id,
-      name,
-      source,
-      // TODO: volume and isMuted should be saved in the state
-      volume: .6,
-      isMuted: false,
-      isPlaying: false,
-      fileSource: trackData.fileSource
-    } as Loop;
-  }
-  if (isOneShotData(trackData)) {
-    return {
-      id,
-      name,
-      source,
-      // TODO: volume and isMuted should be saved in the state
-      volume: .6,
-      isMuted: false,
-      isPlaying: false,
-      fileSources: trackData.fileSources
-    } as OneShot;
-  }
-  console.error('Server returned invalid trackData:', trackData);
-  return null;
-}
-
-export async function fetchTracksForSoundscape(soundscapeId: string) {
+export async function fetchTrackIdsForSoundscape(soundscapeId: string) {
   await new Promise((resolve) => {
     setTimeout(() => {
       resolve();
     }, 400);
   });
-  const tracks = DUMMY_SOUNDSCAPE_DATA.find(result => result.id === soundscapeId)?.tracks;
+  const tracks = DUMMY_SOUNDSCAPE_DATA.find(result => result.id === soundscapeId)?.trackIds;
   if (tracks === undefined) {
     return [];
   }
-  return tracks
-    .map(trackFromTrackData)
-    .filter(track => track !== null);
+  return tracks;
 }
 
 export async function fetchTrackById(trackId: string) {

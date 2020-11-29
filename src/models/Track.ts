@@ -1,3 +1,4 @@
+import { ERROR_TYPE } from "../services/database";
 import { ObjectType } from "./ObjectTypes";
 
 export type TrackMetadata = {
@@ -32,9 +33,11 @@ export type OneShot = {
 export type UnloadedTrack = {
   id: string,
   index: number,
-  name: string,
-  type: ObjectType,
-  tags: string[]
+  // These optional properties are present when loading from a track search result,
+  //  but not when loading from a predefined or saved soundscape
+  name?: string,
+  type?: ObjectType | typeof ERROR_TYPE,
+  tags?: string[]
 };
 
 export function isLoop(track: Track): track is Loop {

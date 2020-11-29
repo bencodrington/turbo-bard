@@ -44,7 +44,7 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
   }
   return (
     <div>
-      <p>{name}</p>
+      <p>{name ?? null}</p>
       {!isAudioLoaded ? <p>Loading...</p> : <p>Loaded</p>}
       {/* TODO: volume slider */}
       <DefaultButton

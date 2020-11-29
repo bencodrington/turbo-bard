@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SearchResult } from "../models/SearchResult";
 import { Soundscape } from "../models/Soundscape";
-import { Track, UnloadedTrack } from "../models/Track";
-import { TrackData } from "../services/database";
+import { UnloadedTrack } from "../models/Track";
+import { ERROR_TYPE, TrackData } from "../services/database";
 import {
   addSearchResultToSoundscape,
   getNextIndex
@@ -33,16 +33,19 @@ const soundscapesSlice = createSlice({
     closeAllSoundscapes(state) {
       state.map(soundscape => Object.assign(soundscape, { isOpen: false }));
     },
-    setTracks(state, { payload }: PayloadAction<{ soundscapeIndex: number, tracks: Track[] }>) {
-      const { soundscapeIndex, tracks } = payload;
+    setTrackIds(state, { payload }: PayloadAction<{ soundscapeIndex: number, trackIds: string[] }>) {
+      const { soundscapeIndex, trackIds } = payload;
       const soundscape = state.find(soundscape => soundscape.index === soundscapeIndex);
       if (soundscape === undefined) return;
       let index = getNextIndex(soundscape.tracks);
       // Give each track an index to uniquely identify it
-      soundscape.tracks = tracks.map(track => {
-        const trackWithIndex = Object.assign(track, { index });
+      soundscape.tracks = trackIds.map(trackId => {
+        const unloadedTrack = { 
+          id: trackId,
+          index
+        };
         index++;
-        return trackWithIndex;
+        return unloadedTrack;
       });
     },
     addSearchResultToOpenSoundscape(state, { payload }: PayloadAction<SearchResult>) {
@@ -68,6 +71,11 @@ const soundscapesSlice = createSlice({
       const soundscape = state.find(soundscape => soundscape.index === soundscapeIndex);
       if (soundscape === undefined) return;
       const trackPosition = soundscape.tracks.findIndex(track => track.index === trackIndex);
+      const currentTrack = soundscape.tracks[trackPosition];
+      if (trackData.type === ERROR_TYPE) {
+        Object.assign(currentTrack, { type: ERROR_TYPE })
+        return;
+      }
       // TODO: handle the case where the track has already been loaded more gracefully than forcing
       //  it to be an UnloadedTrack
       const { id, index, name, type, tags } = soundscape.tracks[trackPosition] as UnloadedTrack;
@@ -93,7 +101,7 @@ export const {
   newSoundscape,
   cloneSoundscape,
   closeAllSoundscapes,
-  setTracks,
+  setTrackIds,
   removeTrack,
   addSearchResultToOpenSoundscape,
   setTrackData,

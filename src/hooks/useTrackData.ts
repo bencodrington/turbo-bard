@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchTrackById } from "../services/database";
+import { ERROR_TYPE, fetchTrackById, TrackData } from "../services/database";
 import { setTrackData } from "../slices/soundscapes";
 
 export default function useTrackData(id: string, index: number, soundscapeIndex: number, isLoaded: boolean) {
   const [isLoadingData, setIsLoadingData] = useState(false);
+  const [results, setResults] = useState<TrackData | null>(null);
   const dispatch = useDispatch();
   useEffect(() => {
     let fetchingDataFor = id;
@@ -12,15 +13,28 @@ export default function useTrackData(id: string, index: number, soundscapeIndex:
       const trackData = await fetchTrackById(id);
       if (id !== fetchingDataFor) return;
       if (trackData === undefined) {
+        setResults({ id: id, type: ERROR_TYPE })
         setIsLoadingData(false);
         return;
       }
-      dispatch(setTrackData({ soundscapeIndex, trackIndex: index, trackData }))
+      setResults(trackData);
       setIsLoadingData(false);
     }
-    if (!isLoaded && !isLoadingData) {
+    if (!isLoaded && !isLoadingData && results === null) {
       setIsLoadingData(true);
       fetchData();
     }
-  }, [isLoaded, isLoadingData, id, dispatch, index, soundscapeIndex]);
+  }, [isLoaded, isLoadingData, id, dispatch, index, results]);
+
+  useEffect(() => {
+    if (results !== null && !isLoaded && !isLoadingData) {
+      dispatch(setTrackData({
+        soundscapeIndex,
+        trackIndex: index,
+        trackData: results
+      }));
+    }
+  })
+
+
 }

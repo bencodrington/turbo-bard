@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Soundscape } from "../../models/Soundscape";
-import { isLoop, isOneShot, Track } from "../../models/Track";
-import { fetchTracksForSoundscape } from "../../services/database";
-import { setTracks, openSoundscape } from "../../slices/soundscapes";
+import { isLoop, isOneShot } from "../../models/Track";
+import { fetchTrackIdsForSoundscape } from "../../services/database";
+import { setTrackIds, openSoundscape } from "../../slices/soundscapes";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 
 import "./SoundscapeListItem.scss";
@@ -27,10 +27,10 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
     ) return;
     // If we're not loading and we have a cloneId and have no tracks, we should fetch
     async function fetch(sourceSoundscapeId: string) {
-      const result = await fetchTracksForSoundscape(sourceSoundscapeId);
+      const result = await fetchTrackIdsForSoundscape(sourceSoundscapeId);
       setHasLoaded(true);
       setIsLoading(false);
-      dispatch(setTracks({ soundscapeIndex, tracks: result as Track[] }));
+      dispatch(setTrackIds({ soundscapeIndex, trackIds: result }));
     }
     setIsLoading(true);
     fetch(sourceId);
