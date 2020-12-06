@@ -7,12 +7,18 @@ import { ERROR_TYPE } from "../../services/database";
 
 type UnloadedTrackListItemProps = {
   soundscapeIndex: number,
-  unloadedTrack: UnloadedTrack
+  unloadedTrack: UnloadedTrack,
+  isVisible: boolean
 };
 
-export default function UnloadedTrackListItem({ unloadedTrack, soundscapeIndex }: UnloadedTrackListItemProps) {
+export default function UnloadedTrackListItem({
+  unloadedTrack,
+  soundscapeIndex,
+  isVisible
+}: UnloadedTrackListItemProps) {
   const { id, index, type } = unloadedTrack;
   useTrackData(id, index, soundscapeIndex, type === ERROR_TYPE);
+  if (!isVisible) return null;
   const output = type === ERROR_TYPE ? 'Failed to load track.' : 'Loading ambiguous track';
   return (
     <p>{output}</p>

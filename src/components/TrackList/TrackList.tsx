@@ -20,15 +20,16 @@ function listItemFromTrack(track: Track, soundscape: Soundscape) {
       soundscapeIndex={soundscape.index}
       loop={track}
       isVisible={soundscape.isOpen}
-    />
-  } else if (isOneShot(track)) {
-    // TODO:
-    return null;
-  } else if (isUnloaded(track)) {
-    return <UnloadedTrackListItem
+      />
+    } else if (isOneShot(track)) {
+      // TODO:
+      return null;
+    } else if (isUnloaded(track)) {
+      return <UnloadedTrackListItem
       key={constructKey(track, soundscape)}
       unloadedTrack={track}
       soundscapeIndex={soundscape.index}
+      isVisible={soundscape.isOpen}
     />
   } else {
     return null;
