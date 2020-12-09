@@ -6,4 +6,12 @@
   align-items: center;
   border-radius: .25rem;
   color: var(--canary);
+
+  &.icon-only {
+    padding: 0.5rem;
+  }
+
+  img {
+    height: 2.5rem;
+  }
 }
