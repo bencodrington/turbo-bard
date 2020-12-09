@@ -1,6 +1,6 @@
 import React from "react";
 import { useOpenSoundscape } from "../../slices";
-import DefaultButton from "./DefaultButton";
+import AddButton from "./AddButton";
 
 // import "./AddTrackButton.scss";
 
@@ -12,6 +12,10 @@ export default function AddTrackButton({ onClick }: AddTrackButtonProps) {
   const openSoundscape = useOpenSoundscape();
   if (openSoundscape === undefined) return null;
   return (
-    <DefaultButton text="Add Track" onClick={onClick} />
+    <AddButton
+      text="Add Track"
+      onClick={onClick}
+      isTrackButton={true}
+    />
   );
 }

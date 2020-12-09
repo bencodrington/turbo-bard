@@ -1,0 +1,31 @@
+@import '../../mixins.scss';
+
+.add-button-container {
+  width: 100%;
+  border: 4px solid var(--canary);
+  border-radius: 1rem;
+  height: 6rem;
+  background: var(--azure--glass);
+  z-index: 1;
+  position: relative;
+  
+  h2 {
+    color: var(--canary);
+    @include heading;
+  }
+  
+  &.track-button {
+    
+    // Required for rounded gradient border
+    border-color: transparent;
+    background-image: linear-gradient(var(--azure--glass), var(--azure--glass)), var(--track);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    
+    h2 {
+      background: var(--track);
+      background-clip: text;
+      color: transparent;
+    }
+  }
+}
