@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react";
+import searchIcon from "../assets/icon-search.svg";
 
 import "./SearchField.scss";
 
@@ -15,12 +16,18 @@ export default function SearchField(props: SearchFieldProps) {
   }
 
   return (
-    <input
-      type="text"
-      className="search-field-container"
-      placeholder={props.placeholderText}
-      value={props.value}
-      onChange={changeHandler}
-    />
+    <div className="search-field-container">
+      <img
+        className="icon"
+        src={searchIcon}
+        alt='Search Icon'
+      />
+      <input
+        type="text"
+        placeholder={props.placeholderText}
+        value={props.value}
+        onChange={changeHandler}
+      />
+    </div>
   );
 }

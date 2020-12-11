@@ -1,21 +1,32 @@
 @import "../mixins.scss";
 
 .search-field-container {
-  background: none;
-  --icon-size: 2rem;
-  height: 2.5rem;
-  width: 100%;
-  border-radius: 1.25rem;
-  border: 2px solid var(--canary);
-  padding: .25rem;
-  padding-left: calc(.5rem + var(--icon-size) + .25rem);
-  color: var(--turbo-blue);
-  @include body;
-  
-  &::placeholder {
+  position: relative;
+
+  .icon {
+    position: absolute;
+    height: 2rem;
+    left: .5rem;
+    top: .25rem;
+  }
+
+  input {
+    background: none;
+    --icon-size: 2rem;
+    height: 2.5rem;
+    width: 100%;
+    border-radius: 1.25rem;
+    border: 2px solid var(--canary);
+    padding: .25rem;
+    padding-left: calc(.5rem + var(--icon-size) + .25rem);
+    color: var(--turbo-blue);
     @include body;
-    font-style: italic;
-    color: rgba(var(--canary--rgb), 70%);
-    opacity: .5;
+    
+    &::placeholder {
+      @include body;
+      font-style: italic;
+      color: rgba(var(--canary--rgb), 70%);
+      opacity: .5;
+    }
   }
 }
