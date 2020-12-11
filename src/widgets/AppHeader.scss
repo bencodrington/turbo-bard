@@ -1,7 +1,11 @@
+@import "../mixins.scss";
+
 .app-header-container {
   display: flex;
   align-items: center;
   padding: .5rem;
+
+  @include hidden--mobile;
 
   .logo {
     pointer-events: none;

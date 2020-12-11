@@ -9,3 +9,10 @@
   font-size: 1.5rem;
   font-kerning: none;
 }
+
+@mixin hidden--mobile {
+  // TODO: should only take effect at mobile resolutions
+  &.hidden--mobile {
+    display: none;
+  }
+}
