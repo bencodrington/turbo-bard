@@ -8,6 +8,9 @@ import useBoolean from "../../hooks/useBoolean";
 import useTrackData from "../../hooks/useTrackData";
 import closeIcon from "../../assets/icon-close.svg";
 import infoIcon from "../../assets/icon-info.svg";
+import loopIcon from "../../assets/icon-loop.svg";
+import playIcon from "../../assets/icon-play.svg";
+import stopIcon from "../../assets/icon-stop.svg";
 
 import "./LoopTrackListItem.scss";
 
@@ -48,23 +51,35 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
     <div className="loop-track-list-item-container">
       <h4>{name ?? null}</h4>
       {!isAudioLoaded ? <p>Loading...</p> : <p>Loaded</p>}
-      {/* TODO: volume slider */}
-      <DefaultButton
-        onClick={toggleIsMuted}
-        text={isMuted ? 'unmute' : 'mute'}
-      />
-      <DefaultButton
-        onClick={toggleIsPlaying}
-        text={isPlaying ? 'Stop' : 'Play'}
-      />
-      <DefaultButton
-        onClick={displaySource}
-        icon={infoIcon}
-      />
-      <DefaultButton
-        onClick={remove}
-        icon={closeIcon}
-      />
+      <div className='loop-controls'>
+        <div className='volume-controls'>
+          {/* TODO: volume slider */}
+          <DefaultButton
+            onClick={toggleIsMuted}
+            text={isMuted ? 'unmute' : 'mute'}
+          />
+        </div>
+
+        <div className='center-cell'>
+          <DefaultButton
+            className='play-toggle-button'
+            onClick={toggleIsPlaying}
+            icon={isPlaying ? stopIcon : playIcon}
+          />
+          <img className='loop-icon' src={loopIcon} alt='' />
+        </div>
+
+        <div className='standard-track-controls'>
+          <DefaultButton
+            onClick={remove}
+            icon={closeIcon}
+          />
+          <DefaultButton
+            onClick={displaySource}
+            icon={infoIcon}
+          />
+        </div>
+      </div>
     </div>
   );
 }
