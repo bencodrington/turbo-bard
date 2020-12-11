@@ -6,8 +6,10 @@ import { removeTrack } from "../../slices/soundscapes";
 import useLoopPlayer from "../../hooks/useLoopPlayer";
 import useBoolean from "../../hooks/useBoolean";
 import useTrackData from "../../hooks/useTrackData";
+import closeIcon from "../../assets/icon-close.svg";
+import infoIcon from "../../assets/icon-info.svg";
 
-// import "./LoopTrackListItem.scss";
+import "./LoopTrackListItem.scss";
 
 type LoopTrackListItemProps = {
   loop: Loop | UnloadedTrack,
@@ -43,8 +45,8 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
     dispatch(removeTrack({ soundscapeIndex, trackIndex: loop.index }))
   }
   return (
-    <div>
-      <p>{name ?? null}</p>
+    <div className="loop-track-list-item-container">
+      <h4>{name ?? null}</h4>
       {!isAudioLoaded ? <p>Loading...</p> : <p>Loaded</p>}
       {/* TODO: volume slider */}
       <DefaultButton
@@ -57,11 +59,11 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
       />
       <DefaultButton
         onClick={displaySource}
-        text="source"
+        icon={infoIcon}
       />
       <DefaultButton
         onClick={remove}
-        text="x"
+        icon={closeIcon}
       />
     </div>
   );
