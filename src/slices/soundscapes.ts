@@ -58,9 +58,6 @@ const soundscapesSlice = createSlice({
       const soundscape = state.find(soundscape => soundscape.index === soundscapeIndex);
       if (soundscape === undefined) return;
       soundscape.tracks = soundscape.tracks.filter(track => track.index !== trackIndex);
-      if (soundscape.tracks.length === 0) {
-        soundscape.isOpen = false;
-      }
     },
     setTrackData(state, { payload }: PayloadAction<{
       soundscapeIndex: number,
