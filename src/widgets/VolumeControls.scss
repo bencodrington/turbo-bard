@@ -1,0 +1,8 @@
+.volume-controls-container {
+  display: flex;
+  flex-direction: column;
+
+  .range-slider {
+    flex: 1;
+  }
+}

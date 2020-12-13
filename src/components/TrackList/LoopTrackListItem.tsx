@@ -13,6 +13,7 @@ import playIcon from "../../assets/icon-play.svg";
 import stopIcon from "../../assets/icon-stop.svg";
 
 import "./LoopTrackListItem.scss";
+import VolumeControls from "../../widgets/VolumeControls";
 
 type LoopTrackListItemProps = {
   loop: Loop | UnloadedTrack,
@@ -52,13 +53,12 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
       <h4>{name ?? null}</h4>
       {!isAudioLoaded ? <p>Loading...</p> : <p>Loaded</p>}
       <div className='loop-controls'>
-        <div className='volume-controls'>
-          {/* TODO: volume slider */}
-          <DefaultButton
-            onClick={toggleIsMuted}
-            text={isMuted ? 'unmute' : 'mute'}
-          />
-        </div>
+        <VolumeControls
+          volume={0.7}
+          isMuted={isMuted}
+          setVolume={(volume) => { console.log(volume) }}
+          toggleIsMuted={toggleIsMuted}
+        />
 
         <div className='center-cell'>
           <DefaultButton

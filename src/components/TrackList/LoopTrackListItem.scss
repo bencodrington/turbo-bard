@@ -15,17 +15,6 @@
     height: 11rem;
     justify-content: center;
 
-    .volume-controls,
-    .standard-track-controls {
-      width: 3.5rem;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .standard-track-controls {
-      justify-content: space-between;
-    }
-
     .center-cell {
       position: relative;
       // TODO: extract magic number from above
@@ -34,12 +23,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-
+      
       .play-toggle-button {
         position: absolute;
-
+        
       }
-
+      
       .loop-icon {
         height: 100%;
         pointer-events: none;
@@ -48,7 +37,15 @@
         left: 0;
         z-index: -1;
       }
-
+      
     }
+
+    .standard-track-controls {
+      width: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
   }
 }
