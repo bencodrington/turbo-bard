@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import noUiSlider from 'nouislider';
 import 'nouislider/distribute/nouislider.css';
 
@@ -22,31 +22,37 @@ export default function RangeInput({
   className = ''
 }: RangeInputProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
+  const [slider, setSlider] = useState<noUiSlider.noUiSlider | null>(null);
 
   useEffect(() => {
     if (sliderRef.current === null) return;
     let options = {
-      start: value,
+      start: 0,
       range: { min, max },
       connect: [true, false], // Colour in one side of the slider
       orientation: 'horizontal',
       direction: 'ltr'
-    } as {
-      start: number,
-      range: { min: number, max: number }
-      orientation: 'horizontal' | 'vertical',
-      direction: 'ltr' | 'rtl'
-    };
+    } as noUiSlider.Options;
     if (isVertical) {
-      options.orientation = 'vertical'
+      options.orientation = 'vertical';
       // Flip so 0 is at the bottom
-      options.direction = 'rtl'
+      options.direction = 'rtl';
     }
     const slider = noUiSlider.create(sliderRef.current, options);
     slider.on('update', (values, handle) => {
       onValueChange(values[handle])
     });
-  }, []);
+    setSlider(slider);
+    return () => {
+      slider.destroy();
+      setSlider(null);
+    }
+  }, [isVertical, max, min, onValueChange]);
+
+  useEffect(() => {
+    if (slider === null) return;
+    slider.set(value);
+  }, [slider, value]);
 
   return (
     <div
