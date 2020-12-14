@@ -6,6 +6,7 @@
     border: none;
     background: var(--azure);
     box-shadow: none;
+    border-radius: 0.25rem;
     &.noUi-vertical {
       width: $barWidth;
     }
@@ -13,6 +14,7 @@
 
   .noUi-connect {
     background: var(--canary);
+    border-radius: 0.25rem;
   }
 
   .noUi-handle {
