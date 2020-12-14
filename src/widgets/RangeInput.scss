@@ -1,0 +1,31 @@
+.range-input-container {
+  $barWidth: 18px;
+  $handleWidth: 28px;
+
+  &.noUi-target {
+    border: none;
+    background: var(--azure);
+    box-shadow: none;
+    &.noUi-vertical {
+      width: $barWidth;
+    }
+  }
+
+  .noUi-connect {
+    background: var(--canary);
+  }
+
+  .noUi-handle {
+    border-radius: 50%;
+    background-color: var(--canary);
+    box-shadow: none;
+    border: none;
+    width: $handleWidth;
+    height: $handleWidth;
+    right: ($barWidth - $handleWidth) / 2;
+
+    &::before, &::after {
+      display: none;
+    }
+  }
+}

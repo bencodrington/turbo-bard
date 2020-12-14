@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import noUiSlider from 'nouislider';
 import 'nouislider/distribute/nouislider.css';
 
-// import "./RangeInput.scss";
+import "./RangeInput.scss";
 
 type RangeInputProps = {
   min: number,
@@ -59,7 +59,7 @@ export default function RangeInput({
 
   return (
     <div
-      className={className}
+      className={'range-input-container ' + className}
       ref={sliderRef}
     />
   );
