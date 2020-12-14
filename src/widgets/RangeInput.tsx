@@ -28,7 +28,7 @@ export default function RangeInput({
     if (sliderRef.current === null) return;
     let options = {
       start: initialValue,
-      range: { min: 0, max: 1 },
+      range: { min, max },
       connect: [true, false], // Colour in one side of the slider
       orientation: 'horizontal',
       direction: 'ltr'
@@ -44,7 +44,7 @@ export default function RangeInput({
       slider.destroy();
       setSlider(null);
     }
-  }, [sliderRef, initialValue, isVertical]);
+  }, [sliderRef, initialValue, min, max, isVertical]);
 
   useEffect(() => {
     if (slider === null) return;
