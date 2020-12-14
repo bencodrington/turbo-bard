@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SearchResult } from "../models/SearchResult";
 import { Soundscape } from "../models/Soundscape";
-import { isUnloaded, UnloadedTrack } from "../models/Track";
+import { isUnloaded } from "../models/Track";
 import { ERROR_TYPE, TrackData } from "../services/database";
 import {
   addSearchResultToSoundscape,
-  getNextIndex
+  getNextIndex,
+  getSoundscapeByIndex,
+  getTrackByIndex
 } from "../utils/storeUtil";
 
 const soundscapesSlice = createSlice({
@@ -35,7 +37,7 @@ const soundscapesSlice = createSlice({
     },
     setTrackIds(state, { payload }: PayloadAction<{ soundscapeIndex: number, trackIds: string[] }>) {
       const { soundscapeIndex, trackIds } = payload;
-      const soundscape = state.find(soundscape => soundscape.index === soundscapeIndex);
+      const soundscape = getSoundscapeByIndex(soundscapeIndex, state);
       if (soundscape === undefined) return;
       let index = getNextIndex(soundscape.tracks);
       // Give each track an index to uniquely identify it
@@ -55,7 +57,7 @@ const soundscapesSlice = createSlice({
     },
     removeTrack(state, { payload }: PayloadAction<{ soundscapeIndex: number, trackIndex: number }>) {
       const { soundscapeIndex, trackIndex } = payload;
-      const soundscape = state.find(soundscape => soundscape.index === soundscapeIndex);
+      const soundscape = getSoundscapeByIndex(soundscapeIndex, state);
       if (soundscape === undefined) return;
       soundscape.tracks = soundscape.tracks.filter(track => track.index !== trackIndex);
     },
@@ -65,25 +67,15 @@ const soundscapesSlice = createSlice({
       trackData: TrackData
     }>) {
       const { soundscapeIndex, trackIndex, trackData } = payload;
-      const soundscape = state.find(soundscape => soundscape.index === soundscapeIndex);
-      if (soundscape === undefined) return;
-      const trackPosition = soundscape.tracks.findIndex(track => track.index === trackIndex);
-      const currentTrack = soundscape.tracks[trackPosition];
+      const track = getTrackByIndex(trackIndex, soundscapeIndex, state);
+      if (track === undefined) return;
       if (trackData.type === ERROR_TYPE) {
-        Object.assign(currentTrack, { type: ERROR_TYPE })
+        Object.assign(track, { type: ERROR_TYPE })
         return;
       }
-      // TODO: handle the case where the track has already been loaded more gracefully than forcing
-      //  it to be an UnloadedTrack
-      const { id, index, name, type, tags } = soundscape.tracks[trackPosition] as UnloadedTrack;
-      soundscape.tracks[trackPosition] = Object.assign({
-        id,
-        index,
-        name,
-        type,
-        tags,
-        volume: 0 // TODO: there has to be a better way of doing this
-      }, trackData);
+      // TODO: initial volume should be passed in with the initial setTrackData() call
+      //  immediately following database call
+      Object.assign(track, { volume: 0 }, trackData);
     },
     openSoundscape(state, { payload }: PayloadAction<{ soundscapeIndex: number }>) {
       const { soundscapeIndex } = payload;
@@ -98,9 +90,7 @@ const soundscapesSlice = createSlice({
       volume: number
     }>) {
       const { soundscapeIndex, trackIndex, volume } = payload;
-      const soundscape = state.find(soundscape => soundscape.index === soundscapeIndex);
-      if (soundscape === undefined) return;
-      const track = soundscape.tracks.find(track => track.index === trackIndex);
+      const track = getTrackByIndex(trackIndex, soundscapeIndex, state);
       if (track === undefined || isUnloaded(track)) return;
       track.volume = volume;
     }

@@ -24,3 +24,20 @@ export function addSearchResultToSoundscape(
     tags
   });
 }
+
+export function getSoundscapeByIndex(
+  soundscapeIndex: number,
+  soundscapes: Soundscape[]
+) {
+  return soundscapes.find(soundscape => soundscape.index === soundscapeIndex);
+}
+
+export function getTrackByIndex(
+  trackIndex: number,
+  soundscapeIndex: number,
+  soundscapes: Soundscape[]
+) {
+  return getSoundscapeByIndex(soundscapeIndex, soundscapes)
+    ?.tracks
+    .find(track => track.index === trackIndex);
+}
