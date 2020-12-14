@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SearchResult } from "../models/SearchResult";
 import { Soundscape } from "../models/Soundscape";
-import { UnloadedTrack } from "../models/Track";
+import { isUnloaded, UnloadedTrack } from "../models/Track";
 import { ERROR_TYPE, TrackData } from "../services/database";
 import {
   addSearchResultToSoundscape,
@@ -40,7 +40,7 @@ const soundscapesSlice = createSlice({
       let index = getNextIndex(soundscape.tracks);
       // Give each track an index to uniquely identify it
       soundscape.tracks = trackIds.map(trackId => {
-        const unloadedTrack = { 
+        const unloadedTrack = {
           id: trackId,
           index
         };
@@ -81,15 +81,28 @@ const soundscapesSlice = createSlice({
         index,
         name,
         type,
-        tags
+        tags,
+        volume: 0 // TODO: there has to be a better way of doing this
       }, trackData);
     },
     openSoundscape(state, { payload }: PayloadAction<{ soundscapeIndex: number }>) {
-      const { soundscapeIndex } = payload
+      const { soundscapeIndex } = payload;
       state = state.map(soundscape => {
         soundscape.isOpen = soundscape.index === soundscapeIndex
         return soundscape;
       });
+    },
+    setTrackVolume(state, { payload }: PayloadAction<{
+      soundscapeIndex: number,
+      trackIndex: number,
+      volume: number
+    }>) {
+      const { soundscapeIndex, trackIndex, volume } = payload;
+      const soundscape = state.find(soundscape => soundscape.index === soundscapeIndex);
+      if (soundscape === undefined) return;
+      const track = soundscape.tracks.find(track => track.index === trackIndex);
+      if (track === undefined || isUnloaded(track)) return;
+      track.volume = volume;
     }
   }
 });
@@ -102,7 +115,8 @@ export const {
   removeTrack,
   addSearchResultToOpenSoundscape,
   setTrackData,
-  openSoundscape
+  openSoundscape,
+  setTrackVolume
 } = soundscapesSlice.actions;
 
 export default soundscapesSlice.reducer;

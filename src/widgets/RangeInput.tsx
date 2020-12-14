@@ -7,7 +7,7 @@ import 'nouislider/distribute/nouislider.css';
 type RangeInputProps = {
   min: number,
   max: number,
-  value: number,
+  initialValue: number,
   onValueChange: (newValue: number) => void,
   isVertical?: boolean,
   className?: string
@@ -16,7 +16,7 @@ type RangeInputProps = {
 export default function RangeInput({
   min,
   max,
-  value,
+  initialValue,
   onValueChange,
   isVertical = false,
   className = ''
@@ -27,8 +27,8 @@ export default function RangeInput({
   useEffect(() => {
     if (sliderRef.current === null) return;
     let options = {
-      start: 0,
-      range: { min, max },
+      start: initialValue,
+      range: { min: 0, max: 1 },
       connect: [true, false], // Colour in one side of the slider
       orientation: 'horizontal',
       direction: 'ltr'
@@ -39,20 +39,23 @@ export default function RangeInput({
       options.direction = 'rtl';
     }
     const slider = noUiSlider.create(sliderRef.current, options);
-    slider.on('update', (values, handle) => {
-      onValueChange(values[handle])
-    });
     setSlider(slider);
     return () => {
       slider.destroy();
       setSlider(null);
     }
-  }, [isVertical, max, min, onValueChange]);
+  }, [sliderRef, initialValue, isVertical]);
 
   useEffect(() => {
     if (slider === null) return;
-    slider.set(value);
-  }, [slider, value]);
+    function onUpdate(values: any[], handle: number) {
+      onValueChange(Number.parseFloat(values[handle]));
+    }
+    slider.on('update', onUpdate);
+    return () => {
+      slider.off('update');
+    }
+  }, [slider, onValueChange]);
 
   return (
     <div

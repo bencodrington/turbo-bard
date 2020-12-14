@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { isUnloaded, Loop, UnloadedTrack } from "../../models/Track";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
-import { removeTrack } from "../../slices/soundscapes";
+import { removeTrack, setTrackVolume } from "../../slices/soundscapes";
 import useLoopPlayer from "../../hooks/useLoopPlayer";
 import useBoolean from "../../hooks/useBoolean";
 import useTrackData from "../../hooks/useTrackData";
@@ -31,13 +31,22 @@ function createSourceSet(fileSource: string) {
 
 // TODO: start at volume zero and transition up to `volume`
 export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: LoopTrackListItemProps) {
+  const dispatch = useDispatch();
   const sourceSet = isUnloaded(loop) ? [] : createSourceSet(loop.fileSource);
+  const volume = isUnloaded(loop) ? 0 : loop.volume;
+  const setVolume = (newVolume: number) => {
+    if (volume === newVolume) return;
+    dispatch(setTrackVolume({
+      soundscapeIndex,
+      trackIndex: loop.index,
+      volume: newVolume
+    }));
+  };
   const { name, id, index } = loop;
 
   const [isMuted, , toggleIsMuted] = useBoolean(false);
   const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet);
   useTrackData(id, index, soundscapeIndex, !isUnloaded(loop));
-  const dispatch = useDispatch();
 
   if (!isVisible) {
     return null;
@@ -54,9 +63,9 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
       {!isAudioLoaded ? <p>Loading...</p> : <p>Loaded</p>}
       <div className='loop-controls'>
         <VolumeControls
-          volume={0.7}
+          initialVolume={0.7} // TODO: extract constant
           isMuted={isMuted}
-          setVolume={(volume) => { console.log(volume) }}
+          setVolume={setVolume}
           toggleIsMuted={toggleIsMuted}
         />
 
