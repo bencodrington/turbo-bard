@@ -7,10 +7,18 @@ type DefaultButtonProps = {
   icon?: string, // icon should be an imported SVG
   iconAltText?: string,
   onClick: () => void,
-  className?: string
+  className?: string,
+  isDisabled?: boolean
 };
 
-export default function DefaultButton({ text, icon, iconAltText, onClick, className }: DefaultButtonProps) {
+export default function DefaultButton({
+  text,
+  icon,
+  iconAltText,
+  onClick,
+  className,
+  isDisabled = false
+}: DefaultButtonProps) {
 
   if (text === undefined && icon === undefined) return null;
   const textContent = text === undefined ? null : <span>{text}</span>;
@@ -26,6 +34,7 @@ export default function DefaultButton({ text, icon, iconAltText, onClick, classN
         className ?? ''
       }
       onClick={onClick}
+      disabled={isDisabled}
     >
       {textContent}
       {imgContent}

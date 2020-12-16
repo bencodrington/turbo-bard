@@ -7,6 +7,14 @@
   border-radius: .25rem;
   color: var(--canary);
 
+  &:disabled {
+    cursor: not-allowed;
+    
+    img, span {
+      opacity: .25;
+    }
+  }
+
   &.icon-only {
     padding: 0.5rem;
   }

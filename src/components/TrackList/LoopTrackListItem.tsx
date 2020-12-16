@@ -59,7 +59,6 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
   return (
     <div className="loop-track-list-item-container">
       <h4>{name ?? null}</h4>
-      {!isAudioLoaded ? <p>Loading...</p> : <p>Loaded</p>}
       <div className='loop-controls'>
         <VolumeControls
           initialVolume={0.7} // TODO: extract constant
@@ -73,6 +72,7 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
             className='play-toggle-button'
             onClick={toggleIsPlaying}
             icon={isPlaying ? stopIcon : playIcon}
+            isDisabled={!isAudioLoaded}
           />
           <img className='loop-icon' src={loopIcon} alt='' />
         </div>
