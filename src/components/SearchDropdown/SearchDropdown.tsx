@@ -8,6 +8,7 @@ type SearchDropdownProps = {
   results: JSX.Element[],
   suggestions: JSX.Element[],
   trailing?: JSX.Element
+  className?: string
 };
 
 export default function SearchDropdown(props: SearchDropdownProps) {
@@ -16,8 +17,10 @@ export default function SearchDropdown(props: SearchDropdownProps) {
   const results = props.isFetchingResults
     ? <p>Loading...</p>
     : <ul>{props.results}</ul>;
+
+  const className = 'search-dropdown-container ' + (props.className ?? '');
   return (
-    <div className="search-dropdown-container">
+    <div className={className}>
       {props.searchField}
       {/* TODO: suggestions */}
       {results}
