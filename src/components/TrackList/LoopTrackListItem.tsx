@@ -29,7 +29,6 @@ function createSourceSet(fileSource: string) {
   ];
 }
 
-// TODO: start at volume zero and transition up to `volume`
 export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: LoopTrackListItemProps) {
   const dispatch = useDispatch();
   const sourceSet = isUnloaded(loop) ? [] : createSourceSet(loop.fileSource);
