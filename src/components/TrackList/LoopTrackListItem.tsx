@@ -15,10 +15,14 @@ import stopIcon from "../../assets/icon-stop.svg";
 import "./LoopTrackListItem.scss";
 import VolumeControls from "../../widgets/VolumeControls";
 
+import TagList from "../TagList";
+
 type LoopTrackListItemProps = {
   loop: Loop | UnloadedTrack,
   soundscapeIndex: number,
-  isVisible: boolean
+  isVisible: boolean,
+  isSearchOpen: boolean,
+  onTagClick: (tag: string) => void
 };
 
 // TODO: extract to util
@@ -29,7 +33,13 @@ function createSourceSet(fileSource: string) {
   ];
 }
 
-export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: LoopTrackListItemProps) {
+export default function LoopTrackListItem({
+  soundscapeIndex,
+  loop,
+  isVisible,
+  isSearchOpen,
+  onTagClick
+}: LoopTrackListItemProps) {
   const dispatch = useDispatch();
   const sourceSet = isUnloaded(loop) ? [] : createSourceSet(loop.fileSource);
   const volume = isUnloaded(loop) ? 0 : loop.volume;
@@ -41,7 +51,7 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
       volume: newVolume
     }));
   };
-  const { name, id, index } = loop;
+  const { name, id, index, tags } = loop;
 
   const [isMuted, , toggleIsMuted] = useBoolean(false);
   const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet);
@@ -54,11 +64,16 @@ export default function LoopTrackListItem({ soundscapeIndex, loop, isVisible }: 
     console.log('TODO');
   }
   function remove() {
-    dispatch(removeTrack({ soundscapeIndex, trackIndex: loop.index }))
+    dispatch(removeTrack({ soundscapeIndex, trackIndex: index }))
   }
   return (
     <div className="loop-track-list-item-container">
       <h4>{name ?? null}</h4>
+      {
+        isSearchOpen && tags !== undefined
+        ? <TagList tags={tags} onTagClick={onTagClick} />
+        : null
+      }
       <div className='loop-controls'>
         <VolumeControls
           initialVolume={0.7} // TODO: extract constant

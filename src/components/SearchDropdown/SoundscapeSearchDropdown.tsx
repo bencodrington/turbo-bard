@@ -70,7 +70,6 @@ export default function SoundscapeSearchDropdown({
     <SearchDropdown
       searchField={searchField}
       results={resultElements}
-      suggestions={[]}
       isFetchingResults={isFetchingResults}
       trailing={trailing}
     />

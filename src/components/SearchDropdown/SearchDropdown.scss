@@ -12,12 +12,7 @@
 
   @include hidden--mobile;
 
-  .suggestions {
+  .tag-list-container {
     padding-top: 16px;
-    align-self: center;
-    
-    .tag-container:not(:last-child) {
-      margin-right: 2px;
-    }
   }
 }

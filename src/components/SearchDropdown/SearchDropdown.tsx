@@ -6,7 +6,7 @@ type SearchDropdownProps = {
   isFetchingResults: Boolean,
   searchField: JSX.Element,
   results: JSX.Element[],
-  suggestions: JSX.Element[],
+  suggestions?: JSX.Element,
   trailing?: JSX.Element
   className?: string
 };
@@ -22,9 +22,7 @@ export default function SearchDropdown(props: SearchDropdownProps) {
   return (
     <div className={className}>
       {props.searchField}
-      <div className="suggestions">
-        {props.suggestions}
-      </div>
+      {props.suggestions}
       {results}
       {trailing}
     </div>

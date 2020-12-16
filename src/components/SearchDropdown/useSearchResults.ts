@@ -22,10 +22,15 @@ export default function useSearchResults<T>(fetchFunction: (searchText: string) 
     }
   }, [searchText, fetchFunction]);
 
+  function appendSearchText(text: string) {
+    setSearchText(searchText + ' ' + text);
+  }
+
   return {
     results,
     isFetchingResults,
     searchText,
-    setSearchText
+    setSearchText,
+    appendSearchText
   };
 }

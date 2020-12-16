@@ -1,28 +1,30 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { SearchResult } from "../../models/SearchResult";
-import { fetchTrackResults } from "../../services/database";
 import { useOpenSoundscape } from "../../slices";
 import { addSearchResultToOpenSoundscape } from "../../slices/soundscapes";
 import SearchField from "../../widgets/SearchField";
-import Tag from "../../widgets/Tag";
+import TagList from "../TagList";
 import SearchDropdown from "./SearchDropdown";
 import SearchItem from "./SearchItem";
-import useSearchResults from "./useSearchResults";
 
 type TrackSearchDropdownProps = {
-  closeSearchDropdown: () => void
+  closeSearchDropdown: () => void,
+  searchText: string,
+  setSearchText: (newSearchText: string) => void,
+  appendSearchText: (newSearchText: string) => void,
+  isFetchingResults: boolean,
+  results: SearchResult[]
 };
 
 export default function TrackSearchDropdown({
-  closeSearchDropdown
+  closeSearchDropdown,
+  searchText,
+  setSearchText,
+  appendSearchText,
+  isFetchingResults,
+  results
 }: TrackSearchDropdownProps) {
-  const {
-    results,
-    isFetchingResults,
-    searchText,
-    setSearchText
-  } = useSearchResults(fetchTrackResults);
   const isHiddenMobile = useOpenSoundscape() === undefined;
   const dispatch = useDispatch();
 
@@ -48,18 +50,9 @@ export default function TrackSearchDropdown({
     />
   ));
 
-  const suggestions = [
-    <Tag
-      key="loop-suggestion"
-      text="loop"
-      onClick={() => setSearchText(searchText + ' loop')}
-    />,
-    <Tag
-      key="one-shot-suggestion"
-      text="one-shot"
-      onClick={() => setSearchText(searchText + ' one-shot')}
-    />
-  ]
+  const suggestions = (
+    <TagList tags={['loop', 'one-shot']} onTagClick={appendSearchText} />
+  );
 
   return (
     <SearchDropdown

@@ -1,0 +1,7 @@
+.tag-list-container {
+  text-align: center;
+  .tag-container.clickable:not(:last-child) {
+    margin-right: 2px;
+    margin-bottom: 2px;
+  }
+}
