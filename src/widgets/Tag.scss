@@ -1,4 +1,11 @@
 .tag-container {
   display: inline-block;
   padding: 4px 8px;
+
+  &.clickable {
+    background: var(--azure);
+    border-radius: 32px;
+    color: var(--canary);
+    cursor: pointer;
+  }
 }

@@ -5,6 +5,7 @@ import { fetchTrackResults } from "../../services/database";
 import { useOpenSoundscape } from "../../slices";
 import { addSearchResultToOpenSoundscape } from "../../slices/soundscapes";
 import SearchField from "../../widgets/SearchField";
+import Tag from "../../widgets/Tag";
 import SearchDropdown from "./SearchDropdown";
 import SearchItem from "./SearchItem";
 import useSearchResults from "./useSearchResults";
@@ -45,15 +46,27 @@ export default function TrackSearchDropdown({
       data={result}
       onClick={() => onSearchItemClick(result)}
     />
-  )
-  );
+  ));
+
+  const suggestions = [
+    <Tag
+      key="loop-suggestion"
+      text="loop"
+      onClick={() => setSearchText(searchText + ' loop')}
+    />,
+    <Tag
+      key="one-shot-suggestion"
+      text="one-shot"
+      onClick={() => setSearchText(searchText + ' one-shot')}
+    />
+  ]
 
   return (
     <SearchDropdown
       className={isHiddenMobile ? 'hidden--mobile' : ''}
       searchField={searchField}
       results={resultElements}
-      suggestions={[]}
+      suggestions={suggestions}
       isFetchingResults={isFetchingResults}
     />
   );

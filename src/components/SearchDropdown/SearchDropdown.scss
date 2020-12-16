@@ -11,4 +11,13 @@
   position: relative;
 
   @include hidden--mobile;
+
+  .suggestions {
+    padding-top: 16px;
+    align-self: center;
+    
+    .tag-container:not(:last-child) {
+      margin-right: 2px;
+    }
+  }
 }

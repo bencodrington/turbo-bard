@@ -22,7 +22,9 @@ export default function SearchDropdown(props: SearchDropdownProps) {
   return (
     <div className={className}>
       {props.searchField}
-      {/* TODO: suggestions */}
+      <div className="suggestions">
+        {props.suggestions}
+      </div>
       {results}
       {trailing}
     </div>
