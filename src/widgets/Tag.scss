@@ -1,11 +1,28 @@
 .tag-container {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
   padding: 4px 8px;
+
+  .trailing-icon {
+    height: 20px;
+    margin-left: 2px;
+    position: relative;
+    // Nudge icons down a little
+    top: 1px;
+  }
 
   &.clickable {
     background: var(--azure);
     border-radius: 32px;
     color: var(--canary);
     cursor: pointer;
+  }
+
+  &.tag--loop {
+    color: var(--loop);
+  }
+  
+  &.tag--one-shot {
+    color: var(--one-shot);
   }
 }
