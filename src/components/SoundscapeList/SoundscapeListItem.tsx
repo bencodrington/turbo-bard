@@ -7,11 +7,12 @@ import DefaultButton from "../../widgets/buttons/DefaultButton";
 import ChestBottom from "../../assets/chest-bottom.svg";
 import ChestTop from "../../assets/chest-top.svg";
 import PlayIcon from "../../assets/icon-play.svg";
+import CloseIcon from "../../assets/icon-close.svg";
+import SoundscapeSummary from "../../widgets/SoundscapeSummary";
+import VolumeControls from "../../widgets/VolumeControls";
 
 
 import "./SoundscapeListItem.scss";
-import SoundscapeSummary from "../../widgets/SoundscapeSummary";
-import VolumeControls from "../../widgets/VolumeControls";
 
 type SoundscapeListItemProps = {
   soundscape: Soundscape
@@ -61,6 +62,11 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
             />
           </div>
         </div>
+        <DefaultButton
+          className="close-button"
+          onClick={() => { console.log('soundscape close clicked'); }}
+          icon={CloseIcon}
+        />
       </div>
     </div>
   );
