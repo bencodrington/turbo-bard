@@ -5,6 +5,8 @@ import { Soundscape } from "../../models/Soundscape";
 import { isLoop, isOneShot } from "../../models/Track";
 import { openSoundscape } from "../../slices/soundscapes";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
+import ChestBottom from "../../assets/chest-bottom.svg";
+import ChestTop from "../../assets/chest-top.svg";
 
 import "./SoundscapeListItem.scss";
 
@@ -35,6 +37,36 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
       <p>isLoading: {isLoading.toString()}</p>
       <p>Loop count: {loopCount}</p>
       <p>One Shot count: {oneShotCount}</p>
+      <div className="chest">
+        <img
+          className="chest-top"
+          src={ChestTop}
+          alt=""
+        />
+        <div className="track-summary">
+          {
+            Array.from({ length: loopCount }, (_, index) =>
+              <div
+                key={"dot--loop-" + index}
+                className="dot dot--loop"
+              />
+            )
+          }
+          {
+            Array.from({ length: oneShotCount }, (_, index) =>
+              <div
+                key={"dot--one-shot-" + index}
+                className="dot dot--one-shot"
+              />
+            )
+          }
+        </div>
+        <img
+          className="chest-bottom"
+          src={ChestBottom}
+          alt=""
+        />
+      </div>
     </div>
   );
 }
