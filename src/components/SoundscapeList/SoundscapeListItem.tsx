@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import useClonedTrackIds from "../../hooks/useClonedTrackIds";
 import { Soundscape } from "../../models/Soundscape";
-import { openSoundscape } from "../../slices/soundscapes";
+import { openSoundscape, removeSoundscape } from "../../slices/soundscapes";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 import ChestBottom from "../../assets/chest-bottom.svg";
 import ChestTop from "../../assets/chest-top.svg";
@@ -31,6 +31,10 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
     dispatch(openSoundscape({ soundscapeIndex }));
   }
 
+  function remove() {
+    dispatch(removeSoundscape({ soundscapeIndex }));
+  }
+
   return (
     <div className="soundscape-list-item-container">
       <h4>{name}</h4>
@@ -57,14 +61,14 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
           />
           <div className="play-buttons">
             <DefaultButton
-              onClick={() => { console.log('soundscape play clicked'); }}
+              onClick={() => { console.log('soundscape close clicked'); }}
               icon={PlayIcon}
             />
           </div>
         </div>
         <DefaultButton
           className="close-button"
-          onClick={() => { console.log('soundscape close clicked'); }}
+          onClick={remove}
           icon={CloseIcon}
         />
       </div>

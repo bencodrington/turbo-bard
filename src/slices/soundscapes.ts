@@ -93,6 +93,10 @@ const soundscapesSlice = createSlice({
       const track = getTrackByIndex(trackIndex, soundscapeIndex, state);
       if (track === undefined || isUnloaded(track)) return;
       track.volume = volume;
+    },
+    removeSoundscape(state, { payload }: PayloadAction<{ soundscapeIndex: number }>) {
+      const { soundscapeIndex } = payload;
+      return state.filter(soundscape => soundscape.index !== soundscapeIndex);
     }
   }
 });
@@ -106,7 +110,8 @@ export const {
   addSearchResultToOpenSoundscape,
   setTrackData,
   openSoundscape,
-  setTrackVolume
+  setTrackVolume,
+  removeSoundscape
 } = soundscapesSlice.actions;
 
 export default soundscapesSlice.reducer;
