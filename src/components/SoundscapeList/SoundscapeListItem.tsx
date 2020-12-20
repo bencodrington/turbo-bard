@@ -9,6 +9,7 @@ import ChestTop from "../../assets/chest-top.svg";
 
 import "./SoundscapeListItem.scss";
 import SoundscapeSummary from "../../widgets/SoundscapeSummary";
+import VolumeControls from "../../widgets/VolumeControls";
 
 type SoundscapeListItemProps = {
   soundscape: Soundscape
@@ -32,18 +33,26 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
       <h4>{name}</h4>
       <DefaultButton onClick={open} text="Open" />
       <p>isLoading: {isLoading.toString()}</p>
-      <div className="chest">
-        <img
-          className="chest-top"
-          src={ChestTop}
-          alt=""
+      <div className="body">
+        <VolumeControls
+          initialVolume={0.7}  // TODO:
+          isMuted={false} // TODO:
+          setVolume={(newVol) => { console.log(newVol); }} // TODO:
+          toggleIsMuted={() => { console.log('toggle muted'); }}
         />
-        <SoundscapeSummary tracks={tracks} />
-        <img
-          className="chest-bottom"
-          src={ChestBottom}
-          alt=""
-        />
+        <div className="chest">
+          <img
+            className="chest-top"
+            src={ChestTop}
+            alt=""
+          />
+          <SoundscapeSummary tracks={tracks} />
+          <img
+            className="chest-bottom"
+            src={ChestBottom}
+            alt=""
+          />
+        </div>
       </div>
     </div>
   );
