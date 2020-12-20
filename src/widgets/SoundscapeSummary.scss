@@ -1,0 +1,21 @@
+.soundscape-summary-container {
+  .dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 16px;
+    display: inline-block;
+    margin-right: 2px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .dot--loop {
+    background: var(--loop);
+  }
+
+  .dot--one-shot {
+    background: var(--one-shot);
+  }
+}
