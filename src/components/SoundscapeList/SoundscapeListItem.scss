@@ -7,4 +7,30 @@
   h4 {
     color: var(--canary);
   }
+
+  .body {
+    display: flex;
+    height: 11rem;
+    align-content: center;
+  }
+
+  .chest {
+    height: 11rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    position: relative;
+
+    .chest-top {
+      z-index: -2;
+    }
+  }
+
+  .soundscape-summary-container {
+    position: absolute;
+    bottom: 76px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+  }
 }
