@@ -54,7 +54,7 @@ export default function LoopTrackListItem({
   const { name, id, index, tags } = loop;
 
   const [isMuted, , toggleIsMuted] = useBoolean(false);
-  const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet);
+  const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet, volume);
   useTrackData(id, index, soundscapeIndex, !isUnloaded(loop));
 
   if (!isVisible) {

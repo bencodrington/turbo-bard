@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useBoolean from "./useBoolean";
 
 
-export default function useLoopPlayer(srcSet: string[]) {
+export default function useLoopPlayer(srcSet: string[], volume: number) {
   // TODO: validate that the extension is supported, fallback to subsequent ones
   const src = srcSet[0];
   const [isPlaying, setIsPlaying, toggleIsPlaying] = useBoolean(false);
@@ -19,7 +19,7 @@ export default function useLoopPlayer(srcSet: string[]) {
     return function cleanup() {
       newAudio.remove();
     }
-  }, [src])
+  }, [src]);
 
   useEffect(() => {
     if (audio === null) return;
@@ -28,6 +28,11 @@ export default function useLoopPlayer(srcSet: string[]) {
     } else {
       audio.pause();
     }
+  });
+
+  useEffect(() => {
+    if (audio === null) return;
+    audio.volume = volume;
   });
 
   return { isPlaying, setIsPlaying, toggleIsPlaying, isLoaded };
