@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SearchResult } from "../models/SearchResult";
 import { Soundscape } from "../models/Soundscape";
-import { isUnloaded } from "../models/Track";
+import { isLoop, isOneShot, isUnloaded } from "../models/Track";
 import { ERROR_TYPE, TrackData } from "../services/database";
 import {
   addSearchResultToSoundscape,
@@ -97,6 +97,20 @@ const soundscapesSlice = createSlice({
     removeSoundscape(state, { payload }: PayloadAction<{ soundscapeIndex: number }>) {
       const { soundscapeIndex } = payload;
       return state.filter(soundscape => soundscape.index !== soundscapeIndex);
+    },
+    setSoundscapeIsPlaying(state, { payload }: PayloadAction<{
+      soundscapeIndex: number,
+      isPlaying: boolean
+    }>) {
+      const { soundscapeIndex, isPlaying } = payload;
+      const soundscape = getSoundscapeByIndex(soundscapeIndex, state);
+      if (soundscape === undefined) return;
+      soundscape.tracks.map(track => {
+        if (isLoop(track) || isOneShot(track)) {
+          track.isPlaying = isPlaying;
+        }
+        return track;
+      });
     }
   }
 });
@@ -111,7 +125,8 @@ export const {
   setTrackData,
   openSoundscape,
   setTrackVolume,
-  removeSoundscape
+  removeSoundscape,
+  setSoundscapeIsPlaying
 } = soundscapesSlice.actions;
 
 export default soundscapesSlice.reducer;

@@ -2,17 +2,23 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import useClonedTrackIds from "../../hooks/useClonedTrackIds";
 import { Soundscape } from "../../models/Soundscape";
-import { openSoundscape, removeSoundscape } from "../../slices/soundscapes";
+import {
+  openSoundscape,
+  removeSoundscape,
+  setSoundscapeIsPlaying
+} from "../../slices/soundscapes";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 import ChestBottom from "../../assets/chest-bottom.svg";
 import ChestTop from "../../assets/chest-top.svg";
 import PlayIcon from "../../assets/icon-play.svg";
+import StopIcon from "../../assets/icon-stop.svg";
 import CloseIcon from "../../assets/icon-close.svg";
 import SoundscapeSummary from "../../widgets/SoundscapeSummary";
 import VolumeControls from "../../widgets/VolumeControls";
 
 
 import "./SoundscapeListItem.scss";
+import { isLoop, isOneShot } from "../../models/Track";
 
 type SoundscapeListItemProps = {
   soundscape: Soundscape
@@ -26,6 +32,12 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
     soundscapeIndex
   });
   const dispatch = useDispatch();
+  let isPlaying = false;
+  tracks.forEach(track => {
+    if (isLoop(track) || isOneShot(track)) {
+      isPlaying = isPlaying || track.isPlaying;
+    }
+  })
 
   function open() {
     dispatch(openSoundscape({ soundscapeIndex }));
@@ -33,6 +45,10 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
 
   function remove() {
     dispatch(removeSoundscape({ soundscapeIndex }));
+  }
+
+  function toggleIsPlaying() {
+    dispatch(setSoundscapeIsPlaying({ soundscapeIndex, isPlaying: !isPlaying }));
   }
 
   return (
@@ -61,9 +77,10 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
           />
           <div className="play-buttons">
             <DefaultButton
-              onClick={() => { console.log('soundscape close clicked'); }}
-              icon={PlayIcon}
+              onClick={toggleIsPlaying}
+              icon={isPlaying ? StopIcon : PlayIcon}
             />
+            {/* TODO: lock button */}
           </div>
         </div>
         <DefaultButton
