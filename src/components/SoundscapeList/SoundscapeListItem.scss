@@ -33,4 +33,16 @@
     transform: translateX(-50%);
     z-index: -1;
   }
+
+  .play-buttons {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+
+    & > *:not(:last-child) {
+      margin-right: 4px;
+    }
+  }
 }

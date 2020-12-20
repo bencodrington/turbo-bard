@@ -6,6 +6,8 @@ import { openSoundscape } from "../../slices/soundscapes";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 import ChestBottom from "../../assets/chest-bottom.svg";
 import ChestTop from "../../assets/chest-top.svg";
+import PlayIcon from "../../assets/icon-play.svg";
+
 
 import "./SoundscapeListItem.scss";
 import SoundscapeSummary from "../../widgets/SoundscapeSummary";
@@ -52,6 +54,12 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
             src={ChestBottom}
             alt=""
           />
+          <div className="play-buttons">
+            <DefaultButton
+              onClick={() => { console.log('soundscape play clicked'); }}
+              icon={PlayIcon}
+            />
+          </div>
         </div>
       </div>
     </div>
