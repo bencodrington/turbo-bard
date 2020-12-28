@@ -1,21 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { isUnloaded, Loop, UnloadedTrack } from "../../models/Track";
-import DefaultButton from "../../widgets/buttons/DefaultButton";
 import { removeTrack, setTrackVolume } from "../../slices/soundscapes";
 import useLoopPlayer from "../../hooks/useLoopPlayer";
 import useBoolean from "../../hooks/useBoolean";
 import useTrackData from "../../hooks/useTrackData";
-import closeIcon from "../../assets/icon-close.svg";
-import infoIcon from "../../assets/icon-info.svg";
-import loopIcon from "../../assets/icon-loop.svg";
-import playIcon from "../../assets/icon-play.svg";
-import stopIcon from "../../assets/icon-stop.svg";
 
 import "./LoopTrackListItem.scss";
-import VolumeControls from "../../widgets/VolumeControls";
 
 import TagList from "../TagList";
+import LoopControls from "./LoopControls";
 
 type LoopTrackListItemProps = {
   loop: Loop | UnloadedTrack,
@@ -71,38 +65,23 @@ export default function LoopTrackListItem({
       <h4>{name ?? null}</h4>
       {
         isSearchOpen && tags !== undefined
-        ? <TagList tags={tags} onTagClick={onTagClick} />
-        : null
+          ? <TagList tags={tags} onTagClick={onTagClick} />
+          : null
       }
-      <div className='loop-controls'>
-        <VolumeControls
-          initialVolume={0.7} // TODO: extract constant
-          isMuted={isMuted}
-          setVolume={setVolume}
-          toggleIsMuted={toggleIsMuted}
-        />
-
-        <div className='center-cell'>
-          <DefaultButton
-            className='play-toggle-button'
-            onClick={toggleIsPlaying}
-            icon={isPlaying ? stopIcon : playIcon}
-            isDisabled={!isAudioLoaded}
+      {
+        !isSearchOpen
+          ? <LoopControls
+            displaySource={displaySource}
+            isMuted={isMuted}
+            toggleIsMuted={toggleIsMuted}
+            isPlaying={isPlaying}
+            toggleIsPlaying={toggleIsPlaying}
+            isAudioLoaded={isAudioLoaded}
+            setVolume={setVolume}
+            remove={remove}
           />
-          <img className='loop-icon' src={loopIcon} alt='' />
-        </div>
-
-        <div className='standard-track-controls'>
-          <DefaultButton
-            onClick={remove}
-            icon={closeIcon}
-          />
-          <DefaultButton
-            onClick={displaySource}
-            icon={infoIcon}
-          />
-        </div>
-      </div>
+          : null
+      }
     </div>
   );
 }
