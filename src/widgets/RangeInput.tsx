@@ -9,7 +9,9 @@ type RangeInputProps = {
   value: number,
   onValueChange: (newValue: number) => void,
   isVertical?: boolean,
-  className?: string
+  className?: string,
+  ariaLabel?: string,
+  getAriaValueText?: (value: number) => string
 };
 
 export default function RangeInput({
@@ -18,6 +20,8 @@ export default function RangeInput({
   value,
   onValueChange,
   isVertical = false,
+  ariaLabel,
+  getAriaValueText,
   className = ''
 }: RangeInputProps) {
   const onChange = (e: React.ChangeEvent<{}>, value: number | number[]) => {
@@ -27,7 +31,8 @@ export default function RangeInput({
   return (
     <Slider
       orientation={isVertical ? 'vertical' : 'horizontal'}
-      // getAriaValueText={value}
+      getAriaValueText={getAriaValueText}
+      aria-label={ariaLabel}
       min={min}
       max={max}
       value={value}

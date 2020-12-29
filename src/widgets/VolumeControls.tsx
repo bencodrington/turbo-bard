@@ -19,6 +19,11 @@ export default function VolumeControls({
   isMuted,
   toggleIsMuted
 }: VolumeControlsProps) {
+
+  const ariaValueFormatter = (value: number) => {
+    return `${value * 100}%`;
+  }
+
   return (
     <div className="volume-controls-container">
       <RangeInput
@@ -28,6 +33,8 @@ export default function VolumeControls({
         value={volume}
         onValueChange={setVolume}
         isVertical={true}
+        ariaLabel="volume slider"
+        getAriaValueText={ariaValueFormatter}
       />
       <DefaultButton
         onClick={toggleIsMuted}
