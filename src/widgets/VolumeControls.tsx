@@ -7,14 +7,14 @@ import RangeInput from "./RangeInput";
 import "./VolumeControls.scss";
 
 type VolumeControlsProps = {
-  initialVolume: number,
+  volume: number,
   setVolume: (newValue: number) => void,
   isMuted: boolean,
   toggleIsMuted: () => void
 };
 
 export default function VolumeControls({
-  initialVolume,
+  volume,
   setVolume,
   isMuted,
   toggleIsMuted
@@ -25,7 +25,7 @@ export default function VolumeControls({
         className="range-slider"
         min={0}
         max={1}
-        initialValue={initialVolume}
+        value={volume}
         onValueChange={setVolume}
         isVertical={true}
       />

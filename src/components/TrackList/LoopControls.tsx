@@ -17,6 +17,7 @@ type LoopControlsProps = {
   toggleIsPlaying: () => void,
   displaySource: () => void,
   remove: () => void,
+  volume: number,
   setVolume: (newVolume: number) => void
 };
 
@@ -26,6 +27,7 @@ export default function LoopControls({
   isAudioLoaded,
   toggleIsMuted,
   toggleIsPlaying,
+  volume,
   setVolume,
   remove,
   displaySource
@@ -33,7 +35,7 @@ export default function LoopControls({
   return (
     <div className='loop-controls-container'>
       <VolumeControls
-        initialVolume={0.7} // TODO: extract constant
+        volume={volume}
         isMuted={isMuted}
         setVolume={setVolume}
         toggleIsMuted={toggleIsMuted}

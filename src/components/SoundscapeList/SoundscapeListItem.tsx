@@ -58,9 +58,9 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
       <p>isLoading: {isLoading.toString()}</p>
       <div className="body">
         <VolumeControls
-          initialVolume={0.7}  // TODO:
+          volume={0.7}  // TODO:
           isMuted={false} // TODO:
-          setVolume={(newVol) => { console.log(newVol); }} // TODO:
+          setVolume={(newVol) => { console.log('ss list item:', newVol); }} // TODO:
           toggleIsMuted={() => { console.log('toggle muted'); }}
         />
         <div className="chest">

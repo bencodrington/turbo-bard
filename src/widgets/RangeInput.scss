@@ -2,32 +2,43 @@
   $barWidth: 18px;
   $handleWidth: 28px;
 
-  &.noUi-target {
+  .rail {
     border: none;
     background: var(--azure);
     box-shadow: none;
     border-radius: 0.25rem;
-    &.noUi-vertical {
-      width: $barWidth;
-    }
+    padding: 0;
   }
 
-  .noUi-connect {
+  .track {
     background: var(--canary);
     border-radius: 0.25rem;
   }
 
-  .noUi-handle {
-    border-radius: 50%;
+  .handle {
     background-color: var(--canary);
-    box-shadow: none;
-    border: none;
     width: $handleWidth;
     height: $handleWidth;
-    right: ($barWidth - $handleWidth) / 2;
-
+    
     &::before, &::after {
       display: none;
+    }
+  }
+  
+  &.vertical {
+    width: $barWidth !important;
+    padding: 0 !important;
+
+    .rail {
+      width: 100%;
+    }
+
+    .track {
+      width: 100%;
+    }
+    
+    .handle {
+      margin-left: ($barWidth - $handleWidth) / 2;
     }
   }
 }

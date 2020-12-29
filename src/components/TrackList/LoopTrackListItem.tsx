@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { isUnloaded, Loop, UnloadedTrack } from "../../models/Track";
 import { removeTrack, setTrackVolume } from "../../slices/soundscapes";
@@ -36,15 +36,15 @@ export default function LoopTrackListItem({
 }: LoopTrackListItemProps) {
   const dispatch = useDispatch();
   const sourceSet = isUnloaded(loop) ? [] : createSourceSet(loop.fileSource);
-  const volume = isUnloaded(loop) ? 0 : loop.volume;
-  const setVolume = (newVolume: number) => {
-    if (volume === newVolume) return;
+  const [volume, setVolume] = useState(isUnloaded(loop) ? 0.7 : loop.volume); // TODO: extract constant
+  useEffect(()  => {
+    if (volume === (loop as Loop).volume) return;
     dispatch(setTrackVolume({
       soundscapeIndex,
       trackIndex: loop.index,
-      volume: newVolume
+      volume: volume
     }));
-  };
+  });
   const { name, id, index, tags } = loop;
 
   const [isMuted, , toggleIsMuted] = useBoolean(false);
@@ -77,6 +77,7 @@ export default function LoopTrackListItem({
             isPlaying={isPlaying}
             toggleIsPlaying={toggleIsPlaying}
             isAudioLoaded={isAudioLoaded}
+            volume={volume}
             setVolume={setVolume}
             remove={remove}
           />
