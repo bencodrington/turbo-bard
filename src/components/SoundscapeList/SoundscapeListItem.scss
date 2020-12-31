@@ -5,13 +5,16 @@
   margin-bottom: 1rem;
 
   h4 {
-    color: var(--canary);
+    color: var(--turbo-blue);
+    text-align: center;
+    cursor: pointer;
   }
 
   .body {
     display: flex;
     height: 11rem;
-    align-content: center;
+    justify-content: center;
+
     position: relative;
   }
 
@@ -21,6 +24,37 @@
     flex-direction: column;
     align-content: center;
     position: relative;
+
+    .chest-lid {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+
+      .chest-lid-top {
+        margin-bottom: -15px;
+        transform-origin: top;
+      }
+
+      .chest-lid-bottom {
+        transform-origin: bottom;
+      }
+
+      .chest-lid-top, .chest-lid-bottom {
+        transition: transform 0.2s ease-out;
+      }
+
+      &:hover {
+
+        .chest-lid-top {
+          transform: scaleY(0.8100200904);
+        }
+
+        .chest-lid-bottom {
+          transform: scaleY(1.42877646215)
+        }
+
+      }
+    }
 
     .chest-top {
       z-index: -2;
@@ -45,12 +79,5 @@
     & > *:not(:last-child) {
       margin-right: 4px;
     }
-  }
-
-  .close-button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    // TODO: don't go farther than 4 pixels away
   }
 }

@@ -10,7 +10,8 @@ import {
 } from "../../slices/soundscapes";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 import ChestBottom from "../../assets/chest-bottom.svg";
-import ChestTop from "../../assets/chest-top.svg";
+import ChestLidTop from "../../assets/chest-lid-top.svg";
+import ChestLidBottom from "../../assets/chest-lid-bottom.svg";
 import PlayIcon from "../../assets/icon-play.svg";
 import StopIcon from "../../assets/icon-stop.svg";
 import CloseIcon from "../../assets/icon-close.svg";
@@ -34,7 +35,7 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
     index: soundscapeIndex,
     volume: soundscapeVolume
   } = soundscape;
-  const { isLoading } = useClonedTrackIds({
+  useClonedTrackIds({
     sourceSoundscapeId: sourceId,
     currentTrackCount: tracks.length,
     soundscapeIndex
@@ -77,8 +78,6 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
   return (
     <div className="soundscape-list-item-container">
       <h4>{name}</h4>
-      <DefaultButton onClick={open} text="Open" />
-      <p>isLoading: {isLoading.toString()}</p>
       <div className="body">
         <VolumeControls
           volume={volume}
@@ -87,11 +86,21 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
           toggleIsMuted={toggleIsMuted}
         />
         <div className="chest">
-          <img
-            className="chest-top"
-            src={ChestTop}
-            alt=""
-          />
+          <div
+            className="chest-lid"
+            onClick={open}
+          >
+            <img
+              className="chest-lid-top"
+              src={ChestLidTop}
+              alt=""
+            />
+            <img
+              className="chest-lid-bottom"
+              src={ChestLidBottom}
+              alt=""
+            />
+          </div>
           <SoundscapeSummary tracks={tracks} />
           <img
             className="chest-bottom"
