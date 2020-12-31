@@ -115,7 +115,7 @@ const DUMMY_SOUNDSCAPE_DATA: SoundscapeData[] = [
 export async function fetchSoundscapeResults(searchText: string) {
   await new Promise((resolve) => {
     setTimeout(() => {
-      resolve();
+      resolve(null);
     }, 400);
   });
   return DUMMY_SOUNDSCAPE_RESULT_DATA;
@@ -124,7 +124,7 @@ export async function fetchSoundscapeResults(searchText: string) {
 export async function fetchTrackResults(searchText: string) {
   await new Promise((resolve) => {
     setTimeout(() => {
-      resolve();
+      resolve(null);
     }, 400);
   });
   return DUMMY_TRACK_RESULT_DATA;
@@ -133,7 +133,7 @@ export async function fetchTrackResults(searchText: string) {
 export async function fetchTrackIdsForSoundscape(soundscapeId: string) {
   await new Promise((resolve) => {
     setTimeout(() => {
-      resolve();
+      resolve(null);
     }, 400);
   });
   const tracks = DUMMY_SOUNDSCAPE_DATA.find(result => result.id === soundscapeId)?.trackIds;
@@ -146,7 +146,7 @@ export async function fetchTrackIdsForSoundscape(soundscapeId: string) {
 export async function fetchTrackById(trackId: string) {
   await new Promise((resolve) => {
     setTimeout(() => {
-      resolve();
+      resolve(null);
     }, 400);
   });
   return DUMMY_TRACK_DATA.find(track => track.id === trackId);
