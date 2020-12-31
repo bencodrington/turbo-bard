@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+import useBoolean from "./useBoolean";
 
-type ReturnType = [
-  number,
-  (newValue: number) => void
-];
+type ReturnType = {
+  volume: number,
+  setVolume: (newValue: number) => void,
+  isMuted: boolean,
+  toggleIsMuted: () => void
+};
 
 type PropType = {
-  initialVolume:  number,
+  initialVolume: number,
   onVolumeChanged: (newValue: number) => void
 };
 
@@ -15,8 +18,9 @@ export function useVolume({
   onVolumeChanged
 }: PropType): ReturnType {
   const [volume, setVolume] = useState(initialVolume);
+  const [isMuted, , toggleIsMuted] = useBoolean(false);
   useEffect(() => {
     onVolumeChanged(volume);
   }, [onVolumeChanged, volume]);
-  return [volume, setVolume];
+  return { volume, setVolume, isMuted, toggleIsMuted };
 }

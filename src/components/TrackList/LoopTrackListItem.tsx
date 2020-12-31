@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { isUnloaded, Loop, UnloadedTrack } from "../../models/Track";
 import { removeTrack, setTrackVolume } from "../../slices/soundscapes";
 import useLoopPlayer from "../../hooks/useLoopPlayer";
-import useBoolean from "../../hooks/useBoolean";
 import useTrackData from "../../hooks/useTrackData";
 
 import "./LoopTrackListItem.scss";
@@ -46,13 +45,16 @@ export default function LoopTrackListItem({
       volume: newVolume
     }));
   }, [dispatch, soundscapeIndex, loop.index]);
-  const [volume, setVolume] = useVolume({
+  const {
+    volume,
+    setVolume,
+    isMuted,
+    toggleIsMuted
+  } = useVolume({
     initialVolume: loop.volume,
     onVolumeChanged
   });
   const { name, id, index, tags } = loop;
-
-  const [isMuted, , toggleIsMuted] = useBoolean(false);
   const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet, volume * soundscapeVolume);
   useTrackData(id, index, soundscapeIndex, !isUnloaded(loop));
 

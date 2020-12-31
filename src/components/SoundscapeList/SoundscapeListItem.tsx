@@ -46,7 +46,12 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
       volume: newVolume
     }));
   }, [dispatch, soundscapeIndex]);
-  const [volume, setVolume] = useVolume({
+  const {
+    volume,
+    setVolume,
+    isMuted,
+    toggleIsMuted
+  } = useVolume({
     initialVolume: soundscapeVolume,
     onVolumeChanged
   });
@@ -77,9 +82,9 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
       <div className="body">
         <VolumeControls
           volume={volume}
-          isMuted={false} // TODO:
+          isMuted={isMuted}
           setVolume={setVolume}
-          toggleIsMuted={() => { console.log('toggle muted'); }}
+          toggleIsMuted={toggleIsMuted}
         />
         <div className="chest">
           <img
