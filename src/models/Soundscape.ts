@@ -10,5 +10,6 @@ export type Soundscape = {
   //  predefined soundscape. It is `undefined` when a
   //  soundscape is created from scratch
   sourceId?: string,
-  isOpen: boolean
+  isOpen: boolean,
+  volume: number
 };

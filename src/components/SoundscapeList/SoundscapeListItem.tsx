@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import useClonedTrackIds from "../../hooks/useClonedTrackIds";
 import { Soundscape } from "../../models/Soundscape";
 import {
   openSoundscape,
   removeSoundscape,
-  setSoundscapeIsPlaying
+  setSoundscapeIsPlaying,
+  setSoundscapeVolume
 } from "../../slices/soundscapes";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 import ChestBottom from "../../assets/chest-bottom.svg";
@@ -19,19 +20,36 @@ import VolumeControls from "../../widgets/VolumeControls";
 
 import "./SoundscapeListItem.scss";
 import { isLoop, isOneShot } from "../../models/Track";
+import { useVolume } from "../../hooks/useVolume";
 
 type SoundscapeListItemProps = {
   soundscape: Soundscape
 };
 
 export default function SoundscapeListItem({ soundscape }: SoundscapeListItemProps) {
-  const { sourceId, name, tracks, index: soundscapeIndex } = soundscape;
+  const {
+    sourceId,
+    name,
+    tracks,
+    index: soundscapeIndex,
+    volume: soundscapeVolume
+  } = soundscape;
   const { isLoading } = useClonedTrackIds({
     sourceSoundscapeId: sourceId,
     currentTrackCount: tracks.length,
     soundscapeIndex
   });
   const dispatch = useDispatch();
+  const onVolumeChanged = useCallback((newVolume: number) => {
+    dispatch(setSoundscapeVolume({
+      soundscapeIndex,
+      volume: newVolume
+    }));
+  }, [dispatch, soundscapeIndex]);
+  const [volume, setVolume] = useVolume({
+    initialVolume: soundscapeVolume,
+    onVolumeChanged
+  });
   let isPlaying = false;
   tracks.forEach(track => {
     if (isLoop(track) || isOneShot(track)) {
@@ -58,9 +76,9 @@ export default function SoundscapeListItem({ soundscape }: SoundscapeListItemPro
       <p>isLoading: {isLoading.toString()}</p>
       <div className="body">
         <VolumeControls
-          volume={0.7}  // TODO:
+          volume={volume}
           isMuted={false} // TODO:
-          setVolume={(newVol) => { console.log('ss list item:', newVol); }} // TODO:
+          setVolume={setVolume}
           toggleIsMuted={() => { console.log('toggle muted'); }}
         />
         <div className="chest">

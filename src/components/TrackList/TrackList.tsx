@@ -29,6 +29,7 @@ function listItemFromTrack(
       isVisible={soundscape.isOpen}
       isSearchOpen={isSearchOpen}
       onTagClick={appendSearchText}
+      soundscapeVolume={soundscape.volume}
     />
   } else if (isOneShot(track)) {
     // TODO:

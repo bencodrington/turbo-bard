@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { isUnloaded, Loop, UnloadedTrack } from "../../models/Track";
 import { removeTrack, setTrackVolume } from "../../slices/soundscapes";
@@ -10,13 +10,15 @@ import "./LoopTrackListItem.scss";
 
 import TagList from "../TagList";
 import LoopControls from "./LoopControls";
+import { useVolume } from "../../hooks/useVolume";
 
 type LoopTrackListItemProps = {
   loop: Loop | UnloadedTrack,
   soundscapeIndex: number,
   isVisible: boolean,
   isSearchOpen: boolean,
-  onTagClick: (tag: string) => void
+  onTagClick: (tag: string) => void,
+  soundscapeVolume: number
 };
 
 // TODO: extract to util
@@ -32,23 +34,26 @@ export default function LoopTrackListItem({
   loop,
   isVisible,
   isSearchOpen,
-  onTagClick
+  onTagClick,
+  soundscapeVolume
 }: LoopTrackListItemProps) {
   const dispatch = useDispatch();
   const sourceSet = isUnloaded(loop) ? [] : createSourceSet(loop.fileSource);
-  const [volume, setVolume] = useState(isUnloaded(loop) ? 0.7 : loop.volume); // TODO: extract constant
-  useEffect(()  => {
-    if (volume === (loop as Loop).volume) return;
+  const onVolumeChanged = useCallback((newVolume: number) => {
     dispatch(setTrackVolume({
       soundscapeIndex,
       trackIndex: loop.index,
-      volume: volume
+      volume: newVolume
     }));
+  }, [dispatch, soundscapeIndex, loop.index]);
+  const [volume, setVolume] = useVolume({
+    initialVolume: isUnloaded(loop) ? 0.7 : loop.volume,
+    onVolumeChanged
   });
   const { name, id, index, tags } = loop;
 
   const [isMuted, , toggleIsMuted] = useBoolean(false);
-  const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet, volume);
+  const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet, volume * soundscapeVolume);
   useTrackData(id, index, soundscapeIndex, !isUnloaded(loop));
 
   if (!isVisible) {

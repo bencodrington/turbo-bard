@@ -20,6 +20,7 @@ const soundscapesSlice = createSlice({
         index: getNextIndex(state),
         tracks: [],
         isOpen: true,
+        volume: 0.7
       });
     },
     cloneSoundscape(state, { payload }: PayloadAction<{ name: string, sourceId: string }>) {
@@ -29,7 +30,8 @@ const soundscapesSlice = createSlice({
         index: getNextIndex(state),
         tracks: [],
         sourceId,
-        isOpen: true
+        isOpen: true,
+        volume: 0.7
       });
     },
     closeAllSoundscapes(state) {
@@ -111,6 +113,15 @@ const soundscapesSlice = createSlice({
         }
         return track;
       });
+    },
+    setSoundscapeVolume(state, { payload }: PayloadAction<{
+      soundscapeIndex: number,
+      volume: number
+    }>) {
+      const { soundscapeIndex, volume } = payload;
+      const soundscape = getSoundscapeByIndex(soundscapeIndex, state);
+      if (soundscape === undefined) return;
+      soundscape.volume = volume;
     }
   }
 });
@@ -126,7 +137,8 @@ export const {
   openSoundscape,
   setTrackVolume,
   removeSoundscape,
-  setSoundscapeIsPlaying
+  setSoundscapeIsPlaying,
+  setSoundscapeVolume
 } = soundscapesSlice.actions;
 
 export default soundscapesSlice.reducer;
