@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SearchResult } from "../models/SearchResult";
 import { Soundscape } from "../models/Soundscape";
-import { isLoop, isOneShot, isUnloaded } from "../models/Track";
+import { isLoop, isOneShot } from "../models/Track";
 import { ERROR_TYPE, SoundscapeChild, TrackData } from "../services/database";
 import {
   addSearchResultToSoundscape,
@@ -76,9 +76,7 @@ const soundscapesSlice = createSlice({
         Object.assign(track, { type: ERROR_TYPE })
         return;
       }
-      // TODO: initial volume should be passed in with the initial setTrackData() call
-      //  immediately following database call
-      Object.assign(track, { volume: 0 }, trackData);
+      Object.assign(track, trackData);
     },
     openSoundscape(state, { payload }: PayloadAction<{ soundscapeIndex: number }>) {
       const { soundscapeIndex } = payload;
@@ -94,7 +92,7 @@ const soundscapesSlice = createSlice({
     }>) {
       const { soundscapeIndex, trackIndex, volume } = payload;
       const track = getTrackByIndex(trackIndex, soundscapeIndex, state);
-      if (track === undefined || isUnloaded(track)) return;
+      if (track === undefined) return;
       track.volume = volume;
     },
     removeSoundscape(state, { payload }: PayloadAction<{ soundscapeIndex: number }>) {

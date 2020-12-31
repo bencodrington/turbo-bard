@@ -47,7 +47,7 @@ export default function LoopTrackListItem({
     }));
   }, [dispatch, soundscapeIndex, loop.index]);
   const [volume, setVolume] = useVolume({
-    initialVolume: isUnloaded(loop) ? 0.7 : loop.volume,
+    initialVolume: loop.volume,
     onVolumeChanged
   });
   const { name, id, index, tags } = loop;
