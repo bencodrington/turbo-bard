@@ -39,6 +39,7 @@
     
     .handle {
       margin-left: ($barWidth - $handleWidth) / 2;
+      margin-bottom: -($handleWidth / 2);
     }
   }
 }

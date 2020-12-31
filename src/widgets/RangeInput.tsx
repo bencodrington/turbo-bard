@@ -8,6 +8,7 @@ type RangeInputProps = {
   max: number,
   value: number,
   onValueChange: (newValue: number) => void,
+  step?: number,
   isVertical?: boolean,
   className?: string,
   ariaLabel?: string,
@@ -18,6 +19,7 @@ export default function RangeInput({
   min,
   max,
   value,
+  step = 0.02,
   onValueChange,
   isVertical = false,
   ariaLabel,
@@ -36,7 +38,7 @@ export default function RangeInput({
       min={min}
       max={max}
       value={value}
-      step={0.01} // TODO: prop with default
+      step={step}
       onChange={onChange}
       classes={{
         root: 'range-input-container ' + className,
