@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { ERROR_TYPE, fetchTrackById, TrackData } from "../services/database";
+import { ERROR_TYPE, fetchTrackDataById, TrackData } from "../services/database";
 import { setTrackData } from "../slices/soundscapes";
 
 export default function useTrackData(id: string, index: number, soundscapeIndex: number, isLoaded: boolean) {
@@ -10,7 +10,7 @@ export default function useTrackData(id: string, index: number, soundscapeIndex:
   useEffect(() => {
     let fetchingDataFor = id;
     async function fetchData() {
-      const trackData = await fetchTrackById(id);
+      const trackData = await fetchTrackDataById(id);
       if (id !== fetchingDataFor) return;
       if (trackData === undefined) {
         setResults({ id: id, type: ERROR_TYPE })

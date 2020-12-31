@@ -33,6 +33,7 @@ export type OneShot = {
 export type UnloadedTrack = {
   id: string,
   index: number,
+  volume: number,
   // These optional properties are present when loading from a track search result,
   //  but not when loading from a predefined or saved soundscape
   name?: string,

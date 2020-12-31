@@ -21,7 +21,8 @@ export function addSearchResultToSoundscape(
     index: getNextIndex(soundscape.tracks),
     name,
     type,
-    tags
+    tags,
+    volume: 0.7 // TODO: extract constant
   });
 }
 

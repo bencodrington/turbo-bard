@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchTrackIdsForSoundscape } from "../services/database";
-import { setTrackIds } from "../slices/soundscapes";
+import { fetchUnloadedTracksForSoundscape } from "../services/database";
+import { setUnloadedTracks } from "../slices/soundscapes";
 
 type PropType = {
   sourceSoundscapeId?: string,
@@ -33,11 +33,11 @@ export default function useClonedTrackIds({
     let isCancelled = false;
     // If we're not loading and we have a cloneId and have no tracks, we should fetch
     async function fetch(sourceSoundscapeId: string) {
-      const result = await fetchTrackIdsForSoundscape(sourceSoundscapeId);
+      const result = await fetchUnloadedTracksForSoundscape(sourceSoundscapeId);
       if (isCancelled) return;
       setHasLoaded(true);
       setIsLoading(false);
-      dispatch(setTrackIds({ soundscapeIndex, trackIds: result }));
+      dispatch(setUnloadedTracks({ soundscapeIndex, tracks: result }));
     }
     setIsLoading(true);
     fetch(sourceSoundscapeId);
