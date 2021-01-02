@@ -11,7 +11,7 @@ export default function NewSoundscapeButton({onClick}: NewSoundscapeButtonProps)
 
   return (
     <DefaultButton
-      text="Create new soundscape"
+      text="Create your own"
       onClick={onClick}
       className="new-soundscape-button-container"
     />

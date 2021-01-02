@@ -15,8 +15,8 @@ export default function SearchDropdown(props: SearchDropdownProps) {
   const trailing = props.trailing ?? null;
 
   const results = props.isFetchingResults
-    ? <p>Loading...</p>
-    : <ul>{props.results}</ul>;
+    ? <p className="results">Loading...</p>
+    : <ul className="results">{props.results}</ul>;
 
   const className = 'search-dropdown-container ' + (props.className ?? '');
   return (

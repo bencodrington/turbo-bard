@@ -45,7 +45,7 @@ export default function SoundscapeSearchDropdown({
     <SearchField
       value={searchText}
       onChange={setSearchText}
-      placeholderText={"'graveyard', 'tavern', ..."}
+      placeholderText={""}
     />
   );
 

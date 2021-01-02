@@ -6,12 +6,11 @@
   display: flex;
   flex-direction: column;
   top: -16px;
-  padding: 4px;
-  padding-top: 16px;
+  padding: 16px 4px 0;
   position: relative;
   height: 75vh;
 
-  ul {
+  .results {
     flex: 1;
     overflow-y: auto;
   }
