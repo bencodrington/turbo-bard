@@ -63,6 +63,7 @@ export default function SoundscapeSearchDropdown({
   const trailing = (
     <NewSoundscapeButton
       onClick={onNewSoundscapeClicked}
+      searchText={searchText}
     />
   )
 

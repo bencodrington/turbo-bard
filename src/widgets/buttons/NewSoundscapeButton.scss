@@ -4,4 +4,11 @@
   border-radius: 16px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  max-width: calc(100% - 16px);
+  
+  span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
