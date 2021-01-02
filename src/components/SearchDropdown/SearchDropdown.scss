@@ -9,6 +9,12 @@
   padding: 4px;
   padding-top: 16px;
   position: relative;
+  height: 75vh;
+
+  ul {
+    flex: 1;
+    overflow-y: auto;
+  }
 
   @include hidden--mobile;
 
