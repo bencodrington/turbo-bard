@@ -25,9 +25,9 @@ export type TrackDataError = {
 export type SoundscapeChild = {
   id: string,
   volume: number,
-  oneShotSettings?: {
-    minFrequency: number,
-    maxFrequency: number
+  oneShotConfig?: {
+    minSecondsBetween: number,
+    maxSecondsBetween: number
   }
 }
 
