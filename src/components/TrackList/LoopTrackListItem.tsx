@@ -10,6 +10,7 @@ import "./LoopTrackListItem.scss";
 import TagList from "../TagList";
 import LoopControls from "./LoopControls";
 import { useVolume } from "../../hooks/useVolume";
+import { createSourceSet } from "../../utils/audioFileUtil";
 
 type LoopTrackListItemProps = {
   loop: Loop | UnloadedTrack,
@@ -19,14 +20,6 @@ type LoopTrackListItemProps = {
   onTagClick: (tag: string) => void,
   soundscapeVolume: number
 };
-
-// TODO: extract to util
-function createSourceSet(fileSource: string) {
-  return [
-    `http://phanary.com/audio/converted/${fileSource}.webm`,
-    `http://phanary.com/audio/converted/${fileSource}.mp3`
-  ];
-}
 
 export default function LoopTrackListItem({
   soundscapeIndex,
