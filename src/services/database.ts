@@ -58,26 +58,26 @@ export function isOneShotData(trackData: TrackData): trackData is OneShotData {
 //   }
 // ];
 
-const DUMMY_TRACK_RESULT_DATA: SearchResult[] = [
-  {
-    id: "111111",
-    name: 'Ominous Ambience',
-    tags: ['loop', 'spooky', 'graveyard', 'horror', 'ghosts', 'spirits', 'crypt'],
-    type: ObjectType.LOOP
-  },
-  {
-    id: "222222",
-    name: 'Carefree Whistling',
-    tags: ['loop', 'music', 'tinkerer', 'happy', 'pleasant', 'cottage', 'cooking', 'guard'],
-    type: ObjectType.LOOP
-  },
-  {
-    id: "333333",
-    name: 'The Jig of Slurs',
-    tags: ['loop', 'music', 'tavern', 'upbeat', 'jovial', 'celtic', 'happy', 'pleasant', 'fiddle', 'flute', 'merry', 'halfling', 'village', 'town'],
-    type: ObjectType.LOOP
-  }
-];
+// const DUMMY_TRACK_RESULT_DATA: SearchResult[] = [
+//   {
+//     id: "111111",
+//     name: 'Ominous Ambience',
+//     tags: ['loop', 'spooky', 'graveyard', 'horror', 'ghosts', 'spirits', 'crypt'],
+//     type: ObjectType.LOOP
+//   },
+//   {
+//     id: "222222",
+//     name: 'Carefree Whistling',
+//     tags: ['loop', 'music', 'tinkerer', 'happy', 'pleasant', 'cottage', 'cooking', 'guard'],
+//     type: ObjectType.LOOP
+//   },
+//   {
+//     id: "333333",
+//     name: 'The Jig of Slurs',
+//     tags: ['loop', 'music', 'tavern', 'upbeat', 'jovial', 'celtic', 'happy', 'pleasant', 'fiddle', 'flute', 'merry', 'halfling', 'village', 'town'],
+//     type: ObjectType.LOOP
+//   }
+// ];
 
 const DUMMY_TRACK_DATA: (LoopData | OneShotData)[] = [
   {
@@ -125,7 +125,7 @@ const DUMMY_SOUNDSCAPE_DATA: SoundscapeData[] = [
 ];
 
 function toSearchResult(unidentified: UntypedSearchResult, type: ObjectType): SearchResult {
-  const {id, name, tags} = unidentified;
+  const { id, name, tags } = unidentified;
   return {
     id,
     name,
@@ -141,13 +141,16 @@ export async function fetchSoundscapeResults(searchText: string) {
   return results as SearchResult[];
 }
 
+type TrackResult = UntypedSearchResult & { trackType: string };
+
 export async function fetchTrackResults(searchText: string) {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(null);
-    }, 400);
+  const response = await fetch(`https://us-central1-turbo-bard.cloudfunctions.net/searchTracks?searchText=${searchText}`);
+  const results = await response.json();
+  results.map((track: TrackResult) => {
+    const type = track.trackType === ObjectType.ONESHOT ? ObjectType.ONESHOT : ObjectType.LOOP;
+    return toSearchResult(track, type);
   });
-  return DUMMY_TRACK_RESULT_DATA;
+  return results as SearchResult[];
 }
 
 export async function fetchUnloadedTracksForSoundscape(soundscapeId: string) {

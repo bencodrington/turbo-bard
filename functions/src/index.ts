@@ -6,6 +6,7 @@ const cors = require('cors');
 admin.initializeApp();
 const db = admin.firestore();
 const soundscapesRef = db.collection('soundscapes');
+const tracksRef = db.collection('tracks');
 
 const MAX_RESULTS = 10;
 
@@ -37,5 +38,38 @@ export const searchSoundscapes = functions.https.onRequest(async (request, respo
       };
     });
     response.send(soundscapes);
+  });
+});
+
+export const searchTracks = functions.https.onRequest(async (request, response) => {
+  return cors()(request, response, async () => {
+
+    const { query } = request;
+    const searchText = query.searchText;
+    functions.logger.info('searchTracks');
+    if (!searchText || searchText.length === 0) {
+      functions.logger.info('Empty searchText, returning.');
+      response.send([]);
+      return;
+    }
+    functions.logger.info(searchText, { structuredData: true });
+    const results = await tracksRef.where('tags', 'array-contains', searchText).limit(MAX_RESULTS).get();
+    if (results.empty) {
+      functions.logger.info('No tracks found for query "' + searchText + '".');
+      response.send([]);
+      return;
+    }
+    functions.logger.info(`Query "${searchText}" returned ${results.docs.length} results.`);
+    const tracks = results.docs.map(doc => {
+      const { name, tags, samples } = doc.data();
+      const trackType = samples === undefined ? 'LOOP' : 'ONESHOT';
+      return {
+        id: doc.id,
+        name,
+        tags,
+        trackType
+      };
+    });
+    response.send(tracks);
   });
 });
