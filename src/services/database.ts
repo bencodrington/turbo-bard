@@ -1,5 +1,5 @@
 import { ObjectType } from "../models/ObjectTypes";
-import { SearchResult } from "../models/SearchResult";
+import { SearchResult, UntypedSearchResult } from "../models/SearchResult";
 import { TrackMetadata } from "../models/Track";
 
 export const ERROR_TYPE = 'ERROR';
@@ -43,20 +43,20 @@ export function isOneShotData(trackData: TrackData): trackData is OneShotData {
     trackData.type === ObjectType.ONESHOT;
 }
 
-const DUMMY_SOUNDSCAPE_RESULT_DATA: SearchResult[] = [
-  {
-    id: 'XXXXX',
-    name: 'Graveyard',
-    tags: ['spooky', 'scary', 'eerie', 'haunted', 'ghosts', 'spirits', 'cemetery', 'crypt'],
-    type: ObjectType.SOUNDSCAPE
-  },
-  {
-    id: 'YYYYY',
-    name: 'Crowded Tavern',
-    tags: ['lively', 'ale', 'beer', 'inn', 'warm', 'cozy', 'busy', 'happy', 'drinks', 'merry'],
-    type: ObjectType.SOUNDSCAPE
-  }
-];
+// const DUMMY_SOUNDSCAPE_RESULT_DATA: SearchResult[] = [
+//   {
+//     id: 'XXXXX',
+//     name: 'Graveyard',
+//     tags: ['spooky', 'scary', 'eerie', 'haunted', 'ghosts', 'spirits', 'cemetery', 'crypt'],
+//     type: ObjectType.SOUNDSCAPE
+//   },
+//   {
+//     id: 'YYYYY',
+//     name: 'Crowded Tavern',
+//     tags: ['lively', 'ale', 'beer', 'inn', 'warm', 'cozy', 'busy', 'happy', 'drinks', 'merry'],
+//     type: ObjectType.SOUNDSCAPE
+//   }
+// ];
 
 const DUMMY_TRACK_RESULT_DATA: SearchResult[] = [
   {
@@ -124,13 +124,21 @@ const DUMMY_SOUNDSCAPE_DATA: SoundscapeData[] = [
   }
 ];
 
+function toSearchResult(unidentified: UntypedSearchResult, type: ObjectType): SearchResult {
+  const {id, name, tags} = unidentified;
+  return {
+    id,
+    name,
+    tags,
+    type
+  };
+}
+
 export async function fetchSoundscapeResults(searchText: string) {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(null);
-    }, 400);
-  });
-  return DUMMY_SOUNDSCAPE_RESULT_DATA;
+  const response = await fetch(`https://us-central1-turbo-bard.cloudfunctions.net/searchSoundscapes?searchText=${searchText}`);
+  const results = await response.json();
+  results.map((soundscape: UntypedSearchResult) => toSearchResult(soundscape, ObjectType.SOUNDSCAPE));
+  return results as SearchResult[];
 }
 
 export async function fetchTrackResults(searchText: string) {
