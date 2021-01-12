@@ -1,6 +1,10 @@
 import * as functions from 'firebase-functions';
 
 import * as admin from 'firebase-admin';
+
+import { isOneShotData, TrackData } from '../../src/models/DatabaseTypes';
+import { ObjectType } from '../../src/models/ObjectTypes';
+
 const cors = require('cors');
 
 admin.initializeApp();
@@ -71,5 +75,55 @@ export const searchTracks = functions.https.onRequest(async (request, response) 
       };
     });
     response.send(tracks);
+  });
+});
+
+export const fetchTrackDataById = functions.https.onRequest(async (request, response) => {
+  return cors()(request, response, async () => {
+
+    const { query } = request;
+    const trackId = query.trackId;
+    functions.logger.info('fetchTrackDataById');
+    if (!trackId || trackId.length === 0) {
+      functions.logger.info('Empty trackId, returning.');
+      response.send({});
+      return;
+    }
+    if (typeof trackId !== 'string') {
+      functions.logger.info('Invalid trackId, returning.', trackId);
+      response.send({});
+      return;
+    }
+    functions.logger.info(trackId, { structuredData: true });
+    const result = await tracksRef.doc(trackId).get();
+    if (!result.exists) {
+      functions.logger.info('No tracks found for trackId "' + trackId + '".');
+      response.send({});
+      return;
+    }
+    functions.logger.info(`Track with id "${trackId}" found.`);
+    const trackData = result.data() as TrackData;
+    const { name, source, tags } = trackData;
+    if (isOneShotData(trackData)) {
+      const track = {
+        id: result.id,
+        name,
+        samples: trackData.samples,
+        tags,
+        source,
+        type: ObjectType.ONESHOT
+      };
+      response.send(track);
+      return;
+    }
+    const track = {
+      id: result.id,
+      name,
+      fileName: trackData.fileName,
+      tags,
+      source,
+      type: ObjectType.LOOP
+    };
+    response.send(track);
   });
 });
