@@ -23,6 +23,10 @@ export default function useSearchResults<T>(fetchFunction: (searchText: string) 
   }, [searchText, fetchFunction]);
 
   function appendSearchText(text: string) {
+    if (searchText.trim().length === 0) {
+      setSearchText(text);
+      return;
+    }
     setSearchText(searchText + ' ' + text);
   }
 
