@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SearchResult } from "../models/SearchResult";
 import { Soundscape } from "../models/Soundscape";
 import { isLoop, isOneShot } from "../models/Track";
-import { ERROR_TYPE, SoundscapeChild, TrackData } from "../services/database";
+import { SoundscapeChild } from "../services/database";
+import { ERROR_TYPE, TrackData, TrackDataError } from "../models/DatabaseTypes";
 import {
   addSearchResultToSoundscape,
   getNextIndex,
@@ -67,7 +68,7 @@ const soundscapesSlice = createSlice({
     setTrackData(state, { payload }: PayloadAction<{
       soundscapeIndex: number,
       trackIndex: number,
-      trackData: TrackData
+      trackData: TrackData | TrackDataError
     }>) {
       const { soundscapeIndex, trackIndex, trackData } = payload;
       const track = getTrackByIndex(trackIndex, soundscapeIndex, state);

@@ -1,4 +1,4 @@
-import { ERROR_TYPE } from "../services/database";
+import { ERROR_TYPE } from "./DatabaseTypes";
 import { ObjectType } from "./ObjectTypes";
 
 export type TrackMetadata = {
@@ -18,7 +18,7 @@ export type Loop = {
   volume: number,
   isMuted: boolean,
   isPlaying: boolean,
-  fileSource: string
+  fileName: string
 } & TrackMetadata;
 
 export type OneShot = {
@@ -27,7 +27,7 @@ export type OneShot = {
   volume: number,
   isMuted: boolean,
   isPlaying: boolean,
-  fileSources: string[]
+  samples: string[]
 } & TrackMetadata;
 
 export type UnloadedTrack = {
@@ -42,16 +42,16 @@ export type UnloadedTrack = {
 };
 
 export function isLoop(track: Track): track is Loop {
-  return (track as Loop).fileSource !== undefined;
+  return (track as Loop).fileName !== undefined;
 }
 
 export function isOneShot(track: Track): track is OneShot {
-  return (track as OneShot).fileSources !== undefined;
+  return (track as OneShot).samples !== undefined;
 }
 
 export function isUnloaded(track: Track): track is UnloadedTrack {
-  return (track as Loop).fileSource === undefined &&
-    (track as OneShot).fileSources === undefined;
+  return (track as Loop).fileName === undefined &&
+    (track as OneShot).samples === undefined;
 }
 
 export function isUnloadedLoop(track: Track): track is UnloadedTrack {

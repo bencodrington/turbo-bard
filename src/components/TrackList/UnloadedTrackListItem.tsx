@@ -1,7 +1,7 @@
 import React from "react";
 import useTrackData from "../../hooks/useTrackData";
 import { UnloadedTrack } from "../../models/Track";
-import { ERROR_TYPE } from "../../services/database";
+import { ERROR_TYPE } from "../../models/DatabaseTypes";
 
 // import "./UnloadedTrackListItem.scss";
 

@@ -1,26 +1,6 @@
+import { TrackData } from "../models/DatabaseTypes";
 import { ObjectType } from "../models/ObjectTypes";
 import { SearchResult, UntypedSearchResult } from "../models/SearchResult";
-import { TrackMetadata } from "../models/Track";
-
-export const ERROR_TYPE = 'ERROR';
-
-export type LoopData = {
-  id: string,
-  type: ObjectType.LOOP
-  fileSource: string
-} & TrackMetadata;
-
-export type OneShotData = {
-  id: string,
-  type: ObjectType.ONESHOT
-  trackMetadata: TrackMetadata,
-  fileSources: string[]
-} & TrackMetadata;
-
-export type TrackDataError = {
-  id: string,
-  type: typeof ERROR_TYPE
-}
 
 export type SoundscapeChild = {
   id: string,
@@ -29,18 +9,6 @@ export type SoundscapeChild = {
     minSecondsBetween: number,
     maxSecondsBetween: number
   }
-}
-
-export type TrackData = TrackDataError | LoopData | OneShotData;
-
-export function isLoopData(trackData: TrackData): trackData is LoopData {
-  return (trackData as LoopData).fileSource !== undefined &&
-    trackData.type === ObjectType.LOOP;
-}
-
-export function isOneShotData(trackData: TrackData): trackData is OneShotData {
-  return (trackData as OneShotData).fileSources !== undefined &&
-    trackData.type === ObjectType.ONESHOT;
 }
 
 // const DUMMY_SOUNDSCAPE_RESULT_DATA: SearchResult[] = [
@@ -79,32 +47,32 @@ export function isOneShotData(trackData: TrackData): trackData is OneShotData {
 //   }
 // ];
 
-const DUMMY_TRACK_DATA: (LoopData | OneShotData)[] = [
-  {
-    id: '111111',
-    type: ObjectType.LOOP,
-    fileSource: 'ominous-ambience',
-    name: 'Ominous Ambience',
-    source: { author: 'Alice', url: 'alice@alice.com' },
-    tags: ['loop', 'spooky', 'graveyard', 'horror', 'ghosts', 'spirits', 'crypt']
-  },
-  {
-    id: '222222',
-    type: ObjectType.LOOP,
-    fileSource: 'carefree-whistling',
-    name: 'Carefree Whistling',
-    source: { author: 'Bob', url: 'bob@bob.com' },
-    tags: ['loop', 'music', 'tinkerer', 'happy', 'pleasant', 'cottage', 'cooking', 'guard'],
-  },
-  {
-    id: '333333',
-    type: ObjectType.LOOP,
-    fileSource: 'jig-of-slurs',
-    name: 'The Jig of Slurs',
-    source: { author: 'Charlie', url: 'charlie@charlie.com' },
-    tags: ['loop', 'music', 'tavern', 'upbeat', 'jovial', 'celtic', 'happy', 'pleasant', 'fiddle', 'flute', 'merry', 'halfling', 'village', 'town'],
-  }
-];
+// const DUMMY_TRACK_DATA: (LoopData | OneShotData)[] = [
+//   {
+//     id: '111111',
+//     type: ObjectType.LOOP,
+//     fileName: 'ominous-ambience',
+//     name: 'Ominous Ambience',
+//     source: { author: 'Alice', url: 'alice@alice.com' },
+//     tags: ['loop', 'spooky', 'graveyard', 'horror', 'ghosts', 'spirits', 'crypt']
+//   },
+//   {
+//     id: '222222',
+//     type: ObjectType.LOOP,
+//     fileName: 'carefree-whistling',
+//     name: 'Carefree Whistling',
+//     source: { author: 'Bob', url: 'bob@bob.com' },
+//     tags: ['loop', 'music', 'tinkerer', 'happy', 'pleasant', 'cottage', 'cooking', 'guard'],
+//   },
+//   {
+//     id: '333333',
+//     type: ObjectType.LOOP,
+//     fileName: 'jig-of-slurs',
+//     name: 'The Jig of Slurs',
+//     source: { author: 'Charlie', url: 'charlie@charlie.com' },
+//     tags: ['loop', 'music', 'tavern', 'upbeat', 'jovial', 'celtic', 'happy', 'pleasant', 'fiddle', 'flute', 'merry', 'halfling', 'village', 'town'],
+//   }
+// ];
 
 type SoundscapeData = { id: string, tracks: SoundscapeChild[] }
 
@@ -167,10 +135,7 @@ export async function fetchUnloadedTracksForSoundscape(soundscapeId: string) {
 }
 
 export async function fetchTrackDataById(trackId: string) {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(null);
-    }, 400);
-  });
-  return DUMMY_TRACK_DATA.find(track => track.id === trackId);
+  const response = await fetch(`https://us-central1-turbo-bard.cloudfunctions.net/fetchTrackDataById?trackId=${trackId}`);
+  const result = await response.json();
+  return result as TrackData;
 }

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { ERROR_TYPE, fetchTrackDataById, TrackData } from "../services/database";
+import { fetchTrackDataById } from "../services/database";
+import { ERROR_TYPE, TrackData, TrackDataError } from "../models/DatabaseTypes";
 import { setTrackData } from "../slices/soundscapes";
 
 export default function useTrackData(id: string, index: number, soundscapeIndex: number, isLoaded: boolean) {
   const [isLoadingData, setIsLoadingData] = useState(false);
-  const [results, setResults] = useState<TrackData | null>(null);
+  const [results, setResults] = useState<TrackData | TrackDataError | null>(null);
   const dispatch = useDispatch();
   useEffect(() => {
     let fetchingDataFor = id;

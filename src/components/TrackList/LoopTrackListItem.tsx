@@ -30,7 +30,7 @@ export default function LoopTrackListItem({
   soundscapeVolume
 }: LoopTrackListItemProps) {
   const dispatch = useDispatch();
-  const sourceSet = isUnloaded(loop) ? [] : createSourceSet(loop.fileSource);
+  const sourceSet = isUnloaded(loop) ? [] : createSourceSet(loop.fileName);
   const onVolumeChanged = useCallback((newVolume: number) => {
     dispatch(setTrackVolume({
       soundscapeIndex,
