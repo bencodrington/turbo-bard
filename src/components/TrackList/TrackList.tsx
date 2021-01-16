@@ -74,7 +74,6 @@ export default function TrackList() {
   return (
     <div className="track-list-container">
       <TrackListHeader />
-      <AddSoundsButton onClick={toggleIsSearchOpen} />
       {isSearchOpen
         ? <TrackSearchDropdown
           closeSearchDropdown={() => { setIsSearchOpen(false) }}
@@ -84,7 +83,7 @@ export default function TrackList() {
           isFetchingResults={isFetchingResults}
           results={results}
         />
-        : null
+        : <AddSoundsButton onClick={toggleIsSearchOpen} />
       }
       {
         soundscapes.map(soundscape =>
