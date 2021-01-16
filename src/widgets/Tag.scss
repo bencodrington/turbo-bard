@@ -12,7 +12,8 @@
   }
 
   &.clickable {
-    background: var(--azure);
+    background: var(--azure-glass);
+    border: 2px solid var(--azure);
     border-radius: 32px;
     color: var(--canary);
     cursor: pointer;
