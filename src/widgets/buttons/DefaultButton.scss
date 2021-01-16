@@ -1,11 +1,13 @@
 .default-button-container {
-  background: var(--azure);
+  background: var(--azure-glass);
   height: 3.5rem;
   padding: 0 1.5rem;
   display: flex;
   align-items: center;
   border-radius: .25rem;
+  border: 2px solid var(--azure);
   color: var(--canary);
+  justify-content: center;
 
   &:disabled {
     cursor: not-allowed;

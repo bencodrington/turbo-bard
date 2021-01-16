@@ -1,7 +1,0 @@
-@import "../../mixins.scss";
-
-.soundscape-list-container {
-  padding: 1rem .5rem;
-
-  @include hidden--mobile;
-}

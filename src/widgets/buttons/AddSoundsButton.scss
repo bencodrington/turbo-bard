@@ -1,0 +1,15 @@
+@import '../../mixins.scss';
+
+.add-sounds-button-container {
+  width: 100%;
+  border-radius: 1rem;
+  height: 6rem;
+  z-index: 1;
+  position: relative;
+  
+  span {
+    background: var(--track);
+    background-clip: text;
+    color: transparent;
+  }
+}

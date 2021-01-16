@@ -4,13 +4,15 @@ import { Soundscape } from "../../models/Soundscape";
 import { isLoop, isOneShot, isUnloaded, isUnloadedLoop, Track } from "../../models/Track";
 import { fetchTrackResults } from "../../services/database";
 import { useSoundscapes } from "../../slices";
-import AddTrackButton from "../../widgets/buttons/AddTrackButton";
+import AddSoundsButton from "../../widgets/buttons/AddSoundsButton";
 import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
 import useSearchResults from "../SearchDropdown/useSearchResults";
 import LoopTrackListItem from "./LoopTrackListItem";
 import OneShotTrackListItem from "./OneShotTrackListItem";
 import TrackListHeader from "./TrackListHeader";
 import UnloadedTrackListItem from "./UnloadedTrackListItem";
+
+import "./TrackList.scss";
 
 function constructKey(track: Track, soundscape: Soundscape) {
   return soundscape.index + '-' + track.index;
@@ -27,7 +29,7 @@ function listItemFromTrack(
       key={constructKey(track, soundscape)}
       soundscapeIndex={soundscape.index}
       loop={track}
-      isVisible={soundscape.isOpen}
+      isVisible={true}
       isSearchOpen={isSearchOpen}
       onTagClick={appendSearchText}
       soundscapeVolume={soundscape.volume}
@@ -37,7 +39,7 @@ function listItemFromTrack(
       key={constructKey(track, soundscape)}
       soundscapeIndex={soundscape.index}
       oneShot={track}
-      isVisible={soundscape.isOpen}
+      isVisible={true}
       isSearchOpen={isSearchOpen}
       onTagClick={appendSearchText}
       soundscapeVolume={soundscape.volume}
@@ -47,7 +49,7 @@ function listItemFromTrack(
       key={constructKey(track, soundscape)}
       unloadedTrack={track}
       soundscapeIndex={soundscape.index}
-      isVisible={soundscape.isOpen}
+      isVisible={true}
     />
   } else {
     return null;
@@ -72,7 +74,7 @@ export default function TrackList() {
   return (
     <div className="track-list-container">
       <TrackListHeader />
-      <AddTrackButton onClick={toggleIsSearchOpen} />
+      <AddSoundsButton onClick={toggleIsSearchOpen} />
       {isSearchOpen
         ? <TrackSearchDropdown
           closeSearchDropdown={() => { setIsSearchOpen(false) }}
