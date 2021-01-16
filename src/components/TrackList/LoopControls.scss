@@ -1,42 +1,8 @@
 .loop-controls-container {
   display: flex;
-  // TODO: extract button height to a shared variable
-  // 3 buttons with 4px padding in between:
-  // 3.5rem * 3 = 10.5rem
-  // 4px * 2 = 8px = .5rem;
-  height: 11rem;
-  justify-content: center;
 
-  .center-cell {
-    position: relative;
-    // TODO: extract magic number from above
-    height: 11rem;
-    width: 11rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    .play-toggle-button {
-      position: absolute;
-      
-    }
-    
-    .loop-icon {
-      height: 100%;
-      pointer-events: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-    
+  .volume-controls-container {
+    flex: 1;
+    margin-right: 4px;
   }
-
-  .standard-track-controls {
-    width: 3.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
 }

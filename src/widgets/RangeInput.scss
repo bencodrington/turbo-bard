@@ -1,6 +1,9 @@
 .range-input-container {
-  $barWidth: 18px;
-  $handleWidth: 28px;
+  $barWidth: 8px;
+  $handleWidth: 20px;
+  
+  height: $barWidth !important;
+  padding: 0 !important;
 
   .rail {
     border: none;
@@ -8,38 +11,24 @@
     box-shadow: none;
     border-radius: 0.25rem;
     padding: 0;
+    height: 100%;
   }
 
   .track {
     background: var(--canary);
     border-radius: 0.25rem;
+    height: 100%;
   }
 
   .handle {
     background-color: var(--canary);
     width: $handleWidth;
     height: $handleWidth;
+    margin-top: ($barWidth - $handleWidth) / 2;
+    margin-left: -($handleWidth / 2);
     
     &::before, &::after {
       display: none;
-    }
-  }
-  
-  &.vertical {
-    width: $barWidth !important;
-    padding: 0 !important;
-
-    .rail {
-      width: 100%;
-    }
-
-    .track {
-      width: 100%;
-    }
-    
-    .handle {
-      margin-left: ($barWidth - $handleWidth) / 2;
-      margin-bottom: -($handleWidth / 2);
     }
   }
 }

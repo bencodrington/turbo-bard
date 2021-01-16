@@ -62,27 +62,32 @@ export default function LoopTrackListItem({
   }
   return (
     <div className="loop-track-list-item-container">
-      <h4>{name ?? null}</h4>
-      {
-        isSearchOpen && tags !== undefined
-          ? <TagList tags={tags} onTagClick={onTagClick} />
-          : null
-      }
-      {
-        !isSearchOpen
-          ? <LoopControls
-            displaySource={displaySource}
-            isMuted={isMuted}
-            toggleIsMuted={toggleIsMuted}
-            isPlaying={isPlaying}
-            toggleIsPlaying={toggleIsPlaying}
-            isAudioLoaded={isAudioLoaded}
-            volume={volume}
-            setVolume={setVolume}
-            remove={remove}
-          />
-          : null
-      }
+      <div className="torch">
+        Torch Goes Here
+      </div>
+      <div className="loop__body">
+        <h4>{name ?? null}</h4>
+        {
+          isSearchOpen && tags !== undefined
+            ? <TagList tags={tags} onTagClick={onTagClick} />
+            : null
+        }
+        {
+          !isSearchOpen
+            ? <LoopControls
+              displaySource={displaySource}
+              isMuted={isMuted}
+              toggleIsMuted={toggleIsMuted}
+              isPlaying={isPlaying}
+              toggleIsPlaying={toggleIsPlaying}
+              isAudioLoaded={isAudioLoaded}
+              volume={volume}
+              setVolume={setVolume}
+              remove={remove}
+            />
+            : null
+        }
+      </div>
     </div>
   );
 }

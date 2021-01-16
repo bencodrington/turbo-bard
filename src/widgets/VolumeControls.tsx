@@ -32,7 +32,6 @@ export default function VolumeControls({
         max={1}
         value={volume}
         onValueChange={setVolume}
-        isVertical={true}
         ariaLabel="volume slider"
         getAriaValueText={ariaValueFormatter}
       />

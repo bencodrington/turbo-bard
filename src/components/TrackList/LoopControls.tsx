@@ -1,11 +1,7 @@
 import React from "react";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 import VolumeControls from "../../widgets/VolumeControls";
-import closeIcon from "../../assets/icon-close.svg";
-import infoIcon from "../../assets/icon-info.svg";
-import loopIcon from "../../assets/icon-loop.svg";
-import playIcon from "../../assets/icon-play.svg";
-import stopIcon from "../../assets/icon-stop.svg";
+import moreIcon from "../../assets/icon-more.svg";
 
 import "./LoopControls.scss";
 
@@ -40,27 +36,26 @@ export default function LoopControls({
         setVolume={setVolume}
         toggleIsMuted={toggleIsMuted}
       />
+      <DefaultButton
+        onClick={() => { console.log('show more options') }}
+        icon={moreIcon}
+        isRound={true}
+      />
+      {/* <DefaultButton
+        className='play-toggle-button'
+        onClick={toggleIsPlaying}
+        icon={isPlaying ? stopIcon : playIcon}
+        isDisabled={!isAudioLoaded}
+      /> */}
 
-      <div className='center-cell'>
-        <DefaultButton
-          className='play-toggle-button'
-          onClick={toggleIsPlaying}
-          icon={isPlaying ? stopIcon : playIcon}
-          isDisabled={!isAudioLoaded}
-        />
-        <img className='loop-icon' src={loopIcon} alt='' />
-      </div>
-
-      <div className='standard-track-controls'>
-        <DefaultButton
-          onClick={remove}
-          icon={closeIcon}
-        />
-        <DefaultButton
-          onClick={displaySource}
-          icon={infoIcon}
-        />
-      </div>
+      {/* <DefaultButton
+        onClick={remove}
+        icon={closeIcon}
+      />
+      <DefaultButton
+        onClick={displaySource}
+        icon={infoIcon}
+      /> */}
     </div>
   );
 }

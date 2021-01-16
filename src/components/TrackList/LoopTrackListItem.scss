@@ -1,9 +1,22 @@
 .loop-track-list-item-container {
+  display: flex;
+
+  .torch {
+    width: 56px;
+  }
+
+  .loop__body {
+    flex: 1;
+    margin-left: 4px;
+    min-width: 0;
+  }
   
   h4 {
     color: var(--loop);
     width: 100%;
-    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
 }
