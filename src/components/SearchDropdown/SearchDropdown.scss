@@ -1,14 +1,11 @@
 @import "../../mixins.scss";
 
 .search-dropdown-container {
-  border: 8px solid var(--azure--glass);
-  border-radius: 0 0 20px 20px;
+  border-radius: 20px;
+  background: var(--azure-glass);
   display: flex;
   flex-direction: column;
-  top: -16px;
-  padding: 16px 4px 0;
-  position: relative;
-  height: 75vh;
+  padding-bottom: 8px;
 
   .results {
     flex: 1;
@@ -16,6 +13,6 @@
   }
 
   .tag-list-container {
-    padding-top: 16px;
+    padding-top: 8px;
   }
 }

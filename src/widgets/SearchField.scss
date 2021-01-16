@@ -17,6 +17,12 @@
     width: 100%;
     border-radius: 1.25rem;
     border: 2px solid var(--canary);
+    // Required for rounded gradient border
+    border-color: transparent;
+    background-image: linear-gradient(var(--azure-glass), var(--azure-glass)), var(--track);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+
     padding: .25rem;
     padding-left: calc(.5rem + var(--icon-size) + .25rem);
     color: var(--turbo-blue);
