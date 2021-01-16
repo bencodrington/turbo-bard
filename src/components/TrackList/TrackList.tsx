@@ -8,6 +8,7 @@ import AddTrackButton from "../../widgets/buttons/AddTrackButton";
 import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
 import useSearchResults from "../SearchDropdown/useSearchResults";
 import LoopTrackListItem from "./LoopTrackListItem";
+import OneShotTrackListItem from "./OneShotTrackListItem";
 import TrackListHeader from "./TrackListHeader";
 import UnloadedTrackListItem from "./UnloadedTrackListItem";
 
@@ -32,8 +33,15 @@ function listItemFromTrack(
       soundscapeVolume={soundscape.volume}
     />
   } else if (isOneShot(track)) {
-    // TODO:
-    return null;
+    return <OneShotTrackListItem
+      key={constructKey(track, soundscape)}
+      soundscapeIndex={soundscape.index}
+      oneShot={track}
+      isVisible={soundscape.isOpen}
+      isSearchOpen={isSearchOpen}
+      onTagClick={appendSearchText}
+      soundscapeVolume={soundscape.volume}
+    />
   } else if (isUnloaded(track)) {
     return <UnloadedTrackListItem
       key={constructKey(track, soundscape)}
