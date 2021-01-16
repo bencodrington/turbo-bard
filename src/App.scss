@@ -6,18 +6,10 @@
   --canary--rgb: 255, 199, 0;
   --turbo-blue: #06CCF8;
   --azure: #081D68;
-  --azure--glass: #10183C;
+  --azure-glass: #10183C;
   --loop: #F13BF4;
   --one-shot: #FF7A00;
   --track: linear-gradient(45deg, var(--loop),var(--one-shot));
-  --phanary: #FFE249;
-  --azure--light: #EBEFFF;
-  --charcoal: #1E3B42;
-  --danger: #AE0C29;
-  --danger--light: #FFD8DF;
-  --loop--light: #F7E0FF;
-  --one-shot--light: #FFECDA;
-  --font--miriam: 'Miriam Libre', sans-serif;
   --font--signika: 'Signika Negative', sans-serif;
   --font--shrikhand: 'Shrikhand';
   background: var(--background);
@@ -35,14 +27,6 @@ h1 {
   font-family: var(--font--signika);
   font-size: 2.5rem;
   font-weight: normal;
-}
-
-// The only difference between h2 and h3 is that
-// h2 should be in all caps
-h2, h3 {
-  font-family: var(--font--miriam);
-  font-weight: bold;
-  font-size: 1.5rem;
 }
 
 h4 {
