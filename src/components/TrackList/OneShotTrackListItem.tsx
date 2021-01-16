@@ -31,6 +31,7 @@ export default function OneShotTrackListItem({
   const dispatch = useDispatch();
   // TODO: use all samples
   const sourceSet = isUnloaded(oneShot) ? [] : createSourceSet(oneShot.samples[0]);
+  console.log(sourceSet);
   const onVolumeChanged = useCallback((newVolume: number) => {
     dispatch(setTrackVolume({
       soundscapeIndex,
