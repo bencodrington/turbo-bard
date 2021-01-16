@@ -72,6 +72,7 @@ export default function Group({
         <DefaultButton
           onClick={() => { console.log('Show options for ' + group.name) }}
           icon={MoreIcon}
+          isRound={true}
         />
         <h3 className="name">{group.name}</h3>
       </div>
@@ -88,6 +89,7 @@ export default function Group({
         className='add-sounds-button'
         onClick={() => { console.log('Show options for ' + group.name) }}
         icon={MoreIcon}
+        isRound={true}
       />
     </div>
   );
