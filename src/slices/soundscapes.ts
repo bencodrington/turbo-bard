@@ -54,10 +54,27 @@ const soundscapesSlice = createSlice({
         return unloadedTrack;
       });
     },
-    addSearchResultToOpenSoundscape(state, { payload }: PayloadAction<SearchResult>) {
-      const soundscape = state.find(soundscape => soundscape.isOpen);
-      if (soundscape === undefined) return;
-      addSearchResultToSoundscape(payload, soundscape);
+    addSearchResultToGroup(
+      state,
+      { payload }: PayloadAction<{ searchResult: SearchResult, groupIndex?: number }>
+    ) {
+      const { searchResult, groupIndex } = payload;
+      let group;
+      if (groupIndex === undefined) {
+        // Create new group
+        group = {
+          name: 'GROUP TITLE',
+          index: getNextIndex(state),
+          tracks: [],
+          isOpen: true,
+          volume: 0.7
+        };
+        state.push(group);
+      } else {
+        group = getSoundscapeByIndex(groupIndex, state);
+      }
+      if (group === undefined) return;
+      addSearchResultToSoundscape(searchResult, group);
     },
     removeTrack(state, { payload }: PayloadAction<{ soundscapeIndex: number, trackIndex: number }>) {
       const { soundscapeIndex, trackIndex } = payload;
@@ -132,7 +149,7 @@ export const {
   closeAllSoundscapes,
   setUnloadedTracks,
   removeTrack,
-  addSearchResultToOpenSoundscape,
+  addSearchResultToGroup,
   setTrackData,
   openSoundscape,
   setTrackVolume,

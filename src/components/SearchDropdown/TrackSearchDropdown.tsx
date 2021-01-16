@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { SearchResult } from "../../models/SearchResult";
 import { useOpenSoundscape } from "../../slices";
-import { addSearchResultToOpenSoundscape } from "../../slices/soundscapes";
+import { addSearchResultToGroup } from "../../slices/soundscapes";
 import SearchField from "../../widgets/SearchField";
 import TagList from "../TagList";
 import SearchDropdown from "./SearchDropdown";
@@ -37,9 +37,8 @@ export default function TrackSearchDropdown({
   );
 
   function onSearchItemClick(searchResult: SearchResult) {
-    setSearchText('');
     closeSearchDropdown();
-    dispatch(addSearchResultToOpenSoundscape(searchResult))
+    dispatch(addSearchResultToGroup({ searchResult }))
   }
 
   const resultElements = results.map(result => (

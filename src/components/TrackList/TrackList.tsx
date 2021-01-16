@@ -9,7 +9,6 @@ import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
 import useSearchResults from "../SearchDropdown/useSearchResults";
 import LoopTrackListItem from "./LoopTrackListItem";
 import OneShotTrackListItem from "./OneShotTrackListItem";
-import TrackListHeader from "./TrackListHeader";
 import UnloadedTrackListItem from "./UnloadedTrackListItem";
 
 import "./TrackList.scss";
@@ -73,7 +72,6 @@ export default function TrackList() {
 
   return (
     <div className="track-list-container">
-      <TrackListHeader />
       {isSearchOpen
         ? <TrackSearchDropdown
           closeSearchDropdown={() => { setIsSearchOpen(false) }}
@@ -87,9 +85,12 @@ export default function TrackList() {
       }
       {
         soundscapes.map(soundscape =>
-          soundscape.tracks.map(track =>
-            listItemFromTrack(track, soundscape, isSearchOpen, appendSearchText)
-          )
+          [
+            <h3 key={soundscape.index}>{soundscape.name}</h3>,
+            soundscape.tracks.map(track =>
+              listItemFromTrack(track, soundscape, isSearchOpen, appendSearchText)
+            )
+          ]
         )
       }
     </div>
