@@ -114,11 +114,11 @@ type TrackResult = UntypedSearchResult & { trackType: string };
 export async function fetchTrackResults(searchText: string) {
   const response = await fetch(`https://us-central1-turbo-bard.cloudfunctions.net/searchTracks?searchText=${searchText}`);
   const results = await response.json();
-  results.map((track: TrackResult) => {
+  const searchResults: SearchResult[] = results.map((track: TrackResult) => {
     const type = track.trackType === ObjectType.ONESHOT ? ObjectType.ONESHOT : ObjectType.LOOP;
     return toSearchResult(track, type);
   });
-  return results as SearchResult[];
+  return searchResults;
 }
 
 export async function fetchUnloadedTracksForSoundscape(soundscapeId: string) {
