@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { SearchResult } from "../../models/SearchResult";
-import { useOpenSoundscape } from "../../slices";
 import { addSearchResultToGroup } from "../../slices/soundscapes";
 import SearchField from "../../widgets/SearchField";
 import TagList from "../TagList";
@@ -25,7 +24,6 @@ export default function TrackSearchDropdown({
   isFetchingResults,
   results
 }: TrackSearchDropdownProps) {
-  const isHiddenMobile = useOpenSoundscape() === undefined;
   const dispatch = useDispatch();
 
   const searchField = (
@@ -55,7 +53,6 @@ export default function TrackSearchDropdown({
 
   return (
     <SearchDropdown
-      className={isHiddenMobile ? 'hidden--mobile' : ''}
       searchField={searchField}
       results={resultElements}
       suggestions={suggestions}
