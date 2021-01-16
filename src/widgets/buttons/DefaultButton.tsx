@@ -40,8 +40,8 @@ export default function DefaultButton({
       onClick={onClick}
       disabled={isDisabled}
     >
-      {textContent}
       {imgContent}
+      {textContent}
     </button>
   )
 };

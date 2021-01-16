@@ -1,6 +1,7 @@
 import React from "react";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 import MoreIcon from "../../assets/icon-more.svg";
+import AddIcon from "../../assets/icon-add.svg";
 import { Soundscape } from "../../models/Soundscape";
 
 import "./Group.scss";
@@ -88,7 +89,7 @@ export default function Group({
       <DefaultButton
         className='add-sounds-button'
         onClick={() => { console.log('Show options for ' + group.name) }}
-        icon={MoreIcon}
+        icon={AddIcon}
         isRound={true}
       />
     </div>

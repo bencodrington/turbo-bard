@@ -1,7 +1,8 @@
 import React from "react";
+import DefaultButton from "./DefaultButton";
+import addIcon from "../../assets/icon-add.svg";
 
 import "./AddSoundsButton.scss";
-import DefaultButton from "./DefaultButton";
 
 type AddSoundsButtonProps = {
   onClick: () => void
@@ -13,7 +14,8 @@ export default function AddSoundsButton({ onClick
     <DefaultButton
       className='add-sounds-button-container'
       onClick={onClick}
-      text='+ Add sounds'
+      icon={addIcon}
+      text='Add sounds'
     />
   );
 }
