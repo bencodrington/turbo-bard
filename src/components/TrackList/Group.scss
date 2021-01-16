@@ -1,0 +1,44 @@
+.group-container {
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    display: flex;
+    align-items: center;
+
+    .name {
+      flex: 1;
+      margin-left: 4px;
+    }
+  }
+
+  .group__body {
+    margin: 4px 0;
+    display: flex;
+    align-items: stretch;
+
+    .collapse-bar {
+      width: 56px;
+      flex-shrink: 0;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: calc(50% - 2px);
+        width: 4px;
+        height: 100%;
+        background: var(--canary);
+        border-radius: 4px;
+      }
+    }
+
+    .tracks {
+      flex: 1;
+    }
+  }
+
+  .add-sounds-button {
+    align-self: flex-start;
+  }
+}
