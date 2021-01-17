@@ -9,11 +9,19 @@ import { isLoop, isOneShot, isUnloaded, isUnloadedLoop, Track } from "../../mode
 import LoopTrackListItem from "./LoopTrackListItem";
 import OneShotTrackListItem from "./OneShotTrackListItem";
 import UnloadedTrackListItem from "./UnloadedTrackListItem";
+import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
+import { SearchResult } from "../../models/SearchResult";
+import { NEW_GROUP } from "../TrackList/TrackList";
 
 type GroupProps = {
-  isSearchModeActive: boolean,
-  isThisGroupSearching: boolean,
-  group: Soundscape
+  searchTarget: number | null | typeof NEW_GROUP,
+  setSearchTarget: (searchTarget: number | null) => void,
+  group: Soundscape,
+  results: SearchResult[],
+  isFetchingResults: boolean,
+  searchText: string,
+  setSearchText: (searchText: string) => void,
+  appendSearchText: (searchText: string) => void
 };
 
 function constructKey(track: Track, soundscape: Soundscape) {
@@ -58,15 +66,18 @@ function listItemFromTrack(
   }
 }
 
-function appendSearchText(text: string) {
-  console.log('TODO: append search text: ' + text);
-}
-
 export default function Group({
-  isSearchModeActive,
-  isThisGroupSearching,
-  group
+  searchTarget,
+  setSearchTarget,
+  group,
+  results,
+  isFetchingResults,
+  searchText,
+  setSearchText,
+  appendSearchText
 }: GroupProps) {
+  const isSearchModeActive = searchTarget !== null;
+  const isThisGroupSearching = searchTarget === group.index;
   return (
     <div className="group-container">
       <div className="header">
@@ -85,13 +96,23 @@ export default function Group({
           )}
         </div>
       </div>
-      {/* TODO: add group-specific searchbars {isThisGroupSearching ?} */}
-      <DefaultButton
-        className='add-sounds-button'
-        onClick={() => { console.log('Show options for ' + group.name) }}
-        icon={AddIcon}
-        isRound={true}
-      />
+      {isThisGroupSearching
+        ? <TrackSearchDropdown
+          closeSearchDropdown={() => { setSearchTarget(null) }}
+          searchText={searchText}
+          setSearchText={setSearchText}
+          appendSearchText={appendSearchText}
+          isFetchingResults={isFetchingResults}
+          results={results}
+          searchTarget={searchTarget}
+        />
+        : <DefaultButton
+          className='add-sounds-button'
+          onClick={() => setSearchTarget(group.index)}
+          icon={AddIcon}
+          isRound={true}
+        />
+      }
     </div>
   );
 }

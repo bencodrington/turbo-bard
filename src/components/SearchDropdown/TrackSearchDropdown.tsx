@@ -6,6 +6,7 @@ import SearchField from "../../widgets/SearchField";
 import TagList from "../TagList";
 import SearchDropdown from "./SearchDropdown";
 import SearchItem from "./SearchItem";
+import { NEW_GROUP } from "../TrackList/TrackList";
 
 type TrackSearchDropdownProps = {
   closeSearchDropdown: () => void,
@@ -13,7 +14,8 @@ type TrackSearchDropdownProps = {
   setSearchText: (newSearchText: string) => void,
   appendSearchText: (newSearchText: string) => void,
   isFetchingResults: boolean,
-  results: SearchResult[]
+  results: SearchResult[],
+  searchTarget: number | null | typeof NEW_GROUP;
 };
 
 export default function TrackSearchDropdown({
@@ -22,7 +24,8 @@ export default function TrackSearchDropdown({
   setSearchText,
   appendSearchText,
   isFetchingResults,
-  results
+  results,
+  searchTarget
 }: TrackSearchDropdownProps) {
   const dispatch = useDispatch();
 
@@ -36,7 +39,11 @@ export default function TrackSearchDropdown({
 
   function onSearchItemClick(searchResult: SearchResult) {
     closeSearchDropdown();
-    dispatch(addSearchResultToGroup({ searchResult }))
+    let groupIndex: undefined | number = undefined;
+    if (typeof searchTarget === 'number') {
+      groupIndex = searchTarget;
+    }
+    dispatch(addSearchResultToGroup({ searchResult, groupIndex }));
   }
 
   const resultElements = results.map(result => (

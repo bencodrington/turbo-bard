@@ -1,5 +1,4 @@
-import React from "react";
-import useBoolean from "../../hooks/useBoolean";
+import React, { useState } from "react";
 import { fetchTrackResults } from "../../services/database";
 import { useSoundscapes } from "../../slices";
 import AddSoundsButton from "../../widgets/buttons/AddSoundsButton";
@@ -9,13 +8,11 @@ import useSearchResults from "../SearchDropdown/useSearchResults";
 import "./TrackList.scss";
 import Group from "./Group";
 
+export const NEW_GROUP = 'NEW_GROUP';
+
 export default function TrackList() {
   const soundscapes = useSoundscapes();
-  const [
-    isSearchOpen,
-    setIsSearchOpen,
-    toggleIsSearchOpen
-  ] = useBoolean(false);
+  const [searchTarget, setSearchTarget] = useState<number | null | typeof NEW_GROUP>(null);
   const {
     results,
     isFetchingResults,
@@ -26,24 +23,31 @@ export default function TrackList() {
 
   return (
     <div className="track-list-container">
-      {isSearchOpen
-        ? <TrackSearchDropdown
-          closeSearchDropdown={() => { setIsSearchOpen(false) }}
-          searchText={searchText}
-          setSearchText={setSearchText}
-          appendSearchText={appendSearchText}
-          isFetchingResults={isFetchingResults}
-          results={results}
-        />
-        : <AddSoundsButton onClick={toggleIsSearchOpen} />
+      {
+        searchTarget === NEW_GROUP
+          ? <TrackSearchDropdown
+            closeSearchDropdown={() => { setSearchTarget(null) }}
+            searchText={searchText}
+            setSearchText={setSearchText}
+            appendSearchText={appendSearchText}
+            isFetchingResults={isFetchingResults}
+            results={results}
+            searchTarget={searchTarget}
+          />
+          : <AddSoundsButton onClick={() => setSearchTarget(NEW_GROUP)} />
       }
       {
         soundscapes.map(group =>
           <Group
             key={group.index}
             group={group}
-            isSearchModeActive={isSearchOpen}
-            isThisGroupSearching={false} // TODO: add search to each group
+            searchTarget={searchTarget}
+            setSearchTarget={setSearchTarget}
+            results={results}
+            isFetchingResults={isFetchingResults}
+            searchText={searchText}
+            setSearchText={setSearchText}
+            appendSearchText={appendSearchText}
           />
         )
       }
