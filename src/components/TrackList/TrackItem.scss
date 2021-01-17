@@ -35,4 +35,14 @@
       color: var(--one-shot);
     }
   }
+
+  .track-controls {
+    display: flex;
+    margin-top: 4px;
+  
+    .volume-controls-container {
+      flex: 1;
+      margin-right: 4px;
+    }
+  }
 }

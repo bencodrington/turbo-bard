@@ -1,11 +1,13 @@
 import React from "react";
 import FlameButton from "../../widgets/buttons/FlameButton";
 import torchHandle from "../../assets/torch-handle.svg";
+import moreIcon from "../../assets/icon-more.svg";
 
 import "./TrackItem.scss";
 import TagList from "../TagList";
-import LoopControls from "./LoopControls";
 import { ObjectType } from "../../models/ObjectTypes";
+import VolumeControls from "../../widgets/VolumeControls";
+import DefaultButton from "../../widgets/buttons/DefaultButton";
 
 type TrackItemProps = {
   type: ObjectType
@@ -68,12 +70,19 @@ export default function TrackItem({
         }
         {
           !isSearchOpen
-            ? <LoopControls
-              isMuted={isMuted}
-              toggleIsMuted={toggleIsMuted}
-              volume={volume}
-              setVolume={setVolume}
-            />
+            ? <div className='track-controls'>
+              <VolumeControls
+                volume={volume}
+                isMuted={isMuted}
+                setVolume={setVolume}
+                toggleIsMuted={toggleIsMuted}
+              />
+              <DefaultButton
+                onClick={() => { console.log('show more options') }}
+                icon={moreIcon}
+                isRound={true}
+              />
+            </div>
             : null
         }
       </div>
