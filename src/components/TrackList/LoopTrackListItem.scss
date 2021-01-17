@@ -3,6 +3,10 @@
 
   .torch {
     width: 56px;
+
+    & .torch__handle {
+      margin-top: 4px;
+    }
   }
 
   .loop__body {

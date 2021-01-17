@@ -4,14 +4,14 @@ import { isUnloaded, Loop, UnloadedTrack } from "../../models/Track";
 import { removeTrack, setTrackVolume } from "../../slices/soundscapes";
 import useLoopPlayer from "../../hooks/useLoopPlayer";
 import useTrackData from "../../hooks/useTrackData";
-
-import "./LoopTrackListItem.scss";
-
 import TagList from "../TagList";
 import LoopControls from "./LoopControls";
 import { useVolume } from "../../hooks/useVolume";
 import { createSourceSet } from "../../utils/audioFileUtil";
 import FlameButton from "../../widgets/buttons/FlameButton";
+import torchHandle from "../../assets/torch-handle.svg";
+
+import "./LoopTrackListItem.scss";
 
 type LoopTrackListItemProps = {
   loop: Loop | UnloadedTrack,
@@ -69,7 +69,9 @@ export default function LoopTrackListItem({
           isPlaying={isPlaying}
           isDisabled={!isAudioLoaded}
         />
-        <div className="torch__handle" />
+        <div className="torch__handle">
+          <img src={torchHandle} alt="Torch handle" />
+        </div>
       </div>
       <div className="loop__body">
         <h4>{name ?? null}</h4>
@@ -84,9 +86,6 @@ export default function LoopTrackListItem({
               displaySource={displaySource}
               isMuted={isMuted}
               toggleIsMuted={toggleIsMuted}
-              isPlaying={isPlaying}
-              toggleIsPlaying={toggleIsPlaying}
-              isAudioLoaded={isAudioLoaded}
               volume={volume}
               setVolume={setVolume}
               remove={remove}
