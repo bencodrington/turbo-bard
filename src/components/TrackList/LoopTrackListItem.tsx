@@ -1,17 +1,14 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { isUnloaded, Loop, UnloadedTrack } from "../../models/Track";
-import { removeTrack, setTrackVolume } from "../../slices/soundscapes";
+import { setTrackVolume } from "../../slices/soundscapes";
 import useLoopPlayer from "../../hooks/useLoopPlayer";
 import useTrackData from "../../hooks/useTrackData";
-import TagList from "../TagList";
-import LoopControls from "./LoopControls";
 import { useVolume } from "../../hooks/useVolume";
 import { createSourceSet } from "../../utils/audioFileUtil";
-import FlameButton from "../../widgets/buttons/FlameButton";
-import torchHandle from "../../assets/torch-handle.svg";
 
-import "./LoopTrackListItem.scss";
+import TrackItem from "./TrackItem";
+import { ObjectType } from "../../models/ObjectTypes";
 
 type LoopTrackListItemProps = {
   loop: Loop | UnloadedTrack,
@@ -55,46 +52,20 @@ export default function LoopTrackListItem({
   if (!isVisible) {
     return null;
   }
-  function displaySource() {
-    console.log('TODO');
-  }
-  function remove() {
-    dispatch(removeTrack({ soundscapeIndex, trackIndex: index }))
-  }
   return (
-    <div className="loop-track-list-item-container">
-      <div className="torch">
-        <FlameButton
-          onClick={toggleIsPlaying}
-          isPlaying={isPlaying}
-          isDisabled={!isAudioLoaded}
-        />
-        <div className="torch__handle">
-          <img src={torchHandle} alt="Torch handle" />
-        </div>
-      </div>
-      <div className="loop__body">
-        <div className="loop__name">
-          <h4>{name ?? null}</h4>
-        </div>
-        {
-          isSearchOpen && tags !== undefined
-            ? <TagList tags={tags} onTagClick={onTagClick} />
-            : null
-        }
-        {
-          !isSearchOpen
-            ? <LoopControls
-              displaySource={displaySource}
-              isMuted={isMuted}
-              toggleIsMuted={toggleIsMuted}
-              volume={volume}
-              setVolume={setVolume}
-              remove={remove}
-            />
-            : null
-        }
-      </div>
-    </div>
+    <TrackItem
+      isAudioLoaded={isAudioLoaded}
+      isMuted={isMuted}
+      isPlaying={isPlaying}
+      isSearchOpen={isSearchOpen}
+      toggleIsMuted={toggleIsMuted}
+      toggleIsPlaying={toggleIsPlaying}
+      name={name}
+      tags={tags ?? []}
+      type={ObjectType.LOOP}
+      volume={volume}
+      setVolume={setVolume}
+      onTagClick={onTagClick}
+    />
   );
 }

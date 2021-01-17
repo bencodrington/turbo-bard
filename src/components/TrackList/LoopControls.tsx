@@ -8,8 +8,9 @@ import "./LoopControls.scss";
 type LoopControlsProps = {
   isMuted: boolean,
   toggleIsMuted: () => void,
-  displaySource: () => void,
-  remove: () => void,
+  // TODO: expanded loop options
+  // displaySource: () => void,
+  // remove: () => void,
   volume: number,
   setVolume: (newVolume: number) => void
 };
@@ -19,8 +20,8 @@ export default function LoopControls({
   toggleIsMuted,
   volume,
   setVolume,
-  remove,
-  displaySource
+  // remove,
+  // displaySource
 }: LoopControlsProps) {
   return (
     <div className='loop-controls-container'>

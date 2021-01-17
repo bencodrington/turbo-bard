@@ -2,13 +2,13 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import useTrackData from "../../hooks/useTrackData";
 import { useVolume } from "../../hooks/useVolume";
+import { ObjectType } from "../../models/ObjectTypes";
 import { isUnloaded, OneShot, UnloadedTrack } from "../../models/Track";
-import { removeTrack, setTrackVolume } from "../../slices/soundscapes";
+import { setTrackVolume } from "../../slices/soundscapes";
 import { createSourceSet } from "../../utils/audioFileUtil";
-import TagList from "../TagList";
-import OneShotControls from "./OneShotControls";
 
 import "./OneShotTrackListItem.scss";
+import TrackItem from "./TrackItem";
 
 type OneShotTrackListItemProps = {
   oneShot: OneShot | UnloadedTrack,
@@ -18,7 +18,6 @@ type OneShotTrackListItemProps = {
   onTagClick: (tag: string) => void,
   soundscapeVolume: number
 };
-
 
 export default function OneShotTrackListItem({
   soundscapeIndex,
@@ -58,35 +57,20 @@ export default function OneShotTrackListItem({
   if (!isVisible) {
     return null;
   }
-  function displaySource() {
-    console.log('TODO');
-  }
-  function remove() {
-    dispatch(removeTrack({ soundscapeIndex, trackIndex: index }))
-  }
   return (
-    <div className="one-shot-track-list-item-container">
-      <h4>{name ?? null}</h4>
-      {
-        isSearchOpen && tags !== undefined
-          ? <TagList tags={tags} onTagClick={onTagClick} />
-          : null
-      }
-      {
-        !isSearchOpen
-          ? <OneShotControls
-            displaySource={displaySource}
-            isMuted={isMuted}
-            toggleIsMuted={toggleIsMuted}
-            isPlaying={isPlaying}
-            toggleIsPlaying={toggleIsPlaying}
-            isAudioLoaded={isAudioLoaded}
-            volume={volume}
-            setVolume={setVolume}
-            remove={remove}
-          />
-          : null
-      }
-    </div>
+    <TrackItem
+      isAudioLoaded={isAudioLoaded}
+      isMuted={isMuted}
+      isPlaying={isPlaying}
+      isSearchOpen={isSearchOpen}
+      toggleIsMuted={toggleIsMuted}
+      toggleIsPlaying={toggleIsPlaying}
+      name={name}
+      tags={tags ?? []}
+      type={ObjectType.ONESHOT}
+      volume={volume}
+      setVolume={setVolume}
+      onTagClick={onTagClick}
+    />
   );
 }

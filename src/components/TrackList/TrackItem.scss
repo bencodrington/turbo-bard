@@ -1,4 +1,4 @@
-.loop-track-list-item-container {
+.track-item-container {
   display: flex;
 
   .torch {
@@ -6,20 +6,21 @@
 
     & .torch__handle {
       margin-top: 4px;
+      height: 56px;
     }
   }
 
-  .loop__body {
+  .track__body {
     flex: 1;
     margin-left: 4px;
     min-width: 0;
   }
 
-  .loop__name {
+  .track__name {
     height: 56px;
     display: flex;
     align-items: center;
-  
+
     h4 {
       color: var(--loop);
       width: 100%;
@@ -29,4 +30,9 @@
     }
   }
 
+  &--one-shot {
+    .track__name h4 {
+      color: var(--one-shot);
+    }
+  }
 }
