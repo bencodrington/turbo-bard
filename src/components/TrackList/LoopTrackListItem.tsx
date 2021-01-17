@@ -11,6 +11,7 @@ import TagList from "../TagList";
 import LoopControls from "./LoopControls";
 import { useVolume } from "../../hooks/useVolume";
 import { createSourceSet } from "../../utils/audioFileUtil";
+import FlameButton from "../../widgets/buttons/FlameButton";
 
 type LoopTrackListItemProps = {
   loop: Loop | UnloadedTrack,
@@ -63,7 +64,12 @@ export default function LoopTrackListItem({
   return (
     <div className="loop-track-list-item-container">
       <div className="torch">
-        Torch Goes Here
+        <FlameButton
+          onClick={toggleIsPlaying}
+          isPlaying={isPlaying}
+          isDisabled={!isAudioLoaded}
+        />
+        <div className="torch__handle" />
       </div>
       <div className="loop__body">
         <h4>{name ?? null}</h4>
