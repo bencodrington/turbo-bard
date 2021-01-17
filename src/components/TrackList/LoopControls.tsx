@@ -7,10 +7,7 @@ import "./LoopControls.scss";
 
 type LoopControlsProps = {
   isMuted: boolean,
-  isPlaying: boolean,
-  isAudioLoaded: boolean,
   toggleIsMuted: () => void,
-  toggleIsPlaying: () => void,
   displaySource: () => void,
   remove: () => void,
   volume: number,
@@ -19,10 +16,7 @@ type LoopControlsProps = {
 
 export default function LoopControls({
   isMuted,
-  isPlaying,
-  isAudioLoaded,
   toggleIsMuted,
-  toggleIsPlaying,
   volume,
   setVolume,
   remove,
@@ -41,12 +35,6 @@ export default function LoopControls({
         icon={moreIcon}
         isRound={true}
       />
-      {/* <DefaultButton
-        className='play-toggle-button'
-        onClick={toggleIsPlaying}
-        icon={isPlaying ? stopIcon : playIcon}
-        isDisabled={!isAudioLoaded}
-      /> */}
 
       {/* <DefaultButton
         onClick={remove}
