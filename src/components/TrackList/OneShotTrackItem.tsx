@@ -7,10 +7,9 @@ import { isUnloaded, OneShot, UnloadedTrack } from "../../models/Track";
 import { setTrackVolume } from "../../slices/soundscapes";
 import { createSourceSet } from "../../utils/audioFileUtil";
 
-import "./OneShotTrackListItem.scss";
 import TrackItem from "./TrackItem";
 
-type OneShotTrackListItemProps = {
+type OneShotTrackItemProps = {
   oneShot: OneShot | UnloadedTrack,
   soundscapeIndex: number,
   isVisible: boolean,
@@ -19,14 +18,14 @@ type OneShotTrackListItemProps = {
   soundscapeVolume: number
 };
 
-export default function OneShotTrackListItem({
+export default function OneShotTrackItem({
   soundscapeIndex,
   oneShot,
   isVisible,
   isSearchOpen,
   onTagClick,
   soundscapeVolume
-}: OneShotTrackListItemProps) {
+}: OneShotTrackItemProps) {
   const dispatch = useDispatch();
   // TODO: use all samples
   const sourceSet = isUnloaded(oneShot) ? [] : createSourceSet(oneShot.samples[0]);

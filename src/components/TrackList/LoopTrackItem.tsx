@@ -10,7 +10,7 @@ import { createSourceSet } from "../../utils/audioFileUtil";
 import TrackItem from "./TrackItem";
 import { ObjectType } from "../../models/ObjectTypes";
 
-type LoopTrackListItemProps = {
+type LoopTrackItemProps = {
   loop: Loop | UnloadedTrack,
   soundscapeIndex: number,
   isVisible: boolean,
@@ -19,14 +19,14 @@ type LoopTrackListItemProps = {
   soundscapeVolume: number
 };
 
-export default function LoopTrackListItem({
+export default function LoopTrackItem({
   soundscapeIndex,
   loop,
   isVisible,
   isSearchOpen,
   onTagClick,
   soundscapeVolume
-}: LoopTrackListItemProps) {
+}: LoopTrackItemProps) {
   const dispatch = useDispatch();
   const sourceSet = isUnloaded(loop) ? [] : createSourceSet(loop.fileName);
   const onVolumeChanged = useCallback((newVolume: number) => {

@@ -3,19 +3,19 @@ import useTrackData from "../../hooks/useTrackData";
 import { UnloadedTrack } from "../../models/Track";
 import { ERROR_TYPE } from "../../models/DatabaseTypes";
 
-// import "./UnloadedTrackListItem.scss";
+// import "./UnloadedTrackItem.scss";
 
-type UnloadedTrackListItemProps = {
+type UnloadedTrackItemProps = {
   soundscapeIndex: number,
   unloadedTrack: UnloadedTrack,
   isVisible: boolean
 };
 
-export default function UnloadedTrackListItem({
+export default function UnloadedTrackItem({
   unloadedTrack,
   soundscapeIndex,
   isVisible
-}: UnloadedTrackListItemProps) {
+}: UnloadedTrackItemProps) {
   const { id, index, type } = unloadedTrack;
   useTrackData(id, index, soundscapeIndex, type === ERROR_TYPE);
   if (!isVisible) return null;

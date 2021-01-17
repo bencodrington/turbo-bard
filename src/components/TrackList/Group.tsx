@@ -6,9 +6,9 @@ import { Soundscape } from "../../models/Soundscape";
 
 import "./Group.scss";
 import { isLoop, isOneShot, isUnloaded, isUnloadedLoop, Track } from "../../models/Track";
-import LoopTrackListItem from "./LoopTrackListItem";
-import OneShotTrackListItem from "./OneShotTrackListItem";
-import UnloadedTrackListItem from "./UnloadedTrackListItem";
+import LoopTrackItem from "./LoopTrackItem";
+import OneShotTrackItem from "./OneShotTrackItem";
+import UnloadedTrackItem from "./UnloadedTrackItem";
 import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
 import { SearchResult } from "../../models/SearchResult";
 import { NEW_GROUP } from "../TrackList/TrackList";
@@ -35,7 +35,7 @@ function listItemFromTrack(
   appendSearchText: (text: string) => void
 ) {
   if (isLoop(track) || isUnloadedLoop(track)) {
-    return <LoopTrackListItem
+    return <LoopTrackItem
       key={constructKey(track, soundscape)}
       soundscapeIndex={soundscape.index}
       loop={track}
@@ -45,7 +45,7 @@ function listItemFromTrack(
       soundscapeVolume={soundscape.volume}
     />
   } else if (isOneShot(track)) {
-    return <OneShotTrackListItem
+    return <OneShotTrackItem
       key={constructKey(track, soundscape)}
       soundscapeIndex={soundscape.index}
       oneShot={track}
@@ -55,7 +55,7 @@ function listItemFromTrack(
       soundscapeVolume={soundscape.volume}
     />
   } else if (isUnloaded(track)) {
-    return <UnloadedTrackListItem
+    return <UnloadedTrackItem
       key={constructKey(track, soundscape)}
       unloadedTrack={track}
       soundscapeIndex={soundscape.index}
