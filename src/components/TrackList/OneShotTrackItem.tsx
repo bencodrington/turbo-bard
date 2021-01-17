@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
+import useOneShotPlayer from "../../hooks/useOneShotPlayer";
 import useTrackData from "../../hooks/useTrackData";
 import { useVolume } from "../../hooks/useVolume";
 import { ObjectType } from "../../models/ObjectTypes";
@@ -27,9 +28,7 @@ export default function OneShotTrackItem({
   soundscapeVolume
 }: OneShotTrackItemProps) {
   const dispatch = useDispatch();
-  // TODO: use all samples
-  const sourceSet = isUnloaded(oneShot) ? [] : createSourceSet(oneShot.samples[0]);
-  console.log(sourceSet);
+  const sourceSets = isUnloaded(oneShot) ? [] : oneShot.samples.map(createSourceSet);
   const onVolumeChanged = useCallback((newVolume: number) => {
     dispatch(setTrackVolume({
       soundscapeIndex,
@@ -47,10 +46,11 @@ export default function OneShotTrackItem({
     onVolumeChanged
   });
   const { name, id, index, tags } = oneShot;
-  // const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet, volume * soundscapeVolume);
-  const isPlaying = false;
-  const toggleIsPlaying = () => { console.log('toggle isPlaying'); }
-  const isAudioLoaded = true;
+  const {
+    isPlaying,
+    toggleIsPlaying,
+    isLoaded: isAudioLoaded
+  } = useOneShotPlayer(sourceSets, volume * soundscapeVolume);
   useTrackData(id, index, soundscapeIndex, !isUnloaded(oneShot));
 
   if (!isVisible) {
