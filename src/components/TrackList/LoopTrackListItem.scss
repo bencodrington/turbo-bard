@@ -14,13 +14,19 @@
     margin-left: 4px;
     min-width: 0;
   }
+
+  .loop__name {
+    height: 56px;
+    display: flex;
+    align-items: center;
   
-  h4 {
-    color: var(--loop);
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    h4 {
+      color: var(--loop);
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
 }

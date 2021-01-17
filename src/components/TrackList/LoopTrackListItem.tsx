@@ -74,7 +74,9 @@ export default function LoopTrackListItem({
         </div>
       </div>
       <div className="loop__body">
-        <h4>{name ?? null}</h4>
+        <div className="loop__name">
+          <h4>{name ?? null}</h4>
+        </div>
         {
           isSearchOpen && tags !== undefined
             ? <TagList tags={tags} onTagClick={onTagClick} />
