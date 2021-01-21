@@ -48,8 +48,7 @@ export default function OneShotTrackItem({
   const { name, id, index, tags } = oneShot;
   const {
     isPlaying,
-    toggleIsPlaying,
-    isLoaded: isAudioLoaded
+    toggleIsPlaying
   } = useOneShotPlayer(sourceSets, volume * soundscapeVolume);
   useTrackData(id, index, soundscapeIndex, !isUnloaded(oneShot));
 
@@ -58,7 +57,7 @@ export default function OneShotTrackItem({
   }
   return (
     <TrackItem
-      isAudioLoaded={isAudioLoaded}
+      isAudioReady={true}
       isMuted={isMuted}
       isPlaying={isPlaying}
       isSearchOpen={isSearchOpen}

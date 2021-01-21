@@ -13,7 +13,7 @@ type TrackItemProps = {
   type: ObjectType
   isPlaying: boolean,
   toggleIsPlaying: () => void,
-  isAudioLoaded: boolean,
+  isAudioReady: boolean,
   isSearchOpen: boolean,
   name?: string,
   isMuted: boolean,
@@ -27,7 +27,7 @@ type TrackItemProps = {
 export default function TrackItem({
   isPlaying,
   toggleIsPlaying,
-  isAudioLoaded,
+  isAudioReady,
   isSearchOpen,
   name,
   isMuted,
@@ -53,7 +53,7 @@ export default function TrackItem({
         <FlameButton
           onClick={toggleIsPlaying}
           isPlaying={isPlaying}
-          isDisabled={!isAudioLoaded}
+          isDisabled={!isAudioReady}
         />
         <div className="torch__handle">
           <img src={torchHandle} alt="Torch handle" />

@@ -1,73 +1,90 @@
 import { useEffect, useState } from "react";
 import useBoolean from "./useBoolean";
 
+const SERIALIZATION_DELIMITER = '----';
+
+function serializeSources(srcSets: string[][]) {
+  // TODO: validate that the extension is supported, fallback to subsequent ones
+  return srcSets.map(srcSet => srcSet[0]).join(SERIALIZATION_DELIMITER);
+}
+
+function deserializeSources(serializedSources: string) {
+  return serializedSources.split(SERIALIZATION_DELIMITER);
+}
 
 export default function useOneShotPlayer(srcSets: string[][], volume: number) {
-  // TODO: use multiple sounds
-  // TODO: validate that the extension is supported, fallback to subsequent ones
-  const src = srcSets[0][0];
   const [isPlaying, setIsPlaying, toggleIsPlaying] = useBoolean(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const [audioElements, setAudioElements] = useState<HTMLAudioElement[]>([]);
   const [playNow, setPlayNow] = useState(false);
+  // The point at which the user clicked play, or when the most recent one-shot
+  //  sound was fired (restarting the timer)
   const [timerStartTimestamp, setTimerStartTimestamp] = useState<number | null>(null);
 
+  // Serializing sources is necessary so that audio elements are only created
+  //  when the sources themselves change. Since useEffect's dependency array
+  //  uses shallow equality, and the source array itself changes every render,
+  //  we serialize it into a string to compare the values themselves.
+  const serializedSources = serializeSources(srcSets);
   useEffect(() => {
-    if (src === undefined) return;
-    const newAudio = new Audio(src);
-    newAudio.oncanplaythrough = () => {
-      setIsLoaded(true);
-    }
-    setAudio(newAudio);
+    const sources = deserializeSources(serializedSources);
+    if (sources.length === 0) return;
+    const newAudioElements = sources.map(source => new Audio(source));
+    newAudioElements.forEach(newAudio => {
+      const loadedHandler = () => {
+        // Once loaded, append it to list of loaded audio elements
+        setAudioElements(_audioElements => [..._audioElements, newAudio]);
+        newAudio.removeEventListener('canplaythrough', loadedHandler);
+      }
+      newAudio.addEventListener('canplaythrough', loadedHandler);
+    });
     return function cleanup() {
-      newAudio.remove();
+      newAudioElements.forEach(newAudio => newAudio.remove());
     }
-  }, [src]);
-
-  // If start is clicked,
-  //  or if audio loads and isPlaying is true,
-  //  or if sound was just played
-  //  set timeout
-
-  // If stop is clicked,
-  //  or on cleanup
-  //  clear timeout
+  }, [serializedSources]);
 
   useEffect(() => {
     // Handle start/stop button clicks
-    if (audio === null) return;
     if (isPlaying) {
       setTimerStartTimestamp(Date.now());
     } else {
       setTimerStartTimestamp(null);
     }
-  }, [audio, isPlaying]);
+  }, [isPlaying]);
 
+  // Start a timer whenever a new (non-null)
+  // timerStartTimestamp is set
   useEffect(() => {
-    // Start a timer whenever a new (non-null)
-    // timerStartTimestamp is set
     if (timerStartTimestamp === null) return;
     const timeout = setTimeout(() => {
       setPlayNow(true);
       // Restart timer
       setTimerStartTimestamp(Date.now());
+      // TODO: actual timer length should be randomly selected
+      // from a user-configurable range
     }, 2000);
     return () => clearTimeout(timeout);
   }, [timerStartTimestamp])
 
+  // Play a sound randomly selected from the sources
   useEffect(() => {
     if (!playNow) return;
     setPlayNow(false);
-    if (isLoaded) {
-      // Play sound
-      console.log('play sound', src);
+    if (audioElements.length > 0) {
+      const randomIndex = Math.floor(Math.random() * audioElements.length);
+      const audio = audioElements[randomIndex];
+      // Restart from the beginning, in case the sound
+      //  is currently playing
+      audio.currentTime = 0;
+      audio.play();
     }
-  }, [playNow, isLoaded, src]);
+  }, [playNow, audioElements]);
 
+  // Keep audio volume in sync
   useEffect(() => {
-    if (audio === null) return;
-    audio.volume = volume;
+    audioElements.forEach(audio => {
+      audio.volume = volume;
+    });
   });
 
-  return { isPlaying, setIsPlaying, toggleIsPlaying, isLoaded };
+  return { isPlaying, setIsPlaying, toggleIsPlaying };
 }

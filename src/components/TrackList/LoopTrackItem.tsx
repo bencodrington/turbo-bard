@@ -54,7 +54,7 @@ export default function LoopTrackItem({
   }
   return (
     <TrackItem
-      isAudioLoaded={isAudioLoaded}
+      isAudioReady={isAudioLoaded}
       isMuted={isMuted}
       isPlaying={isPlaying}
       isSearchOpen={isSearchOpen}
