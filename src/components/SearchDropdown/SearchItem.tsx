@@ -13,7 +13,7 @@ type SearchItemProps = {
 const CLASS_NAMES = {
   [ObjectType.LOOP]: 'loop',
   [ObjectType.ONESHOT]: 'one-shot',
-  [ObjectType.SOUNDSCAPE]: ''
+  [ObjectType.SOUNDSCAPE]: 'pack'
 };
 
 export default function SearchItem({ data, onClick }: SearchItemProps) {

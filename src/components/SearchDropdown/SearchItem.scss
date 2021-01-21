@@ -3,7 +3,6 @@
   margin-bottom: .5rem;
 
   h4 {
-    color: var(--canary);
     display: inline-block;
 
     &.loop {
@@ -12,6 +11,12 @@
 
     &.one-shot {
       color: var(--one-shot);
+    }
+
+    &.pack {
+      background: var(--track);
+      background-clip: text;
+      color: transparent;
     }
   }
 }
