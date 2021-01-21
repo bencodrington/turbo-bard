@@ -7,5 +7,9 @@ export type SearchResult = UntypedSearchResult & {
 export type UntypedSearchResult = {
   id: string,
   name: string,
-  tags: string[]
+  tags: string[],
+  packSummary?: {
+    loopCount: number,
+    oneShotCount: number
+  }
 };

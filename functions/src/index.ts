@@ -4,77 +4,69 @@ import * as admin from 'firebase-admin';
 
 import { isOneShotData, TrackData } from '../../src/models/DatabaseTypes';
 import { ObjectType } from '../../src/models/ObjectTypes';
+import { UntypedSearchResult } from '../../src/models/SearchResult';
 
 const cors = require('cors');
 
 admin.initializeApp();
 const db = admin.firestore();
-const soundscapesRef = db.collection('soundscapes');
+const packsRef = db.collection('packs');
 const tracksRef = db.collection('tracks');
 
 const MAX_RESULTS = 10;
 
-export const searchSoundscapes = functions.https.onRequest(async (request, response) => {
-  return cors()(request, response, async () => {
-
-    const { query } = request;
-    const searchText = query.searchText;
-    functions.logger.info('searchSoundscapes');
-    if (!searchText || searchText.length === 0) {
-      functions.logger.info('Empty searchText, returning.');
-      response.send([]);
-      return;
-    }
-    functions.logger.info(searchText, { structuredData: true });
-    const results = await soundscapesRef.where('tags', 'array-contains', searchText).limit(MAX_RESULTS).get();
-    if (results.empty) {
-      functions.logger.info('No soundscapes found for query "' + searchText + '".');
-      response.send([]);
-      return;
-    }
-    functions.logger.info(`Query "${searchText}" returned ${results.docs.length} results.`);
-    const soundscapes = results.docs.map(doc => {
-      const { name, tags } = doc.data();
-      return {
-        id: doc.id,
-        name,
-        tags
-      };
-    });
-    response.send(soundscapes);
+async function _search(searchText: string): Promise<UntypedSearchResult[]> {
+  // Split search text into words
+  const words = searchText.split(' ');
+  // Search packs
+  const packResults = await packsRef.where('tags', 'array-contains-any', words).limit(MAX_RESULTS).get();
+  functions.logger.info(`Query "${searchText}" returned ${packResults.docs.length} pack results.`);
+  const packs = packResults.docs.map(doc => {
+    const { name, tags } = doc.data();
+    // TODO: extract `tracks` and use it to create track summary
+    return {
+      id: doc.id,
+      name,
+      tags
+    };
   });
-});
+  // Search tracks
+  const trackResults = await tracksRef.where('tags', 'array-contains-any', words).limit(MAX_RESULTS).get();
+  functions.logger.info(`Query "${searchText}" returned ${trackResults.docs.length} track results.`);
+  const tracks = trackResults.docs.map(doc => {
+    const { name, tags, type } = doc.data();
+    return {
+      id: doc.id,
+      name,
+      tags,
+      type
+    };
+  });
+  const results = [...packs, ...tracks];
+  if (results.length === 0) {
+    functions.logger.info('No results found for query "' + searchText + '".');
+  }
+  return results;
+}
 
-export const searchTracks = functions.https.onRequest(async (request, response) => {
+export const search = functions.https.onRequest(async (request, response) => {
   return cors()(request, response, async () => {
-
     const { query } = request;
     const searchText = query.searchText;
-    functions.logger.info('searchTracks');
+    functions.logger.info('search');
     if (!searchText || searchText.length === 0) {
       functions.logger.info('Empty searchText, returning.');
       response.send([]);
       return;
     }
-    functions.logger.info(searchText, { structuredData: true });
-    const results = await tracksRef.where('tags', 'array-contains', searchText).limit(MAX_RESULTS).get();
-    if (results.empty) {
-      functions.logger.info('No tracks found for query "' + searchText + '".');
+    if (typeof searchText !== 'string') {
+      functions.logger.info('Unsupported searchtext type "', typeof searchText, '", returning.');
       response.send([]);
       return;
     }
-    functions.logger.info(`Query "${searchText}" returned ${results.docs.length} results.`);
-    const tracks = results.docs.map(doc => {
-      const { name, tags, samples } = doc.data();
-      const trackType = samples === undefined ? 'LOOP' : 'ONESHOT';
-      return {
-        id: doc.id,
-        name,
-        tags,
-        trackType
-      };
-    });
-    response.send(tracks);
+    functions.logger.info(searchText, { structuredData: true });
+    const results = await _search(searchText);
+    response.send(results);
   });
 });
 
