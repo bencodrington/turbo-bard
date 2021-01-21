@@ -49,11 +49,7 @@ export async function fetchSoundscapeResults(searchText: string) {
 export async function fetchTrackResults(searchText: string) {
   const response = await fetch(`https://us-central1-turbo-bard.cloudfunctions.net/search?searchText=${searchText}`);
   const results = await response.json();
-  const searchResults: SearchResult[] = results.map((track: SearchResult) => {
-    const type = track.type === ObjectType.ONESHOT ? ObjectType.ONESHOT : ObjectType.LOOP;
-    return toSearchResult(track, type);
-  });
-  return searchResults;
+  return results as SearchResult[];
 }
 
 export async function fetchUnloadedTracksForSoundscape(soundscapeId: string) {
