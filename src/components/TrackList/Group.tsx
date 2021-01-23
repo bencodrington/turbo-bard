@@ -85,6 +85,7 @@ export default function Group({
           onClick={() => { console.log('Show options for ' + group.name) }}
           icon={MoreIcon}
           isRound={true}
+          isDisabled={isSearchModeActive}
         />
         <h3 className="name">{group.name}</h3>
       </div>

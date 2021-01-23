@@ -15,9 +15,12 @@ export default function Tag({ text, onClick }: TagProps) {
     }
   }
 
+  const className = 'tag-container' +
+    (onClick !== undefined ? ' clickable' : '');
+
   return (
     <span
-      className="tag-container"
+      className={className}
       onClick={handleClick}
     >
       {onClick !== undefined ? '+ ' : ''}
