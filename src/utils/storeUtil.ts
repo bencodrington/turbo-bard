@@ -1,5 +1,5 @@
 import { SearchResult } from "../models/SearchResult";
-import { Soundscape } from "../models/Soundscape";
+import { Group } from "../models/Group";
 
 const DEFAULT_VOLUME = 0.7;
 
@@ -15,7 +15,7 @@ export function getNextIndex(indexedItems: { index: number }[]) {
 
 export function addSearchResultToSoundscape(
   searchResult: SearchResult,
-  soundscape: Soundscape
+  soundscape: Group
 ) {
   const { id, name, type, tags, tracks } = searchResult;
   if (tracks !== undefined) {
@@ -42,19 +42,19 @@ export function addSearchResultToSoundscape(
   });
 }
 
-export function getSoundscapeByIndex(
-  soundscapeIndex: number,
-  soundscapes: Soundscape[]
+export function getGroupByIndex(
+  groupIndex: number,
+  groups: Group[]
 ) {
-  return soundscapes.find(soundscape => soundscape.index === soundscapeIndex);
+  return groups.find(group => group.index === groupIndex);
 }
 
 export function getTrackByIndex(
   trackIndex: number,
-  soundscapeIndex: number,
-  soundscapes: Soundscape[]
+  groupIndex: number,
+  groups: Group[]
 ) {
-  return getSoundscapeByIndex(soundscapeIndex, soundscapes)
+  return getGroupByIndex(groupIndex, groups)
     ?.tracks
     .find(track => track.index === trackIndex);
 }

@@ -27,7 +27,7 @@ async function _search(searchText: string): Promise<SearchResult[]> {
       id: doc.id,
       name,
       tags,
-      type: ObjectType.SOUNDSCAPE,
+      type: ObjectType.PACK,
       tracks
     };
   });

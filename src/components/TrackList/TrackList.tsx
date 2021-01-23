@@ -6,7 +6,7 @@ import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
 import useSearchResults from "../SearchDropdown/useSearchResults";
 
 import "./TrackList.scss";
-import Group from "./Group";
+import Group from "./TrackListGroup";
 
 export const NEW_GROUP = 'NEW_GROUP';
 

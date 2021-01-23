@@ -12,30 +12,30 @@ import TrackItem from "./TrackItem";
 
 type OneShotTrackItemProps = {
   oneShot: OneShot | UnloadedTrack,
-  soundscapeIndex: number,
+  groupIndex: number,
   isVisible: boolean,
   isSearchOpen: boolean,
   onTagClick: (tag: string) => void,
-  soundscapeVolume: number
+  groupVolume: number
 };
 
 export default function OneShotTrackItem({
-  soundscapeIndex,
+  groupIndex,
   oneShot,
   isVisible,
   isSearchOpen,
   onTagClick,
-  soundscapeVolume
+  groupVolume
 }: OneShotTrackItemProps) {
   const dispatch = useDispatch();
   const sourceSets = isUnloaded(oneShot) ? [] : oneShot.samples.map(createSourceSet);
   const onVolumeChanged = useCallback((newVolume: number) => {
     dispatch(setTrackVolume({
-      soundscapeIndex,
+      groupIndex,
       trackIndex: oneShot.index,
       volume: newVolume
     }));
-  }, [dispatch, soundscapeIndex, oneShot.index]);
+  }, [dispatch, groupIndex, oneShot.index]);
   const {
     volume,
     setVolume,
@@ -49,8 +49,8 @@ export default function OneShotTrackItem({
   const {
     isPlaying,
     toggleIsPlaying
-  } = useOneShotPlayer(sourceSets, volume * soundscapeVolume);
-  useTrackData(id, index, soundscapeIndex, !isUnloaded(oneShot));
+  } = useOneShotPlayer(sourceSets, volume * groupVolume);
+  useTrackData(id, index, groupIndex, !isUnloaded(oneShot));
 
   if (!isVisible) {
     return null;

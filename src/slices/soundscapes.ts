@@ -1,35 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SearchResult } from "../models/SearchResult";
-import { Soundscape } from "../models/Soundscape";
+import { Group } from "../models/Group";
 import { isLoop, isOneShot } from "../models/Track";
 import { ERROR_TYPE, TrackData, TrackDataError } from "../models/DatabaseTypes";
 import {
   addSearchResultToSoundscape,
   getNextIndex,
-  getSoundscapeByIndex,
+  getGroupByIndex,
   getTrackByIndex
 } from "../utils/storeUtil";
 
 const soundscapesSlice = createSlice({
   name: 'soundscapes',
-  initialState: [] as Soundscape[],
+  initialState: [] as Group[],
   reducers: {
     newSoundscape(state, { payload }: { payload: string }) {
       state.push({
         name: payload,
         index: getNextIndex(state),
         tracks: [],
-        isOpen: true,
-        volume: 0.7
-      });
-    },
-    cloneSoundscape(state, { payload }: PayloadAction<{ name: string, sourceId: string }>) {
-      const { name, sourceId } = payload;
-      state.push({
-        name,
-        index: getNextIndex(state),
-        tracks: [],
-        sourceId,
         isOpen: true,
         volume: 0.7
       });
@@ -54,14 +43,14 @@ const soundscapesSlice = createSlice({
         };
         state.push(group);
       } else {
-        group = getSoundscapeByIndex(groupIndex, state);
+        group = getGroupByIndex(groupIndex, state);
       }
       if (group === undefined) return;
       addSearchResultToSoundscape(searchResult, group);
     },
     removeTrack(state, { payload }: PayloadAction<{ soundscapeIndex: number, trackIndex: number }>) {
       const { soundscapeIndex, trackIndex } = payload;
-      const soundscape = getSoundscapeByIndex(soundscapeIndex, state);
+      const soundscape = getGroupByIndex(soundscapeIndex, state);
       if (soundscape === undefined) return;
       soundscape.tracks = soundscape.tracks.filter(track => track.index !== trackIndex);
     },
@@ -87,12 +76,12 @@ const soundscapesSlice = createSlice({
       });
     },
     setTrackVolume(state, { payload }: PayloadAction<{
-      soundscapeIndex: number,
+      groupIndex: number,
       trackIndex: number,
       volume: number
     }>) {
-      const { soundscapeIndex, trackIndex, volume } = payload;
-      const track = getTrackByIndex(trackIndex, soundscapeIndex, state);
+      const { groupIndex, trackIndex, volume } = payload;
+      const track = getTrackByIndex(trackIndex, groupIndex, state);
       if (track === undefined) return;
       track.volume = volume;
     },
@@ -105,7 +94,7 @@ const soundscapesSlice = createSlice({
       isPlaying: boolean
     }>) {
       const { soundscapeIndex, isPlaying } = payload;
-      const soundscape = getSoundscapeByIndex(soundscapeIndex, state);
+      const soundscape = getGroupByIndex(soundscapeIndex, state);
       if (soundscape === undefined) return;
       soundscape.tracks.map(track => {
         if (isLoop(track) || isOneShot(track)) {
@@ -119,7 +108,7 @@ const soundscapesSlice = createSlice({
       volume: number
     }>) {
       const { soundscapeIndex, volume } = payload;
-      const soundscape = getSoundscapeByIndex(soundscapeIndex, state);
+      const soundscape = getGroupByIndex(soundscapeIndex, state);
       if (soundscape === undefined) return;
       soundscape.volume = volume;
     }
@@ -128,9 +117,7 @@ const soundscapesSlice = createSlice({
 
 export const {
   newSoundscape,
-  cloneSoundscape,
   closeAllSoundscapes,
-  // setUnloadedTracks, // TODO: remove
   removeTrack,
   addSearchResultToGroup,
   setTrackData,

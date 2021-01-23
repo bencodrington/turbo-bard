@@ -2,21 +2,21 @@ import React from "react";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 import MoreIcon from "../../assets/icon-more.svg";
 import AddIcon from "../../assets/icon-add.svg";
-import { Soundscape } from "../../models/Soundscape";
+import { Group } from "../../models/Group";
 
-import "./Group.scss";
+import "./TrackListGroup.scss";
 import { isLoop, isOneShot, isUnloaded, isUnloadedLoop, Track } from "../../models/Track";
 import LoopTrackItem from "./LoopTrackItem";
 import OneShotTrackItem from "./OneShotTrackItem";
 import UnloadedTrackItem from "./UnloadedTrackItem";
 import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
 import { SearchResult } from "../../models/SearchResult";
-import { NEW_GROUP } from "../TrackList/TrackList";
+import { NEW_GROUP } from "./TrackList";
 
 type GroupProps = {
   searchTarget: number | null | typeof NEW_GROUP,
   setSearchTarget: (searchTarget: number | null) => void,
-  group: Soundscape,
+  group: Group,
   results: SearchResult[],
   isFetchingResults: boolean,
   searchText: string,
@@ -24,41 +24,41 @@ type GroupProps = {
   appendSearchText: (searchText: string) => void
 };
 
-function constructKey(track: Track, soundscape: Soundscape) {
-  return soundscape.index + '-' + track.index;
+function constructKey(track: Track, group: Group) {
+  return group.index + '-' + track.index;
 }
 
 function listItemFromTrack(
   track: Track,
-  soundscape: Soundscape,
+  group: Group,
   isSearchOpen: boolean,
   appendSearchText: (text: string) => void
 ) {
   if (isLoop(track) || isUnloadedLoop(track)) {
     return <LoopTrackItem
-      key={constructKey(track, soundscape)}
-      soundscapeIndex={soundscape.index}
+      key={constructKey(track, group)}
+      groupIndex={group.index}
       loop={track}
       isVisible={true}
       isSearchOpen={isSearchOpen}
       onTagClick={appendSearchText}
-      soundscapeVolume={soundscape.volume}
+      groupVolume={group.volume}
     />
   } else if (isOneShot(track)) {
     return <OneShotTrackItem
-      key={constructKey(track, soundscape)}
-      soundscapeIndex={soundscape.index}
+      key={constructKey(track, group)}
+      groupIndex={group.index}
       oneShot={track}
       isVisible={true}
       isSearchOpen={isSearchOpen}
       onTagClick={appendSearchText}
-      soundscapeVolume={soundscape.volume}
+      groupVolume={group.volume}
     />
   } else if (isUnloaded(track)) {
     return <UnloadedTrackItem
-      key={constructKey(track, soundscape)}
+      key={constructKey(track, group)}
       unloadedTrack={track}
-      soundscapeIndex={soundscape.index}
+      groupIndex={group.index}
       isVisible={true}
     />
   } else {
@@ -66,7 +66,7 @@ function listItemFromTrack(
   }
 }
 
-export default function Group({
+export default function TrackListGroup({
   searchTarget,
   setSearchTarget,
   group,

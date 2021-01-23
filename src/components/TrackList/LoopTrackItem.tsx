@@ -12,30 +12,30 @@ import { ObjectType } from "../../models/ObjectTypes";
 
 type LoopTrackItemProps = {
   loop: Loop | UnloadedTrack,
-  soundscapeIndex: number,
+  groupIndex: number,
   isVisible: boolean,
   isSearchOpen: boolean,
   onTagClick: (tag: string) => void,
-  soundscapeVolume: number
+  groupVolume: number
 };
 
 export default function LoopTrackItem({
-  soundscapeIndex,
+  groupIndex,
   loop,
   isVisible,
   isSearchOpen,
   onTagClick,
-  soundscapeVolume
+  groupVolume
 }: LoopTrackItemProps) {
   const dispatch = useDispatch();
   const sourceSet = isUnloaded(loop) ? [] : createSourceSet(loop.fileName);
   const onVolumeChanged = useCallback((newVolume: number) => {
     dispatch(setTrackVolume({
-      soundscapeIndex,
+      groupIndex,
       trackIndex: loop.index,
       volume: newVolume
     }));
-  }, [dispatch, soundscapeIndex, loop.index]);
+  }, [dispatch, groupIndex, loop.index]);
   const {
     volume,
     setVolume,
@@ -46,8 +46,8 @@ export default function LoopTrackItem({
     onVolumeChanged
   });
   const { name, id, index, tags } = loop;
-  const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet, volume * soundscapeVolume);
-  useTrackData(id, index, soundscapeIndex, !isUnloaded(loop));
+  const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet, volume * groupVolume);
+  useTrackData(id, index, groupIndex, !isUnloaded(loop));
 
   if (!isVisible) {
     return null;
