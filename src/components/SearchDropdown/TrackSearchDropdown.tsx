@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { SearchResult } from "../../models/SearchResult";
-import { addSearchResult } from "../../slices/soundscapes";
+import { addSearchResult } from "../../slices/groups";
 import SearchField from "../../widgets/SearchField";
 import SearchDropdown from "./SearchDropdown";
 import SearchItem from "./SearchItem";

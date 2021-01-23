@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchTrackDataById } from "../services/database";
 import { ERROR_TYPE, TrackData, TrackDataError } from "../models/DatabaseTypes";
-import { setTrackData } from "../slices/soundscapes";
+import { setTrackData } from "../slices/groups";
 
 export default function useTrackData(id: string, index: number, groupIndex: number, isLoaded: boolean) {
   const [isLoadingData, setIsLoadingData] = useState(false);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { fetchSearchResults } from "../../services/database";
-import { useSoundscapes } from "../../slices";
+import { useGroups } from "../../slices";
 import AddSoundsButton from "../../widgets/buttons/AddSoundsButton";
 import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
 import useSearchResults from "../SearchDropdown/useSearchResults";
@@ -11,7 +11,7 @@ import Group from "./TrackListGroup";
 export const NEW_GROUP = 'NEW_GROUP';
 
 export default function TrackList() {
-  const groups = useSoundscapes();
+  const groups = useGroups();
   const [searchTarget, setSearchTarget] = useState<number | null | typeof NEW_GROUP>(null);
   const {
     results,

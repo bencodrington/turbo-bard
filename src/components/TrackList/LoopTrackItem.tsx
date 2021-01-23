@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { isUnloaded, Loop, UnloadedTrack } from "../../models/Track";
-import { setTrackVolume } from "../../slices/soundscapes";
+import { setTrackVolume } from "../../slices/groups";
 import useLoopPlayer from "../../hooks/useLoopPlayer";
 import useTrackData from "../../hooks/useTrackData";
 import { useVolume } from "../../hooks/useVolume";

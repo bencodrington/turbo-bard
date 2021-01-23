@@ -5,7 +5,7 @@ import useTrackData from "../../hooks/useTrackData";
 import { useVolume } from "../../hooks/useVolume";
 import { ObjectType } from "../../models/ObjectTypes";
 import { isUnloaded, OneShot, UnloadedTrack } from "../../models/Track";
-import { setTrackVolume } from "../../slices/soundscapes";
+import { setTrackVolume } from "../../slices/groups";
 import { createSourceSet } from "../../utils/audioFileUtil";
 
 import TrackItem from "./TrackItem";
