@@ -1,11 +1,20 @@
 .group-container {
   display: flex;
   flex-direction: column;
-  margin-top: 16px;
+  border: 2px solid var(--turbo-blue);
+  border-radius: 3px;
+  padding: 36px 8px 8px 8px;
+  position: relative;
+  margin-top: calc(28px + 4px);
 
   .header {
     display: flex;
     align-items: center;
+    position: absolute;
+    top: -28px;
+    background: var(--background);
+    padding: 0 4px;
+    left: 4px;
 
     .name {
       flex: 1;
@@ -17,31 +26,8 @@
     }
   }
 
-  .group__body {
-    margin: 4px 0;
-    display: flex;
-    align-items: stretch;
-
-    .collapse-bar {
-      width: 56px;
-      flex-shrink: 0;
-      position: relative;
-
-      &::after {
-        content: "";
-        position: absolute;
-        left: calc(50% - 2px);
-        width: 4px;
-        height: 100%;
-        background: var(--canary);
-        border-radius: 4px;
-      }
-    }
-
-    .tracks {
-      flex: 1;
-      min-width: 0;
-    }
+  .tracks {
+    margin: 4px 0 8px;
   }
 
   .add-sounds-button {

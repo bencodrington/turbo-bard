@@ -88,13 +88,10 @@ export default function Group({
         />
         <h3 className="name">{group.name}</h3>
       </div>
-      <div className="group__body">
-        <div className="collapse-bar" />
-        <div className="tracks">
-          {group.tracks.map(track =>
-            listItemFromTrack(track, group, isSearchModeActive, appendSearchText)
-          )}
-        </div>
+      <div className="tracks">
+        {group.tracks.map(track =>
+          listItemFromTrack(track, group, isSearchModeActive, appendSearchText)
+        )}
       </div>
       {isThisGroupSearching
         ? <TrackSearchDropdown
