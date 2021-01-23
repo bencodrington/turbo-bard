@@ -4,19 +4,6 @@
 
   h4 {
     display: inline-block;
-
-    &.loop {
-      color: var(--loop);
-    }
-
-    &.one-shot {
-      color: var(--one-shot);
-    }
-
-    &.pack {
-      background: var(--track);
-      background-clip: text;
-      color: transparent;
-    }
+    color: var(--canary);
   }
 }
