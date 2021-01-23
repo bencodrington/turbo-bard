@@ -9,7 +9,8 @@ type DefaultButtonProps = {
   onClick: () => void,
   className?: string,
   isDisabled?: boolean,
-  isRound?: boolean
+  isRound?: boolean,
+  isFullWidth?: boolean
 };
 
 export default function DefaultButton({
@@ -20,6 +21,7 @@ export default function DefaultButton({
   className,
   isDisabled = false,
   isRound = false,
+  isFullWidth = false
 }: DefaultButtonProps) {
 
   if (text === undefined && icon === undefined) return null;
@@ -28,6 +30,7 @@ export default function DefaultButton({
 
   const imgClass = icon !== undefined ? 'icon-only ' : '';
   const shapeClass = isRound ? 'round ' : '';
+  const fullWidthClass = isFullWidth ? 'full-width ' : '';
 
   return (
     <button
@@ -35,6 +38,7 @@ export default function DefaultButton({
         'default-button-container ' +
         imgClass +
         shapeClass +
+        fullWidthClass +
         className ?? ''
       }
       onClick={onClick}

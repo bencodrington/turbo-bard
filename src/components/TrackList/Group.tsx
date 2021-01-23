@@ -106,7 +106,7 @@ export default function Group({
           className='add-sounds-button'
           onClick={() => setSearchTarget(group.index)}
           icon={AddIcon}
-          isRound={true}
+          isFullWidth={true}
         />
       }
     </div>

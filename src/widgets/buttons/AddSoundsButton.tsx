@@ -16,6 +16,7 @@ export default function AddSoundsButton({ onClick
       onClick={onClick}
       icon={addIcon}
       text='Add sounds'
+      isFullWidth={true}
     />
   );
 }

@@ -3,7 +3,7 @@
   flex-direction: column;
   border: 2px solid var(--turbo-blue);
   border-radius: 3px;
-  padding: 36px 8px 8px 8px;
+  padding: 36px 4px 4px 4px;
   position: relative;
   margin-top: calc(28px + 4px);
 
@@ -14,20 +14,18 @@
     top: -28px;
     background: var(--background);
     padding: 0 4px;
-    left: 4px;
+    left: 2px;
 
     .name {
       flex: 1;
       margin-left: 4px;
-      color: var(--charcoal);
-      font-size: 1.125rem;
-      font-weight: 600;
+      font-size: 1rem;
       letter-spacing: .05rem;
     }
   }
 
   .tracks {
-    margin: 4px 0 8px;
+    margin: 4px 0 16px;
   }
 
   .add-sounds-button {
