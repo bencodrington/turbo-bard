@@ -101,7 +101,6 @@ export default function Group({
           closeSearchDropdown={() => { setSearchTarget(null) }}
           searchText={searchText}
           setSearchText={setSearchText}
-          appendSearchText={appendSearchText}
           isFetchingResults={isFetchingResults}
           results={results}
           searchTarget={searchTarget}

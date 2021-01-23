@@ -63,7 +63,7 @@ const soundscapesSlice = createSlice({
       if (groupIndex === undefined) {
         // Create new group
         group = {
-          name: 'GROUP TITLE',
+          name: 'UNTITLED GROUP',
           index: getNextIndex(state),
           tracks: [],
           isOpen: true,
