@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SearchResult } from "../models/SearchResult";
 import { Soundscape } from "../models/Soundscape";
 import { isLoop, isOneShot } from "../models/Track";
-import { SoundscapeChild } from "../services/database";
 import { ERROR_TYPE, TrackData, TrackDataError } from "../models/DatabaseTypes";
 import {
   addSearchResultToSoundscape,
@@ -37,22 +36,6 @@ const soundscapesSlice = createSlice({
     },
     closeAllSoundscapes(state) {
       state.map(soundscape => Object.assign(soundscape, { isOpen: false }));
-    },
-    setUnloadedTracks(state, { payload }: PayloadAction<{ soundscapeIndex: number, tracks: SoundscapeChild[] }>) {
-      const { soundscapeIndex, tracks } = payload;
-      const soundscape = getSoundscapeByIndex(soundscapeIndex, state);
-      if (soundscape === undefined) return;
-      let index = getNextIndex(soundscape.tracks);
-      // Give each track an index to uniquely identify it
-      soundscape.tracks = tracks.map(track => {
-        const unloadedTrack = {
-          id: track.id,
-          volume: track.volume,
-          index
-        };
-        index++;
-        return unloadedTrack;
-      });
     },
     addSearchResultToGroup(
       state,
@@ -147,7 +130,7 @@ export const {
   newSoundscape,
   cloneSoundscape,
   closeAllSoundscapes,
-  setUnloadedTracks,
+  // setUnloadedTracks, // TODO: remove
   removeTrack,
   addSearchResultToGroup,
   setTrackData,

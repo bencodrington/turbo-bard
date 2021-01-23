@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { fetchTrackResults } from "../../services/database";
+import { fetchSearchResults } from "../../services/database";
 import { useSoundscapes } from "../../slices";
 import AddSoundsButton from "../../widgets/buttons/AddSoundsButton";
 import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
@@ -19,7 +19,7 @@ export default function TrackList() {
     searchText,
     setSearchText,
     appendSearchText
-  } = useSearchResults(fetchTrackResults);
+  } = useSearchResults(fetchSearchResults);
 
   return (
     <div className="track-list-container">

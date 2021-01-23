@@ -4,7 +4,7 @@ import * as admin from 'firebase-admin';
 
 import { isOneShotData, TrackData } from '../../src/models/DatabaseTypes';
 import { ObjectType } from '../../src/models/ObjectTypes';
-import { UntypedSearchResult } from '../../src/models/SearchResult';
+import { SearchResult } from '../../src/models/SearchResult';
 
 const cors = require('cors');
 
@@ -15,20 +15,20 @@ const tracksRef = db.collection('tracks');
 
 const MAX_RESULTS = 10;
 
-async function _search(searchText: string): Promise<UntypedSearchResult[]> {
+async function _search(searchText: string): Promise<SearchResult[]> {
   // Split search text into words
   const words = searchText.split(' ');
   // Search packs
   const packResults = await packsRef.where('tags', 'array-contains-any', words).limit(MAX_RESULTS).get();
   functions.logger.info(`Query "${searchText}" returned ${packResults.docs.length} pack results.`);
   const packs = packResults.docs.map(doc => {
-    const { name, tags } = doc.data();
-    // TODO: extract `tracks` and use it to create track summary
+    const { name, tags, tracks } = doc.data();
     return {
       id: doc.id,
       name,
       tags,
-      type: ObjectType.SOUNDSCAPE
+      type: ObjectType.SOUNDSCAPE,
+      tracks
     };
   });
   // Search tracks

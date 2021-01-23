@@ -1,6 +1,8 @@
 import { SearchResult } from "../models/SearchResult";
 import { Soundscape } from "../models/Soundscape";
 
+const DEFAULT_VOLUME = 0.7;
+
 export function getNextIndex(indexedItems: { index: number }[]) {
   let maxIndex = -1;
   indexedItems.forEach(indexedItems => {
@@ -15,14 +17,28 @@ export function addSearchResultToSoundscape(
   searchResult: SearchResult,
   soundscape: Soundscape
 ) {
-  const { id, name, type, tags } = searchResult;
+  const { id, name, type, tags, tracks } = searchResult;
+  if (tracks !== undefined) {
+    // Result is a pack
+    tracks.forEach(track => {
+      const { id, volume, oneShotConfig } = track;
+      console.log(oneShotConfig); // TODO: use oneshotconfig
+      soundscape.tracks.push({
+        id,
+        volume,
+        index: getNextIndex(soundscape.tracks)
+      });
+    })
+    return;
+  }
+  // Result is an individual track
   soundscape.tracks.push({
     id,
     index: getNextIndex(soundscape.tracks),
     name,
     type,
     tags,
-    volume: 0.7 // TODO: extract constant
+    volume: DEFAULT_VOLUME
   });
 }
 

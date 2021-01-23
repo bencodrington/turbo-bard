@@ -1,15 +1,16 @@
 import { ObjectType } from "../models/ObjectTypes";
 
-export type SearchResult = UntypedSearchResult & {
-  type: ObjectType
-};
-
-export type UntypedSearchResult = {
+export type SearchResult = {
   id: string,
   name: string,
   tags: string[],
-  packSummary?: {
-    loopCount: number,
-    oneShotCount: number
-  }
+  type: ObjectType,
+  tracks?: {
+    id: string,
+    volume: number,
+    oneShotConfig?: {
+      minSecondsBetween: number,
+      maxSecondsBetween: number
+    }
+  }[]
 };
