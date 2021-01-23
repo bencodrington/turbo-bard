@@ -7,7 +7,8 @@ import {
   addSearchResultToGroup,
   getNextIndex,
   getGroupByIndex,
-  getTrackByIndex
+  getTrackByIndex,
+  DEFAULT_VOLUME
 } from "../utils/storeUtil";
 
 const groupsSlice = createSlice({
@@ -20,7 +21,7 @@ const groupsSlice = createSlice({
         index: getNextIndex(state),
         tracks: [],
         isOpen: true,
-        volume: 0.7
+        volume: DEFAULT_VOLUME
       });
     },
     closeAllGroups(state) {
@@ -40,7 +41,7 @@ const groupsSlice = createSlice({
           index: getNextIndex(state),
           tracks: [],
           isOpen: true,
-          volume: 0.7
+          volume: DEFAULT_VOLUME
         };
         state.push(group);
       } else {

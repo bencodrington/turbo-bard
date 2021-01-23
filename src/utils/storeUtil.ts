@@ -1,7 +1,7 @@
 import { SearchResult } from "../models/SearchResult";
 import { Group } from "../models/Group";
 
-const DEFAULT_VOLUME = 0.7;
+export const DEFAULT_VOLUME = 0.7;
 
 export function getNextIndex(indexedItems: { index: number }[]) {
   let maxIndex = -1;
