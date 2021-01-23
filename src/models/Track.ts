@@ -35,7 +35,7 @@ export type UnloadedTrack = {
   index: number,
   volume: number,
   // These optional properties are present when loading from a track search result,
-  //  but not when loading from a predefined or saved soundscape
+  //  but not when loading from a pack
   name?: string,
   type?: ObjectType | typeof ERROR_TYPE,
   tags?: string[]

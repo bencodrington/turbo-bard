@@ -41,7 +41,7 @@ export default function TrackItem({
 
   // TODO: expanded loop options
   // function remove() {
-  //   dispatch(removeTrack({ soundscapeIndex, trackIndex: index }))
+  //   dispatch(removeTrack({ groupIndex, trackIndex: index }))
   // }
 
   const className = 'track-item-container' +

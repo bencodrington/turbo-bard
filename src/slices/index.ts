@@ -1,11 +1,11 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
-import soundscapesReducer from "./soundscapes";
+import groupsReducer from "./soundscapes";
 
 export const rootReducer = combineReducers({
-  soundscapes: soundscapesReducer
+  groups: groupsReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-export const useSoundscapes = () => useSelector((state: RootState) => state.soundscapes);
+export const useSoundscapes = () => useSelector((state: RootState) => state.groups);

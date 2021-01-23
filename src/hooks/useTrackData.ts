@@ -4,7 +4,7 @@ import { fetchTrackDataById } from "../services/database";
 import { ERROR_TYPE, TrackData, TrackDataError } from "../models/DatabaseTypes";
 import { setTrackData } from "../slices/soundscapes";
 
-export default function useTrackData(id: string, index: number, soundscapeIndex: number, isLoaded: boolean) {
+export default function useTrackData(id: string, index: number, groupIndex: number, isLoaded: boolean) {
   const [isLoadingData, setIsLoadingData] = useState(false);
   const [results, setResults] = useState<TrackData | TrackDataError | null>(null);
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ export default function useTrackData(id: string, index: number, soundscapeIndex:
   useEffect(() => {
     if (results !== null && !isLoaded && !isLoadingData) {
       dispatch(setTrackData({
-        soundscapeIndex,
+        groupIndex,
         trackIndex: index,
         trackData: results
       }));

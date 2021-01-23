@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { SearchResult } from "../../models/SearchResult";
-import { addSearchResultToGroup } from "../../slices/soundscapes";
+import { addSearchResult } from "../../slices/soundscapes";
 import SearchField from "../../widgets/SearchField";
 import SearchDropdown from "./SearchDropdown";
 import SearchItem from "./SearchItem";
@@ -40,7 +40,7 @@ export default function TrackSearchDropdown({
     if (typeof searchTarget === 'number') {
       groupIndex = searchTarget;
     }
-    dispatch(addSearchResultToGroup({ searchResult, groupIndex }));
+    dispatch(addSearchResult({ searchResult, groupIndex }));
   }
 
   const resultElements = results.map(result => (

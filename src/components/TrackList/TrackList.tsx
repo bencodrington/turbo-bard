@@ -11,7 +11,7 @@ import Group from "./TrackListGroup";
 export const NEW_GROUP = 'NEW_GROUP';
 
 export default function TrackList() {
-  const soundscapes = useSoundscapes();
+  const groups = useSoundscapes();
   const [searchTarget, setSearchTarget] = useState<number | null | typeof NEW_GROUP>(null);
   const {
     results,
@@ -36,7 +36,7 @@ export default function TrackList() {
           : <AddSoundsButton onClick={() => setSearchTarget(NEW_GROUP)} />
       }
       {
-        soundscapes.map(group =>
+        groups.map(group =>
           <Group
             key={group.index}
             group={group}
