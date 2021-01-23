@@ -1,6 +1,6 @@
 .track-item-container {
   display: flex;
-  margin-top: 16px;
+  margin-top: 24px;
 
   .torch {
     width: 56px;
@@ -28,12 +28,6 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-    }
-  }
-
-  &--one-shot {
-    .track__name h4 {
-      color: var(--one-shot);
     }
   }
 
