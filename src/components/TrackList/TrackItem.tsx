@@ -49,16 +49,20 @@ export default function TrackItem({
 
   return (
     <div className={className}>
-      <div className="torch">
-        <FlameButton
-          onClick={toggleIsPlaying}
-          isPlaying={isPlaying}
-          isDisabled={!isAudioReady}
-        />
-        <div className="torch__handle">
-          <img src={torchHandle} alt="Torch handle" />
-        </div>
-      </div>
+      {
+        isSearchOpen
+          ? null
+          : <div className="torch">
+            <FlameButton
+              onClick={toggleIsPlaying}
+              isPlaying={isPlaying}
+              isDisabled={!isAudioReady}
+            />
+            <div className="torch__handle">
+              <img src={torchHandle} alt="Torch handle" />
+            </div>
+          </div>
+      }
       <div className="track__body">
         <div className="track__name">
           <h4>{name ?? '...'}</h4>
