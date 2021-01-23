@@ -13,9 +13,9 @@ export function getNextIndex(indexedItems: { index: number }[]) {
   return maxIndex + 1;
 }
 
-export function addSearchResultToSoundscape(
+export function addSearchResultToGroup(
   searchResult: SearchResult,
-  soundscape: Group
+  group: Group
 ) {
   const { id, name, type, tags, tracks } = searchResult;
   if (tracks !== undefined) {
@@ -23,18 +23,18 @@ export function addSearchResultToSoundscape(
     tracks.forEach(track => {
       const { id, volume, oneShotConfig } = track;
       console.log(oneShotConfig); // TODO: use oneshotconfig
-      soundscape.tracks.push({
+      group.tracks.push({
         id,
         volume,
-        index: getNextIndex(soundscape.tracks)
+        index: getNextIndex(group.tracks)
       });
     })
     return;
   }
   // Result is an individual track
-  soundscape.tracks.push({
+  group.tracks.push({
     id,
-    index: getNextIndex(soundscape.tracks),
+    index: getNextIndex(group.tracks),
     name,
     type,
     tags,
