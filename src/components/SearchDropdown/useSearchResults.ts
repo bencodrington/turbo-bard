@@ -27,7 +27,7 @@ export default function useSearchResults<T>(fetchFunction: (searchText: string) 
       setSearchText(text);
       return;
     }
-    setSearchText(searchText + ' ' + text);
+    setSearchText(searchText.trim() + ' ' + text);
   }
 
   return {
