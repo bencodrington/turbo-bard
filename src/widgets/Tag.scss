@@ -1,7 +1,7 @@
 .tag-container {
   display: inline-flex;
   justify-content: center;
-  padding: 4px 8px;
+  padding-left: 8px;
 
   .trailing-icon {
     height: 20px;
@@ -17,6 +17,7 @@
     border-radius: 32px;
     color: var(--canary);
     cursor: pointer;
+    padding: 4px 8px;
   }
 
   &.tag--loop {
