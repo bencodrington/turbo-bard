@@ -46,7 +46,10 @@ export default function LoopTrackItem({
     onVolumeChanged
   });
   const { name, id, index, tags } = loop;
-  const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet, volume * groupVolume);
+  const computedVolume = isMuted
+    ? 0
+    : volume * groupVolume;
+  const { isPlaying, toggleIsPlaying, isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet, computedVolume);
   useTrackData(id, index, groupIndex, !isUnloaded(loop));
 
   if (!isVisible) {

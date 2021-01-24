@@ -46,10 +46,13 @@ export default function OneShotTrackItem({
     onVolumeChanged
   });
   const { name, id, index, tags } = oneShot;
+  const computedVolume = isMuted
+    ? 0
+    : volume * groupVolume;
   const {
     isPlaying,
     toggleIsPlaying
-  } = useOneShotPlayer(sourceSets, volume * groupVolume);
+  } = useOneShotPlayer(sourceSets, computedVolume);
   useTrackData(id, index, groupIndex, !isUnloaded(oneShot));
 
   if (!isVisible) {
