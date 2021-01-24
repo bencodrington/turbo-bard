@@ -1,9 +1,23 @@
 .search-item-container {
   margin: 0;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 
   h4 {
     display: inline-block;
     color: var(--canary);
+  }
+
+  .pack-count {
+    background: var(--track);
+    background-clip: text;
+    color: transparent;
+    margin-left: 8px;
+
+    .pack-count__number {
+      border: 1px solid var(--turbo-blue);
+      border-radius: 4px;
+      padding: 0 3px;
+      margin-right: 2px;
+    }
   }
 }
