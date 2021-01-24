@@ -20,6 +20,9 @@ type OneShotTrackItemProps = {
   groupVolume: number
 };
 
+const DEFAULT_MIN_TIME_BETWEEN = 5;
+const DEFAULT_MAX_TIME_BETWEEN = 10;
+
 export default function OneShotTrackItem({
   groupIndex,
   oneShot,
@@ -47,17 +50,26 @@ export default function OneShotTrackItem({
   const computedVolume = isMuted
     ? 0
     : volume * groupVolume;
+  useTrackData(id, index, groupIndex, !isUnloaded(oneShot));
+
+  const minSecondsBetween = (oneShot as OneShot).minSecondsBetween ?? DEFAULT_MIN_TIME_BETWEEN;
+  const maxSecondsBetween = (oneShot as OneShot).maxSecondsBetween ?? DEFAULT_MAX_TIME_BETWEEN;
+
   const {
     isPlaying,
     toggleIsPlaying
-  } = useOneShotPlayer(sourceSets, computedVolume);
-  useTrackData(id, index, groupIndex, !isUnloaded(oneShot));
+  } = useOneShotPlayer(
+    sourceSets,
+    computedVolume,
+    minSecondsBetween,
+    maxSecondsBetween
+  );
 
   const additionalControls = <div className="one-shot-range">
     play{isPlaying ? 'ing' : ''} every
-    <span className="number"> 10 </span>
+    <span className="number"> {minSecondsBetween} </span>
     to
-    <span className="number"> 20 </span>
+    <span className="number"> {maxSecondsBetween} </span>
     seconds
   </div>
 

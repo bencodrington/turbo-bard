@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { randIntBetween } from "../utils/mathUtil";
 import useBoolean from "./useBoolean";
 
 const SERIALIZATION_DELIMITER = '----';
@@ -12,7 +13,12 @@ function deserializeSources(serializedSources: string) {
   return serializedSources.split(SERIALIZATION_DELIMITER);
 }
 
-export default function useOneShotPlayer(srcSets: string[][], volume: number) {
+export default function useOneShotPlayer(
+  srcSets: string[][],
+  volume: number,
+  minSecondsBetween: number,
+  maxSecondsBetween: number
+) {
   const [isPlaying, setIsPlaying, toggleIsPlaying] = useBoolean(false);
   const [audioElements, setAudioElements] = useState<HTMLAudioElement[]>([]);
   const [playNow, setPlayNow] = useState(false);
@@ -55,15 +61,14 @@ export default function useOneShotPlayer(srcSets: string[][], volume: number) {
   // timerStartTimestamp is set
   useEffect(() => {
     if (timerStartTimestamp === null) return;
+    const timerLength = randIntBetween(minSecondsBetween * 1000, maxSecondsBetween * 1000);
     const timeout = setTimeout(() => {
       setPlayNow(true);
       // Restart timer
       setTimerStartTimestamp(Date.now());
-      // TODO: actual timer length should be randomly selected
-      // from a user-configurable range
-    }, 2000);
+    }, timerLength);
     return () => clearTimeout(timeout);
-  }, [timerStartTimestamp])
+  }, [timerStartTimestamp, minSecondsBetween, maxSecondsBetween])
 
   // Play a sound randomly selected from the sources
   useEffect(() => {

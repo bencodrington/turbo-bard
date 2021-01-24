@@ -27,7 +27,9 @@ export type OneShot = {
   volume: number,
   isMuted: boolean,
   isPlaying: boolean,
-  samples: string[]
+  samples: string[],
+  minSecondsBetween: number,
+  maxSecondsBetween: number
 } & TrackMetadata;
 
 export type UnloadedTrack = {
