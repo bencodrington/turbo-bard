@@ -5,13 +5,13 @@
   background: var(--azure-glass);
   display: flex;
   flex-direction: column;
-  padding-bottom: 8px;
+  padding-bottom: 4px;
   min-height: 80px;
 
   .results {
     flex: 1;
     overflow-y: auto;
-    padding: 0 4px;
+    padding: 4px;
   }
 
   .tag-list-container {
