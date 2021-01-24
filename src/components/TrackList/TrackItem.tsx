@@ -5,12 +5,10 @@ import moreIcon from "../../assets/icon-more.svg";
 
 import "./TrackItem.scss";
 import TagList from "../TagList";
-import { ObjectType } from "../../models/ObjectTypes";
 import VolumeControls from "../../widgets/VolumeControls";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 
 type TrackItemProps = {
-  type: ObjectType
   isPlaying: boolean,
   toggleIsPlaying: () => void,
   isAudioReady: boolean,
@@ -21,7 +19,9 @@ type TrackItemProps = {
   volume: number,
   setVolume: (newVolume: number) => void,
   tags?: string[],
-  onTagClick: (tag: string) => void
+  onTagClick: (tag: string) => void,
+  additionalControls?: JSX.Element,
+  className?: string
 };
 
 export default function TrackItem({
@@ -36,7 +36,8 @@ export default function TrackItem({
   setVolume,
   tags,
   onTagClick,
-  type
+  additionalControls,
+  className
 }: TrackItemProps) {
 
   // TODO: expanded loop options
@@ -44,11 +45,8 @@ export default function TrackItem({
   //   dispatch(removeTrack({ groupIndex, trackIndex: index }))
   // }
 
-  const className = 'track-item-container' +
-    (type === ObjectType.ONESHOT ? ' track-item-container--one-shot' : '');
-
   return (
-    <div className={className}>
+    <div className={'track-item-container ' + (className ?? '')}>
       {
         isSearchOpen
           ? null
@@ -67,6 +65,7 @@ export default function TrackItem({
         <div className="track__name">
           <h4>{name ?? '...'}</h4>
         </div>
+        {additionalControls}
         {
           isSearchOpen && tags !== undefined
             ? <TagList tags={tags} onTagClick={onTagClick} />

@@ -8,7 +8,6 @@ import { useVolume } from "../../hooks/useVolume";
 import { createSourceSet } from "../../utils/audioFileUtil";
 
 import TrackItem from "./TrackItem";
-import { ObjectType } from "../../models/ObjectTypes";
 
 type LoopTrackItemProps = {
   loop: Loop | UnloadedTrack,
@@ -65,7 +64,6 @@ export default function LoopTrackItem({
       toggleIsPlaying={toggleIsPlaying}
       name={name}
       tags={tags ?? []}
-      type={ObjectType.LOOP}
       volume={volume}
       setVolume={setVolume}
       onTagClick={onTagClick}

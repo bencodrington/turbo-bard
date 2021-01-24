@@ -3,12 +3,13 @@ import { useDispatch } from "react-redux";
 import useOneShotPlayer from "../../hooks/useOneShotPlayer";
 import useTrackData from "../../hooks/useTrackData";
 import { useVolume } from "../../hooks/useVolume";
-import { ObjectType } from "../../models/ObjectTypes";
 import { isUnloaded, OneShot, UnloadedTrack } from "../../models/Track";
 import { setTrackVolume } from "../../slices/groups";
 import { createSourceSet } from "../../utils/audioFileUtil";
 
 import TrackItem from "./TrackItem";
+
+import "./OneShotTrackItem.scss";
 
 type OneShotTrackItemProps = {
   oneShot: OneShot | UnloadedTrack,
@@ -41,10 +42,7 @@ export default function OneShotTrackItem({
     setVolume,
     isMuted,
     toggleIsMuted
-  } = useVolume({
-    initialVolume: oneShot.volume,
-    onVolumeChanged
-  });
+  } = useVolume({ initialVolume: oneShot.volume, onVolumeChanged });
   const { name, id, index, tags } = oneShot;
   const computedVolume = isMuted
     ? 0
@@ -54,6 +52,14 @@ export default function OneShotTrackItem({
     toggleIsPlaying
   } = useOneShotPlayer(sourceSets, computedVolume);
   useTrackData(id, index, groupIndex, !isUnloaded(oneShot));
+
+  const additionalControls = <div className="one-shot-range">
+    play{isPlaying ? 'ing' : ''} every
+    <span className="number"> 10 </span>
+    to
+    <span className="number"> 20 </span>
+    seconds
+  </div>
 
   if (!isVisible) {
     return null;
@@ -68,10 +74,11 @@ export default function OneShotTrackItem({
       toggleIsPlaying={toggleIsPlaying}
       name={name}
       tags={tags ?? []}
-      type={ObjectType.ONESHOT}
       volume={volume}
       setVolume={setVolume}
       onTagClick={onTagClick}
+      additionalControls={additionalControls}
+      className="one-shot-track-item-container"
     />
   );
 }

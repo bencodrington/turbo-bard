@@ -1,0 +1,10 @@
+.one-shot-track-item-container {
+  .one-shot-range {
+    position: absolute;
+    bottom: 56px;
+
+    .number {
+      color: var(--one-shot);
+    }
+  }
+}
