@@ -38,6 +38,7 @@ export default function VolumeControls({
       <DefaultButton
         onClick={toggleIsMuted}
         icon={isMuted ? muteIcon : volumeIcon}
+        isActive={isMuted}
       />
     </div>
   );

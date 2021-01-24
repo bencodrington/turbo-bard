@@ -29,6 +29,10 @@
     width: 100%;
   }
 
+  &.active {
+    background-color: var(--azure);
+  }
+
   img {
     height: 2.5rem;
   }
