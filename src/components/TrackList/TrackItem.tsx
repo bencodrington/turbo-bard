@@ -11,6 +11,7 @@ import DefaultButton from "../../widgets/buttons/DefaultButton";
 import useBoolean from "../../hooks/useBoolean";
 import { useDispatch } from "react-redux";
 import { removeTrack } from "../../slices/groups";
+import TrackSource from "./TrackSource";
 
 type TrackItemProps = {
   isPlaying: boolean,
@@ -27,6 +28,10 @@ type TrackItemProps = {
   additionalControls?: JSX.Element,
   groupIndex: number,
   trackIndex: number
+  source?: {
+    author?: string,
+    url: string
+  }
 };
 
 export default function TrackItem({
@@ -43,7 +48,8 @@ export default function TrackItem({
   onTagClick,
   additionalControls,
   groupIndex,
-  trackIndex
+  trackIndex,
+  source
 }: TrackItemProps) {
 
   const [isExpanded, , toggleIsExpanded] = useBoolean(false);
@@ -81,7 +87,12 @@ export default function TrackItem({
             />
             : null
         }
-        {isSearchOpen ? null : additionalControls}
+        {
+          isExpanded
+            ? <TrackSource source={source} />
+            : null
+        }
+        {(isSearchOpen || isExpanded) ? null : additionalControls}
         {
           isSearchOpen && tags !== undefined
             ? <TagList tags={tags} onTagClick={onTagClick} />

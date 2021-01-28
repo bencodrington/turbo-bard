@@ -76,6 +76,8 @@ export default function OneShotTrackItem({
     />
   );
 
+  const source = (oneShot as OneShot).source ?? null;
+
   return (
     <TrackItem
       isAudioReady={true}
@@ -92,6 +94,7 @@ export default function OneShotTrackItem({
       additionalControls={range}
       groupIndex={groupIndex}
       trackIndex={oneShot.index}
+      source={source}
     />
   );
 }

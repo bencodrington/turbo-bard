@@ -54,6 +54,9 @@ export default function LoopTrackItem({
   if (!isVisible) {
     return null;
   }
+
+  const source = (loop as Loop).source ?? null;
+  
   return (
     <TrackItem
       isAudioReady={isAudioLoaded}
@@ -69,6 +72,7 @@ export default function LoopTrackItem({
       onTagClick={onTagClick}
       groupIndex={groupIndex}
       trackIndex={loop.index}
+      source={source}
     />
   );
 }
