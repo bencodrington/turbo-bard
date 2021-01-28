@@ -11,7 +11,9 @@ export type OneShotData = {
   id: string,
   type: ObjectType.ONESHOT
   trackMetadata: TrackMetadata,
-  samples: string[]
+  samples: string[],
+  minSecondsBetween?: number,
+  maxSecondsBetween?: number
 } & TrackMetadata;
 
 export const ERROR_TYPE = 'ERROR';
