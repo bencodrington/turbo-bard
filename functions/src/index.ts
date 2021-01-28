@@ -102,6 +102,8 @@ export const fetchTrackDataById = functions.https.onRequest(async (request, resp
         id: result.id,
         name,
         samples: trackData.samples,
+        minSecondsBetween: trackData.minSecondsBetween,
+        maxSecondsBetween: trackData.maxSecondsBetween,
         tags,
         source,
         type: ObjectType.ONESHOT
