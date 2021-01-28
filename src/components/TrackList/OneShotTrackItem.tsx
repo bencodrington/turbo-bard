@@ -6,10 +6,9 @@ import { useVolume } from "../../hooks/useVolume";
 import { isUnloaded, OneShot, UnloadedTrack } from "../../models/Track";
 import { setTrackVolume } from "../../slices/groups";
 import { createSourceSet } from "../../utils/audioFileUtil";
+import OneShotRange from "./OneShotRange";
 
 import TrackItem from "./TrackItem";
-
-import "./OneShotTrackItem.scss";
 
 type OneShotTrackItemProps = {
   oneShot: OneShot | UnloadedTrack,
@@ -65,17 +64,18 @@ export default function OneShotTrackItem({
     maxSecondsBetween
   );
 
-  const additionalControls = <div className="one-shot-range">
-    play{isPlaying ? 'ing' : ''} every
-    <span className="number"> {minSecondsBetween} </span>
-    to
-    <span className="number"> {maxSecondsBetween} </span>
-    seconds
-  </div>
-
   if (!isVisible) {
     return null;
   }
+
+  const range = (
+    <OneShotRange
+      isPlaying={isPlaying}
+      minSecondsBetween={minSecondsBetween}
+      maxSecondsBetween={maxSecondsBetween}
+    />
+  );
+
   return (
     <TrackItem
       isAudioReady={true}
@@ -89,8 +89,7 @@ export default function OneShotTrackItem({
       volume={volume}
       setVolume={setVolume}
       onTagClick={onTagClick}
-      additionalControls={additionalControls}
-      className="one-shot-track-item-container"
+      additionalControls={range}
       groupIndex={groupIndex}
       trackIndex={oneShot.index}
     />

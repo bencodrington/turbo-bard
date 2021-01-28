@@ -25,7 +25,6 @@ type TrackItemProps = {
   tags?: string[],
   onTagClick: (tag: string) => void,
   additionalControls?: JSX.Element,
-  className?: string,
   groupIndex: number,
   trackIndex: number
 };
@@ -43,7 +42,6 @@ export default function TrackItem({
   tags,
   onTagClick,
   additionalControls,
-  className,
   groupIndex,
   trackIndex
 }: TrackItemProps) {
@@ -56,7 +54,7 @@ export default function TrackItem({
   }
 
   return (
-    <div className={'track-item-container ' + (className ?? '')}>
+    <div className="track-item-container">
       {
         isSearchOpen
           ? null
