@@ -91,6 +91,8 @@ export default function OneShotTrackItem({
       onTagClick={onTagClick}
       additionalControls={additionalControls}
       className="one-shot-track-item-container"
+      groupIndex={groupIndex}
+      trackIndex={oneShot.index}
     />
   );
 }

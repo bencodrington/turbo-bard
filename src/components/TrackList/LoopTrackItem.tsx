@@ -67,6 +67,8 @@ export default function LoopTrackItem({
       volume={volume}
       setVolume={setVolume}
       onTagClick={onTagClick}
+      groupIndex={groupIndex}
+      trackIndex={loop.index}
     />
   );
 }

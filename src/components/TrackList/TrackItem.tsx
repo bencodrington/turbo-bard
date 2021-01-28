@@ -2,11 +2,15 @@ import React from "react";
 import FlameButton from "../../widgets/buttons/FlameButton";
 import torchHandle from "../../assets/torch-handle.svg";
 import moreIcon from "../../assets/icon-more.svg";
+import closeIcon from "../../assets/icon-close.svg";
 
 import "./TrackItem.scss";
 import TagList from "../TagList";
 import VolumeControls from "../../widgets/VolumeControls";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
+import useBoolean from "../../hooks/useBoolean";
+import { useDispatch } from "react-redux";
+import { removeTrack } from "../../slices/groups";
 
 type TrackItemProps = {
   isPlaying: boolean,
@@ -21,7 +25,9 @@ type TrackItemProps = {
   tags?: string[],
   onTagClick: (tag: string) => void,
   additionalControls?: JSX.Element,
-  className?: string
+  className?: string,
+  groupIndex: number,
+  trackIndex: number
 };
 
 export default function TrackItem({
@@ -37,13 +43,17 @@ export default function TrackItem({
   tags,
   onTagClick,
   additionalControls,
-  className
+  className,
+  groupIndex,
+  trackIndex
 }: TrackItemProps) {
 
-  // TODO: expanded loop options
-  // function remove() {
-  //   dispatch(removeTrack({ groupIndex, trackIndex: index }))
-  // }
+  const [isExpanded, , toggleIsExpanded] = useBoolean(false);
+  const dispatch = useDispatch();
+
+  function remove() {
+    dispatch(removeTrack({ groupIndex, trackIndex }))
+  }
 
   return (
     <div className={'track-item-container ' + (className ?? '')}>
@@ -65,7 +75,15 @@ export default function TrackItem({
         <div className="track__name">
           <h4>{name ?? '...'}</h4>
         </div>
-        {additionalControls}
+        {
+          isExpanded
+            ? <DefaultButton
+              onClick={remove}
+              icon={closeIcon}
+            />
+            : null
+        }
+        {isSearchOpen ? null : additionalControls}
         {
           isSearchOpen && tags !== undefined
             ? <TagList tags={tags} onTagClick={onTagClick} />
@@ -81,9 +99,10 @@ export default function TrackItem({
                 toggleIsMuted={toggleIsMuted}
               />
               <DefaultButton
-                onClick={() => { console.log('show more options') }}
+                onClick={toggleIsExpanded}
                 icon={moreIcon}
                 isRound={true}
+                isActive={isExpanded}
               />
             </div>
             : null
