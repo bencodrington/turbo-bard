@@ -1,6 +1,7 @@
 import React from "react";
+import AnchorButton from "../../widgets/buttons/AnchorButton";
 
-// import "./TrackSource.scss";
+import "./TrackSource.scss";
 
 type TrackSourceProps = {
   source?: {
@@ -11,14 +12,14 @@ type TrackSourceProps = {
 
 export default function TrackSource({ source }: TrackSourceProps) {
   return (
-    <div>
+    <div className="track-source-container">
       <p>Source: {source
         ? source.author ?? ''
         : '...'
       }</p>
       {
         source
-          ? <a href={source.url} target="_blank" rel="noopener noreferrer">{source.url}</a>
+          ? <AnchorButton url={source.url} />
           : null
       }
     </div>

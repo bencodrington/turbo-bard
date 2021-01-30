@@ -2,16 +2,13 @@ import React from "react";
 import FlameButton from "../../widgets/buttons/FlameButton";
 import torchHandle from "../../assets/torch-handle.svg";
 import moreIcon from "../../assets/icon-more.svg";
-import closeIcon from "../../assets/icon-close.svg";
 
 import "./TrackItem.scss";
 import TagList from "../TagList";
 import VolumeControls from "../../widgets/VolumeControls";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 import useBoolean from "../../hooks/useBoolean";
-import { useDispatch } from "react-redux";
-import { removeTrack } from "../../slices/groups";
-import TrackSource from "./TrackSource";
+import ExpandedTrackItem from "./ExpandedTrackItem";
 
 type TrackItemProps = {
   isPlaying: boolean,
@@ -27,7 +24,7 @@ type TrackItemProps = {
   onTagClick: (tag: string) => void,
   additionalControls?: JSX.Element,
   groupIndex: number,
-  trackIndex: number
+  trackIndex: number,
   source?: {
     author?: string,
     url: string
@@ -53,10 +50,15 @@ export default function TrackItem({
 }: TrackItemProps) {
 
   const [isExpanded, , toggleIsExpanded] = useBoolean(false);
-  const dispatch = useDispatch();
 
-  function remove() {
-    dispatch(removeTrack({ groupIndex, trackIndex }))
+  if (isExpanded) {
+    return <ExpandedTrackItem
+      name={name}
+      source={source}
+      groupIndex={groupIndex}
+      trackIndex={trackIndex}
+      toggleIsExpanded={toggleIsExpanded}
+    />
   }
 
   return (
@@ -79,20 +81,7 @@ export default function TrackItem({
         <div className="track__name">
           <h4>{name ?? '...'}</h4>
         </div>
-        {
-          isExpanded
-            ? <DefaultButton
-              onClick={remove}
-              icon={closeIcon}
-            />
-            : null
-        }
-        {
-          isExpanded
-            ? <TrackSource source={source} />
-            : null
-        }
-        {(isSearchOpen || isExpanded) ? null : additionalControls}
+        {(isSearchOpen) ? null : additionalControls}
         {
           isSearchOpen && tags !== undefined
             ? <TagList tags={tags} onTagClick={onTagClick} />
@@ -111,7 +100,7 @@ export default function TrackItem({
                 onClick={toggleIsExpanded}
                 icon={moreIcon}
                 isRound={true}
-                isActive={isExpanded}
+                isActive={false}
               />
             </div>
             : null

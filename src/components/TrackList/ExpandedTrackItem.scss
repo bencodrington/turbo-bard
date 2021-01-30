@@ -1,0 +1,24 @@
+.expanded-track-item-container {
+  display: flex;
+  margin-top: 24px;
+
+  h4 {
+    margin-bottom: 14px;
+  }
+
+  .left-column {
+    flex: 1;
+    min-width: 0;
+    margin-right: 8px;
+  }
+
+  .right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    & > *:not(:first-child) {
+      margin-top: 4px;
+    }
+  }
+}
