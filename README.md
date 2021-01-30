@@ -8,21 +8,21 @@ Running in your phone or laptop's browser, TurboBard lets you react in real-time
 
 ## Scripts
 
-### `npm start`
+#### `npm start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `npm run build`
+#### `npm run build`
 
 Builds and minifies app for production to the `build` folder.
 
-## In the `functions` directory
+### In the `functions` directory
 
-### `npm run serve`
+#### `npm run serve`
 
 Emulate cloud functions locally to test without having to deploy.
 
-### `npm run deploy`
+#### `npm run deploy`
 
 Deploys any changes to the cloud functions.
