@@ -27,6 +27,7 @@ export default function SearchField(props: SearchFieldProps) {
         placeholder={props.placeholderText}
         value={props.value}
         onChange={changeHandler}
+        role="searchbox"
       />
     </div>
   );

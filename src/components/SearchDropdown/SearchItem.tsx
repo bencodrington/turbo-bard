@@ -24,6 +24,7 @@ export default function SearchItem({ data, onClick }: SearchItemProps) {
     <li
       className="search-item-container"
       onClick={onClick}
+      tabIndex={0}
     >
       <h4>{data.name}</h4>
       {packCountElement}
