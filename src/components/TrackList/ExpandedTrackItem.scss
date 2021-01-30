@@ -3,7 +3,7 @@
   margin-top: 24px;
 
   h4 {
-    margin-bottom: 14px;
+    margin-bottom: 8px;
   }
 
   .left-column {
@@ -15,7 +15,7 @@
   .right-column {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-self: start;
 
     & > *:not(:first-child) {
       margin-top: 4px;
