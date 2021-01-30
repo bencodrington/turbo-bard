@@ -4,9 +4,9 @@ function processElement(element) {
   // ---------------------------------
   // Make changes to each element here
   // ---------------------------------
-  if (element.type === undefined) {
-    console.log(element);
-  }
+  // if (element.type === undefined) {
+  //   console.log(element);
+  // }
 }
 
 function writeFile(outputObject, fileName) {
@@ -29,7 +29,7 @@ function processFile(fileContents, fileName) {
 
 
 function readFile(fileName) {
-  fs.readFile(`${fileName}.json`, function read(err, data) {
+  fs.readFile(`./inputs/${fileName}.json`, function read(err, data) {
     if (err) {
       throw err;
     }
