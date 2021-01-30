@@ -1242,7 +1242,8 @@
       "cauldron",
       "witch",
       "brew",
-      "water"
+      "water",
+      "boil"
     ],
     "fileName": "bubbling",
     "type": "LOOP"
@@ -3420,7 +3421,7 @@
       "relaxing",
       "transformation",
       "deity",
-      "heiling"
+      "healing"
     ],
     "fileName": "experimental-test-subject",
     "type": "LOOP"
