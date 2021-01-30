@@ -11,4 +11,5 @@ This file is included to facilitate bulk changes to the metadata, like reformatt
 3. Make a new directory within `/database/` called `inputs`, and copy `packs.json` and `tracks.json` into it. These will act as inputs to `process.js` and won't be overwritten.
 4. Navigate to `/database/` in a terminal.
 5. Run `node process.js`. This will overwrite `/database/tracks.json` and `/database/packs.json`.
-6. Commit the updated files and raise a PR!
+6. Format the newly-overwritten files with a JSON formatter so that the diff is more useful.
+7. Commit the updated files and raise a PR!
