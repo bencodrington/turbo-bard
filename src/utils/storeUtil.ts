@@ -26,6 +26,7 @@ export function addSearchResultToGroup(
       group.tracks.push({
         id,
         volume,
+        isMuted: false,
         index: getNextIndex(group.tracks)
       });
     })
@@ -38,7 +39,8 @@ export function addSearchResultToGroup(
     name,
     type,
     tags,
-    volume: DEFAULT_VOLUME
+    volume: DEFAULT_VOLUME,
+    isMuted: false
   });
 }
 

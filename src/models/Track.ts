@@ -36,6 +36,7 @@ export type UnloadedTrack = {
   id: string,
   index: number,
   volume: number,
+  isMuted: boolean,
   // These optional properties are present when loading from a track search result,
   //  but not when loading from a pack
   name?: string,

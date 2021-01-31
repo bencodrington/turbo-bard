@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setTrackIsMuted, setTrackVolume } from "../slices/groups";
 import useBoolean from "./useBoolean";
 
 type ReturnType = {
@@ -10,17 +12,33 @@ type ReturnType = {
 
 type PropType = {
   initialVolume: number,
-  onVolumeChanged: (newValue: number) => void
+  groupIndex: number,
+  trackIndex: number
 };
 
 export function useVolume({
   initialVolume,
-  onVolumeChanged
+  groupIndex,
+  trackIndex
 }: PropType): ReturnType {
   const [volume, setVolume] = useState(initialVolume);
   const [isMuted, , toggleIsMuted] = useBoolean(false);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    onVolumeChanged(volume);
-  }, [onVolumeChanged, volume]);
+    dispatch(setTrackVolume({
+      groupIndex,
+      trackIndex,
+      volume
+    }));
+  }, [dispatch, groupIndex, trackIndex, volume]);
+
+  useEffect(() => {
+    dispatch(setTrackIsMuted({
+      groupIndex,
+      trackIndex,
+      isMuted
+    }));
+  }, [dispatch, groupIndex, trackIndex, isMuted])
   return { volume, setVolume, isMuted, toggleIsMuted };
 }

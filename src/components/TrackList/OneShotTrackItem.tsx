@@ -1,10 +1,8 @@
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import useOneShotPlayer from "../../hooks/useOneShotPlayer";
 import useTrackData from "../../hooks/useTrackData";
 import { useVolume } from "../../hooks/useVolume";
 import { isUnloaded, OneShot, UnloadedTrack } from "../../models/Track";
-import { setTrackVolume } from "../../slices/groups";
 import { createSourceSet } from "../../utils/audioFileUtil";
 import OneShotRange from "./OneShotRange";
 
@@ -30,21 +28,17 @@ export default function OneShotTrackItem({
   onTagClick,
   groupVolume
 }: OneShotTrackItemProps) {
-  const dispatch = useDispatch();
   const sourceSets = isUnloaded(oneShot) ? [] : oneShot.samples.map(createSourceSet);
-  const onVolumeChanged = useCallback((newVolume: number) => {
-    dispatch(setTrackVolume({
-      groupIndex,
-      trackIndex: oneShot.index,
-      volume: newVolume
-    }));
-  }, [dispatch, groupIndex, oneShot.index]);
   const {
     volume,
     setVolume,
     isMuted,
     toggleIsMuted
-  } = useVolume({ initialVolume: oneShot.volume, onVolumeChanged });
+  } = useVolume({
+    initialVolume: oneShot.volume,
+    groupIndex,
+    trackIndex: oneShot.index
+  });
   const { name, id, index, tags } = oneShot;
   const computedVolume = isMuted
     ? 0

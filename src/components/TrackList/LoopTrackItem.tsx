@@ -1,7 +1,5 @@
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import { isUnloaded, Loop, UnloadedTrack } from "../../models/Track";
-import { setTrackVolume } from "../../slices/groups";
 import useLoopPlayer from "../../hooks/useLoopPlayer";
 import useTrackData from "../../hooks/useTrackData";
 import { useVolume } from "../../hooks/useVolume";
@@ -26,15 +24,7 @@ export default function LoopTrackItem({
   onTagClick,
   groupVolume
 }: LoopTrackItemProps) {
-  const dispatch = useDispatch();
   const sourceSet = isUnloaded(loop) ? [] : createSourceSet(loop.fileName);
-  const onVolumeChanged = useCallback((newVolume: number) => {
-    dispatch(setTrackVolume({
-      groupIndex,
-      trackIndex: loop.index,
-      volume: newVolume
-    }));
-  }, [dispatch, groupIndex, loop.index]);
   const {
     volume,
     setVolume,
@@ -42,7 +32,8 @@ export default function LoopTrackItem({
     toggleIsMuted
   } = useVolume({
     initialVolume: loop.volume,
-    onVolumeChanged
+    groupIndex,
+    trackIndex: loop.index
   });
   const { name, id, index, tags } = loop;
   const computedVolume = isMuted

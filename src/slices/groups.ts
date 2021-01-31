@@ -88,6 +88,16 @@ const groupsSlice = createSlice({
       if (track === undefined) return;
       track.volume = volume;
     },
+    setTrackIsMuted(state, { payload }: PayloadAction<{
+      groupIndex: number,
+      trackIndex: number,
+      isMuted: boolean
+    }>) {
+      const { groupIndex, trackIndex, isMuted } = payload;
+      const track = getTrackByIndex(trackIndex, groupIndex, state);
+      if (track === undefined) return;
+      track.isMuted = isMuted;
+    },
     removeGroup(state, { payload }: PayloadAction<{ groupIndex: number }>) {
       const { groupIndex } = payload;
       return state.filter(group => group.index !== groupIndex);
@@ -126,6 +136,7 @@ export const {
   setTrackData,
   openGroup,
   setTrackVolume,
+  setTrackIsMuted,
   removeGroup,
   setGroupIsPlaying,
   setGroupVolume
