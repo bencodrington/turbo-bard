@@ -12,6 +12,7 @@ export default function useLoopPlayer(srcSet: string[], volume: number) {
   useEffect(() => {
     if (src === undefined) return;
     const newAudio = new Audio(src);
+    newAudio.loop = true;
     newAudio.oncanplaythrough = () => {
       setIsLoaded(true);
     }
