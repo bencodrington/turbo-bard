@@ -28,6 +28,7 @@ export default function SearchField(props: SearchFieldProps) {
         value={props.value}
         onChange={changeHandler}
         role="searchbox"
+        autoFocus
       />
     </div>
   );
