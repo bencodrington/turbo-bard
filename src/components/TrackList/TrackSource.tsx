@@ -6,7 +6,7 @@ import "./TrackSource.scss";
 type TrackSourceProps = {
   source?: {
     author?: string,
-    url: string
+    urls: string[]
   }
 };
 
@@ -19,7 +19,7 @@ export default function TrackSource({ source }: TrackSourceProps) {
       }</p>
       {
         source
-          ? <AnchorButton url={source.url} />
+          ? source.urls.map(url => <AnchorButton url={url} key={url} />)
           : null
       }
     </div>

@@ -12,7 +12,7 @@ type ExpandedTrackItemProps = {
   name?: string,
   source?: {
     author?: string,
-    url: string
+    urls: string[]
   },
   groupIndex: number,
   trackIndex: number,

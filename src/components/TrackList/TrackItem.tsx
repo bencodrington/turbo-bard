@@ -27,7 +27,7 @@ type TrackItemProps = {
   trackIndex: number,
   source?: {
     author?: string,
-    url: string
+    urls: string[]
   }
 };
 

@@ -5,7 +5,7 @@ export type TrackMetadata = {
   name: string,
   source: {
     author?: string,
-    url: string
+    urls: string[]
   },
   tags: string[]
 };
