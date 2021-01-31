@@ -44,7 +44,10 @@ export default function useOneShotPlayer(
       newAudio.addEventListener('canplaythrough', loadedHandler);
     });
     return function cleanup() {
-      newAudioElements.forEach(newAudio => newAudio.remove());
+      // TODO: fade out
+      newAudioElements.forEach(newAudio => newAudio.pause());
+      // Remove reference to newAudioElements, marking them for garbage collection
+      setAudioElements([]);
     }
   }, [serializedSources]);
 
