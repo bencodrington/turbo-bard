@@ -18,7 +18,10 @@ export default function useLoopPlayer(srcSet: string[], volume: number) {
     }
     setAudio(newAudio);
     return function cleanup() {
-      newAudio.remove();
+      // TODO: fade out
+      newAudio.pause();
+      // Remove reference to newAudio, marking it for garbage collection
+      setAudio(null);
     }
   }, [src]);
 
