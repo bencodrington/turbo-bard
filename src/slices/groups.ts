@@ -43,7 +43,7 @@ const groupsSlice = createSlice({
           isOpen: true,
           volume: DEFAULT_VOLUME
         };
-        state.push(group);
+        state.unshift(group);
       } else {
         group = getGroupByIndex(groupIndex, state);
       }
@@ -70,13 +70,6 @@ const groupsSlice = createSlice({
         return;
       }
       Object.assign(track, trackData);
-    },
-    openGroup(state, { payload }: PayloadAction<{ groupIndex: number }>) {
-      const { groupIndex } = payload;
-      state = state.map(group => {
-        group.isOpen = group.index === groupIndex
-        return group;
-      });
     },
     setTrackVolume(state, { payload }: PayloadAction<{
       groupIndex: number,
@@ -134,7 +127,6 @@ export const {
   removeTrack,
   addSearchResult,
   setTrackData,
-  openGroup,
   setTrackVolume,
   setTrackIsMuted,
   removeGroup,
