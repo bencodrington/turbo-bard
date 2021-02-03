@@ -135,6 +135,14 @@ const groupsSlice = createSlice({
       group.tracks.forEach(track => {
         track.isPlaying = true;
       });
+    },
+    stopAllInGroup(state, { payload }: PayloadAction<{ groupIndex: number }>) {
+      const { groupIndex } = payload;
+      const group = getGroupByIndex(groupIndex, state);
+      if (group === undefined) return;
+      group.tracks.forEach(track => {
+        track.isPlaying = false;
+      });
     }
   }
 });
@@ -151,7 +159,8 @@ export const {
   setGroupIsPlaying,
   setGroupVolume,
   setTrackIsPlaying,
-  startAllInGroup
+  startAllInGroup,
+  stopAllInGroup
 } = groupsSlice.actions;
 
 export default groupsSlice.reducer;
