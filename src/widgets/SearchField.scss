@@ -2,12 +2,14 @@
 
 .search-field-container {
   position: relative;
+  --border-width: 2px;
 
   .icon {
     position: absolute;
     height: 2rem;
     left: .5rem;
-    top: .25rem;
+    // Center vertically
+    top: calc(.25rem - calc(var(--border-width) / 2));
   }
 
   input {
