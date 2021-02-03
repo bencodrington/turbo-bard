@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { randIntBetween } from "../utils/mathUtil";
-import useBoolean from "./useBoolean";
 
 const SERIALIZATION_DELIMITER = '----';
 
@@ -17,9 +16,9 @@ export default function useOneShotPlayer(
   srcSets: string[][],
   volume: number,
   minSecondsBetween: number,
-  maxSecondsBetween: number
+  maxSecondsBetween: number,
+  isPlaying: boolean
 ) {
-  const [isPlaying, setIsPlaying, toggleIsPlaying] = useBoolean(false);
   const [audioElements, setAudioElements] = useState<HTMLAudioElement[]>([]);
   const [playNow, setPlayNow] = useState(false);
   // The point at which the user clicked play, or when the most recent one-shot
@@ -93,6 +92,4 @@ export default function useOneShotPlayer(
       audio.volume = volume;
     });
   });
-
-  return { isPlaying, setIsPlaying, toggleIsPlaying };
 }

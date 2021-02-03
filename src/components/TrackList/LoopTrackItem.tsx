@@ -51,7 +51,11 @@ export default function LoopTrackItem({
 
   const source = (loop as Loop).source ?? null;
   function toggleIsPlaying() {
-    dispatch(setTrackIsPlaying({ groupIndex, trackIndex: index, isPlaying: !loop.isPlaying }));
+    dispatch(setTrackIsPlaying({
+      groupIndex,
+      trackIndex: index,
+      isPlaying: !loop.isPlaying
+    }));
   }
 
   return (
