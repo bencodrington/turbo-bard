@@ -27,7 +27,8 @@ export function addSearchResultToGroup(
         id,
         volume,
         isMuted: false,
-        index: getNextIndex(group.tracks)
+        index: getNextIndex(group.tracks),
+        isPlaying: false
       });
     })
     return;
@@ -40,7 +41,8 @@ export function addSearchResultToGroup(
     type,
     tags,
     volume: DEFAULT_VOLUME,
-    isMuted: false
+    isMuted: false,
+    isPlaying: false
   });
 }
 

@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import useBoolean from "./useBoolean";
 
 
-export default function useLoopPlayer(srcSet: string[], volume: number) {
+export default function useLoopPlayer(srcSet: string[], volume: number, isPlaying: boolean) {
   // TODO: validate that the extension is supported, fallback to subsequent ones
   const src = srcSet[0];
-  const [isPlaying, setIsPlaying, toggleIsPlaying] = useBoolean(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
 
@@ -39,5 +37,5 @@ export default function useLoopPlayer(srcSet: string[], volume: number) {
     audio.volume = volume;
   });
 
-  return { isPlaying, setIsPlaying, toggleIsPlaying, isLoaded };
+  return { isLoaded };
 }
