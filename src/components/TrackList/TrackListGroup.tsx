@@ -1,6 +1,7 @@
 import React from "react";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 import MoreIcon from "../../assets/icon-more.svg";
+import StartAllIcon from "../../assets/icon-start-all.svg";
 import AddIcon from "../../assets/icon-add.svg";
 import { Group } from "../../models/Group";
 
@@ -12,6 +13,8 @@ import UnloadedTrackItem from "./UnloadedTrackItem";
 import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
 import { SearchResult } from "../../models/SearchResult";
 import { NEW_GROUP } from "./TrackList";
+import { useDispatch } from "react-redux";
+import { startAllInGroup } from "../../slices/groups";
 
 type GroupProps = {
   searchTarget: number | null | typeof NEW_GROUP,
@@ -78,6 +81,11 @@ export default function TrackListGroup({
 }: GroupProps) {
   const isSearchModeActive = searchTarget !== null;
   const isThisGroupSearching = searchTarget === group.index;
+
+  const dispatch = useDispatch();
+  function startAll() {
+    dispatch(startAllInGroup({ groupIndex: group.index }));
+  }
   return (
     <div className="group-container">
       <div className="header">
@@ -88,6 +96,13 @@ export default function TrackListGroup({
           isDisabled={isSearchModeActive}
         />
         <h3 className="name">{group.name}</h3>
+      </div>
+      <div className="group-controls">
+        <DefaultButton
+          onClick={startAll}
+          icon={StartAllIcon}
+          text="Start all"
+        />
       </div>
       <div className="tracks">
         {group.tracks.map(track =>

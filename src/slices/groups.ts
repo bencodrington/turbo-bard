@@ -127,6 +127,14 @@ const groupsSlice = createSlice({
       const group = getGroupByIndex(groupIndex, state);
       if (group === undefined) return;
       group.volume = volume;
+    },
+    startAllInGroup(state, { payload }: PayloadAction<{ groupIndex: number }>) {
+      const { groupIndex } = payload;
+      const group = getGroupByIndex(groupIndex, state);
+      if (group === undefined) return;
+      group.tracks.forEach(track => {
+        track.isPlaying = true;
+      });
     }
   }
 });
@@ -142,7 +150,8 @@ export const {
   removeGroup,
   setGroupIsPlaying,
   setGroupVolume,
-  setTrackIsPlaying
+  setTrackIsPlaying,
+  startAllInGroup
 } = groupsSlice.actions;
 
 export default groupsSlice.reducer;
