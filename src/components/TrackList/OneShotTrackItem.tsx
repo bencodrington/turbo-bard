@@ -68,6 +68,8 @@ export default function OneShotTrackItem({
       minSecondsBetween={minSecondsBetween}
       maxSecondsBetween={maxSecondsBetween}
       isConfigurable={false}
+      groupIndex={groupIndex}
+      trackIndex={index}
     />
   );
 
@@ -77,6 +79,8 @@ export default function OneShotTrackItem({
       minSecondsBetween={minSecondsBetween}
       maxSecondsBetween={maxSecondsBetween}
       isConfigurable={true}
+      groupIndex={groupIndex}
+      trackIndex={index}
     />
   )
 

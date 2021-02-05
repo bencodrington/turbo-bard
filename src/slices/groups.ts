@@ -151,6 +151,23 @@ const groupsSlice = createSlice({
           track.isPlaying = group.index === groupIndex;
         })
       })
+    },
+    setOneShotRange(state, { payload }: PayloadAction<{
+      groupIndex: number,
+      trackIndex: number,
+      minSecondsBetween: number,
+      maxSecondsBetween: number
+    }>) {
+      const {
+        groupIndex,
+        trackIndex,
+        minSecondsBetween,
+        maxSecondsBetween
+      } = payload;
+      const track = getTrackByIndex(trackIndex, groupIndex, state);
+      if (track === undefined || !isOneShot(track)) return;
+      track.minSecondsBetween = minSecondsBetween;
+      track.maxSecondsBetween = maxSecondsBetween;
     }
   }
 });
@@ -169,7 +186,8 @@ export const {
   setTrackIsPlaying,
   startAllInGroup,
   stopAllInGroup,
-  transitionToGroup
+  transitionToGroup,
+  setOneShotRange
 } = groupsSlice.actions;
 
 export default groupsSlice.reducer;

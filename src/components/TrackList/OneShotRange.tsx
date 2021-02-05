@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setOneShotRange } from "../../slices/groups";
 import { isNumberArray } from "../../utils/typeUtil";
 import RangeInput from "../../widgets/RangeInput";
 
@@ -8,7 +10,9 @@ type OneShotRangeProps = {
   isPlaying: boolean,
   minSecondsBetween: number,
   maxSecondsBetween: number,
-  isConfigurable: boolean
+  isConfigurable: boolean,
+  groupIndex: number,
+  trackIndex: number
 };
 
 const TIME_OPTIONS = [
@@ -23,8 +27,11 @@ export default function OneShotRange({
   isPlaying,
   minSecondsBetween,
   maxSecondsBetween,
-  isConfigurable
+  isConfigurable,
+  groupIndex,
+  trackIndex
 }: OneShotRangeProps) {
+  const dispatch = useDispatch();
   if (!isConfigurable) {
     return (
       <div className="one-shot-range-container">
@@ -40,7 +47,17 @@ export default function OneShotRange({
     // Coerce value to type number, since RangeInput
     //  can have a single handle
     if (!isNumberArray(newValues)) return;
-    console.log('new value', newValues, TIME_OPTIONS[newValues[0]], TIME_OPTIONS[newValues[1]]);
+    const [_minSecondsBetween, _maxSecondsBetween] = newValues.map(value => TIME_OPTIONS[value]);
+    const somethingChanged = (_minSecondsBetween !== minSecondsBetween) ||
+      (_maxSecondsBetween !== maxSecondsBetween);
+    console.log(somethingChanged);
+    if (!somethingChanged) return;
+    dispatch(setOneShotRange({
+      groupIndex,
+      trackIndex,
+      minSecondsBetween: _minSecondsBetween,
+      maxSecondsBetween: _maxSecondsBetween
+    }));
   }
   return (
     <div className="one-shot-range-container one-shot-range-container--configurable">
