@@ -1,3 +1,9 @@
 .group-controls-container {
   margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+
+  & > *:not(:first-child) {
+    margin-left: 5px;
+  }
 }
