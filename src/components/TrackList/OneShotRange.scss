@@ -5,4 +5,29 @@
   .number {
     color: var(--one-shot);
   }
+
+}
+.one-shot-range-container--configurable {
+  position: relative;
+  bottom: 0;
+  padding: 5px;
+
+  .sentence {
+    display: flex;
+
+    .number {
+      flex: 1;
+      text-align: center;
+    }
+  }
+}
+
+.one-shot-range-input {
+  margin: .75rem 0;
+  .handle {
+    background: var(--one-shot);
+  }
+  .track {
+    background: var(--turbo-blue);
+  }
 }

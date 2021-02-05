@@ -23,6 +23,7 @@ type TrackItemProps = {
   tags?: string[],
   onTagClick: (tag: string) => void,
   additionalControls?: JSX.Element,
+  additionalExpandedControls?: JSX.Element,
   groupIndex: number,
   trackIndex: number,
   source?: {
@@ -44,6 +45,7 @@ export default function TrackItem({
   tags,
   onTagClick,
   additionalControls,
+  additionalExpandedControls,
   groupIndex,
   trackIndex,
   source
@@ -58,6 +60,7 @@ export default function TrackItem({
       groupIndex={groupIndex}
       trackIndex={trackIndex}
       toggleIsExpanded={toggleIsExpanded}
+      additionalExpandedControls={additionalExpandedControls}
     />
   }
 

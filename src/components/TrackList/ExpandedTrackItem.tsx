@@ -16,7 +16,8 @@ type ExpandedTrackItemProps = {
   },
   groupIndex: number,
   trackIndex: number,
-  toggleIsExpanded: () => void
+  toggleIsExpanded: () => void,
+  additionalExpandedControls?: JSX.Element
 };
 
 export default function ExpandedTrackItem({
@@ -24,7 +25,8 @@ export default function ExpandedTrackItem({
   source,
   groupIndex,
   trackIndex,
-  toggleIsExpanded
+  toggleIsExpanded,
+  additionalExpandedControls
 }: ExpandedTrackItemProps) {
   const dispatch = useDispatch();
 
@@ -36,6 +38,7 @@ export default function ExpandedTrackItem({
     <div className="expanded-track-item-container">
       <div className="left-column">
         <h4>{name ?? '...'}</h4>
+        {additionalExpandedControls}
         <TrackSource source={source} />
       </div>
       <div className="right-column">

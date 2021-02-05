@@ -5,6 +5,7 @@ import muteIcon from "../assets/icon-mute.svg";
 import RangeInput from "./RangeInput";
 
 import "./VolumeControls.scss";
+import { isNumberArray } from "../utils/typeUtil";
 
 type VolumeControlsProps = {
   volume: number,
@@ -24,6 +25,13 @@ export default function VolumeControls({
     return `${value * 100}%`;
   }
 
+  function _setVolume(volume: number | number[]) {
+    // Coerce value to type number, since RangeInput
+    //  can have multiple handles
+    if (isNumberArray(volume)) return;
+    return setVolume(volume);
+  }
+
   return (
     <div className="volume-controls-container">
       <RangeInput
@@ -31,7 +39,7 @@ export default function VolumeControls({
         min={0}
         max={1}
         value={volume}
-        onValueChange={setVolume}
+        onValueChange={_setVolume}
         ariaLabel="volume slider"
         getAriaValueText={ariaValueFormatter}
       />

@@ -6,13 +6,13 @@ import "./RangeInput.scss";
 type RangeInputProps = {
   min: number,
   max: number,
-  value: number,
-  onValueChange: (newValue: number) => void,
+  value: number | number[],
+  onValueChange: (newValue: number | number[]) => void,
   step?: number,
-  isVertical?: boolean,
   className?: string,
   ariaLabel?: string,
-  getAriaValueText?: (value: number) => string
+  getAriaValueText?: (value: number) => string,
+  showTicks?: boolean
 };
 
 export default function RangeInput({
@@ -21,18 +21,16 @@ export default function RangeInput({
   value,
   step = 0.02,
   onValueChange,
-  isVertical = false,
   ariaLabel,
   getAriaValueText,
-  className = ''
+  className = '',
+  showTicks = false
 }: RangeInputProps) {
   const onChange = (e: React.ChangeEvent<{}>, value: number | number[]) => {
-    if ((value as number[]).length !== undefined) return;
-    onValueChange(value as number);
+    onValueChange(value);
   };
   return (
     <Slider
-      orientation={isVertical ? 'vertical' : 'horizontal'}
       getAriaValueText={getAriaValueText}
       aria-label={ariaLabel}
       min={min}
@@ -47,6 +45,7 @@ export default function RangeInput({
         rail: 'rail',
         vertical: 'vertical'
       }}
+      marks={showTicks}
     />
   );
 }
