@@ -6,7 +6,7 @@ import startAllIcon from "../../assets/icon-start-all.svg";
 import stopIcon from "../../assets/icon-stop.svg";
 import { Track } from "../../models/Track";
 
-// import "./GroupControls.scss";
+import "./GroupControls.scss";
 
 type GroupControlsProps = {
   groupIndex: number,
@@ -28,7 +28,7 @@ export default function GroupControls({
     dispatch(stopAllInGroup({ groupIndex }));
   }
   return (
-    <div className="group-controls">
+    <div className="group-controls-container">
       <DefaultButton
         onClick={isChildPlaying ? stopAll: startAll}
         icon={isChildPlaying ? stopIcon : startAllIcon}
