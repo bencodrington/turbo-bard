@@ -59,6 +59,9 @@ export default function OneShotRange({
       maxSecondsBetween: _maxSecondsBetween
     }));
   }
+  function getAriaValueText(value: number) {
+    return `${value} seconds`;
+  }
   return (
     <div className="one-shot-range-container one-shot-range-container--configurable">
       <div className="sentence">
@@ -76,7 +79,8 @@ export default function OneShotRange({
         onValueChange={onHandleMoved}
         value={[minSecondsBetween, maxSecondsBetween].map(getTimeOptionIndex)}
         showTicks={true}
-      // TODO: aria value label
+        ariaLabel="Play every"
+        getAriaValueText={getAriaValueText}
       />
     </div>
   );
