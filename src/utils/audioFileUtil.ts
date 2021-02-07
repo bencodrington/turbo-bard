@@ -15,7 +15,6 @@ const PERCENT_CHANGE_PER_FRAME = PERCENT_CHANGE_PER_SECOND / FRAMES_PER_SECOND;
 export function fadeOutAndPause(audio: HTMLAudioElement) {
   const interval = setInterval(() => {
     audio.volume = clamp(0, audio.volume - PERCENT_CHANGE_PER_FRAME, 1);
-    console.log(audio.volume);
     if (audio.volume <= 0) {
       audio.pause();
       clearInterval(interval);
