@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { fadeOutAndPause } from "../utils/audioFileUtil";
 import { randIntBetween } from "../utils/mathUtil";
+import { useFadeMultiplier } from "./useFadeMultiplier";
 
 const SERIALIZATION_DELIMITER = '----';
 
@@ -21,6 +23,7 @@ export default function useOneShotPlayer(
 ) {
   const [audioElements, setAudioElements] = useState<HTMLAudioElement[]>([]);
   const [playNow, setPlayNow] = useState(false);
+  const fadeMultiplier = useFadeMultiplier(isPlaying);
   // The point at which the user clicked play, or when the most recent one-shot
   //  sound was fired (restarting the timer)
   const [timerStartTimestamp, setTimerStartTimestamp] = useState<number | null>(null);
@@ -43,10 +46,7 @@ export default function useOneShotPlayer(
       newAudio.addEventListener('canplaythrough', loadedHandler);
     });
     return function cleanup() {
-      // TODO: fade out
-      newAudioElements.forEach(newAudio => newAudio.pause());
-      // Remove reference to newAudioElements, marking them for garbage collection
-      setAudioElements([]);
+      newAudioElements.forEach(newAudio => fadeOutAndPause(newAudio));
     }
   }, [serializedSources]);
 
@@ -89,7 +89,7 @@ export default function useOneShotPlayer(
   // Keep audio volume in sync
   useEffect(() => {
     audioElements.forEach(audio => {
-      audio.volume = volume;
+      audio.volume = fadeMultiplier * volume;
     });
   });
 }
