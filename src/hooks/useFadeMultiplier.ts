@@ -11,7 +11,6 @@ export function useFadeMultiplier(isFadingIn: boolean) {
   const [fadeMultiplier, setFadeMultiplier] = useState(0);
 
   useEffect(() => {
-    console.log('isFadingIn', isFadingIn);
     const direction = isFadingIn ? 1 : -1;
     const interval = setInterval(() => {
       const change = PERCENT_CHANGE_PER_FRAME * direction;

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { fadeOutAndPause } from "../utils/audioFileUtil";
 import { useFadeMultiplier } from "./useFadeMultiplier";
 
 export default function useLoopPlayer(srcSet: string[], volume: number, isPlaying: boolean) {
-  // TODO: validate that the extension is supported, fallback to subsequent ones
+  // TODO: validate that the file extension is supported, fallback to subsequent ones
   const src = srcSet[0];
   const [isLoaded, setIsLoaded] = useState(false);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
@@ -17,10 +18,7 @@ export default function useLoopPlayer(srcSet: string[], volume: number, isPlayin
     }
     setAudio(newAudio);
     return function cleanup() {
-      // TODO: fade out
-      newAudio.pause();
-      // Remove reference to newAudio, marking it for garbage collection
-      setAudio(null);
+      fadeOutAndPause(newAudio);
     }
   }, [src]);
 
