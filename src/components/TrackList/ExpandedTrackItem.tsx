@@ -49,7 +49,6 @@ export default function ExpandedTrackItem({
         <DefaultButton
           onClick={toggleIsExpanded}
           icon={infoIcon}
-          isRound={true}
           isActive={true}
         />
       </div>
