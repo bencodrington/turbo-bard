@@ -50,7 +50,6 @@ export default function OneShotRange({
     const [_minSecondsBetween, _maxSecondsBetween] = newValues.map(value => TIME_OPTIONS[value]);
     const somethingChanged = (_minSecondsBetween !== minSecondsBetween) ||
       (_maxSecondsBetween !== maxSecondsBetween);
-    console.log(somethingChanged);
     if (!somethingChanged) return;
     dispatch(setOneShotRange({
       groupIndex,
@@ -60,7 +59,7 @@ export default function OneShotRange({
     }));
   }
   function getAriaValueText(value: number) {
-    return `${value} seconds`;
+    return `Play every ${value} seconds`;
   }
   return (
     <div className="one-shot-range-container one-shot-range-container--configurable">
@@ -78,8 +77,6 @@ export default function OneShotRange({
         step={1}
         onValueChange={onHandleMoved}
         value={[minSecondsBetween, maxSecondsBetween].map(getTimeOptionIndex)}
-        showTicks={true}
-        ariaLabel="Play every"
         getAriaValueText={getAriaValueText}
       />
     </div>

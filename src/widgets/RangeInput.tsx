@@ -11,8 +11,7 @@ type RangeInputProps = {
   step?: number,
   className?: string,
   ariaLabel?: string,
-  getAriaValueText?: (value: number) => string,
-  showTicks?: boolean
+  getAriaValueText?: (value: number) => string
 };
 
 export default function RangeInput({
@@ -23,8 +22,7 @@ export default function RangeInput({
   onValueChange,
   ariaLabel,
   getAriaValueText,
-  className = '',
-  showTicks = false
+  className = ''
 }: RangeInputProps) {
   const onChange = (e: React.ChangeEvent<{}>, value: number | number[]) => {
     onValueChange(value);
@@ -45,7 +43,6 @@ export default function RangeInput({
         rail: 'rail',
         vertical: 'vertical'
       }}
-      marks={showTicks}
     />
   );
 }
