@@ -12,12 +12,9 @@
   }
 
   &.clickable {
-    background: var(--azure-glass);
-    border: 2px solid var(--azure);
-    border-radius: 32px;
     color: var(--canary);
     cursor: pointer;
-    padding: 4px 8px;
+    padding: 20px 4px;
   }
 
   &.tag--loop {
