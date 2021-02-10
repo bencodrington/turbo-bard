@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { removeTrack } from "../../slices/groups";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 import TrackSource from "./TrackSource";
-import moreIcon from "../../assets/icon-more.svg";
+import infoIcon from "../../assets/icon-info.svg";
 import closeIcon from "../../assets/icon-close.svg";
 
 import "./ExpandedTrackItem.scss";
@@ -48,7 +48,7 @@ export default function ExpandedTrackItem({
         />
         <DefaultButton
           onClick={toggleIsExpanded}
-          icon={moreIcon}
+          icon={infoIcon}
           isRound={true}
           isActive={true}
         />

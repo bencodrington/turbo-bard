@@ -1,7 +1,7 @@
 import React from "react";
 import FlameButton from "../../widgets/buttons/FlameButton";
 import torchHandle from "../../assets/torch-handle.svg";
-import moreIcon from "../../assets/icon-more.svg";
+import infoIcon from "../../assets/icon-info.svg";
 
 import "./TrackItem.scss";
 import TagList from "../TagList";
@@ -101,7 +101,7 @@ export default function TrackItem({
               />
               <DefaultButton
                 onClick={toggleIsExpanded}
-                icon={moreIcon}
+                icon={infoIcon}
                 isRound={true}
                 isActive={false}
               />
