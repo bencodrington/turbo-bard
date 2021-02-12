@@ -9,18 +9,18 @@
 
   .header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     position: absolute;
     top: -28px;
-    background: var(--background);
-    padding: 0 4px;
     left: 2px;
+    width: calc(100% - 4px);
 
     .name {
-      flex: 1;
-      margin-left: 4px;
+      padding: 0 4px;
       font-size: 1rem;
       letter-spacing: .05rem;
+      background: var(--background);
     }
   }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
-import MoreIcon from "../../assets/icon-more.svg";
+import closeIcon from "../../assets/icon-close.svg";
 import AddIcon from "../../assets/icon-add.svg";
 import { Group } from "../../models/Group";
 
@@ -13,6 +13,8 @@ import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
 import { SearchResult } from "../../models/SearchResult";
 import { NEW_GROUP } from "./TrackList";
 import GroupControls from "./GroupControls";
+import { removeGroup } from "../../slices/groups";
+import { useDispatch } from "react-redux";
 
 type GroupProps = {
   searchTarget: number | null | typeof NEW_GROUP,
@@ -77,19 +79,24 @@ export default function TrackListGroup({
   setSearchText,
   appendSearchText
 }: GroupProps) {
+  const dispatch = useDispatch();
   const isSearchModeActive = searchTarget !== null;
   const isThisGroupSearching = searchTarget === group.index;
+
+  function onCloseButtonClick() {
+    dispatch(removeGroup({ groupIndex: group.index }));
+  }
 
   return (
     <div className="group-container">
       <div className="header">
+        <h3 className="name">{group.name}</h3>
         <DefaultButton
-          onClick={() => { console.log('Show options for ' + group.name) }}
-          icon={MoreIcon}
+          onClick={onCloseButtonClick}
+          icon={closeIcon}
           isRound={true}
           isDisabled={isSearchModeActive}
         />
-        <h3 className="name">{group.name}</h3>
       </div>
       <GroupControls
         groupIndex={group.index}
