@@ -31,8 +31,8 @@ export default function DefaultButton({
   const imgContent = icon === undefined ? null : <img src={icon} alt={iconAltText ?? ''} />;
 
   const computedClassName = 'default-button-container '
-    + (className ?? '')
-    + (icon !== undefined ? 'icon-only ' : '')
+    + (className ? className + ' ' : '')
+    + (icon !== undefined && text === undefined ? 'icon-only ' : '')
     + (isRound ? 'round ' : '')
     + (isActive ? 'active ' : '')
     + (isFullWidth ? 'full-width ' : '');
