@@ -37,7 +37,7 @@ const groupsSlice = createSlice({
       if (groupIndex === undefined) {
         // Create new group
         group = {
-          name: 'UNTITLED GROUP',
+          name: 'GROUP',
           index: getNextIndex(state),
           tracks: [],
           isOpen: true,
