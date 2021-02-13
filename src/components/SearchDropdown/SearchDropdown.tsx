@@ -10,25 +10,30 @@ type SearchDropdownProps = {
   results: JSX.Element[],
   suggestions?: JSX.Element,
   className?: string,
-  closeDropdown: () => void
+  closeDropdown: () => void,
+  isSearchTextEmpty: boolean
 };
 
 export default function SearchDropdown(props: SearchDropdownProps) {
 
-  const results = props.isFetchingResults
-    ? <p className="results">Loading...</p>
-    : <ul className="results">{props.results}</ul>;
+  const mainContent = props.isFetchingResults
+    ? <p className="message">Loading...</p>
+    : props.results.length > 0
+      ? <ul className="results">{props.results}</ul>
+      : props.isSearchTextEmpty
+        ? <p className="message">"tavern", "music", "horse"</p>
+        : <p className="message">Couldn't find those sounds.</p>;
 
   const className = 'search-dropdown-container ' + (props.className ?? '');
   return (
     <div className={className}>
       {props.searchField}
       {props.suggestions}
-      {results}
+      {mainContent}
       <DefaultButton
         onClick={props.closeDropdown}
         icon={caretUpIcon}
-        iconAltText="TODO:"
+        iconAltText="Collapse search results"
         className="collapse-search-button"
       />
     </div>

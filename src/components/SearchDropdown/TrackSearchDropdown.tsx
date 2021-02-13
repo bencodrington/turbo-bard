@@ -30,7 +30,7 @@ export default function TrackSearchDropdown({
     <SearchField
       value={searchText}
       onChange={setSearchText}
-      placeholderText={"'graveyard', 'tavern', ..."}
+      placeholderText={'search for sounds'}
     />
   );
 
@@ -57,6 +57,7 @@ export default function TrackSearchDropdown({
       results={resultElements}
       isFetchingResults={isFetchingResults}
       closeDropdown={closeSearchDropdown}
+      isSearchTextEmpty={searchText.length === 0}
     />
   );
 }

@@ -1,6 +1,11 @@
 .search-item-container {
   margin: 0;
   margin-top: 0.5rem;
+  align-items: center;
+
+  .loading {
+    text-align: center;
+  }
 
   h4 {
     display: inline-block;
