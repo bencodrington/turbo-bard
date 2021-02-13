@@ -9,6 +9,8 @@ type TagProps = {
 
 export default function Tag({ text, onClick }: TagProps) {
 
+  const isClickable = onClick !== undefined;
+
   const handleClick = () => {
     if (onClick !== undefined) {
       onClick(text);
@@ -16,14 +18,28 @@ export default function Tag({ text, onClick }: TagProps) {
   }
 
   const className = 'tag-container' +
-    (onClick !== undefined ? ' clickable' : '');
+    (isClickable ? ' clickable' : '');
+
+
+  function onKeyDown(event: React.KeyboardEvent<HTMLLIElement>) {
+    switch (event.key) {
+      case 'Enter':
+        handleClick();
+        break;
+      case ' ':
+        handleClick();
+        break;
+    }
+  }
 
   return (
     <span
       className={className}
       onClick={handleClick}
+      tabIndex={isClickable ? 0 : undefined}
+      onKeyDown={onKeyDown}
     >
-      {onClick !== undefined ? '+ ' : ''}
+      {isClickable ? '+ ' : ''}
       {text}
     </span>
   );
