@@ -14,7 +14,10 @@
   &.clickable {
     color: var(--canary);
     cursor: pointer;
-    padding: 20px 4px;
+    padding: 12px 8px;
+    border-radius: 50px;
+    background: var(--background);
+    border: 1px solid var(--azure);
   }
 
   &.tag--loop {

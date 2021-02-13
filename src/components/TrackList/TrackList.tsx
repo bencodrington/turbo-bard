@@ -29,6 +29,7 @@ export default function TrackList() {
             closeSearchDropdown={() => { setSearchTarget(null) }}
             searchText={searchText}
             setSearchText={setSearchText}
+            appendSearchText={appendSearchText}
             isFetchingResults={isFetchingResults}
             results={results}
             searchTarget={searchTarget}

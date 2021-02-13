@@ -21,7 +21,7 @@ export default function SearchDropdown(props: SearchDropdownProps) {
     : props.results.length > 0
       ? <ul className="results">{props.results}</ul>
       : props.isSearchTextEmpty
-        ? <p className="message">"tavern", "music", "horse"</p>
+        ? null
         : <p className="message">Couldn't find those sounds.</p>;
 
   const className = 'search-dropdown-container ' + (props.className ?? '');
