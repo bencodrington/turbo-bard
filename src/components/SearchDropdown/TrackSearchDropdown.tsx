@@ -56,6 +56,7 @@ export default function TrackSearchDropdown({
       searchField={searchField}
       results={resultElements}
       isFetchingResults={isFetchingResults}
+      closeDropdown={closeSearchDropdown}
     />
   );
 }

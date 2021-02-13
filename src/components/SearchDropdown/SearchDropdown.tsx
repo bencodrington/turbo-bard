@@ -1,4 +1,6 @@
 import React from "react";
+import DefaultButton from "../../widgets/buttons/DefaultButton";
+import caretUpIcon from "../../assets/icon-caret-up.svg";
 
 import './SearchDropdown.scss';
 
@@ -7,12 +9,11 @@ type SearchDropdownProps = {
   searchField: JSX.Element,
   results: JSX.Element[],
   suggestions?: JSX.Element,
-  trailing?: JSX.Element
-  className?: string
+  className?: string,
+  closeDropdown: () => void
 };
 
 export default function SearchDropdown(props: SearchDropdownProps) {
-  const trailing = props.trailing ?? null;
 
   const results = props.isFetchingResults
     ? <p className="results">Loading...</p>
@@ -24,7 +25,12 @@ export default function SearchDropdown(props: SearchDropdownProps) {
       {props.searchField}
       {props.suggestions}
       {results}
-      {trailing}
+      <DefaultButton
+        onClick={props.closeDropdown}
+        icon={caretUpIcon}
+        iconAltText="TODO:"
+        className="collapse-search-button"
+      />
     </div>
   );
 }

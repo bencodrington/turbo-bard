@@ -5,16 +5,19 @@
   background: var(--azure-glass);
   display: flex;
   flex-direction: column;
-  padding-bottom: 4px;
-  min-height: 80px;
 
   .results {
     flex: 1;
     overflow-y: auto;
-    padding: 4px;
+    padding: 0 4px;
+    max-height: 190px;
   }
 
   .tag-list-container {
     padding-top: 8px;
+  }
+
+  .collapse-search-button {
+    background: none;
   }
 }
