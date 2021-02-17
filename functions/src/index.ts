@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 
 import * as admin from 'firebase-admin';
+import Fuse from 'fuse.js';
 
 import { isOneShotData, TrackData } from '../../src/models/DatabaseTypes';
 import { ObjectType } from '../../src/models/ObjectTypes';
@@ -12,42 +13,32 @@ admin.initializeApp();
 const db = admin.firestore();
 const packsRef = db.collection('packs');
 const tracksRef = db.collection('tracks');
+const indexRef = db.collection('index');
 
-const MAX_RESULTS = 10;
+const MAX_RESULTS = 25;
+
+const fuseOptions: Fuse.IFuseOptions<SearchResult> = {
+  minMatchCharLength: 2,
+  ignoreLocation: true,
+  threshold: 0.2,
+  keys: [
+    {
+      name: "name",
+      weight: 25
+    },
+    {
+      name: "tags",
+      weight: 1
+    }
+  ]
+};
 
 async function _search(searchText: string): Promise<SearchResult[]> {
-  // Split search text into words
-  const words = searchText.split(' ');
-  // Search packs
-  const packResults = await packsRef.where('tags', 'array-contains-any', words).limit(MAX_RESULTS).get();
-  functions.logger.info(`Query "${searchText}" returned ${packResults.docs.length} pack results.`);
-  const packs = packResults.docs.map(doc => {
-    const { name, tags, tracks } = doc.data();
-    return {
-      id: doc.id,
-      name,
-      tags,
-      type: ObjectType.PACK,
-      tracks
-    };
-  });
-  // Search tracks
-  const trackResults = await tracksRef.where('tags', 'array-contains-any', words).limit(MAX_RESULTS).get();
-  functions.logger.info(`Query "${searchText}" returned ${trackResults.docs.length} track results.`);
-  const tracks = trackResults.docs.map(doc => {
-    const { name, tags, type } = doc.data();
-    return {
-      id: doc.id,
-      name,
-      tags,
-      type
-    };
-  });
-  const results = [...packs, ...tracks];
-  if (results.length === 0) {
-    functions.logger.info('No results found for query "' + searchText + '".');
-  }
-  return results;
+  const index = await indexRef.doc('index').get();
+  const {tracks, packs} = index.data() ?? {tracks: [], packs: []};
+  const fuse = new Fuse([...tracks as SearchResult[], ...packs as SearchResult[]], fuseOptions);
+  const fuseResults = fuse.search(searchText);
+  return fuseResults.map(result => result.item).splice(0, MAX_RESULTS);
 }
 
 export const search = functions.https.onRequest(async (request, response) => {
@@ -67,6 +58,7 @@ export const search = functions.https.onRequest(async (request, response) => {
     }
     functions.logger.info(searchText, { structuredData: true });
     const results = await _search(searchText);
+    functions.logger.info(`${results.length} results found.`);
     response.send(results);
   });
 });
@@ -120,5 +112,50 @@ export const fetchTrackDataById = functions.https.onRequest(async (request, resp
       type: ObjectType.LOOP
     };
     response.send(track);
+  });
+});
+
+// TODO: call this whenever the database is updated
+export const createSearchIndex = functions.https.onRequest(async (request, response) => {
+  return cors()(request, response, async () => {
+
+    functions.logger.info('index packs');
+    const packResults = await packsRef.get();
+    let packs: SearchResult[] = [];
+    if (packResults.empty) {
+      functions.logger.info('No packs found in the packs index.');
+    } else {
+      functions.logger.info(`${packResults.size} packs found.`);
+      packs = packResults.docs.map(doc => {
+        const { name, tags, tracks } = doc.data();
+        return {
+          id: doc.id,
+          name,
+          tags,
+          type: ObjectType.PACK,
+          tracks
+        };
+      });
+    }
+
+    functions.logger.info('index tracks');
+    let tracks: SearchResult[] = [];
+    const trackResults = await tracksRef.get();
+    if (trackResults.empty) {
+      functions.logger.info('No tracks found in the tracks index.');
+    } else {
+      functions.logger.info(`${trackResults.size} tracks found.`);
+      tracks = trackResults.docs.map(doc => {
+        const { name, tags, type } = doc.data();
+        return {
+          id: doc.id,
+          name,
+          tags,
+          type
+        };
+      });
+    }
+    indexRef.doc('index').set({ packs, tracks });
+    response.status(200).send('success');
   });
 });
