@@ -61,37 +61,31 @@ export default function TrackItem({
 
   return (
     <div className="track-item-container">
-      {
-        isSearchOpen
-          ? null
-          : <div className="torch">
-            <FlameButton
-              onClick={toggleIsPlaying}
-              isPlaying={isPlaying}
-              isDisabled={!isAudioReady}
-            />
-            <div className="torch__handle">
-              <img src={torchHandle} alt="Torch handle" />
-            </div>
-          </div>
-      }
+      <div className="torch">
+        <FlameButton
+          onClick={toggleIsPlaying}
+          isPlaying={isPlaying}
+          isDisabled={!isAudioReady}
+        />
+        <div className="torch__handle">
+          <img src={torchHandle} alt="Torch handle" />
+        </div>
+      </div>
       <div className="track__body">
         <div className="track__name">
           <h4>{name ?? '...'}</h4>
-          {(isSearchOpen) ? null : additionalControls}
+          {additionalControls}
           <DefaultButton
             onClick={remove}
             icon={closeIcon}
           />
         </div>
         {
-          isSearchOpen && tags !== undefined
-            ? <TagList tags={tags} onTagClick={onTagClick} />
-            : null
-        }
-        {
-          !isSearchOpen
-            ? <div className='track-controls'>
+          isSearchOpen
+            ? tags !== undefined
+              ? <TagList tags={tags} onTagClick={onTagClick} />
+              : null
+            : <div className='track-controls'>
               <VolumeControls
                 volume={volume}
                 isMuted={isMuted}
@@ -104,7 +98,6 @@ export default function TrackItem({
                 isActive={false}
               />
             </div>
-            : null
         }
         {
           isExpanded
