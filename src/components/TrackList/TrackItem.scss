@@ -19,7 +19,7 @@
   }
 
   .track__name {
-    height: 56px;
+    // height: 56px;
     display: flex;
     align-items: center;
 
@@ -29,6 +29,12 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      &.expanded {
+        text-overflow: unset;
+        white-space: normal;
+        overflow: visible;
+      }
     }
   }
 

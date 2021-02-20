@@ -73,7 +73,9 @@ export default function TrackItem({
       </div>
       <div className="track__body">
         <div className="track__name">
-          <h4>{name ?? '...'}</h4>
+          <h4 className={isExpanded ? 'expanded' : ''}>
+            {name ?? '...'}
+          </h4>
           {additionalControls}
           <DefaultButton
             onClick={remove}
