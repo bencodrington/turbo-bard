@@ -53,6 +53,7 @@ export default function useOneShotPlayer(
   useEffect(() => {
     // Handle start/stop button clicks
     if (isPlaying) {
+      setPlayNow(true);
       setTimerStartTimestamp(Date.now());
     } else {
       setTimerStartTimestamp(null);
