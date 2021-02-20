@@ -67,8 +67,6 @@ export default function OneShotTrackItem({
       isPlaying={isPlaying}
       minSecondsBetween={minSecondsBetween}
       maxSecondsBetween={maxSecondsBetween}
-      groupIndex={groupIndex}
-      trackIndex={index}
     />
   )
 

@@ -5,18 +5,14 @@ import "./OneShotRange.scss";
 type OneShotRangeProps = {
   isPlaying: boolean,
   minSecondsBetween: number,
-  maxSecondsBetween: number,
-  groupIndex: number,
-  trackIndex: number
+  maxSecondsBetween: number
 };
 
 
 export default function OneShotRange({
   isPlaying,
   minSecondsBetween,
-  maxSecondsBetween,
-  groupIndex,
-  trackIndex
+  maxSecondsBetween
 }: OneShotRangeProps) {
   return (
     <div className="one-shot-range-container">
