@@ -80,6 +80,7 @@ export default function TrackItem({
           <DefaultButton
             onClick={remove}
             icon={closeIcon}
+            isDisabled={isSearchOpen}
           />
         </div>
         {
