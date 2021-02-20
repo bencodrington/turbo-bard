@@ -62,23 +62,11 @@ export default function OneShotTrackItem({
     return null;
   }
 
-  const range = (
-    <OneShotRange
-      isPlaying={isPlaying}
-      minSecondsBetween={minSecondsBetween}
-      maxSecondsBetween={maxSecondsBetween}
-      isConfigurable={false}
-      groupIndex={groupIndex}
-      trackIndex={index}
-    />
-  );
-
   const configurableRange = (
     <OneShotRange
       isPlaying={isPlaying}
       minSecondsBetween={minSecondsBetween}
       maxSecondsBetween={maxSecondsBetween}
-      isConfigurable={true}
       groupIndex={groupIndex}
       trackIndex={index}
     />
@@ -107,8 +95,7 @@ export default function OneShotTrackItem({
       volume={volume}
       setVolume={setVolume}
       onTagClick={onTagClick}
-      additionalControls={range}
-      additionalExpandedControls={configurableRange}
+      additionalControls={configurableRange}
       groupIndex={groupIndex}
       trackIndex={oneShot.index}
       source={source}
