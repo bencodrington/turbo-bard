@@ -121,6 +121,7 @@ export default function TrackListGroup({
           className='add-sounds-button'
           onClick={() => setSearchTarget(group.index)}
           icon={AddIcon}
+          text="Add sounds to group"
           isFullWidth={true}
         />
       }

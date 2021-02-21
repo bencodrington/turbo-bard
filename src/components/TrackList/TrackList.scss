@@ -1,4 +1,10 @@
 .track-list-container {
   padding: 4px;
   padding-top: 0;
+
+  .add-sounds-button {
+    background: var(--track);
+    background-clip: text;
+    color: transparent;
+  }
 }
