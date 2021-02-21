@@ -1,4 +1,10 @@
 .track-source-container {
+  label {
+    letter-spacing: .05rem;
+    margin-right: 8px;
+    font-weight: 600;
+  }
+
   p {
     word-wrap: break-word;
   }
