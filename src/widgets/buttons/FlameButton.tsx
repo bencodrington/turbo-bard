@@ -1,7 +1,6 @@
 import React from "react";
 import playIcon from "../../assets/icon-play.svg";
 import stopIcon from "../../assets/icon-stop.svg";
-import flame from "../../assets/flame.svg";
 
 import "./FlameButton.scss";
 
@@ -22,16 +21,15 @@ export default function FlameButton({
       className="flame-button-container"
       aria-label={ariaLabel}
       onClick={onClick}
+      disabled={isDisabled}
     >
       <img
         className="icon"
         src={isPlaying ? stopIcon : playIcon}
         alt=""
       />
-      <img
-        className="background"
-        src={flame}
-        alt=""
+      <div
+        className={"background" + (isPlaying ? ' playing' : '')}
       />
     </button>
   );
