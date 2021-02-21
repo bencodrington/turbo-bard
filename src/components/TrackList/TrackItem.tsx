@@ -98,7 +98,8 @@ export default function TrackItem({
               <DefaultButton
                 onClick={toggleIsExpanded}
                 icon={infoIcon}
-                isActive={false}
+                isActive={isExpanded}
+                isRound={true}
               />
             </div>
         }
