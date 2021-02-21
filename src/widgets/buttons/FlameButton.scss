@@ -6,8 +6,9 @@
   .icon {
     position: absolute;
     width: 2.25rem;
-    left: .5rem;
+    left: 50%;
     top: .75rem;
+    transform: translateX(-50%);
     z-index: 1;
   }
 
