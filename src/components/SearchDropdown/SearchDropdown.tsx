@@ -8,7 +8,6 @@ type SearchDropdownProps = {
   isFetchingResults: Boolean,
   searchField: JSX.Element,
   results: JSX.Element[],
-  suggestions?: JSX.Element,
   className?: string,
   closeDropdown: () => void,
   isSearchTextEmpty: boolean
@@ -28,7 +27,6 @@ export default function SearchDropdown(props: SearchDropdownProps) {
   return (
     <div className={className}>
       {props.searchField}
-      {props.suggestions}
       {mainContent}
       <DefaultButton
         onClick={props.closeDropdown}

@@ -6,7 +6,6 @@ import SearchField from "../../widgets/SearchField";
 import SearchDropdown from "./SearchDropdown";
 import SearchItem from "./SearchItem";
 import { NEW_GROUP } from "../TrackList/TrackList";
-import TagList from "../TagList";
 
 type TrackSearchDropdownProps = {
   closeSearchDropdown: () => void,
@@ -33,7 +32,7 @@ export default function TrackSearchDropdown({
     <SearchField
       value={searchText}
       onChange={setSearchText}
-      placeholderText={'search for sounds'}
+      placeholderText={`'tavern', 'music', 'horse', ...`}
     />
   );
 
@@ -54,20 +53,12 @@ export default function TrackSearchDropdown({
     />
   ));
 
-  const suggestions = searchText.length === 0
-    ? <TagList
-      tags={['tavern', 'music', 'horse']} 
-      onTagClick={appendSearchText}
-      />
-    : undefined;
-
   return (
     <SearchDropdown
       searchField={searchField}
       results={resultElements}
       isFetchingResults={isFetchingResults}
       closeDropdown={closeSearchDropdown}
-      suggestions={suggestions}
       isSearchTextEmpty={searchText.length === 0}
     />
   );
