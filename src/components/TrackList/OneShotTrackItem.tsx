@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import useOneShotPlayer from "../../hooks/useOneShotPlayer";
 import useTrackData from "../../hooks/useTrackData";
@@ -47,6 +47,7 @@ export default function OneShotTrackItem({
     : volume * groupVolume;
   useTrackData(id, index, groupIndex, !isUnloaded(oneShot));
   const dispatch = useDispatch();
+  const wickRef = useRef(null);
 
   const minSecondsBetween = (oneShot as OneShot).minSecondsBetween ?? DEFAULT_MIN_TIME_BETWEEN;
   const maxSecondsBetween = (oneShot as OneShot).maxSecondsBetween ?? DEFAULT_MAX_TIME_BETWEEN;
@@ -55,7 +56,8 @@ export default function OneShotTrackItem({
     computedVolume,
     minSecondsBetween,
     maxSecondsBetween,
-    isPlaying
+    isPlaying,
+    wickRef
   );
 
   if (!isVisible) {
@@ -67,6 +69,7 @@ export default function OneShotTrackItem({
       isPlaying={isPlaying}
       minSecondsBetween={minSecondsBetween}
       maxSecondsBetween={maxSecondsBetween}
+      wickRef={wickRef}
     />
   )
 

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 import { fadeOutAndPause } from "../utils/audioFileUtil";
-import { randIntBetween } from "../utils/mathUtil";
+import { clamp, randIntBetween } from "../utils/mathUtil";
 import { useFadeMultiplier } from "./useFadeMultiplier";
 
 const SERIALIZATION_DELIMITER = '----';
@@ -19,7 +19,8 @@ export default function useOneShotPlayer(
   volume: number,
   minSecondsBetween: number,
   maxSecondsBetween: number,
-  isPlaying: boolean
+  isPlaying: boolean,
+  wickRef: RefObject<HTMLDivElement>
 ) {
   const [audioElements, setAudioElements] = useState<HTMLAudioElement[]>([]);
   const [playNow, setPlayNow] = useState(false);
@@ -27,6 +28,7 @@ export default function useOneShotPlayer(
   // The point at which the user clicked play, or when the most recent one-shot
   //  sound was fired (restarting the timer)
   const [timerStartTimestamp, setTimerStartTimestamp] = useState<number | null>(null);
+  const [timerDuration, setTimerDuration] = useState<number | null>(null);
 
   // Serializing sources is necessary so that audio elements are only created
   //  when the sources themselves change. Since useEffect's dependency array
@@ -54,7 +56,7 @@ export default function useOneShotPlayer(
     // Handle start/stop button clicks
     if (isPlaying) {
       setPlayNow(true);
-      setTimerStartTimestamp(Date.now());
+      setTimerStartTimestamp(performance.now());
     } else {
       setTimerStartTimestamp(null);
     }
@@ -68,10 +70,30 @@ export default function useOneShotPlayer(
     const timeout = setTimeout(() => {
       setPlayNow(true);
       // Restart timer
-      setTimerStartTimestamp(Date.now());
+      setTimerStartTimestamp(performance.now());
     }, timerLength);
+    setTimerDuration(timerLength);
     return () => clearTimeout(timeout);
   }, [timerStartTimestamp, minSecondsBetween, maxSecondsBetween])
+
+  useEffect(() => {
+    // Start wick burning animation
+    function animateWick(time: number) {
+      if (
+        wickRef.current === null ||
+        timerStartTimestamp === null ||
+        timerDuration === null
+      ) return;
+      const timeElapsed = time - timerStartTimestamp;
+      const percentageElapsed = clamp(0, timeElapsed / timerDuration, 1);
+      const percentageRemaining = 1 - percentageElapsed;
+      wickRef.current.style.transform = `scaleX(${percentageRemaining})`;
+      if (percentageRemaining === 0) return;
+      wickAnimationRafId = requestAnimationFrame(animateWick);
+    }
+    let wickAnimationRafId = requestAnimationFrame(animateWick);
+    return () => cancelAnimationFrame(wickAnimationRafId);
+  }, [timerStartTimestamp, timerDuration, wickRef]);
 
   // Play a sound randomly selected from the sources
   useEffect(() => {

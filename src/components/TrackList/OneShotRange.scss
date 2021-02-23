@@ -1,6 +1,6 @@
 .one-shot-range-container {
   position: absolute;
-  top: 40px;
+  top: 36px;
 
   .sentence {
     font-size: 1rem;
@@ -9,5 +9,18 @@
   .number {
     color: var(--one-shot);
     font-size: 1rem;
+  }
+
+  .wick {
+    margin-top: 4px;
+    width: 100%;
+    height: 2px;
+    opacity: 0;
+    background-color: var(--one-shot);
+    transform-origin: left;
+
+    &.visible {
+      opacity: 1;
+    }
   }
 }
