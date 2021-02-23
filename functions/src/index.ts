@@ -35,10 +35,34 @@ const fuseOptions: Fuse.IFuseOptions<SearchResult> = {
 
 async function _search(searchText: string): Promise<SearchResult[]> {
   const index = await indexRef.doc('index').get();
-  const {tracks, packs} = index.data() ?? {tracks: [], packs: []};
+  const { tracks, packs } = index.data() ?? { tracks: [], packs: [] };
   const fuse = new Fuse([...tracks as SearchResult[], ...packs as SearchResult[]], fuseOptions);
-  const fuseResults = fuse.search(searchText);
-  return fuseResults.map(result => result.item).splice(0, MAX_RESULTS);
+  const words = searchText.split(' ');
+  const resultsMap: {
+    [id: string]: {
+      item: SearchResult,
+      score: number
+    }
+  } = {};
+  // Search for results for each word
+  //  and sum up the scores of each result
+  words.forEach(word => {
+    const fuseResults = fuse.search(word).splice(0, MAX_RESULTS);
+    fuseResults.forEach(result => {
+      const { item, score = 0 } = result;
+      const id = item.id;
+      if (resultsMap[id] === undefined) {
+        resultsMap[id] = { item, score }
+      } else {
+        resultsMap[id].score += score;
+      }
+    });
+  });
+  // Sort by highest aggregated sum
+  return Object.values(resultsMap)
+    .sort((a, b) => b.score - a.score)
+    .map(result => result.item)
+    .splice(0, MAX_RESULTS);
 }
 
 export const search = functions.https.onRequest(async (request, response) => {
