@@ -33,9 +33,10 @@ const FUSE_OPTIONS: Fuse.IFuseOptions<SearchResult> = {
 };
 
 let fuse: Fuse<SearchResult>;
+let index: firestore.DocumentData;
 
 async function _search(searchText: string): Promise<SearchResult[]> {
-  const index = await indexRef.doc('index').get();
+  index = index || await indexRef.doc('index').get();
   const { tracks, packs } = index.data() ?? { tracks: [], packs: [] };
   fuse = fuse || new Fuse([...tracks as SearchResult[], ...packs as SearchResult[]], FUSE_OPTIONS);
   const words = searchText.split(' ');
