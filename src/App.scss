@@ -24,6 +24,11 @@
   font-weight: normal;
 }
 
+body {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
 h1 {
   font-family: var(--font--signika);
   font-size: 2.5rem;
