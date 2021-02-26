@@ -18,6 +18,10 @@
     border-radius: 50px;
     background: var(--background);
     border: 1px solid var(--azure);
+
+    &:hover {
+      color: white;
+    }
   }
 
   &.tag--loop {
