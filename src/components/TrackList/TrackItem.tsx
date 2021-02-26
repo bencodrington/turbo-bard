@@ -76,7 +76,7 @@ export default function TrackItem({
           <h4 className={isExpanded ? 'expanded' : ''}>
             {name ?? '...'}
           </h4>
-          {additionalControls}
+          {!isSearchOpen && additionalControls}
           <DefaultButton
             onClick={remove}
             icon={closeIcon}
