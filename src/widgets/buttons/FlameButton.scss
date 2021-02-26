@@ -3,6 +3,10 @@
   height: 3.5rem;
   width: 3.5rem;
 
+  &:hover:not(:disabled) img {
+    transform: translateX(-50%) scale(1.1);
+  }
+
   .icon {
     position: absolute;
     width: 2.25rem;

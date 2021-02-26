@@ -1,10 +1,7 @@
 @import '../../mixins.scss';
 
 .add-sounds-button-container {
-  
-  span {
-    background: var(--track);
-    background-clip: text;
-    color: transparent;
-  }
+  background: var(--track);
+  background-clip: text;
+  color: transparent;
 }

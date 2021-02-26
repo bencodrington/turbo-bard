@@ -8,6 +8,13 @@
   background: var(--background);
   justify-content: center;
 
+  &:hover:not(:disabled) {
+    color: white;
+    img {
+      transform: scale(1.1);
+    }
+  }
+
   &:disabled {
     cursor: not-allowed;
     
