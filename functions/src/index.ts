@@ -19,11 +19,11 @@ const MAX_RESULTS = 25;
 const FUSE_OPTIONS: Fuse.IFuseOptions<SearchResult> = {
   minMatchCharLength: 2,
   ignoreLocation: true,
-  threshold: 0.2,
+  threshold: 0.1,
   keys: [
     {
       name: "name",
-      weight: 25
+      weight: 0.05
     },
     {
       name: "tags",
