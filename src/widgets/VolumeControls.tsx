@@ -1,7 +1,5 @@
 import React from "react";
-import DefaultButton from "./buttons/DefaultButton";
 import volumeIcon from "../assets/icon-volume.svg";
-import muteIcon from "../assets/icon-mute.svg";
 import RangeInput from "./RangeInput";
 
 import "./VolumeControls.scss";
@@ -34,6 +32,9 @@ export default function VolumeControls({
 
   return (
     <div className="volume-controls-container">
+      <label className= "icon">
+        <img src={volumeIcon} alt="volume" />
+      </label>
       <RangeInput
         className="range-slider"
         min={0}
@@ -42,11 +43,6 @@ export default function VolumeControls({
         onValueChange={_setVolume}
         ariaLabel="volume slider"
         getAriaValueText={ariaValueFormatter}
-      />
-      <DefaultButton
-        onClick={toggleIsMuted}
-        icon={isMuted ? muteIcon : volumeIcon}
-        isActive={isMuted}
       />
     </div>
   );

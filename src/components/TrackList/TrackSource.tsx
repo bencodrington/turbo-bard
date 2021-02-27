@@ -13,7 +13,7 @@ type TrackSourceProps = {
 export default function TrackSource({ source }: TrackSourceProps) {
   return (
     <div className="track-source-container">
-      <p><label>SOURCE</label>{source
+      <p><label>Source</label>{source
         ? source.author ?? ''
         : '...'
       }</p>
