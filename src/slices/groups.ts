@@ -55,6 +55,10 @@ const groupsSlice = createSlice({
       const { groupIndex, trackIndex } = payload;
       const group = getGroupByIndex(groupIndex, state);
       if (group === undefined) return;
+      if (group.tracks.length === 1 && group.tracks[0].index === trackIndex) {
+        // Last track was removed, so remove this group
+        return state.filter(group => group.index !== groupIndex);
+      }
       group.tracks = group.tracks.filter(track => track.index !== trackIndex);
     },
     setTrackData(state, { payload }: PayloadAction<{
