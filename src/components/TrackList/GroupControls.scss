@@ -6,4 +6,8 @@
   & > *:not(:first-child) {
     margin-left: 5px;
   }
+
+  .fixed-width {
+    min-width:18ch;
+  }
 }

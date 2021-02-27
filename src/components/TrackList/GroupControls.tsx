@@ -36,21 +36,21 @@ export default function GroupControls({
   }
   return (
     <div className="group-controls-container">
-      {tracks.length >= 2
-        ? <DefaultButton
+      {tracks.length >= 1
+        && <DefaultButton
           onClick={isChildPlaying ? stopAll : startAll}
           icon={isChildPlaying ? stopIcon : startAllIcon}
           text={(isChildPlaying ? 'Stop' : 'Start') + ' all'}
+          className={'fixed-width'}
         />
-        : null
       }
-      {!isChildPlaying && _isAnotherGroupPlaying
-        ? <DefaultButton
+      {tracks.length >= 1
+        && <DefaultButton
           onClick={transitionTo}
           icon={transitionToIcon}
           text={'Transition to'}
+          isDisabled={!_isAnotherGroupPlaying}
         />
-        : null
       }
     </div>
   );
