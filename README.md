@@ -19,7 +19,11 @@ Builds and minifies app for production to the `build` folder.
 
 ### In the `functions` directory
 
-#### `npm run serve`
+#### `npm run watch`
+
+Recompile functions whenever you save.
+
+#### `npm run start`
 
 Emulate cloud functions locally to test without having to deploy.
 

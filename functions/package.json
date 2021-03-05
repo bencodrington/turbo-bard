@@ -3,9 +3,10 @@
   "scripts": {
     "lint": "eslint \"src/**/*\"",
     "build": "tsc",
-    "serve": "npm run build && firebase emulators:start --only functions",
+    "watch": "tsc -w",
+    "serve": "npm run build",
     "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
+    "start": "firebase emulators:start --inspect-functions",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
