@@ -1,10 +1,9 @@
 import { clamp } from "./mathUtil";
 
-export function createSourceSet(fileName: string) {
-  return [
-    `https://storage.googleapis.com/turbo-bard.appspot.com/${fileName}.webm`,
-    `https://storage.googleapis.com/turbo-bard.appspot.com/${fileName}.mp3`
-  ];
+export function getAudioFileUrl(fileName: string) {
+  const useWebm = (new Audio().canPlayType('audio/webm; codecs="vorbis')) === "probably";
+  const fileType = useWebm ? 'webm' : 'mp3';
+  return `https://storage.googleapis.com/turbo-bard.appspot.com/${fileName}.${fileType}`;
 }
 
 const FADE_DURATION_SECONDS = 2;

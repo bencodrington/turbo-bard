@@ -1,13 +1,12 @@
 import { RefObject, useEffect, useState } from "react";
-import { fadeOutAndPause } from "../utils/audioFileUtil";
+import { fadeOutAndPause, getAudioFileUrl } from "../utils/audioFileUtil";
 import { clamp, randIntBetween } from "../utils/mathUtil";
 import { useFadeMultiplier } from "./useFadeMultiplier";
 
 const SERIALIZATION_DELIMITER = '----';
 
-function serializeSources(srcSets: string[][]) {
-  // TODO: validate that the extension is supported, fallback to subsequent ones
-  return srcSets.map(srcSet => srcSet[0]).join(SERIALIZATION_DELIMITER);
+function serializeSources(samples: string[]) {
+  return samples.map(filename => getAudioFileUrl(filename)).join(SERIALIZATION_DELIMITER);
 }
 
 function deserializeSources(serializedSources: string) {
@@ -15,7 +14,7 @@ function deserializeSources(serializedSources: string) {
 }
 
 export default function useOneShotPlayer(
-  srcSets: string[][],
+  samples: string[],
   volume: number,
   minSecondsBetween: number,
   maxSecondsBetween: number,
@@ -34,7 +33,7 @@ export default function useOneShotPlayer(
   //  when the sources themselves change. Since useEffect's dependency array
   //  uses shallow equality, and the source array itself changes every render,
   //  we serialize it into a string to compare the values themselves.
-  const serializedSources = serializeSources(srcSets);
+  const serializedSources = serializeSources(samples);
   useEffect(() => {
     const sources = deserializeSources(serializedSources);
     if (sources.length === 0) return;

@@ -5,7 +5,6 @@ import useTrackData from "../../hooks/useTrackData";
 import { useVolume } from "../../hooks/useVolume";
 import { isUnloaded, OneShot, UnloadedTrack } from "../../models/Track";
 import { setTrackIsPlaying } from "../../slices/groups";
-import { createSourceSet } from "../../utils/audioFileUtil";
 import OneShotRange from "./OneShotRange";
 
 import TrackItem from "./TrackItem";
@@ -30,7 +29,6 @@ export default function OneShotTrackItem({
   onTagClick,
   groupVolume
 }: OneShotTrackItemProps) {
-  const sourceSets = isUnloaded(oneShot) ? [] : oneShot.samples.map(createSourceSet);
   const {
     volume,
     setVolume,
@@ -43,16 +41,17 @@ export default function OneShotTrackItem({
   });
   const { name, id, index, tags, isPlaying } = oneShot;
   const computedVolume = isMuted
-    ? 0
-    : volume * groupVolume;
+  ? 0
+  : volume * groupVolume;
   useTrackData(id, index, groupIndex, !isUnloaded(oneShot));
   const dispatch = useDispatch();
   const wickRef = useRef(null);
-
+  
+  const samples = isUnloaded(oneShot) ? [] : oneShot.samples;
   const minSecondsBetween = (oneShot as OneShot).minSecondsBetween ?? DEFAULT_MIN_TIME_BETWEEN;
   const maxSecondsBetween = (oneShot as OneShot).maxSecondsBetween ?? DEFAULT_MAX_TIME_BETWEEN;
   useOneShotPlayer(
-    sourceSets,
+    samples,
     computedVolume,
     minSecondsBetween,
     maxSecondsBetween,

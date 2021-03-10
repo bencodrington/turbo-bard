@@ -3,7 +3,6 @@ import { isUnloaded, Loop, UnloadedTrack } from "../../models/Track";
 import useLoopPlayer from "../../hooks/useLoopPlayer";
 import useTrackData from "../../hooks/useTrackData";
 import { useVolume } from "../../hooks/useVolume";
-import { createSourceSet } from "../../utils/audioFileUtil";
 
 import TrackItem from "./TrackItem";
 import { useDispatch } from "react-redux";
@@ -26,7 +25,6 @@ export default function LoopTrackItem({
   onTagClick,
   groupVolume
 }: LoopTrackItemProps) {
-  const sourceSet = isUnloaded(loop) ? [] : createSourceSet(loop.fileName);
   const { name, id, index, tags, isPlaying } = loop;
   const {
     volume,
@@ -41,7 +39,8 @@ export default function LoopTrackItem({
   const computedVolume = isMuted
     ? 0
     : volume * groupVolume;
-  const { isLoaded: isAudioLoaded } = useLoopPlayer(sourceSet, computedVolume, isPlaying);
+  const fileName = isUnloaded(loop) ? undefined : loop.fileName;
+  const { isLoaded: isAudioLoaded } = useLoopPlayer(computedVolume, isPlaying, fileName);
   useTrackData(id, index, groupIndex, !isUnloaded(loop));
   const dispatch = useDispatch();
 
