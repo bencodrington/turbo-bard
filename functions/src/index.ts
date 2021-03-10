@@ -1,4 +1,4 @@
-import { https, logger } from 'firebase-functions';
+import { https, logger, firestore as functionsFirestore } from 'firebase-functions';
 import { initializeApp, firestore } from 'firebase-admin';
 import Fuse from 'fuse.js';
 
@@ -10,8 +10,10 @@ const cors = require('cors');
 
 initializeApp();
 const db = firestore();
-const packsRef = db.collection('packs');
-const tracksRef = db.collection('tracks');
+const PACKS = 'packs';
+const TRACKS = 'tracks';
+const packsRef = db.collection(PACKS);
+const tracksRef = db.collection(TRACKS);
 const indexRef = db.collection('index');
 
 const MAX_RESULTS = 25;
@@ -140,10 +142,9 @@ export const fetchTrackDataById = https.onRequest(async (request, response) => {
   });
 });
 
-// TODO: call this whenever the database is updated
-export const createSearchIndex = https.onRequest(async (request, response) => {
-  return cors()(request, response, async () => {
-
+export const indexPacks = functionsFirestore
+  .document(`${PACKS}/{packId}`)
+  .onWrite(async (change, context) => {
     logger.info('index packs');
     const packResults = await packsRef.get();
     let packs: SearchResult[] = [];
@@ -163,6 +164,12 @@ export const createSearchIndex = https.onRequest(async (request, response) => {
       });
     }
 
+    indexRef.doc('index').set({ packs }, { merge: true });
+  });
+
+export const indexTracks = functionsFirestore
+  .document(`${TRACKS}/{trackId}`)
+  .onWrite(async (change, context) => {
     logger.info('index tracks');
     let tracks: SearchResult[] = [];
     const trackResults = await tracksRef.get();
@@ -180,7 +187,5 @@ export const createSearchIndex = https.onRequest(async (request, response) => {
         };
       });
     }
-    indexRef.doc('index').set({ packs, tracks });
-    response.status(200).send('success');
+    indexRef.doc('index').set({ tracks }, { merge: true });
   });
-});
