@@ -22,13 +22,14 @@ export function addSearchResultToGroup(
     // Result is a pack
     tracks.forEach(track => {
       const { id, volume, oneShotConfig } = track;
-      console.log(oneShotConfig); // TODO: use oneshotconfig
       group.tracks.push({
         id,
         volume,
         isMuted: false,
         index: getNextIndex(group.tracks),
-        isPlaying: false
+        isPlaying: false,
+        minSecondsBetween: oneShotConfig?.minSecondsBetween,
+        maxSecondsBetween: oneShotConfig?.maxSecondsBetween,
       });
     })
     return;
