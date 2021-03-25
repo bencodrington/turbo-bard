@@ -13,6 +13,8 @@
 
 # database
 /database/inputs
+# database credentials
+/database/turbo-bard-firebase-adminsdk-*.json
 
 # misc
 .DS_Store
