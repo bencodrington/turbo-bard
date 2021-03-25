@@ -4635,6 +4635,8 @@
     "samples": [
       "battle-horn"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "596c03a91ad11a4338b81fa5": {
@@ -4656,6 +4658,8 @@
     "samples": [
       "northern-windchimes"
     ],
+    "minSecondsBetween": 20,
+    "maxSecondsBetween": 45,
     "type": "ONESHOT"
   },
   "596c0bc21ad11a4338b81fba": {
@@ -4676,6 +4680,8 @@
     "samples": [
       "magic-effect"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "596c0eeb1ad11a4338b81fc4": {
@@ -4695,6 +4701,8 @@
     "samples": [
       "five-dice-on-felt"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "596c0f1a1ad11a4338b81fc6": {
@@ -4715,6 +4723,8 @@
     "samples": [
       "sixteen-dice-on-felt"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "596c0f461ad11a4338b81fc8": {
@@ -4732,8 +4742,10 @@
       "meta"
     ],
     "samples": [
-      "five-dice-on-hard-wood"
+      "two-dice-on-hard-wood"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "596c102c1ad11a4338b81fcb": {
@@ -4757,6 +4769,8 @@
     "samples": [
       "ghosts-pass-by"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "596c10731ad11a4338b81fcd": {
@@ -4777,6 +4791,8 @@
     "samples": [
       "necromantic-spell"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "596c17421ad11a4338b81fdd": {
@@ -4790,11 +4806,14 @@
     "tags": [
       "cinematic",
       "dramatic",
-      "plot-twist"
+      "plot-twist",
+      "sting"
     ],
     "samples": [
       "razor-impact"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "596c19301ad11a4338b81fe2": {
@@ -4815,6 +4834,8 @@
     "samples": [
       "massive-explosion"
     ],
+    "minSecondsBetween": 20,
+    "maxSecondsBetween": 45,
     "type": "ONESHOT"
   },
   "596d2ec5c98d54325ca2c938": {
@@ -4839,6 +4860,8 @@
       "glass-3",
       "glass-4"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "596d2fdcc98d54325ca2c93c": {
@@ -4861,6 +4884,8 @@
       "wave-large",
       "wave-medium"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "596d322dc98d54325ca2c943": {
@@ -4881,6 +4906,8 @@
     "samples": [
       "firework-spell"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 25,
     "type": "ONESHOT"
   },
   "596d474423ef2925a856ec06": {
@@ -4901,6 +4928,8 @@
     "samples": [
       "its-here"
     ],
+    "minSecondsBetween": 20,
+    "maxSecondsBetween": 45,
     "type": "ONESHOT"
   },
   "596d477323ef2925a856ec08": {
@@ -4921,6 +4950,8 @@
     "samples": [
       "it-begins"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 25,
     "type": "ONESHOT"
   },
   "596d48c523ef2925a856ec0c": {
@@ -4940,6 +4971,8 @@
     "samples": [
       "b3"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 10,
     "type": "ONESHOT"
   },
   "596d4b2223ef2925a856ec11": {
@@ -4964,6 +4997,8 @@
       "attercop-2",
       "attercop-3"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 25,
     "type": "ONESHOT"
   },
   "596d516523ef2925a856ec18": {
@@ -4995,6 +5030,8 @@
       "debris-7",
       "debris-8"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "596d523023ef2925a856ec21": {
@@ -5021,6 +5058,8 @@
       "fizzy-drink-3",
       "fizzy-drink-4"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 25,
     "type": "ONESHOT"
   },
   "596d52ef23ef2925a856ec35": {
@@ -5041,6 +5080,8 @@
     "samples": [
       "sombre-fiddle"
     ],
+    "minSecondsBetween": 30,
+    "maxSecondsBetween": 45,
     "type": "ONESHOT"
   },
   "596d538123ef2925a856ec37": {
@@ -5065,6 +5106,8 @@
       "battering-ram-3",
       "battering-ram-4"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 8,
     "type": "ONESHOT"
   },
   "596d55ab23ef2925a856ec3e": {
@@ -5081,7 +5124,9 @@
       "parchment",
       "quill",
       "ink",
-      "charcoal"
+      "charcoal",
+      "intro",
+      "recap"
     ],
     "samples": [
       "rough-draft-1",
@@ -5090,6 +5135,8 @@
       "rough-draft-4",
       "rough-draft-5"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "596d59bdab828c44d8ff3545": {
@@ -5103,11 +5150,14 @@
     "tags": [
       "horse",
       "distant",
-      "stressed"
+      "stressed",
+      "frightened"
     ],
     "samples": [
       "horse-whinnying"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "596d5a4cab828c44d8ff3547": {
@@ -5126,6 +5176,8 @@
     "samples": [
       "magic-missile"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "596d5aabab828c44d8ff3549": {
@@ -5148,6 +5200,8 @@
       "anvil-strike",
       "anvil-strikes"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 10,
     "type": "ONESHOT"
   },
   "596d5bbdab828c44d8ff354b": {
@@ -5168,6 +5222,8 @@
     "samples": [
       "explosion-large"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 25,
     "type": "ONESHOT"
   },
   "596d5c6aab828c44d8ff354d": {
@@ -5191,6 +5247,8 @@
       "punch-3",
       "punch-4"
     ],
+    "minSecondsBetween": 2,
+    "maxSecondsBetween": 10,
     "type": "ONESHOT"
   },
   "596d5cecab828c44d8ff3552": {
@@ -5215,6 +5273,8 @@
       "troll-noise-3",
       "troll-noise-4"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "596d6f14ab828c44d8ff3557": {
@@ -5236,6 +5296,8 @@
     "samples": [
       "terror-approaches"
     ],
+    "minSecondsBetween": 20,
+    "maxSecondsBetween": 45,
     "type": "ONESHOT"
   },
   "596d702aab828c44d8ff3559": {
@@ -5259,6 +5321,8 @@
       "counting-coins-2",
       "counting-coins-3"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "596d71c8ab828c44d8ff355f": {
@@ -5284,6 +5348,8 @@
       "pony-noise-3",
       "pony-noise-4"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "596fef6bb4c0bb0d405d4b10": {
@@ -5304,6 +5370,8 @@
     "samples": [
       "spit-take"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "596fefb5b4c0bb0d405d4b12": {
@@ -5324,6 +5392,8 @@
     "samples": [
       "crunch-munch"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 25,
     "type": "ONESHOT"
   },
   "596ff1cbb4c0bb0d405d4b16": {
@@ -5347,11 +5417,14 @@
       "elemental",
       "fiend",
       "monstrosity",
-      "undead"
+      "undead",
+      "defeated"
     ],
     "samples": [
       "monster-death"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 45,
     "type": "ONESHOT"
   },
   "596ff21db4c0bb0d405d4b18": {
@@ -5371,11 +5444,14 @@
       "fiend",
       "monstrosity",
       "wyvern",
-      "ancient"
+      "ancient",
+      "angry"
     ],
     "samples": [
       "dragon-roar"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 45,
     "type": "ONESHOT"
   },
   "596ff265b4c0bb0d405d4b1a": {
@@ -5398,11 +5474,15 @@
       "elemental",
       "fiend",
       "monstrosity",
-      "undead"
+      "undead",
+      "death",
+      "defeated"
     ],
     "samples": [
       "monster-attack"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "596ff27fb4c0bb0d405d4b1c": {
@@ -5431,6 +5511,8 @@
     "samples": [
       "monster-pain"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "596ff47bb4c0bb0d405d4b21": {
@@ -5455,6 +5537,8 @@
     "samples": [
       "teleport"
     ],
+    "minSecondsBetween": 20,
+    "maxSecondsBetween": 60,
     "type": "ONESHOT"
   },
   "596ff536b4c0bb0d405d4b24": {
@@ -5472,11 +5556,17 @@
       "teleport",
       "casting",
       "transmutation",
-      "conjuration"
+      "conjuration",
+      "mysterious",
+      "disappear",
+      "vanish",
+      "invisibility"
     ],
     "samples": [
       "blink"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "596ff69bb4c0bb0d405d4b27": {
@@ -5507,6 +5597,8 @@
       "falling-ice-3",
       "falling-ice-4"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "596ff725b4c0bb0d405d4b2c": {
@@ -5523,11 +5615,16 @@
       "drop",
       "corrosion",
       "lava",
-      "hiss"
+      "hiss",
+      "venom",
+      "spit",
+      "poison"
     ],
     "samples": [
       "acid-burn"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "596ffa1bb4c0bb0d405d4b30": {
@@ -5548,12 +5645,15 @@
       "strain",
       "groan",
       "lair",
-      "cave"
+      "cave",
+      "snow"
     ],
     "samples": [
       "thin-ice-1",
       "thin-ice-2"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "596ffe6320dbd71470b936c0": {
@@ -5576,7 +5676,8 @@
       "gross",
       "grotesque",
       "undead",
-      "monster"
+      "monster",
+      "swamp"
     ],
     "samples": [
       "cannibalism-1",
@@ -5584,6 +5685,8 @@
       "cannibalism-3",
       "cannibalism-4"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 25,
     "type": "ONESHOT"
   },
   "596fffa620dbd71470b936c6": {
@@ -5606,6 +5709,8 @@
       "fart-3",
       "fart-4"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "597004ad85c3b4391cb994c3": {
@@ -5630,6 +5735,8 @@
       "door-creak-3",
       "door-creak-4"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "597005ea85c3b4391cb994c7": {
@@ -5646,11 +5753,16 @@
       "casting",
       "conjuration",
       "abjuration",
-      "protection"
+      "protection",
+      "shield",
+      "telekinesis",
+      "aura"
     ],
     "samples": [
       "energy-pulse"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "5970061c85c3b4391cb994c9": {
