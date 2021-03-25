@@ -1,6 +1,6 @@
 import React from "react";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
-import closeIcon from "../../assets/icon-close.svg";
+import closeMultipleIcon from "../../assets/icon-close-multiple.svg";
 import AddIcon from "../../assets/icon-add.svg";
 import { Group } from "../../models/Group";
 
@@ -93,7 +93,7 @@ export default function TrackListGroup({
         <h3 className="name">{group.name}</h3>
         <DefaultButton
           onClick={onCloseButtonClick}
-          icon={closeIcon}
+          icon={closeMultipleIcon}
           isRound={true}
           isDisabled={isSearchModeActive}
         />
