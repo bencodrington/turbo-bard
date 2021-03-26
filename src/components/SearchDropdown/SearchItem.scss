@@ -1,3 +1,5 @@
+@import '../../mixins.scss';
+
 .search-item-container {
   margin: 0;
   margin-top: 0.5rem;
@@ -21,9 +23,7 @@
   }
 
   .pack-count {
-    background: var(--track);
-    background-clip: text;
-    color: transparent;
+    @include gradientText;
     margin-left: 8px;
 
     .pack-count__number {

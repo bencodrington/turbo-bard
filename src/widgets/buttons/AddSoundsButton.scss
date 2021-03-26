@@ -1,7 +1,5 @@
 @import '../../mixins.scss';
 
 .add-sounds-button-container {
-  background: var(--track);
-  background-clip: text;
-  color: transparent;
+  @include gradientText;
 }

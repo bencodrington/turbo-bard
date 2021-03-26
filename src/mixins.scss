@@ -9,3 +9,9 @@
   font-size: 1.125rem;
   font-kerning: none;
 }
+
+@mixin gradientText {
+  background: var(--track);
+  background-clip: text;
+  color: transparent;
+}

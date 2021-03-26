@@ -1,9 +1,9 @@
+@import "../../mixins.scss";
+
 .track-list-container {
   padding: 0 4px 64px;
 
   .add-sounds-button {
-    background: var(--track);
-    background-clip: text;
-    color: transparent;
+    @include gradientText;
   }
 }
