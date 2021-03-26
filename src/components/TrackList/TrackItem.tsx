@@ -72,17 +72,19 @@ export default function TrackItem({
         </div>
       </div>
       <div className="track__body">
-        <div className="track__name">
-          <h4 className={isExpanded ? 'expanded' : ''}>
-            {name ?? '...'}
-          </h4>
-          {!isSearchOpen && additionalControls}
+        <header className={additionalControls !== undefined ? 'has-controls' : ''}>
+          <div className="name-column">
+            <h4 className={isExpanded ? 'expanded' : ''}>
+              {name ?? '...'}
+            </h4>
+            {additionalControls}
+          </div>
           <DefaultButton
             onClick={remove}
             icon={closeIcon}
             isDisabled={isSearchOpen}
           />
-        </div>
+        </header>
         {
           isSearchOpen
             ? tags !== undefined

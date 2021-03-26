@@ -18,10 +18,16 @@
     position: relative;
   }
 
-  .track__name {
-    // height: 56px;
+  header {
     display: flex;
     align-items: center;
+
+    .name-column {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+    }
 
     h4 {
       color: var(--turbo-blue);

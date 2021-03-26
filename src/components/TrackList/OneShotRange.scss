@@ -1,9 +1,16 @@
 .one-shot-range-container {
-  position: absolute;
-  top: 36px;
+  // Shift controls up slightly to reduce their
+  //  height and make the row fit into the 56px
+  //  row
+  margin-top: -2px;
 
   .sentence {
     font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: 100%;
   }
 
   .number {
