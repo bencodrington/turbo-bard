@@ -61,56 +61,58 @@ export default function TrackItem({
 
   return (
     <div className="track-item-container">
-      <div className="torch">
-        <FlameButton
-          onClick={toggleIsPlaying}
-          isPlaying={isPlaying}
-          isDisabled={!isAudioReady}
-        />
-        <div className="torch__handle">
-          <img src={torchHandle} alt="Torch handle" />
+      <div className="row">
+        <div className="torch">
+          <FlameButton
+            onClick={toggleIsPlaying}
+            isPlaying={isPlaying}
+            isDisabled={!isAudioReady}
+          />
+          <div className="torch__handle">
+            <img src={torchHandle} alt="Torch handle" />
+          </div>
+        </div>
+        <div className="track__body">
+          <header className={additionalControls !== undefined ? 'has-controls' : ''}>
+            <div className="name-column">
+              <h4 className={isExpanded ? 'expanded' : ''}>
+                {name ?? '...'}
+              </h4>
+              {additionalControls}
+            </div>
+            <DefaultButton
+              onClick={remove}
+              icon={closeIcon}
+              isDisabled={isSearchOpen}
+            />
+          </header>
+          {
+            isSearchOpen
+              ? tags !== undefined
+                ? <TagList tags={tags} onTagClick={onTagClick} />
+                : null
+              : <div className='track-controls'>
+                <VolumeControls
+                  volume={volume}
+                  isMuted={isMuted}
+                  setVolume={setVolume}
+                  toggleIsMuted={toggleIsMuted}
+                />
+                <DefaultButton
+                  onClick={toggleIsExpanded}
+                  icon={infoIcon}
+                  isActive={isExpanded}
+                  isRound={true}
+                />
+              </div>
+          }
         </div>
       </div>
-      <div className="track__body">
-        <header className={additionalControls !== undefined ? 'has-controls' : ''}>
-          <div className="name-column">
-            <h4 className={isExpanded ? 'expanded' : ''}>
-              {name ?? '...'}
-            </h4>
-            {additionalControls}
-          </div>
-          <DefaultButton
-            onClick={remove}
-            icon={closeIcon}
-            isDisabled={isSearchOpen}
-          />
-        </header>
-        {
-          isSearchOpen
-            ? tags !== undefined
-              ? <TagList tags={tags} onTagClick={onTagClick} />
-              : null
-            : <div className='track-controls'>
-              <VolumeControls
-                volume={volume}
-                isMuted={isMuted}
-                setVolume={setVolume}
-                toggleIsMuted={toggleIsMuted}
-              />
-              <DefaultButton
-                onClick={toggleIsExpanded}
-                icon={infoIcon}
-                isActive={isExpanded}
-                isRound={true}
-              />
-            </div>
-        }
-        {
-          isExpanded
-            ? <TrackSource source={source} />
-            : null
-        }
-      </div>
+      {
+        isExpanded && !isSearchOpen
+          ? <TrackSource source={source} />
+          : null
+      }
     </div>
   );
 }

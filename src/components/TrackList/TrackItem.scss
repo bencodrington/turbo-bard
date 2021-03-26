@@ -1,6 +1,11 @@
 .track-item-container {
   display: flex;
+  flex-direction: column;
   margin-top: 24px;
+
+  .row {
+    display: flex;
+  }
 
   .torch {
     width: 56px;
