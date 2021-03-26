@@ -43,24 +43,9 @@ body, p, span {
   @include body;
 }
 
-ul li{
-  list-style: none;
-  display: block;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+a {
+  color: var(--canary);
+  text-decoration: none;
 }
 
 button {
@@ -68,4 +53,9 @@ button {
   border: none;
   background: none;
   cursor: pointer;
+}
+
+.App {
+  // Create a new stacking context
+  isolation: isolate;
 }

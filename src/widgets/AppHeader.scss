@@ -4,9 +4,19 @@
   display: flex;
   align-items: center;
   padding: .5rem;
+  justify-content: space-between;
 
   .logo {
     pointer-events: none;
     height: 3rem;
+  }
+
+  &.about-open {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: var(--background);
   }
 }
