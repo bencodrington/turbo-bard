@@ -5701,6 +5701,7 @@
       "gas",
       "toots",
       "rips",
+      "shenanigans",
       ":)"
     ],
     "samples": [
@@ -5785,6 +5786,8 @@
     "samples": [
       "ice-knife"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "59700c13fd689e1514ac8a40": {
@@ -5811,6 +5814,8 @@
     "samples": [
       "behind-dresser"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "59700cf4fd689e1514ac8a42": {
@@ -5834,6 +5839,8 @@
     "samples": [
       "firebolt"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "59700dfbfd689e1514ac8a44": {
@@ -5854,6 +5861,8 @@
     "samples": [
       "metal-plate"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "59700e5ffd689e1514ac8a49": {
@@ -5875,6 +5884,8 @@
     "samples": [
       "smouldering-metal"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 25,
     "type": "ONESHOT"
   },
   "59700ec3fd689e1514ac8a4f": {
@@ -5898,6 +5909,8 @@
     "samples": [
       "tinkering"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "59700f7dfd689e1514ac8a54": {
@@ -5919,6 +5932,8 @@
       "creaky-bridge-2",
       "creaky-bridge-3"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "5970106afd689e1514ac8a65": {
@@ -5943,6 +5958,8 @@
       "augmented-slam-1",
       "augmented-slam-2"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "59701704fd689e1514ac8a70": {
@@ -5959,11 +5976,14 @@
       "evocation",
       "casting",
       "electricity",
-      "pulse"
+      "pulse",
+      "curse"
     ],
     "samples": [
       "eldritch-blast"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "59701776fd689e1514ac8a72": {
@@ -5986,6 +6006,8 @@
     "samples": [
       "wooden-door"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "597017a6fd689e1514ac8a74": {
@@ -6009,6 +6031,8 @@
     "samples": [
       "stone-door"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 25,
     "type": "ONESHOT"
   },
   "59701903fd689e1514ac8a7c": {
@@ -6027,6 +6051,8 @@
     "samples": [
       "female-scream"
     ],
+    "minSecondsBetween": 30,
+    "maxSecondsBetween": 45,
     "type": "ONESHOT"
   },
   "59701d845b8d1b0d3cb0a7f6": {
@@ -6048,6 +6074,8 @@
     "samples": [
       "sinister-moment"
     ],
+    "minSecondsBetween": 20,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "59701e2d5b8d1b0d3cb0a7f9": {
@@ -6069,6 +6097,8 @@
     "samples": [
       "horror-moment"
     ],
+    "minSecondsBetween": 20,
+    "maxSecondsBetween": 45,
     "type": "ONESHOT"
   },
   "597026e8083fff0c8415d5c3": {
@@ -6101,6 +6131,8 @@
       "sword-clash-4",
       "sword-clash-5"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 10,
     "type": "ONESHOT"
   },
   "59702797083fff0c8415d5ca": {
@@ -6125,6 +6157,8 @@
     "samples": [
       "loose-arrow"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 10,
     "type": "ONESHOT"
   },
   "59702a64083fff0c8415d5ce": {
@@ -6146,6 +6180,8 @@
     "samples": [
       "monster-breath"
     ],
+    "minSecondsBetween": 5,
+    "maxSecondsBetween": 10,
     "type": "ONESHOT"
   },
   "59702b56083fff0c8415d5d0": {
@@ -6170,6 +6206,8 @@
     "samples": [
       "dragon-snarl"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "59702c30083fff0c8415d5d2": {
@@ -6187,11 +6225,15 @@
       "teleport",
       "portal",
       "dimensional",
-      "rift"
+      "rift",
+      "shield",
+      "aura"
     ],
     "samples": [
       "temporal-gate"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "59702c79083fff0c8415d5d4": {
@@ -6216,6 +6258,8 @@
     "samples": [
       "aboleth"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "59702cd7083fff0c8415d5d6": {
@@ -6234,11 +6278,17 @@
       "slurp",
       "grotesque",
       "gross",
-      "horror"
+      "horror",
+      "graveyard",
+      "necromancy",
+      "tomb",
+      "cemetery"
     ],
     "samples": [
       "passive-undead"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "59702edb083fff0c8415d5d9": {
@@ -6262,6 +6312,8 @@
       "horse-snort-1",
       "horse-snort-2"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 15,
     "type": "ONESHOT"
   },
   "597035a5083fff0c8415d5e3": {
@@ -6280,11 +6332,14 @@
       "cleric",
       "temple",
       "deity",
-      "paladin"
+      "paladin",
+      "comedy"
     ],
     "samples": [
       "choir-aah"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "59703dd1083fff0c8415d5ee": {
@@ -6298,14 +6353,17 @@
     "tags": [
       "comedic",
       "dramatic",
+      "hamster",
       "cinematic",
       "meta",
       "plot twist",
-      "play once"
+      "shenanigans"
     ],
     "samples": [
       "dun-dun-dun"
     ],
+    "minSecondsBetween": 30,
+    "maxSecondsBetween": 60,
     "type": "ONESHOT"
   },
   "59c3272e96808b2ef0bb56e7": {
@@ -6320,11 +6378,14 @@
       "comedic",
       "shenanigans",
       "funny",
-      "play once"
+      "death",
+      "defeated"
     ],
     "samples": [
       "wilhelm-scream"
     ],
+    "minSecondsBetween": 30,
+    "maxSecondsBetween": 60,
     "type": "ONESHOT"
   },
   "5b2ae7cfb29cc022082cb9e3": {
@@ -6336,7 +6397,6 @@
       ]
     },
     "tags": [
-      "play once",
       "monkeys",
       "apes",
       "gorillas",
@@ -6347,6 +6407,8 @@
     "samples": [
       "chimpanzees"
     ],
+    "minSecondsBetween": 20,
+    "maxSecondsBetween": 45,
     "type": "ONESHOT"
   },
   "5b2aee18b29cc022082cb9ed": {
@@ -6358,7 +6420,6 @@
       ]
     },
     "tags": [
-      "play once",
       "bell",
       "tower",
       "church",
@@ -6372,6 +6433,8 @@
     "samples": [
       "clock-strikes-eleven"
     ],
+    "minSecondsBetween": 60,
+    "maxSecondsBetween": 90,
     "type": "ONESHOT"
   },
   "5b2aef12b29cc022082cb9ef": {
@@ -6383,7 +6446,6 @@
       ]
     },
     "tags": [
-      "play once",
       "clapping",
       "performance",
       "voices",
@@ -6394,6 +6456,8 @@
     "samples": [
       "outdoor-applause"
     ],
+    "minSecondsBetween": 30,
+    "maxSecondsBetween": 60,
     "type": "ONESHOT"
   },
   "5b2aef66b29cc022082cb9f1": {
@@ -6405,7 +6469,6 @@
       ]
     },
     "tags": [
-      "play-once",
       "clapping",
       "whistling",
       "enthusiastic",
@@ -6416,6 +6479,8 @@
     "samples": [
       "large-hall-applause"
     ],
+    "minSecondsBetween": 30,
+    "maxSecondsBetween": 60,
     "type": "ONESHOT"
   },
   "5b2aefc2b29cc022082cb9f3": {
@@ -6427,13 +6492,16 @@
       ]
     },
     "tags": [
-      "play-once",
       "small group",
-      "slow clap"
+      "clapping",
+      "bard",
+      "village"
     ],
     "samples": [
       "feeble-applause"
     ],
+    "minSecondsBetween": 30,
+    "maxSecondsBetween": 60,
     "type": "ONESHOT"
   },
   "5b35910778a99e33a097195d": {
@@ -6454,6 +6522,8 @@
     "samples": [
       "shutting-drawer"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "5b35930278a99e33a0971961": {
@@ -6478,6 +6548,8 @@
       "stones-falling-3",
       "stones-falling-4"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "5b35945378a99e33a0971967": {
@@ -6494,11 +6566,18 @@
       "blast",
       "necromancer",
       "dungeon",
-      "lava"
+      "lava",
+      "witch",
+      "cauldron",
+      "smelting",
+      "forge",
+      "blacksmith"
     ],
     "samples": [
       "crucible-quenching"
     ],
+    "minSecondsBetween": 20,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "5b3596c478a99e33a097196c": {
@@ -6520,6 +6599,8 @@
     "samples": [
       "grandfather-clock-12"
     ],
+    "minSecondsBetween": 60,
+    "maxSecondsBetween": 60,
     "type": "ONESHOT"
   },
   "5b35979278a99e33a0971970": {
@@ -6538,11 +6619,16 @@
       "comedic",
       "madness",
       "deity",
-      "whimsical"
+      "whimsical",
+      "shenanigans",
+      "jester",
+      "fey"
     ],
     "samples": [
       "cartoon-time-machine"
     ],
+    "minSecondsBetween": 30,
+    "maxSecondsBetween": 60,
     "type": "ONESHOT"
   },
   "5b3597fd78a99e33a0971972": {
@@ -6559,11 +6645,15 @@
       "ominous",
       "funny",
       "madness",
-      "chaos"
+      "chaos",
+      "shenanigans",
+      "critical"
     ],
     "samples": [
       "cuckoo-clock-12"
     ],
+    "minSecondsBetween": 60,
+    "maxSecondsBetween": 60,
     "type": "ONESHOT"
   },
   "5b35993f78a99e33a0971976": {
@@ -6579,11 +6669,16 @@
       "smooch",
       "romance",
       "juicy",
-      "funny"
+      "funny",
+      "shenanigans",
+      "delicious",
+      "food"
     ],
     "samples": [
       "kiss"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "5b359aa878a99e33a097197b": {
@@ -6602,11 +6697,14 @@
       "funny",
       "magic",
       "chaos",
-      "madness"
+      "madness",
+      "fey"
     ],
     "samples": [
       "comedic-polymorph"
     ],
+    "minSecondsBetween": 30,
+    "maxSecondsBetween": 60,
     "type": "ONESHOT"
   },
   "5b359c1a78a99e33a097197f": {
@@ -6628,6 +6726,8 @@
     "samples": [
       "wall-collapsing"
     ],
+    "minSecondsBetween": 10,
+    "maxSecondsBetween": 20,
     "type": "ONESHOT"
   },
   "5b359cd778a99e33a0971981": {
@@ -6649,6 +6749,8 @@
     "samples": [
       "church-door-exterior"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "5b359d2b78a99e33a0971983": {
@@ -6670,6 +6772,8 @@
     "samples": [
       "church-door-interior"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "5b359d9078a99e33a0971986": {
@@ -6690,6 +6794,8 @@
     "samples": [
       "prison-cell-door"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   },
   "5b359dc978a99e33a0971988": {
@@ -6711,6 +6817,8 @@
     "samples": [
       "prison-iron-gate"
     ],
+    "minSecondsBetween": 15,
+    "maxSecondsBetween": 30,
     "type": "ONESHOT"
   }
 }
