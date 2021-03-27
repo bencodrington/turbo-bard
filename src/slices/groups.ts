@@ -20,12 +20,8 @@ const groupsSlice = createSlice({
         name: payload,
         index: getNextIndex(state),
         tracks: [],
-        isOpen: true,
         volume: DEFAULT_VOLUME
       });
-    },
-    closeAllGroups(state) {
-      state.map(group => Object.assign(group, { isOpen: false }));
     },
     addSearchResult(
       state,
@@ -40,7 +36,6 @@ const groupsSlice = createSlice({
           name: 'GROUP',
           index: getNextIndex(state),
           tracks: [],
-          isOpen: true,
           volume: DEFAULT_VOLUME
         };
         state.unshift(group);
@@ -178,7 +173,6 @@ const groupsSlice = createSlice({
 
 export const {
   newGroup,
-  closeAllGroups,
   removeTrack,
   addSearchResult,
   setTrackData,

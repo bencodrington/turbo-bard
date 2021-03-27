@@ -6,6 +6,5 @@ export type Group = {
   index: number,
   name: string,
   tracks: Track[],
-  isOpen: boolean,
   volume: number
 };
