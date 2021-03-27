@@ -13,6 +13,7 @@
   --charcoal: #3A3D4F;
   --font--signika: 'Signika Negative', sans-serif;
   --font--shrikhand: 'Shrikhand';
+  --max-width: 560px;
   background: var(--background);
   color: var(--turbo-blue);
 }
@@ -25,7 +26,7 @@
 }
 
 body {
-  max-width: 560px;
+  max-width: var(--max-width);
   margin: 0 auto;
 }
 
