@@ -4,6 +4,14 @@
   width: 3.5rem;
   isolation: isolate;
 
+  &:disabled {
+    cursor: not-allowed;
+    
+    img, span {
+      opacity: .25;
+    }
+  }
+
   &:hover:not(:disabled) img {
     transform: translateX(-50%) scale(1.1);
   }
