@@ -1,5 +1,5 @@
-@import '../../mixins.scss';
+@import "../../mixins.scss";
 
-.add-sounds-button-container {
+.add-sounds-button-container span {
   @include gradientText;
 }
