@@ -64,7 +64,15 @@ export default function AboutPage() {
             text="Code"
           />
         </div>
-        TODO: planned features
+        <p>
+          Upcoming features:
+        </p>
+        <ul>
+          <li>Persist your sounds between visits</li>
+          <li>Collapse groups</li>
+          <li>Rename groups</li>
+          <li>Upload your own sounds</li>
+        </ul>
       </section>
       <section>
         <h4>About the audio.</h4>
