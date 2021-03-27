@@ -25,6 +25,10 @@
 
   &.icon-only {
     padding: .5rem;
+
+    img {
+      height: 2.5rem;
+    }
   }
 
   &.round {
@@ -41,6 +45,10 @@
   }
 
   img {
-    height: 2.5rem;
+    height: 2rem;
+  }
+
+  span:nth-child(2) {
+    margin-left: 4px;
   }
 }
