@@ -4,7 +4,7 @@ import "./DefaultButton.scss";
 
 type DefaultButtonProps = {
   text?: string,
-  icon?: string, // icon should be an imported SVG
+  icon?: string, // icon should be an imported image
   iconAltText?: string,
   onClick: () => void,
   className?: string,

@@ -1,6 +1,10 @@
 import React from "react";
 
+import kofiIcon from "../assets/ko-fi-icon.png";
+import githubIcon from "../assets/github-icon.png";
+
 import "./AboutPage.scss";
+import AnchorButton from "../widgets/buttons/AnchorButton";
 
 export default function AboutPage() {
   return (
@@ -44,9 +48,22 @@ export default function AboutPage() {
           </a>
           &nbsp;to help cover the costs of running it.
         </p>
-        TODO: support me button
-        TODO: code button
-
+        <div className="button-group">
+          <AnchorButton
+            className="ko-fi-button"
+            url="https://ko-fi.com/projectbench"
+            icon={kofiIcon}
+            iconAltText="Ko-Fi logo"
+            text="Support me"
+          />
+          <AnchorButton
+            className="github-button"
+            url="https://github.com/bencodrington/turbo-bard"
+            icon={githubIcon}
+            iconAltText="GitHub logo"
+            text="Code"
+          />
+        </div>
         TODO: planned features
       </section>
       <section>

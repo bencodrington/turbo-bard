@@ -33,4 +33,28 @@
   section {
     margin-top: 2.5rem;
   }
+
+  .button-group {
+    margin-top: .75rem;
+    display: flex;
+
+    img {
+      height: 24px;
+      margin-right: 8px;
+    }
+
+    .github-button,
+    .ko-fi-button {
+      flex: 1;
+      span {
+        width: auto;
+      }
+    }
+
+    .github-button{
+      img {
+        height: 20px;
+      }
+    }
+  }
 }
