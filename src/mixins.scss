@@ -11,7 +11,9 @@
 }
 
 @mixin gradientText {
+  /* if we can clip, do it */
+  -webkit-text-fill-color: transparent;
   background: var(--track);
   background-clip: text;
-  color: transparent;
+  color: var(--loop);
 }
