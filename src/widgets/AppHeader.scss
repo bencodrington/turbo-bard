@@ -15,8 +15,10 @@
     position: fixed;
     width: 100%;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 2;
     background: var(--background);
+    max-width: var(--max-width);
   }
 }

@@ -33,7 +33,7 @@
 
   section {
     margin-top: 2.5rem;
-    max-width: var(--max-width);
+    max-width: calc(var(--max-width) - 16px);
     margin-left: auto;
     margin-right: auto;
   }
