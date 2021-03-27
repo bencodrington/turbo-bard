@@ -14,7 +14,7 @@ function App() {
         isAboutOpen={isAboutOpen}
         setIsAboutOpen={setIsAboutOpen}
       />
-      {isAboutOpen && <AboutPage />}
+      {isAboutOpen && <AboutPage closeAboutPage={() => { setIsAboutOpen(false); }} />}
       <TrackList />
     </div>
   );

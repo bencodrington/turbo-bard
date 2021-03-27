@@ -2,11 +2,17 @@ import React from "react";
 
 import kofiIcon from "../assets/ko-fi-icon.png";
 import githubIcon from "../assets/github-icon.png";
+import backIcon from "../assets/icon-back.svg";
 
 import "./AboutPage.scss";
 import AnchorButton from "../widgets/buttons/AnchorButton";
+import DefaultButton from "../widgets/buttons/DefaultButton";
 
-export default function AboutPage() {
+type AboutPageProps = {
+  closeAboutPage: () => void;
+};
+
+export default function AboutPage({ closeAboutPage }: AboutPageProps) {
   return (
     <div className="about-page-container">
       <section>
@@ -100,6 +106,14 @@ export default function AboutPage() {
           TurboBard doesn't use any cookies.
           No personal data is recorded at any time.
         </p>
+      </section>
+      <section>
+        <DefaultButton
+          icon={backIcon}
+          text="Back"
+          iconAltText="Back arrow"
+          onClick={closeAboutPage}
+        />
       </section>
     </div>
   );
