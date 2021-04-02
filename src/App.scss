@@ -47,6 +47,10 @@ body, p, span {
 a {
   color: var(--canary);
   text-decoration: none;
+
+  &:hover {
+    color: white;
+  }
 }
 
 button {
