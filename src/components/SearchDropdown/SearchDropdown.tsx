@@ -1,6 +1,5 @@
 import React from "react";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
-import caretUpIcon from "../../assets/icon-caret-up.svg";
 
 import './SearchDropdown.scss';
 
@@ -30,8 +29,7 @@ export default function SearchDropdown(props: SearchDropdownProps) {
       {mainContent}
       <DefaultButton
         onClick={props.closeDropdown}
-        icon={caretUpIcon}
-        iconAltText="Collapse search results"
+        text="Cancel"
         className="collapse-search-button"
       />
     </div>
