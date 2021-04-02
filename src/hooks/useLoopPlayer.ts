@@ -1,34 +1,41 @@
 import { useEffect, useState } from "react";
-import { fadeOutAndPause, getAudioFileUrl } from "../utils/audioFileUtil";
+import { getAudioFileUrl } from "../utils/audioFileUtil";
 import { useFadeMultiplier } from "./useFadeMultiplier";
+import { Howl } from "howler";
+const FADE_DURATION_SECONDS = 2;
 
-export default function useLoopPlayer(volume: number, isPlaying: boolean, fileName?: string) {
+export default function useLoopPlayer(
+  volume: number,
+  isPlaying: boolean,
+  fileName?: string
+) {
   const src = fileName !== undefined ? getAudioFileUrl(fileName) : undefined;
   const [isLoaded, setIsLoaded] = useState(false);
-  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const [howl, setHowl] = useState<Howl | null>(null);
   const fadeMultiplier = useFadeMultiplier(isPlaying);
 
   useEffect(() => {
     if (src === undefined) return;
-    const newAudio = new Audio(src);
-    newAudio.loop = true;
-    newAudio.oncanplaythrough = () => {
-      setIsLoaded(true);
-    }
-    setAudio(newAudio);
-    return function cleanup() {
-      fadeOutAndPause(newAudio);
+    const newHowl = new Howl({
+      src: [src],
+      loop: true,
+      onload: () => setIsLoaded(true)
+    });
+    setHowl(newHowl);
+    return () => {
+      newHowl.fade(newHowl.volume(), 0, FADE_DURATION_SECONDS * 1000);
+      newHowl.once('fade', () => newHowl.unload());
     }
   }, [src]);
 
   useEffect(() => {
-    if (audio === null) return;
-    if (isPlaying) {
-      audio.play();
+    if (howl === null) return;
+    if (isPlaying && !howl.playing()) {
+      howl.play();
     } else if (fadeMultiplier <= 0) {
-      audio.pause();
+      howl.stop();
     }
-    audio.volume = volume * fadeMultiplier;
+    howl.volume(volume * fadeMultiplier);
   });
 
   return { isLoaded };

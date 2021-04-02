@@ -1,7 +1,9 @@
 import { RefObject, useEffect, useState } from "react";
-import { fadeOutAndPause, getAudioFileUrl } from "../utils/audioFileUtil";
+import { getAudioFileUrl } from "../utils/audioFileUtil";
 import { clamp, randIntBetween } from "../utils/mathUtil";
 import { useFadeMultiplier } from "./useFadeMultiplier";
+import { Howl } from "howler";
+const FADE_DURATION_SECONDS = 2;
 
 const SERIALIZATION_DELIMITER = '----';
 
@@ -21,7 +23,7 @@ export default function useOneShotPlayer(
   isPlaying: boolean,
   wickRef: RefObject<HTMLDivElement>
 ) {
-  const [audioElements, setAudioElements] = useState<HTMLAudioElement[]>([]);
+  const [howls, setHowls] = useState<Howl[]>([]);
   const [playNow, setPlayNow] = useState(false);
   const fadeMultiplier = useFadeMultiplier(isPlaying);
   // The point at which the user clicked play, or when the most recent one-shot
@@ -37,18 +39,19 @@ export default function useOneShotPlayer(
   useEffect(() => {
     const sources = deserializeSources(serializedSources);
     if (sources.length === 0) return;
-    const newAudioElements = sources.map(source => new Audio(source));
-    newAudioElements.forEach(newAudio => {
-      const loadedHandler = () => {
+    const newHowls = sources.map(source => new Howl({ src: [source] }));
+    newHowls.forEach(newHowl => {
+      newHowl.once('load', () => {
         // Once loaded, append it to list of loaded audio elements
-        setAudioElements(_audioElements => [..._audioElements, newAudio]);
-        newAudio.removeEventListener('canplaythrough', loadedHandler);
-      }
-      newAudio.addEventListener('canplaythrough', loadedHandler);
+        setHowls(_howls => [..._howls, newHowl]);
+      });
     });
     return function cleanup() {
-      newAudioElements.forEach(newAudio => fadeOutAndPause(newAudio));
-    }
+      newHowls.forEach(newHowl => {
+        newHowl.fade(newHowl.volume(), 0, FADE_DURATION_SECONDS * 1000);
+        newHowl.once('fade', () => newHowl.unload());
+      });
+    };
   }, [serializedSources]);
 
   useEffect(() => {
@@ -98,20 +101,19 @@ export default function useOneShotPlayer(
   useEffect(() => {
     if (!playNow) return;
     setPlayNow(false);
-    if (audioElements.length > 0) {
-      const randomIndex = Math.floor(Math.random() * audioElements.length);
-      const audio = audioElements[randomIndex];
+    if (howls.length > 0) {
+      const randomIndex = Math.floor(Math.random() * howls.length);
+      const howl = howls[randomIndex];
       // Restart from the beginning, in case the sound
       //  is currently playing
-      audio.currentTime = 0;
-      audio.play();
+      howl.play();
     }
-  }, [playNow, audioElements]);
+  }, [playNow, howls]);
 
   // Keep audio volume in sync
   useEffect(() => {
-    audioElements.forEach(audio => {
-      audio.volume = fadeMultiplier * volume;
+    howls.forEach(howl => {
+      howl.volume(fadeMultiplier * volume);
     });
   });
 }
