@@ -17,6 +17,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Builds and minifies app for production to the `build` folder.
 
+#### `npm run deploy`
+
+Runs `build` and then commits and pushes the output to the remote `gh-pages` branch, deploying it immediately to the live GitHub Pages site. [More info](https://www.npmjs.com/package/gh-pages#command-line-utility).
+
 ### In the `functions` directory
 
 #### `npm run watch`
