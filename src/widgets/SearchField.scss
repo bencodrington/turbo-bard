@@ -2,22 +2,25 @@
 
 .search-field-container {
   position: relative;
+  display: flex;
+  align-items: center;
   --border-width: 2px;
 
   .icon {
     position: absolute;
     height: 2rem;
     left: .5rem;
-    // Center vertically
-    top: calc(.25rem - calc(var(--border-width) / 2));
+    // Center vertically, then nudge a bit up
+    top: 50%;
+    transform: translateY(calc(-50% - 2px));
   }
 
   input {
     background: none;
     --icon-size: 2rem;
-    height: 2.5rem;
-    width: 100%;
-    border-radius: 1.25rem;
+    height: 3rem;
+    flex: 1;
+    border-radius: 8px;
     border: 2px solid var(--canary);
     // Required for rounded gradient border
     border-color: transparent;
@@ -36,5 +39,10 @@
       color: rgba(var(--canary--rgb), 70%);
       opacity: .5;
     }
+  }
+
+  .collapse-search-button {
+    background: none;
+    height: 3rem;
   }
 }
