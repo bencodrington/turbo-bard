@@ -1,0 +1,23 @@
+import { Group } from "../models/Group";
+
+const GROUPS = 'groups';
+
+export function saveGroups(groups: Group[]) {
+  localStorage.setItem(GROUPS, JSON.stringify(groups));
+}
+
+export function loadGroups() {
+  const storedGroupsString = localStorage.getItem(GROUPS);
+  if (storedGroupsString === null) return [];
+  const parsedGroupsString = JSON.parse(storedGroupsString);
+  if (!Array.isArray(parsedGroupsString)) return [];
+  const storedGroups = parsedGroupsString as Group[];
+  // Make sure all tracks are stopped before returning them
+  // to prevent unwanted autoplay
+  storedGroups.forEach(group => {
+    group.tracks.forEach(track => {
+      track.isPlaying = false;
+    });
+  });
+  return storedGroups;
+}

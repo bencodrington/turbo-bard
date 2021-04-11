@@ -10,6 +10,7 @@ import {
   getTrackByIndex,
   DEFAULT_VOLUME
 } from "../utils/storeUtil";
+import { loadGroups, saveGroups } from "../services/localStorage";
 
 const groupsSlice = createSlice({
   name: 'groups',
@@ -22,6 +23,7 @@ const groupsSlice = createSlice({
         tracks: [],
         volume: DEFAULT_VOLUME
       });
+      saveGroups(state);
     },
     addSearchResult(
       state,
@@ -45,6 +47,7 @@ const groupsSlice = createSlice({
       if (group === undefined) return;
       // Add track(s) to that group
       addSearchResultToGroup(searchResult, group);
+      saveGroups(state);
     },
     removeTrack(state, { payload }: PayloadAction<{ groupIndex: number, trackIndex: number }>) {
       const { groupIndex, trackIndex } = payload;
@@ -55,6 +58,7 @@ const groupsSlice = createSlice({
         return state.filter(group => group.index !== groupIndex);
       }
       group.tracks = group.tracks.filter(track => track.index !== trackIndex);
+      saveGroups(state);
     },
     setTrackData(state, { payload }: PayloadAction<{
       groupIndex: number,
@@ -69,6 +73,7 @@ const groupsSlice = createSlice({
         return;
       }
       Object.assign(track, trackData);
+      saveGroups(state);
     },
     setTrackVolume(state, { payload }: PayloadAction<{
       groupIndex: number,
@@ -79,6 +84,7 @@ const groupsSlice = createSlice({
       const track = getTrackByIndex(trackIndex, groupIndex, state);
       if (track === undefined) return;
       track.volume = volume;
+      saveGroups(state);
     },
     setTrackIsMuted(state, { payload }: PayloadAction<{
       groupIndex: number,
@@ -89,6 +95,7 @@ const groupsSlice = createSlice({
       const track = getTrackByIndex(trackIndex, groupIndex, state);
       if (track === undefined) return;
       track.isMuted = isMuted;
+      saveGroups(state);
     },
     setTrackIsPlaying(state, { payload }: PayloadAction<{
       groupIndex: number,
@@ -99,10 +106,13 @@ const groupsSlice = createSlice({
       const track = getTrackByIndex(trackIndex, groupIndex, state);
       if (track === undefined) return;
       track.isPlaying = isPlaying;
+      saveGroups(state);
     },
     removeGroup(state, { payload }: PayloadAction<{ groupIndex: number }>) {
       const { groupIndex } = payload;
-      return state.filter(group => group.index !== groupIndex);
+      const newGroupList = state.filter(group => group.index !== groupIndex);
+      saveGroups(newGroupList);
+      return newGroupList;
     },
     setGroupIsPlaying(state, { payload }: PayloadAction<{
       groupIndex: number,
@@ -117,6 +127,7 @@ const groupsSlice = createSlice({
         }
         return track;
       });
+      saveGroups(state);
     },
     setGroupVolume(state, { payload }: PayloadAction<{
       groupIndex: number,
@@ -126,6 +137,7 @@ const groupsSlice = createSlice({
       const group = getGroupByIndex(groupIndex, state);
       if (group === undefined) return;
       group.volume = volume;
+      saveGroups(state);
     },
     startAllInGroup(state, { payload }: PayloadAction<{ groupIndex: number }>) {
       const { groupIndex } = payload;
@@ -134,6 +146,7 @@ const groupsSlice = createSlice({
       group.tracks.forEach(track => {
         track.isPlaying = true;
       });
+      saveGroups(state);
     },
     stopAllInGroup(state, { payload }: PayloadAction<{ groupIndex: number }>) {
       const { groupIndex } = payload;
@@ -142,6 +155,7 @@ const groupsSlice = createSlice({
       group.tracks.forEach(track => {
         track.isPlaying = false;
       });
+      saveGroups(state);
     },
     transitionToGroup(state, { payload }: PayloadAction<{ groupIndex: number }>) {
       const { groupIndex } = payload;
@@ -150,6 +164,7 @@ const groupsSlice = createSlice({
           track.isPlaying = group.index === groupIndex;
         })
       })
+      saveGroups(state);
     },
     setOneShotRange(state, { payload }: PayloadAction<{
       groupIndex: number,
@@ -167,6 +182,15 @@ const groupsSlice = createSlice({
       if (track === undefined || !isOneShot(track)) return;
       track.minSecondsBetween = minSecondsBetween;
       track.maxSecondsBetween = maxSecondsBetween;
+      saveGroups(state);
+    },
+    loadGroupsFromStorage(state) {
+      const newState = [
+        ...state,
+        ...loadGroups()
+      ];
+      saveGroups(newState);
+      return newState;
     }
   }
 });
@@ -185,7 +209,8 @@ export const {
   startAllInGroup,
   stopAllInGroup,
   transitionToGroup,
-  setOneShotRange
+  setOneShotRange,
+  loadGroupsFromStorage
 } = groupsSlice.actions;
 
 export default groupsSlice.reducer;
