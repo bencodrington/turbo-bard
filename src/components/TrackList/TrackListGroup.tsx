@@ -12,7 +12,7 @@ import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
 import { SearchResult } from "../../models/SearchResult";
 import { NEW_GROUP } from "./TrackList";
 import GroupControls from "./GroupControls";
-import { removeGroup } from "../../slices/groups";
+import { removeGroup, setGroupName } from "../../slices/groups";
 import { useDispatch } from "react-redux";
 import EditableHeader from "../../widgets/EditableHeader";
 import AddSoundsButton from "../../widgets/buttons/AddSoundsButton";
@@ -90,12 +90,16 @@ export default function TrackListGroup({
     dispatch(removeGroup({ groupIndex: group.index }));
   }
 
+  function saveGroupName(name: string) {
+    dispatch(setGroupName({ groupIndex: group.index, name }));
+  }
+
   return (
     <div className="group-container">
       <div className="header">
         <EditableHeader
           initialText={group.name}
-          onSave={() => { console.log('todo'); }}
+          onSave={saveGroupName}
         />
         <DefaultButton
           onClick={onCloseButtonClick}

@@ -30,8 +30,14 @@ export default function EditableHeader({ initialText, onSave }: EditableHeaderPr
   }, [isEditModeActive]);
 
   function onInput(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter") {
-      toggleIsEditModeActive();
+    switch (e.key) {
+      case 'Enter':
+        toggleIsEditModeActive();
+        break;
+      case 'Escape':
+        setText(initialText);
+        toggleIsEditModeActive();
+        break;
     }
   }
 
@@ -43,7 +49,7 @@ export default function EditableHeader({ initialText, onSave }: EditableHeaderPr
             type="text"
             value={text}
             ref={inputRef}
-            onChange={e => setText(e.target.value.toUpperCase())}
+            onChange={e => setText(e.target.value)}
             onKeyDown={onInput}
           />
           : <h3 className="static-text">{text}</h3>

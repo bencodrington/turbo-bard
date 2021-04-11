@@ -35,7 +35,7 @@ const groupsSlice = createSlice({
       if (groupIndex === undefined) {
         // Create new group
         group = {
-          name: 'GROUP',
+          name: 'Untitled group',
           index: getNextIndex(state),
           tracks: [],
           volume: DEFAULT_VOLUME
@@ -113,6 +113,16 @@ const groupsSlice = createSlice({
       const newGroupList = state.filter(group => group.index !== groupIndex);
       saveGroups(newGroupList);
       return newGroupList;
+    },
+    setGroupName(state, { payload }: PayloadAction<{
+      groupIndex: number,
+      name: string
+    }>) {
+      const { groupIndex, name } = payload;
+      const group = getGroupByIndex(groupIndex, state);
+      if (group === undefined) return;
+      group.name = name;
+      saveGroups(state);
     },
     setGroupIsPlaying(state, { payload }: PayloadAction<{
       groupIndex: number,
@@ -203,6 +213,7 @@ export const {
   setTrackVolume,
   setTrackIsMuted,
   removeGroup,
+  setGroupName,
   setGroupIsPlaying,
   setGroupVolume,
   setTrackIsPlaying,

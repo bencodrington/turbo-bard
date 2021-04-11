@@ -10,7 +10,6 @@
     @include body;
     padding: 0.5rem 4px;
     font-size: 1rem;
-    letter-spacing: 0.05rem;
     background: var(--background);
     color: var(--turbo-blue);
     // To avoid a slight shift when the input's border is shown,
