@@ -12,17 +12,19 @@ type ReturnType = {
 
 type PropType = {
   initialVolume: number,
+  isInitiallyMuted: boolean,
   groupIndex: number,
   trackIndex: number
 };
 
 export function useVolume({
   initialVolume,
+  isInitiallyMuted,
   groupIndex,
   trackIndex
 }: PropType): ReturnType {
   const [volume, setVolume] = useState(initialVolume);
-  const [isMuted, , toggleIsMuted] = useBoolean(false);
+  const [isMuted, , toggleIsMuted] = useBoolean(isInitiallyMuted);
   const dispatch = useDispatch();
 
   useEffect(() => {

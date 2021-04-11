@@ -33,6 +33,7 @@ export default function LoopTrackItem({
     toggleIsMuted
   } = useVolume({
     initialVolume: loop.volume,
+    isInitiallyMuted: loop.isMuted,
     groupIndex,
     trackIndex: index
   });

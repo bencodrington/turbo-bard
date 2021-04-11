@@ -63,6 +63,8 @@ function listItemFromTrack(
       unloadedTrack={track}
       groupIndex={group.index}
       isVisible={true}
+      isSearchOpen={isSearchOpen}
+      onTagClick={appendSearchText}
     />
   } else {
     return null;

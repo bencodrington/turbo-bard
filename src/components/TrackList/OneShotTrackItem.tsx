@@ -36,6 +36,7 @@ export default function OneShotTrackItem({
     toggleIsMuted
   } = useVolume({
     initialVolume: oneShot.volume,
+    isInitiallyMuted: oneShot.isMuted,
     groupIndex,
     trackIndex: oneShot.index
   });
