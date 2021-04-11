@@ -5,17 +5,20 @@ import addIcon from "../../assets/icon-add.svg";
 import "./AddSoundsButton.scss";
 
 type AddSoundsButtonProps = {
-  onClick: () => void
+  onClick: () => void,
+  text: string
 };
 
-export default function AddSoundsButton({ onClick
+export default function AddSoundsButton({
+  onClick,
+  text
 }: AddSoundsButtonProps) {
   return (
     <DefaultButton
       className='add-sounds-button-container'
       onClick={onClick}
       icon={addIcon}
-      text='Add sounds'
+      text={text}
       isFullWidth={true}
     />
   );

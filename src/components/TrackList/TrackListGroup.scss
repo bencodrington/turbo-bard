@@ -23,11 +23,4 @@
   .tracks {
     margin: 0 0 16px;
   }
-
-  .add-sounds-button {
-    align-self: flex-start;
-    span {
-      @include gradientText;
-    }
-  }
 }

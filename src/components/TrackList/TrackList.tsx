@@ -34,7 +34,10 @@ export default function TrackList() {
             results={results}
             searchTarget={searchTarget}
           />
-          : <AddSoundsButton onClick={() => setSearchTarget(NEW_GROUP)} />
+          : <AddSoundsButton
+            onClick={() => setSearchTarget(NEW_GROUP)}
+            text='Add sounds'
+          />
       }
       {
         groups.map(group =>

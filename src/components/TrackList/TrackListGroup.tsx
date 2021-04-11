@@ -1,7 +1,6 @@
 import React from "react";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 import closeMultipleIcon from "../../assets/icon-close-multiple.svg";
-import AddIcon from "../../assets/icon-add.svg";
 import { Group } from "../../models/Group";
 
 import "./TrackListGroup.scss";
@@ -16,6 +15,7 @@ import GroupControls from "./GroupControls";
 import { removeGroup } from "../../slices/groups";
 import { useDispatch } from "react-redux";
 import EditableHeader from "../../widgets/EditableHeader";
+import AddSoundsButton from "../../widgets/buttons/AddSoundsButton";
 
 type GroupProps = {
   searchTarget: number | null | typeof NEW_GROUP,
@@ -124,12 +124,9 @@ export default function TrackListGroup({
             results={results}
             searchTarget={searchTarget}
           />
-          : <DefaultButton
-            className='add-sounds-button'
+          : <AddSoundsButton
             onClick={() => setSearchTarget(group.index)}
-            icon={AddIcon}
-            text="Add sounds to group"
-            isFullWidth={true}
+            text='Add sounds to group'
           />
       }
     </div >
