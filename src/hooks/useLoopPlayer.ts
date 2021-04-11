@@ -16,13 +16,18 @@ export default function useLoopPlayer(
 
   useEffect(() => {
     if (src === undefined) return;
+    let wasDeleted = false;
     const newHowl = new Howl({
       src: [src],
       loop: true,
-      onload: () => setIsLoaded(true)
+      onload: () => {
+        if (wasDeleted) return;
+        setIsLoaded(true);
+      }
     });
     setHowl(newHowl);
     return () => {
+      wasDeleted = true;
       newHowl.fade(newHowl.volume(), 0, FADE_DURATION_SECONDS * 1000);
       newHowl.once('fade', () => newHowl.unload());
     }

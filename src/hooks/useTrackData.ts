@@ -10,9 +10,10 @@ export default function useTrackData(id: string, index: number, groupIndex: numb
   const dispatch = useDispatch();
   useEffect(() => {
     let fetchingDataFor = id;
+    let wasDeleted = false;
     async function fetchData() {
       const trackData = await fetchTrackDataById(id);
-      if (id !== fetchingDataFor) return;
+      if (id !== fetchingDataFor || wasDeleted) return;
       if (trackData === undefined) {
         setResults({ id: id, type: ERROR_TYPE })
         setIsLoadingData(false);
@@ -25,6 +26,7 @@ export default function useTrackData(id: string, index: number, groupIndex: numb
       setIsLoadingData(true);
       fetchData();
     }
+    return () => { wasDeleted = true; };
   }, [isLoaded, isLoadingData, id, dispatch, index, results]);
 
   useEffect(() => {
