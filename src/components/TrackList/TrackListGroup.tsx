@@ -130,7 +130,7 @@ export default function TrackListGroup({
           />
           : <AddSoundsButton
             onClick={() => setSearchTarget(group.index)}
-            text='Add sounds to group'
+            text={`Add sounds to "${group.name}"`}
           />
       }
     </div >

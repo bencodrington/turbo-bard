@@ -21,6 +21,8 @@ export default function TrackList() {
     appendSearchText
   } = useSearchResults(fetchSearchResults);
 
+  const addButtonText = 'Add sounds' + (groups.length > 0 ? ' to new group' : '');
+
   return (
     <div className="track-list-container">
       {
@@ -36,7 +38,7 @@ export default function TrackList() {
           />
           : <AddSoundsButton
             onClick={() => setSearchTarget(NEW_GROUP)}
-            text='Add sounds'
+            text={addButtonText}
           />
       }
       {
