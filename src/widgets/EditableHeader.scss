@@ -1,0 +1,34 @@
+@import "../mixins.scss";
+
+.editable-header-container {
+  display: flex;
+  align-items: center;
+  flex: 1;
+
+  .static-text,
+  input {
+    @include body;
+    padding: 0.5rem 4px;
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+    background: var(--background);
+    color: var(--turbo-blue);
+    // To avoid a slight shift when the input's border is shown,
+    //  add a transparent one to the static text version as well
+    border: 1px solid transparent;
+  }
+
+  input {
+    border: 1px solid var(--canary);
+    border-radius: 2px;
+    flex: 1;
+    color: var(--canary);
+  }
+
+  .edit-button {
+    padding: 0.75rem;
+    img {
+      width: 2rem;
+    }
+  }
+}

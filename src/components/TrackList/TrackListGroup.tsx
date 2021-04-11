@@ -15,6 +15,7 @@ import { NEW_GROUP } from "./TrackList";
 import GroupControls from "./GroupControls";
 import { removeGroup } from "../../slices/groups";
 import { useDispatch } from "react-redux";
+import EditableHeader from "../../widgets/EditableHeader";
 
 type GroupProps = {
   searchTarget: number | null | typeof NEW_GROUP,
@@ -92,7 +93,10 @@ export default function TrackListGroup({
   return (
     <div className="group-container">
       <div className="header">
-        <h3 className="name">{group.name}</h3>
+        <EditableHeader
+          initialText={group.name}
+          onSave={() => { console.log('todo'); }}
+        />
         <DefaultButton
           onClick={onCloseButtonClick}
           icon={closeMultipleIcon}
@@ -109,24 +113,25 @@ export default function TrackListGroup({
           listItemFromTrack(track, group, isSearchModeActive, appendSearchText)
         )}
       </div>
-      {isThisGroupSearching
-        ? <TrackSearchDropdown
-          closeSearchDropdown={() => { setSearchTarget(null) }}
-          searchText={searchText}
-          setSearchText={setSearchText}
-          appendSearchText={appendSearchText}
-          isFetchingResults={isFetchingResults}
-          results={results}
-          searchTarget={searchTarget}
-        />
-        : <DefaultButton
-          className='add-sounds-button'
-          onClick={() => setSearchTarget(group.index)}
-          icon={AddIcon}
-          text="Add sounds to group"
-          isFullWidth={true}
-        />
+      {
+        isThisGroupSearching
+          ? <TrackSearchDropdown
+            closeSearchDropdown={() => { setSearchTarget(null) }}
+            searchText={searchText}
+            setSearchText={setSearchText}
+            appendSearchText={appendSearchText}
+            isFetchingResults={isFetchingResults}
+            results={results}
+            searchTarget={searchTarget}
+          />
+          : <DefaultButton
+            className='add-sounds-button'
+            onClick={() => setSearchTarget(group.index)}
+            icon={AddIcon}
+            text="Add sounds to group"
+            isFullWidth={true}
+          />
       }
-    </div>
+    </div >
   );
 }
