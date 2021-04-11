@@ -8,26 +8,32 @@ export default function useTrackData(id: string, index: number, groupIndex: numb
   const [isLoadingData, setIsLoadingData] = useState(false);
   const [results, setResults] = useState<TrackData | TrackDataError | null>(null);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    let fetchingDataFor = id;
-    let wasDeleted = false;
+    if (!isLoaded && !isLoadingData && results === null) {
+      // We should start loading data
+      setIsLoadingData(true);
+    }
+  }, [isLoaded, isLoadingData, results]);
+
+  useEffect(() => {
+    let isCancelled = false;
     async function fetchData() {
       const trackData = await fetchTrackDataById(id);
-      if (id !== fetchingDataFor || wasDeleted) return;
+      if (isCancelled) return;
       if (trackData === undefined) {
-        setResults({ id: id, type: ERROR_TYPE })
+        setResults({ id, type: ERROR_TYPE })
         setIsLoadingData(false);
         return;
       }
       setResults(trackData);
       setIsLoadingData(false);
     }
-    if (!isLoaded && !isLoadingData && results === null) {
-      setIsLoadingData(true);
+    if (isLoadingData) {
       fetchData();
+      return () => { isCancelled = true; };
     }
-    return () => { wasDeleted = true; };
-  }, [isLoaded, isLoadingData, id, dispatch, index, results]);
+  }, [isLoadingData, id, dispatch, index, results]);
 
   useEffect(() => {
     if (results !== null && !isLoaded && !isLoadingData) {
