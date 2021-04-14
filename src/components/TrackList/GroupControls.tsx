@@ -5,7 +5,7 @@ import DefaultButton from "../../widgets/buttons/DefaultButton";
 import startAllIcon from "../../assets/icon-start-all.svg";
 import stopIcon from "../../assets/icon-stop.svg";
 import caretDownIcon from "../../assets/icon-caret-down.svg";
-import caretLeftIcon from "../../assets/icon-caret-left.svg";
+import caretRightIcon from "../../assets/icon-caret-right.svg";
 import { Track } from "../../models/Track";
 
 import "./GroupControls.scss";
@@ -40,17 +40,17 @@ export default function GroupControls({
   return (
     <div className="group-controls-container">
       <DefaultButton
+        onClick={toggleIsExpanded}
+        icon={isExpanded ? caretDownIcon : caretRightIcon}
+        iconAltText={isExpanded ? 'Collapse group' : 'Expand group'}
+        isRound={true}
+      />
+      <DefaultButton
         onClick={isChildPlaying ? stopAll : startAll}
         icon={isChildPlaying ? stopIcon : startAllIcon}
         text={(isChildPlaying ? 'Stop' : 'Start') + ' all'}
         className={'fixed-width'}
       />
-      <DefaultButton
-          onClick={toggleIsExpanded}
-          icon={isExpanded ? caretDownIcon : caretLeftIcon}
-          iconAltText={isExpanded ? 'Collapse group' : 'Expand group'}
-          isRound={true}
-        />
     </div>
   );
 }
