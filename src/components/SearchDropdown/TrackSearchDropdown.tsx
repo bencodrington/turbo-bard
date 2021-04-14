@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux";
 import { SearchResult } from "../../models/SearchResult";
 import { addSearchResult } from "../../slices/groups";
 import SearchField from "../../widgets/SearchField";
-import SearchDropdown from "./SearchDropdown";
 import SearchItem from "./SearchItem";
 import { NEW_GROUP } from "../TrackList/TrackList";
+
+import './SearchDropdown.scss';
 
 type TrackSearchDropdownProps = {
   closeSearchDropdown: () => void,
@@ -27,16 +28,6 @@ export default function TrackSearchDropdown({
   searchTarget
 }: TrackSearchDropdownProps) {
   const dispatch = useDispatch();
-
-  const searchField = (
-    <SearchField
-      value={searchText}
-      onChange={setSearchText}
-      onCancel={closeSearchDropdown}
-      placeholderText={`'tavern', 'music', 'horse', ...`}
-    />
-  );
-
   function onSearchItemClick(searchResult: SearchResult) {
     closeSearchDropdown();
     let groupIndex: undefined | number = undefined;
@@ -54,12 +45,22 @@ export default function TrackSearchDropdown({
     />
   ));
 
+  const mainContent = isFetchingResults
+    ? <p className="message">Loading...</p>
+    : resultElements.length > 0
+      ? <ul className="results">{resultElements}</ul>
+      : searchText.length === 0
+        ? null
+        : <p className="message">Couldn't find those sounds.</p>;
   return (
-    <SearchDropdown
-      searchField={searchField}
-      results={resultElements}
-      isFetchingResults={isFetchingResults}
-      isSearchTextEmpty={searchText.length === 0}
-    />
+    <div className="search-dropdown-container">
+      <SearchField
+        value={searchText}
+        onChange={setSearchText}
+        onCancel={closeSearchDropdown}
+        placeholderText={`'tavern', 'music', 'horse', ...`}
+      />
+      {mainContent}
+    </div>
   );
 }
