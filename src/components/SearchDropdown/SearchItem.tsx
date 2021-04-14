@@ -31,6 +31,7 @@ export default function SearchItem({ data, onClick }: SearchItemProps) {
         break;
     }
   }
+
   return (
     <li
       className="search-item-container"

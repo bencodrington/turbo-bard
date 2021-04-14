@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import useBoolean from "../hooks/useBoolean";
-import DefaultButton from "./buttons/DefaultButton";
-import quillIcon from "../assets/icon-quill.svg";
 
 import "./EditableHeader.scss";
 
@@ -41,6 +39,17 @@ export default function EditableHeader({ initialText, onSave }: EditableHeaderPr
     }
   }
 
+  function staticTextKeyHandler(event: React.KeyboardEvent<HTMLHeadingElement>) {
+    switch (event.key) {
+      case 'Enter':
+        toggleIsEditModeActive();
+        break;
+      case ' ':
+        toggleIsEditModeActive();
+        break;
+    }
+  }
+
   return (
     <div className="editable-header-container">
       {
@@ -51,17 +60,15 @@ export default function EditableHeader({ initialText, onSave }: EditableHeaderPr
             ref={inputRef}
             onChange={e => setText(e.target.value)}
             onKeyDown={onInput}
+            onBlur={toggleIsEditModeActive}
           />
-          : <h3 className="static-text">{text}</h3>
+          : <h3
+            className="static-text"
+            tabIndex={0}
+            onClick={toggleIsEditModeActive}
+            onKeyDown={staticTextKeyHandler}
+          > {text}</h3>
       }
-      <DefaultButton
-        onClick={toggleIsEditModeActive}
-        className={"edit-button"}
-        icon={quillIcon}
-        iconAltText={isEditModeActive ? 'Save new name' : `Rename group ${text}`}
-        isActive={isEditModeActive}
-        isRound={true}
-      />
-    </div>
+    </div >
   );
 }
