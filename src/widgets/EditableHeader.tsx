@@ -15,9 +15,12 @@ export default function EditableHeader({ initialText, onSave }: EditableHeaderPr
 
   useEffect(() => {
     if (!isEditModeActive) {
-      onSave(text);
+      const trimmedText = text.trim();
+      const nonEmptyText = trimmedText === '' ? 'Untitled group' : trimmedText;
+      setText(nonEmptyText)
+      onSave(nonEmptyText);
     }
-  });
+  }, [isEditModeActive, text, onSave]);
 
   useEffect(() => {
     if (isEditModeActive && inputRef.current !== null) {
