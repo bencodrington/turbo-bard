@@ -1,16 +1,17 @@
 .group-controls-container {
   margin-top: 16px;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
 
-  & > *:not(:first-child) {
-    margin-left: 5px;
+  &.space-between {
+    justify-content: space-between;
   }
 
   .fixed-width {
     justify-content: left;
     span {
       text-align: left;
+      min-width: 7ch;
     }
   }
 }

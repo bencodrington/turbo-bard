@@ -16,7 +16,6 @@ import { removeGroup, setGroupName } from "../../slices/groups";
 import { useDispatch } from "react-redux";
 import EditableHeader from "../../widgets/EditableHeader";
 import AddSoundsButton from "../../widgets/buttons/AddSoundsButton";
-import TrackListGroupSummary from "../TrackListGroupSummary";
 
 type GroupProps = {
   searchTarget: number | null | typeof NEW_GROUP,
@@ -119,7 +118,6 @@ export default function TrackListGroup({
         tracks={group.tracks}
       />
       <div>
-        {!group.isExpanded && <TrackListGroupSummary tracks={group.tracks} />}
         {group.tracks.map(track =>
           listItemFromTrack(
             track,
