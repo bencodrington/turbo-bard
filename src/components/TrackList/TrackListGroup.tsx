@@ -118,8 +118,8 @@ export default function TrackListGroup({
         isExpanded={isExpanded}
         tracks={group.tracks}
       />
-      {!group.isExpanded && <TrackListGroupSummary tracks={group.tracks} /> }
-      <div className="tracks">
+      <div>
+        {!group.isExpanded && <TrackListGroupSummary tracks={group.tracks} />}
         {group.tracks.map(track =>
           listItemFromTrack(
             track,
