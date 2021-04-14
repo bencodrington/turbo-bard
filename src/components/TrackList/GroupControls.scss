@@ -8,6 +8,9 @@
   }
 
   .fixed-width {
-    min-width:18ch;
+    justify-content: left;
+    span {
+      text-align: left;
+    }
   }
 }
