@@ -1,7 +1,7 @@
 .group-controls-container {
-  margin-top: 8px;
+  margin-top: 16px;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
 
   & > *:not(:first-child) {
     margin-left: 5px;

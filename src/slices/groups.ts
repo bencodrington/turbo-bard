@@ -21,7 +21,8 @@ const groupsSlice = createSlice({
         name: payload,
         index: getNextIndex(state),
         tracks: [],
-        volume: DEFAULT_VOLUME
+        volume: DEFAULT_VOLUME,
+        isExpanded: true
       });
       saveGroups(state);
     },
@@ -38,7 +39,8 @@ const groupsSlice = createSlice({
           name: 'Untitled group',
           index: getNextIndex(state),
           tracks: [],
-          volume: DEFAULT_VOLUME
+          volume: DEFAULT_VOLUME,
+          isExpanded: true
         };
         state.unshift(group);
       } else {
@@ -139,6 +141,16 @@ const groupsSlice = createSlice({
       });
       saveGroups(state);
     },
+    setGroupIsExpanded(state, { payload }: PayloadAction<{
+      groupIndex: number,
+      isExpanded: boolean
+    }>) {
+      const { groupIndex, isExpanded } = payload;
+      const group = getGroupByIndex(groupIndex, state);
+      if (group === undefined) return;
+      group.isExpanded = isExpanded;
+      saveGroups(state);
+    },
     setGroupVolume(state, { payload }: PayloadAction<{
       groupIndex: number,
       volume: number
@@ -165,15 +177,6 @@ const groupsSlice = createSlice({
       group.tracks.forEach(track => {
         track.isPlaying = false;
       });
-      saveGroups(state);
-    },
-    transitionToGroup(state, { payload }: PayloadAction<{ groupIndex: number }>) {
-      const { groupIndex } = payload;
-      state.forEach(group => {
-        group.tracks.forEach(track => {
-          track.isPlaying = group.index === groupIndex;
-        })
-      })
       saveGroups(state);
     },
     setOneShotRange(state, { payload }: PayloadAction<{
@@ -215,11 +218,11 @@ export const {
   removeGroup,
   setGroupName,
   setGroupIsPlaying,
+  setGroupIsExpanded,
   setGroupVolume,
   setTrackIsPlaying,
   startAllInGroup,
   stopAllInGroup,
-  transitionToGroup,
   setOneShotRange,
   loadGroupsFromStorage
 } = groupsSlice.actions;

@@ -1,6 +1,6 @@
 import React from "react";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
-import closeMultipleIcon from "../../assets/icon-close-multiple.svg";
+import closeIcon from "../../assets/icon-close.svg";
 import { Group } from "../../models/Group";
 
 import "./TrackListGroup.scss";
@@ -16,6 +16,7 @@ import { removeGroup, setGroupName } from "../../slices/groups";
 import { useDispatch } from "react-redux";
 import EditableHeader from "../../widgets/EditableHeader";
 import AddSoundsButton from "../../widgets/buttons/AddSoundsButton";
+import TrackListGroupSummary from "../TrackListGroupSummary";
 
 type GroupProps = {
   searchTarget: number | null | typeof NEW_GROUP,
@@ -36,14 +37,16 @@ function listItemFromTrack(
   track: Track,
   group: Group,
   isSearchOpen: boolean,
+  isGroupExpanded: boolean,
   appendSearchText: (text: string) => void
 ) {
+  const { index: groupIndex } = group;
   if (isLoop(track) || isUnloadedLoop(track)) {
     return <LoopTrackItem
       key={constructKey(track, group)}
-      groupIndex={group.index}
+      groupIndex={groupIndex}
       loop={track}
-      isVisible={true}
+      isVisible={isGroupExpanded}
       isSearchOpen={isSearchOpen}
       onTagClick={appendSearchText}
       groupVolume={group.volume}
@@ -51,9 +54,9 @@ function listItemFromTrack(
   } else if (isOneShot(track)) {
     return <OneShotTrackItem
       key={constructKey(track, group)}
-      groupIndex={group.index}
+      groupIndex={groupIndex}
       oneShot={track}
-      isVisible={true}
+      isVisible={isGroupExpanded}
       isSearchOpen={isSearchOpen}
       onTagClick={appendSearchText}
       groupVolume={group.volume}
@@ -62,8 +65,8 @@ function listItemFromTrack(
     return <UnloadedTrackItem
       key={constructKey(track, group)}
       unloadedTrack={track}
-      groupIndex={group.index}
-      isVisible={true}
+      groupIndex={groupIndex}
+      isVisible={isGroupExpanded}
       isSearchOpen={isSearchOpen}
       onTagClick={appendSearchText}
     />
@@ -84,14 +87,15 @@ export default function TrackListGroup({
 }: GroupProps) {
   const dispatch = useDispatch();
   const isSearchModeActive = searchTarget !== null;
-  const isThisGroupSearching = searchTarget === group.index;
+  const { isExpanded, index } = group;
+  const isThisGroupSearching = searchTarget === index;
 
   function onCloseButtonClick() {
-    dispatch(removeGroup({ groupIndex: group.index }));
+    dispatch(removeGroup({ groupIndex: index }));
   }
 
   function saveGroupName(name: string) {
-    dispatch(setGroupName({ groupIndex: group.index, name }));
+    dispatch(setGroupName({ groupIndex: index, name }));
   }
 
   return (
@@ -103,18 +107,27 @@ export default function TrackListGroup({
         />
         <DefaultButton
           onClick={onCloseButtonClick}
-          icon={closeMultipleIcon}
+          icon={closeIcon}
+          iconAltText="Delete group"
           isRound={true}
           isDisabled={isSearchModeActive}
         />
       </div>
       <GroupControls
-        groupIndex={group.index}
+        groupIndex={index}
+        isExpanded={isExpanded}
         tracks={group.tracks}
       />
+      {!group.isExpanded && <TrackListGroupSummary tracks={group.tracks} /> }
       <div className="tracks">
         {group.tracks.map(track =>
-          listItemFromTrack(track, group, isSearchModeActive, appendSearchText)
+          listItemFromTrack(
+            track,
+            group,
+            isSearchModeActive,
+            isExpanded,
+            appendSearchText
+          )
         )}
       </div>
       {
@@ -128,8 +141,8 @@ export default function TrackListGroup({
             results={results}
             searchTarget={searchTarget}
           />
-          : <AddSoundsButton
-            onClick={() => setSearchTarget(group.index)}
+          : group.isExpanded && <AddSoundsButton
+            onClick={() => setSearchTarget(index)}
             text={`Add sounds to "${group.name}"`}
           />
       }

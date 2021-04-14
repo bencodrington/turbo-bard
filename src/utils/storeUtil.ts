@@ -63,14 +63,3 @@ export function getTrackByIndex(
     ?.tracks
     .find(track => track.index === trackIndex);
 }
-
-export function isAnotherGroupPlaying(
-  whosAsking: number,
-  groups: Group[]
-) {
-  return groups.find(group => {
-    const isAsking = group.index === whosAsking;
-    const containsAPlayingTrack = group.tracks.find(track => track.isPlaying) !== undefined;
-    return !isAsking && containsAPlayingTrack;
-  }) !== undefined;
-}
