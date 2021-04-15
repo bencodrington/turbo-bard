@@ -8,7 +8,7 @@ import { isLoop, isOneShot, isUnloaded, isUnloadedLoop, Track } from "../../mode
 import LoopTrackItem from "./LoopTrackItem";
 import OneShotTrackItem from "./OneShotTrackItem";
 import UnloadedTrackItem from "./UnloadedTrackItem";
-import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
+import TrackSearchDropdown from "../SearchDropdown/SearchDropdown";
 import { SearchResult } from "../../models/SearchResult";
 import { NEW_GROUP } from "./TrackList";
 import GroupControls from "./GroupControls";

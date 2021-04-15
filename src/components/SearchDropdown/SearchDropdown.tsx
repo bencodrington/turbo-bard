@@ -8,7 +8,7 @@ import { NEW_GROUP } from "../TrackList/TrackList";
 
 import './SearchDropdown.scss';
 
-type TrackSearchDropdownProps = {
+type SearchDropdownProps = {
   closeSearchDropdown: () => void,
   searchText: string,
   setSearchText: (newSearchText: string) => void,
@@ -18,7 +18,7 @@ type TrackSearchDropdownProps = {
   searchTarget: number | null | typeof NEW_GROUP;
 };
 
-export default function TrackSearchDropdown({
+export default function SearchDropdown({
   closeSearchDropdown,
   searchText,
   setSearchText,
@@ -26,7 +26,7 @@ export default function TrackSearchDropdown({
   isFetchingResults,
   results,
   searchTarget
-}: TrackSearchDropdownProps) {
+}: SearchDropdownProps) {
   const dispatch = useDispatch();
   function onSearchItemClick(searchResult: SearchResult) {
     closeSearchDropdown();

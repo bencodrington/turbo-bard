@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { fetchSearchResults } from "../../services/database";
 import { useGroups } from "../../slices";
 import AddSoundsButton from "../../widgets/buttons/AddSoundsButton";
-import TrackSearchDropdown from "../SearchDropdown/TrackSearchDropdown";
+import TrackSearchDropdown from "../SearchDropdown/SearchDropdown";
 import useSearchResults from "../SearchDropdown/useSearchResults";
 
 import "./TrackList.scss";
