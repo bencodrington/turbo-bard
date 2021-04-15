@@ -74,10 +74,8 @@ export default function AboutPage({ closeAboutPage }: AboutPageProps) {
           Upcoming features:
         </p>
         <ul>
-          <li>Persist your sounds between visits</li>
-          <li>Collapse groups</li>
-          <li>Rename groups</li>
           <li>Upload your own sounds</li>
+          <li>Online multiplayer</li>
         </ul>
       </section>
       <section>
