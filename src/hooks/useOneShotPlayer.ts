@@ -41,10 +41,17 @@ export default function useOneShotPlayer(
     if (sources.length === 0) return;
     const newHowls = sources.map(source => new Howl({ src: [source] }));
     newHowls.forEach(newHowl => {
-      newHowl.once('load', () => {
-        // Once loaded, append it to list of loaded audio elements
+      // Once loaded, append it to list of loaded audio elements
+      const appendToHowlList = () => {
         setHowls(_howls => [..._howls, newHowl]);
-      });
+      }
+      if (newHowl.state() === 'loaded') {
+        // Sound is already loaded in howler (probably the same one shot was
+        //  added twice)
+        appendToHowlList();
+        return;
+      }
+      newHowl.once('load', appendToHowlList);
     });
     return function cleanup() {
       newHowls.forEach(newHowl => {
