@@ -24,7 +24,7 @@ export default function useOneShotPlayer(
   wickRef: RefObject<HTMLDivElement>
 ) {
   const [howls, setHowls] = useState<Howl[]>([]);
-  const [playNow, setPlayNow] = useState(false);
+  const [shouldPlayNow, setShouldPlayNow] = useState(false);
   const fadeMultiplier = useFadeMultiplier(isPlaying);
   // The point at which the user clicked play, or when the most recent one-shot
   //  sound was fired (restarting the timer)
@@ -57,7 +57,6 @@ export default function useOneShotPlayer(
   useEffect(() => {
     // Handle start/stop button clicks
     if (isPlaying) {
-      setPlayNow(true);
       setTimerStartTimestamp(performance.now());
     } else {
       setTimerStartTimestamp(null);
@@ -70,7 +69,7 @@ export default function useOneShotPlayer(
     if (timerStartTimestamp === null) return;
     const timerLength = randIntBetween(minSecondsBetween * 1000, maxSecondsBetween * 1000);
     const timeout = setTimeout(() => {
-      setPlayNow(true);
+      setShouldPlayNow(true);
       // Restart timer
       setTimerStartTimestamp(performance.now());
     }, timerLength);
@@ -99,8 +98,8 @@ export default function useOneShotPlayer(
 
   // Play a sound randomly selected from the sources
   useEffect(() => {
-    if (!playNow) return;
-    setPlayNow(false);
+    if (!shouldPlayNow) return;
+    setShouldPlayNow(false);
     if (howls.length > 0) {
       const randomIndex = Math.floor(Math.random() * howls.length);
       const howl = howls[randomIndex];
@@ -108,7 +107,7 @@ export default function useOneShotPlayer(
       //  is currently playing
       howl.play();
     }
-  }, [playNow, howls]);
+  }, [shouldPlayNow, howls]);
 
   // Keep audio volume in sync
   useEffect(() => {
@@ -116,4 +115,8 @@ export default function useOneShotPlayer(
       howl.volume(fadeMultiplier * volume);
     });
   });
+
+  return {
+    playNow: () => setShouldPlayNow(true)
+  }
 }

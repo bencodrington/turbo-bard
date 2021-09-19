@@ -51,7 +51,7 @@ export default function OneShotTrackItem({
   const samples = isUnloaded(oneShot) ? [] : oneShot.samples;
   const minSecondsBetween = (oneShot as OneShot).minSecondsBetween ?? DEFAULT_MIN_TIME_BETWEEN;
   const maxSecondsBetween = (oneShot as OneShot).maxSecondsBetween ?? DEFAULT_MAX_TIME_BETWEEN;
-  useOneShotPlayer(
+  const { playNow } = useOneShotPlayer(
     samples,
     computedVolume,
     minSecondsBetween,
@@ -76,10 +76,18 @@ export default function OneShotTrackItem({
   const source = (oneShot as OneShot).source ?? null;
 
   function toggleIsPlaying() {
+    const newIsPlayingValue = !isPlaying;
+    // When play button is clicked, play sound before resetting one-shot wick.
+    //  This can't happen within the hook whenever isPlaying is set to true,
+    //  because we don't want to trigger the sound when a group's "play all"
+    //  button is clicked.
+    if (newIsPlayingValue === true) {
+      playNow();
+    }
     dispatch(setTrackIsPlaying({
       groupIndex,
       trackIndex: oneShot.index,
-      isPlaying: !isPlaying
+      isPlaying: newIsPlayingValue
     }));
   }
 
