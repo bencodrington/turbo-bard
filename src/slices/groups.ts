@@ -11,6 +11,7 @@ import {
   DEFAULT_VOLUME
 } from "../utils/storeUtil";
 import { loadGroups, saveGroups } from "../services/localStorage";
+import { ObjectType } from "../models/ObjectTypes";
 
 const groupsSlice = createSlice({
   name: 'groups',
@@ -34,9 +35,12 @@ const groupsSlice = createSlice({
       // Determine which group the new track(s) should be assigned to
       let group;
       if (groupIndex === undefined) {
+        const groupName = searchResult.type === ObjectType.PACK
+          ? searchResult.name
+          : 'Untitled group';
         // Create new group
         group = {
-          name: 'Untitled group',
+          name: groupName,
           index: getNextIndex(state),
           tracks: [],
           volume: DEFAULT_VOLUME,
