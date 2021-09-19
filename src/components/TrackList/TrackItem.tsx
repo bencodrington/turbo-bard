@@ -5,13 +5,13 @@ import infoIcon from "../../assets/icon-info.svg";
 import closeIcon from "../../assets/icon-close.svg";
 
 import "./TrackItem.scss";
-import TagList from "../TagList";
 import VolumeControls from "../../widgets/VolumeControls";
 import DefaultButton from "../../widgets/buttons/DefaultButton";
 import useBoolean from "../../hooks/useBoolean";
 import { useDispatch } from "react-redux";
 import { removeTrack } from "../../slices/groups";
 import TrackSource from "./TrackSource";
+import Tag from "../../widgets/Tag";
 
 type TrackItemProps = {
   isPlaying: boolean,
@@ -59,6 +59,20 @@ export default function TrackItem({
     dispatch(removeTrack({ groupIndex, trackIndex }))
   }
 
+  const tagList = tags !== undefined
+    ? <div>
+      {
+        tags.map(tag => (
+          <Tag
+            key={tag}
+            text={tag}
+            onClick={onTagClick}
+          />
+        ))
+      }
+    </div>
+    : null;
+
   return (
     <div className="track-item-container">
       <div className="row">
@@ -88,9 +102,7 @@ export default function TrackItem({
           </header>
           {
             isSearchOpen
-              ? tags !== undefined
-                ? <TagList tags={tags} onTagClick={onTagClick} />
-                : null
+              ? tagList
               : <div className='track-controls'>
                 <VolumeControls
                   volume={volume}
