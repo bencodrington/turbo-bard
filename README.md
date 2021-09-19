@@ -21,6 +21,10 @@ Builds and minifies app for production to the `build` folder.
 
 Runs `build` and then commits and pushes the output to the remote `gh-pages` branch, deploying it immediately to the live GitHub Pages site. [More info](https://www.npmjs.com/package/gh-pages#command-line-utility).
 
+After deploying, create a new tag with `git tag -a v1.2.3 -m "Description of update."`.
+
+Push it to remote with `git push origin v1.2.3`.
+
 ### In the `functions` directory
 
 #### `npm run watch`
