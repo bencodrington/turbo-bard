@@ -43,6 +43,7 @@ export default function GroupControls({
       <DefaultButton
         onClick={toggleIsExpanded}
         icon={isExpanded ? caretDownIcon : caretRightIcon}
+        text={isExpanded ? 'Collapse' : 'Expand'}
         iconAltText={isExpanded ? 'Collapse group' : 'Expand group'}
         isRound={true}
       />
