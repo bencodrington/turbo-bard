@@ -17,6 +17,19 @@ function App() {
     dispatch(loadGroupsFromStorage());
   }, [dispatch]);
 
+  useEffect(() => {
+    // Close about page when Escape is pressed.
+    const keyPressHandler = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isAboutOpen) {
+        setIsAboutOpen(false);
+      }
+    };
+    window.addEventListener("keydown", keyPressHandler);
+    return () => {
+      window.removeEventListener("keydown", keyPressHandler);
+    }
+  });
+
   return (
     <div className="App">
       <AppHeader
