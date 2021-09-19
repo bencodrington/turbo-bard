@@ -71,6 +71,13 @@ export default function AboutPage({ closeAboutPage }: AboutPageProps) {
           />
         </div>
         <p>
+          Recent changes:
+        </p>
+        <ul>
+          <li>Fixed bug where duplicate sounds wouldn't play</li>
+          <li>Minor tweaks to make controls more intuitive</li>
+        </ul>
+        <p>
           Upcoming features:
         </p>
         <ul>
