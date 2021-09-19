@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { fetchSearchResults } from "../../services/database";
 import { useGroups } from "../../slices";
 import AddSoundsButton from "../../widgets/buttons/AddSoundsButton";
-import TrackSearchDropdown from "../SearchDropdown/SearchDropdown";
+import SearchDropdown from "../SearchDropdown/SearchDropdown";
 import useSearchResults from "../SearchDropdown/useSearchResults";
 
 import "./TrackList.scss";
-import Group from "./TrackListGroup";
+import TrackListGroup from "./TrackListGroup";
 
 export const NEW_GROUP = 'NEW_GROUP';
 
@@ -27,7 +27,7 @@ export default function TrackList() {
     <div className="track-list-container">
       {
         searchTarget === NEW_GROUP
-          ? <TrackSearchDropdown
+          ? <SearchDropdown
             closeSearchDropdown={() => { setSearchTarget(null) }}
             searchText={searchText}
             setSearchText={setSearchText}
@@ -43,7 +43,7 @@ export default function TrackList() {
       }
       {
         groups.map(group =>
-          <Group
+          <TrackListGroup
             key={group.index}
             group={group}
             searchTarget={searchTarget}
