@@ -41,7 +41,7 @@ export default function LoopTrackItem({
     ? 0
     : volume * groupVolume;
   const fileName = isUnloaded(loop) ? undefined : loop.fileName;
-  const { isLoaded: isAudioLoaded } = useLoopPlayer(computedVolume, isPlaying, fileName);
+  const { isLoaded: isAudioLoaded } = useLoopPlayer(computedVolume, isPlaying, loop.shouldLoad, fileName);
   useTrackData(id, index, groupIndex, !isUnloaded(loop));
   const dispatch = useDispatch();
 

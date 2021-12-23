@@ -28,6 +28,7 @@ export function addSearchResultToGroup(
         isMuted: false,
         index: getNextIndex(group.tracks),
         isPlaying: false,
+        shouldLoad: true,
         minSecondsBetween: oneShotConfig?.minSecondsBetween,
         maxSecondsBetween: oneShotConfig?.maxSecondsBetween,
       });
@@ -43,7 +44,8 @@ export function addSearchResultToGroup(
     tags,
     volume: DEFAULT_VOLUME,
     isMuted: false,
-    isPlaying: false
+    isPlaying: false,
+    shouldLoad: true
   });
 }
 

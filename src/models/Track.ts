@@ -18,6 +18,7 @@ export type Loop = {
   volume: number,
   isMuted: boolean,
   isPlaying: boolean,
+  shouldLoad: boolean,
   fileName: string
 } & TrackMetadata;
 
@@ -27,6 +28,7 @@ export type OneShot = {
   volume: number,
   isMuted: boolean,
   isPlaying: boolean,
+  shouldLoad: boolean,
   samples: string[],
   minSecondsBetween: number,
   maxSecondsBetween: number
@@ -38,6 +40,7 @@ export type UnloadedTrack = {
   volume: number,
   isMuted: boolean,
   isPlaying: boolean,
+  shouldLoad: boolean,
   // These optional properties are present when loading from a track search result,
   //  but not when loading from a pack
   name?: string,

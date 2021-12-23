@@ -80,7 +80,7 @@ export default function TrackItem({
           <FlameButton
             onClick={toggleIsPlaying}
             isPlaying={isPlaying}
-            isDisabled={!isAudioReady}
+            isLoaded={isAudioReady}
           />
           <div className="torch__handle">
             <img src={torchHandle} alt="Torch handle" />

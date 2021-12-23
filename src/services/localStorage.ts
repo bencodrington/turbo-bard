@@ -13,10 +13,13 @@ export function loadGroups() {
   if (!Array.isArray(parsedGroupsString)) return [];
   const storedGroups = parsedGroupsString as Group[];
   // Make sure all tracks are stopped before returning them
-  // to prevent unwanted autoplay
+  //  to prevent unwanted autoplay.
+  // Similarly, set shouldLoad to false to avoid loading all
+  //  previous sounds at once.
   storedGroups.forEach(group => {
     group.tracks.forEach(track => {
       track.isPlaying = false;
+      track.shouldLoad = false;
     });
   });
   return storedGroups;

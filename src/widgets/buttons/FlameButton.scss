@@ -16,6 +16,10 @@
     transform: translateX(-50%) scale(1.1);
   }
 
+  @keyframes load {
+    100% { background-position: -40px * 60; }
+  }
+
   .icon {
     position: absolute;
     width: 2.25rem;
@@ -23,6 +27,19 @@
     top: .75rem;
     transform: translateX(-50%);
     z-index: 1;
+  }
+  .loading {
+    position: absolute;
+    width: 40px;
+    height: 12.5px;
+    background-image: url('../../assets/loading-animation.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: auto 100%;
+    animation: load 1s steps(60) infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   @keyframes flicker {

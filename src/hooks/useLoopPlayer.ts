@@ -7,6 +7,7 @@ const FADE_DURATION_SECONDS = 2;
 export default function useLoopPlayer(
   volume: number,
   isPlaying: boolean,
+  shouldLoad: boolean,
   fileName?: string
 ) {
   const src = fileName !== undefined ? getAudioFileUrl(fileName) : undefined;
@@ -20,6 +21,7 @@ export default function useLoopPlayer(
     const newHowl = new Howl({
       src: [src],
       loop: true,
+      preload: false,
       onload: () => {
         if (wasDeleted) return;
         setIsLoaded(true);
@@ -32,6 +34,13 @@ export default function useLoopPlayer(
       newHowl.once('fade', () => newHowl.unload());
     }
   }, [src]);
+
+  useEffect(() => {
+    if (howl === null || isLoaded) return;
+    if (shouldLoad || isPlaying) {
+      howl.load();
+    }
+  }, [howl, shouldLoad, isPlaying, isLoaded])
 
   useEffect(() => {
     if (howl === null) return;

@@ -6,28 +6,28 @@ import "./FlameButton.scss";
 
 type FlameButtonProps = {
   isPlaying: boolean,
-  isDisabled?: boolean,
+  isLoaded: boolean,
   onClick: () => void
 };
 
 export default function FlameButton({
   isPlaying,
   onClick,
-  isDisabled = false
+  isLoaded
 }: FlameButtonProps) {
+  const isLoading = isPlaying && !isLoaded;
   const ariaLabel = (isPlaying ? "Play" : "Stop") + " button";
   return (
     <button
       className="flame-button-container"
       aria-label={ariaLabel}
       onClick={onClick}
-      disabled={isDisabled}
     >
-      <img
+      {isLoading ? <div className="loading" /> : <img
         className="icon"
         src={isPlaying ? stopIcon : playIcon}
         alt=""
-      />
+      />}
       <div
         className={"background" + (isPlaying ? ' playing' : '')}
       />
