@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.6d715c46.chunk.css",
-    "main.js": "/static/js/main.b835fefb.chunk.js",
-    "main.js.map": "/static/js/main.b835fefb.chunk.js.map",
+    "main.css": "/static/css/main.1b3226f1.chunk.css",
+    "main.js": "/static/js/main.342614ee.chunk.js",
+    "main.js.map": "/static/js/main.342614ee.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.b8e047a5.js",
     "runtime-main.js.map": "/static/js/runtime-main.b8e047a5.js.map",
     "static/js/2.6ab6b91f.chunk.js": "/static/js/2.6ab6b91f.chunk.js",
     "static/js/2.6ab6b91f.chunk.js.map": "/static/js/2.6ab6b91f.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.6d715c46.chunk.css.map": "/static/css/main.6d715c46.chunk.css.map",
+    "static/css/main.1b3226f1.chunk.css.map": "/static/css/main.1b3226f1.chunk.css.map",
     "static/js/2.6ab6b91f.chunk.js.LICENSE.txt": "/static/js/2.6ab6b91f.chunk.js.LICENSE.txt",
     "static/media/AboutPage.scss": "/static/media/bullet.73dd11cf.svg",
     "static/media/TrackListGroupSummary.scss": "/static/media/flame.4ac31bc4.svg",
@@ -24,13 +24,14 @@
     "static/media/icon-start-all.a900c4a8.svg": "/static/media/icon-start-all.a900c4a8.svg",
     "static/media/icon-stop.57194b63.svg": "/static/media/icon-stop.57194b63.svg",
     "static/media/icon-volume.3544539c.svg": "/static/media/icon-volume.3544539c.svg",
+    "static/media/FlameButton.scss": "/static/media/loading-animation.8d75d4dc.png",
     "static/media/logo.311742e0.svg": "/static/media/logo.311742e0.svg",
     "static/media/torch-handle.50074439.svg": "/static/media/torch-handle.50074439.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.b8e047a5.js",
     "static/js/2.6ab6b91f.chunk.js",
-    "static/css/main.6d715c46.chunk.css",
-    "static/js/main.b835fefb.chunk.js"
+    "static/css/main.1b3226f1.chunk.css",
+    "static/js/main.342614ee.chunk.js"
   ]
 }
