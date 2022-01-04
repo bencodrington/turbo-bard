@@ -36,6 +36,16 @@ export default function useLoopPlayer(
   }, [src]);
 
   useEffect(() => {
+    // If
+    //  - howl exists
+    //  - and hasn't been loaded yet
+    //  - and
+    //    (was just added from search
+    //    OR
+    //    user played a track loaded from localStorage)
+    // then load the audio file.
+    // This logic is to avoid overloading phone memory by loading the audio for
+    //  potentially hundreds of tracks from the list in localStorage.
     if (howl === null || isLoaded) return;
     if (shouldLoad || isPlaying) {
       howl.load();
