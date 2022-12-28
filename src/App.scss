@@ -28,6 +28,7 @@
 body {
   max-width: var(--max-width);
   margin: 0 auto;
+  overflow-y: scroll;
 }
 
 h1 {
