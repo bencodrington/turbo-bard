@@ -3,22 +3,12 @@
 .app-header-container {
   display: flex;
   align-items: center;
-  padding: .5rem;
+  padding: .5rem 1rem .5rem 0.25rem;
   justify-content: space-between;
+  background: var(--azure-glass);
 
   .logo {
     pointer-events: none;
     height: 3rem;
-  }
-
-  &.about-open {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    background: var(--background);
-    max-width: var(--max-width);
   }
 }

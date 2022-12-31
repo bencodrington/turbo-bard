@@ -1,7 +1,10 @@
 .anchor-button-container {
-  height: 2.5rem;
-  display: flex;
+  height: 3.5rem;
+  display: inline-flex;
+  padding: 0 1rem;
   align-items: center;
+  border: 1px solid var(--azure);
+  background: var(--azure-glass);
   border-radius: .25rem;
   color: var(--canary);
   justify-content: center;
@@ -12,7 +15,6 @@
   }
 
   span {
-    width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
   }

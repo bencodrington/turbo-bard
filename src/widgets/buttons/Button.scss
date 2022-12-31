@@ -1,0 +1,31 @@
+.button-container {
+  height: 3.5rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--azure);
+  border-radius: .25rem;
+  color: var(--canary);
+  background: var(--azure-glass);
+  justify-content: center;
+
+  &:hover {
+    color: white;
+    img {
+      transform: scale(1.1);
+    }
+  }
+
+  &.icon-only {
+    padding: .5rem;
+    width: 3.5rem;
+
+    img {
+      height: 2.5rem;
+    }
+  }
+
+  img {
+    height: 2rem;
+  }
+}

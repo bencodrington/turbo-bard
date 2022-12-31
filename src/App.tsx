@@ -5,7 +5,6 @@ import AboutPage from './components/AboutPage';
 import TrackList from './components/TrackList/TrackList';
 import useBoolean from './hooks/useBoolean';
 import { loadGroupsFromStorage } from './slices/groups';
-import AppHeader from './widgets/AppHeader';
 
 function App() {
   const [isAboutOpen, setIsAboutOpen] = useBoolean(false);
@@ -32,12 +31,8 @@ function App() {
 
   return (
     <div className="App">
-      <AppHeader
-        isAboutOpen={isAboutOpen}
-        setIsAboutOpen={setIsAboutOpen}
-      />
       {isAboutOpen && <AboutPage closeAboutPage={() => { setIsAboutOpen(false); }} />}
-      <TrackList />
+      <TrackList openAboutPage={() => { setIsAboutOpen(true) }} />
     </div>
   );
 }

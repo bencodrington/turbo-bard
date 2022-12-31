@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { fetchSearchResults } from "../../services/database";
 import { useGroups } from "../../slices";
+import AppHeader from "../../widgets/AppHeader";
 import AddSoundsButton from "../../widgets/buttons/AddSoundsButton";
 import SearchDropdown from "../SearchDropdown/SearchDropdown";
 import useSearchResults from "../SearchDropdown/useSearchResults";
@@ -10,7 +11,11 @@ import TrackListGroup from "./TrackListGroup";
 
 export const NEW_GROUP = 'NEW_GROUP';
 
-export default function TrackList() {
+type TrackListProps = {
+  openAboutPage: () => void;
+};
+
+export default function TrackList({ openAboutPage }: TrackListProps) {
   const groups = useGroups();
   const [searchTarget, setSearchTarget] = useState<number | null | typeof NEW_GROUP>(null);
   const {
@@ -25,6 +30,10 @@ export default function TrackList() {
 
   return (
     <div className="track-list-container">
+      <AppHeader
+        isAboutOpen={false}
+        setIsAboutOpen={openAboutPage}
+      />
       {
         searchTarget === NEW_GROUP
           ? <SearchDropdown
