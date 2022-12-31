@@ -21,7 +21,7 @@ export default function AboutPage({ closeAboutPage }: AboutPageProps) {
       />
       <main>
         <section>
-          <h4>Music and effects at the speed of sound.</h4>
+          <h2>Music and effects at the speed of sound.</h2>
           <p>
             Spice up your <a href="https://en.wikipedia.org/wiki/Tabletop_role-playing_game"
               target="_blank"
@@ -36,7 +36,7 @@ export default function AboutPage({ closeAboutPage }: AboutPageProps) {
           </ul>
         </section>
         <section>
-          <h4>Always leveling up.</h4>
+          <h2>Always leveling up.</h2>
           <p>
             Please send any feedback, bugs, or ideas to <a href="mailto:phanarydev@gmail.com"
               target="_blank"
@@ -66,21 +66,17 @@ export default function AboutPage({ closeAboutPage }: AboutPageProps) {
             iconAltText="Ko-Fi logo"
             text="Support me"
           />
-          <p>
-            Recent changes:
-          </p>
+          <h3>Recent changes</h3>
           <ul>
             <li>Redesign to make the interface easier to learn, and faster to switch between groups during a game session</li>
           </ul>
-          <p>
-            Upcoming features:
-          </p>
+          <h3>Upcoming features</h3>
           <ul>
             <li>Use sounds from your own device</li>
           </ul>
         </section>
         <section>
-          <h4>About the audio.</h4>
+          <h2>About the audio.</h2>
           <p>
             I’ve collected sounds from across the Internet with
             permissive licenses.
@@ -99,7 +95,7 @@ export default function AboutPage({ closeAboutPage }: AboutPageProps) {
           </p>
         </section>
         <section>
-          <h4>Data policy.</h4>
+          <h2>Data policy.</h2>
           <p>
             TurboBard doesn't use any cookies.
             No personal data is recorded at any time.
