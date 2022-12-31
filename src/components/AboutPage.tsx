@@ -2,11 +2,9 @@ import React from "react";
 
 import kofiIcon from "../assets/ko-fi-icon.png";
 import githubIcon from "../assets/github-icon.png";
-import backIcon from "../assets/icon-back.svg";
 
 import "./AboutPage.scss";
 import AnchorButton from "../widgets/buttons/AnchorButton";
-import DefaultButton from "../widgets/buttons/DefaultButton";
 import AppHeader from "../widgets/AppHeader";
 import Button from "../widgets/buttons/Button";
 
