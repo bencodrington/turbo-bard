@@ -9,7 +9,6 @@ import caretRightIcon from "../../assets/icon-caret-right.svg";
 import { Track } from "../../models/Track";
 
 import "./GroupControls.scss";
-import TrackListGroupSummary from "../TrackListGroupSummary";
 
 type GroupControlsProps = {
   groupIndex: number,
@@ -47,7 +46,6 @@ export default function GroupControls({
         iconAltText={isExpanded ? 'Collapse group' : 'Expand group'}
         isRound={true}
       />
-      {!isExpanded && <TrackListGroupSummary tracks={tracks} />}
       <DefaultButton
         onClick={isChildPlaying ? stopAll : startAll}
         icon={isChildPlaying ? stopIcon : startAllIcon}
