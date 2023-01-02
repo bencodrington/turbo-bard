@@ -2,8 +2,14 @@ import React from "react";
 
 import "./Button.scss";
 
+export enum ButtonType {
+  Default = '',
+  Primary = 'primary'
+}
+
 type ButtonProps = {
   text?: string,
+  type?: ButtonType,
   icon?: string, // icon should be an imported image
   iconAltText?: string,
   onClick: () => void,
@@ -12,6 +18,7 @@ type ButtonProps = {
 
 export default function Button({
   text,
+  type,
   icon,
   iconAltText,
   onClick,
@@ -25,6 +32,7 @@ export default function Button({
   const computedClassName = 'button-container '
     + (className ? className + ' ' : '')
     + (icon !== undefined && text === undefined ? 'icon-only ' : '')
+    + (type ? type + ' ' : '')
 
   return (
     <button

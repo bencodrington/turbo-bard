@@ -1,3 +1,5 @@
+@import "../../mixins.scss";
+
 .button-container {
   height: 3.5rem;
   padding: 0 1rem;
@@ -13,6 +15,28 @@
     color: white;
     img {
       transform: scale(1.1);
+    }
+  }
+
+  &.primary {
+    position: relative;
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--track);
+      opacity: 0.1;
+    }
+    background: none;
+    border: 1px solid var(--gradient-color-1);
+    border-top-color: var(--gradient-color-2);
+    border-right-color: var(--gradient-color-2);
+    span {
+      @include gradientText;
     }
   }
 
