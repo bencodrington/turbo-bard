@@ -1,0 +1,17 @@
+.group-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 2rem 1rem;
+    gap: 1.25rem;
+  }
+
+  .empty-state-message {
+    color: var(--faded-white);
+  }
+}

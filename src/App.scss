@@ -8,7 +8,9 @@
   --azure: #0D38D4;
   --azure-glass: #06103D;
   --gradient-color-1: #F13BF4;
-  --track: linear-gradient(45deg, var(--gradient-color-1), #FF7A00);
+  --gradient-color-2: #FF7A00;
+  --track: linear-gradient(45deg, var(--gradient-color-1), var(--gradient-color-2));
+  --faded-white: #838591;
   --font--signika: 'Signika Negative', sans-serif;
   --font--shrikhand: 'Shrikhand';
   --max-width: 560px;

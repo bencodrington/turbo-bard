@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import './App.scss';
 import AboutPage from './components/AboutPage';
-import TrackList from './components/TrackList/TrackList';
+import GroupList from './components/GroupList/GroupList';
 import useBoolean from './hooks/useBoolean';
 import { loadGroupsFromStorage } from './slices/groups';
 
@@ -32,7 +32,7 @@ function App() {
   return (
     <div className="App">
       {isAboutOpen && <AboutPage closeAboutPage={() => { setIsAboutOpen(false); }} />}
-      <TrackList openAboutPage={() => { setIsAboutOpen(true) }} />
+      <GroupList openAboutPage={() => { setIsAboutOpen(true) }} />
     </div>
   );
 }
