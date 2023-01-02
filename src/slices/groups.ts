@@ -8,7 +8,7 @@ import {
   getNextIndex,
   getGroupByIndex,
   getTrackByIndex,
-  DEFAULT_VOLUME
+  DEFAULT_GROUP_VOLUME
 } from "../utils/storeUtil";
 import { loadGroups, saveGroups } from "../services/localStorage";
 import { ObjectType } from "../models/ObjectTypes";
@@ -17,12 +17,12 @@ const groupsSlice = createSlice({
   name: 'groups',
   initialState: [] as Group[],
   reducers: {
-    newGroup(state, { payload }: { payload: string }) {
+    newGroup(state, { payload }: PayloadAction<{ index: number }>) {
       state.push({
-        name: payload,
-        index: getNextIndex(state),
+        name: 'Untitled Group',
+        index: payload.index,
         tracks: [],
-        volume: DEFAULT_VOLUME,
+        volume: DEFAULT_GROUP_VOLUME,
         isExpanded: true
       });
       saveGroups(state);
@@ -43,7 +43,7 @@ const groupsSlice = createSlice({
           name: groupName,
           index: getNextIndex(state),
           tracks: [],
-          volume: DEFAULT_VOLUME,
+          volume: DEFAULT_GROUP_VOLUME,
           isExpanded: true
         };
         state.unshift(group);

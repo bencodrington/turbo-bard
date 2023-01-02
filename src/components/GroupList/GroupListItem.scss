@@ -1,0 +1,26 @@
+.group-list-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sound-display-text {
+    color: var(--faded-white);
+    margin-top: .5rem;
+    margin-bottom: .75rem;
+  }
+
+  .buttons {
+    display: flex;
+    gap: .25rem;
+
+    & > *:first-child {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+}

@@ -1,7 +1,8 @@
 import { SearchResult } from "../models/SearchResult";
 import { Group } from "../models/Group";
 
-export const DEFAULT_VOLUME = 0.7;
+export const DEFAULT_GROUP_VOLUME = 1;
+export const DEFAULT_TRACK_VOLUME = 0.7;
 
 export function getNextIndex(indexedItems: { index: number }[]) {
   let maxIndex = -1;
@@ -42,7 +43,7 @@ export function addSearchResultToGroup(
     name,
     type,
     tags,
-    volume: DEFAULT_VOLUME,
+    volume: DEFAULT_TRACK_VOLUME,
     isMuted: false,
     isPlaying: false,
     shouldLoad: true
