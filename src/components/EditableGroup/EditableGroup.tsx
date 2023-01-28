@@ -8,6 +8,8 @@ import { Group } from "../../models/Group";
 import useBoolean from "../../hooks/useBoolean";
 import SearchDropdown from "../SearchDropdown/SearchDropdown";
 import useSearchResults from "../SearchDropdown/useSearchResults";
+import { constructKey } from "../../utils/tsxUtil";
+import SoundItem from "./SoundItem";
 
 type EditableGroupProps = {
   className?: string;
@@ -36,7 +38,7 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
     dispatch(setGroupName({ groupIndex: group.index, name: newName }));
   }
 
-  const [isSearchActive, setIsSearchActive] = useBoolean(false);
+  const [isSearchOpen, setIsSearchOpen] = useBoolean(false);
   const {
     results,
     isFetchingResults,
@@ -71,11 +73,17 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
       </header>
 
       <div className="sounds-list">
-        {/* TODO: sounds in group */}
-
-        {isSearchActive
+        {group.tracks.map(track =>
+          <SoundItem
+            key={constructKey(group, track)}
+            track={track}
+            isSearchOpen={isSearchOpen}
+            groupIndex={group.index}
+          />
+        )}
+        {isSearchOpen
           ? <SearchDropdown
-            closeSearchDropdown={() => { setIsSearchActive(false) }}
+            closeSearchDropdown={() => { setIsSearchOpen(false) }}
             searchText={searchText}
             setSearchText={setSearchText}
             appendSearchText={appendSearchText}
@@ -88,7 +96,7 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
             type={ButtonType.Default}
             icon={addIcon}
             iconAltText="A plus icon"
-            onClick={() => setIsSearchActive(true)}
+            onClick={() => setIsSearchOpen(true)}
           />
         }
       </div>
