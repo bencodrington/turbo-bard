@@ -6,6 +6,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: .5rem;
+
+    h2 {
+      flex: 1;
+      min-width: 0;
+    }
   }
 
   .sound-display-text {
