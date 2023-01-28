@@ -38,7 +38,7 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
         setIsAboutOpen={openAboutPage}
       />
       <main>
-        {groups.length === 0 && <h3 className="empty-state-message">No sound groups.</h3>}
+        {groups.length === 0 && <h3 className="empty-state-message">Create a group of sounds to get started.</h3>}
         {
           groups.map(group =>
             <GroupListItem

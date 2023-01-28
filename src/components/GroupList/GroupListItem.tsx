@@ -7,6 +7,8 @@ import caretDownIcon from "../../assets/icon-caret-down.svg";
 // import stopIcon from "../../assets/icon-stop.svg";
 
 import "./GroupListItem.scss";
+import { useDispatch } from "react-redux";
+import { setGroupIsPlaying } from "../../slices/groups";
 
 type GroupListItemProps = {
   group: Group,
@@ -26,14 +28,19 @@ export default function GroupListItem({ group, editGroup }: GroupListItemProps) 
 
   const soundsDisplayString = computeSoundDisplayString(group.tracks);
 
-  const playSolo = () => { };
+  const dispatch = useDispatch();
+  const playSolo = () => { dispatch(setGroupIsPlaying({ groupIndex: group.index, isPlaying: true })) };
   const toggleDropdown = () => { };
 
   return (
     <div className="group-list-item-container">
       <header>
         <h2>{group.name}</h2>
-        <Button onClick={() => { editGroup(group.index) }} text="Edit" />
+        <Button
+          onClick={() => { editGroup(group.index) }}
+          text="Edit"
+          isEditButtonWidth={true}
+        />
       </header>
       <p className="sound-display-text">{soundsDisplayString}</p>
       <div className="buttons">
@@ -47,6 +54,7 @@ export default function GroupListItem({ group, editGroup }: GroupListItemProps) 
           icon={caretDownIcon}
           iconAltText="Caret pointing downward"
           onClick={toggleDropdown}
+          isEditButtonWidth={true}
         />
       </div>
     </div>

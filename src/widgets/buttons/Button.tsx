@@ -14,6 +14,8 @@ type ButtonProps = {
   iconAltText?: string,
   onClick: () => void,
   className?: string,
+  isHeaderButtonWidth?: boolean,
+  isEditButtonWidth?: boolean,
 };
 
 export default function Button({
@@ -23,6 +25,8 @@ export default function Button({
   iconAltText,
   onClick,
   className,
+  isHeaderButtonWidth,
+  isEditButtonWidth,
 }: ButtonProps) {
 
   if (text === undefined && icon === undefined) return null;
@@ -32,6 +36,8 @@ export default function Button({
   const computedClassName = 'button-container '
     + (className ? className + ' ' : '')
     + (icon !== undefined && text === undefined ? 'icon-only ' : '')
+    + (isHeaderButtonWidth ? 'header-button-width ' : '')
+    + (isEditButtonWidth ? 'edit-button-width ' : '')
     + (type ? type + ' ' : '')
 
   return (

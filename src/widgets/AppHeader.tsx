@@ -21,6 +21,7 @@ export default function AppHeader({
       <Button
         onClick={() => setIsAboutOpen(!isAboutOpen)}
         text={isAboutOpen ? 'Back' : 'About'}
+        isHeaderButtonWidth={true}
       />
     </div>
   );

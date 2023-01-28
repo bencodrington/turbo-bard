@@ -52,4 +52,12 @@
   img {
     height: 2rem;
   }
+
+  // Force some buttons to be a specific width to look more uniform
+  &.header-button-width {
+    width: 8rem;
+  }
+  &.edit-button-width {
+    width: 4rem;
+  }
 }
