@@ -2,6 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  isolation: isolate;
+
+  .editable-group {
+    z-index: 1;
+  }
 
   main {
     display: flex;

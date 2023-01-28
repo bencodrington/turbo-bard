@@ -9,7 +9,8 @@ import caretDownIcon from "../../assets/icon-caret-down.svg";
 import "./GroupListItem.scss";
 
 type GroupListItemProps = {
-  group: Group
+  group: Group,
+  editGroup: (groupIndex: number) => void
 };
 
 const computeSoundDisplayString = (tracks: Track[]) => {
@@ -21,7 +22,7 @@ const computeSoundDisplayString = (tracks: Track[]) => {
   );
 }
 
-export default function GroupListItem({ group }: GroupListItemProps) {
+export default function GroupListItem({ group, editGroup }: GroupListItemProps) {
 
   const soundsDisplayString = computeSoundDisplayString(group.tracks);
 
@@ -32,7 +33,7 @@ export default function GroupListItem({ group }: GroupListItemProps) {
     <div className="group-list-item-container">
       <header>
         <h2>{group.name}</h2>
-        <Button onClick={() => { }} text="Edit" />
+        <Button onClick={() => { editGroup(group.index) }} text="Edit" />
       </header>
       <p className="sound-display-text">{soundsDisplayString}</p>
       <div className="buttons">

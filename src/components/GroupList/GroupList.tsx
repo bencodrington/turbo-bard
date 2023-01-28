@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { newGroup } from "../../slices/groups";
 import { getNextIndex } from "../../utils/storeUtil";
 import GroupListItem from "./GroupListItem";
+import EditableGroup from "../EditableGroup/EditableGroup";
 
 type GroupListProps = {
   openAboutPage: () => void;
@@ -19,6 +20,7 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
   const dispatch = useDispatch();
 
   const [editableGroupIndex, setEditableGroupIndex] = useState<null | number>(null);
+  const editableGroup = groups.find(group => group.index === editableGroupIndex) ?? null;
   const editGroup = (index: number) => setEditableGroupIndex(index);
   const stopEditingGroup = () => setEditableGroupIndex(null);
 
@@ -30,12 +32,11 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
 
   return (
     <div className="group-list-container">
-      {/* TODO: <EditableGroup stopEditingGroup={stopEditingGroup} /> */}
+      {editableGroup !== null && <EditableGroup className="editable-group" stopEditingGroup={stopEditingGroup} group={editableGroup}/>}
       <AppHeader
         isAboutOpen={false}
         setIsAboutOpen={openAboutPage}
       />
-      {editableGroupIndex !== null && <h3>{editableGroupIndex}</h3>}
       <main>
         {groups.length === 0 && <h3 className="empty-state-message">No sound groups.</h3>}
         {
@@ -43,6 +44,7 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
             <GroupListItem
               key={group.index}
               group={group}
+              editGroup={editGroup}
             />
           )
         }
