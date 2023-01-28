@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import './App.scss';
 import AboutPage from './components/AboutPage';
+import AudioManager from './components/AudioManager/AudioManager';
 import GroupList from './components/GroupList/GroupList';
 import useBoolean from './hooks/useBoolean';
 import { loadGroupsFromStorage } from './slices/groups';
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <div className="App">
+      <AudioManager />
       {isAboutOpen && <AboutPage closeAboutPage={() => { setIsAboutOpen(false); }} />}
       <GroupList openAboutPage={() => { setIsAboutOpen(true) }} />
     </div>
