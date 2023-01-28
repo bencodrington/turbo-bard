@@ -1,7 +1,7 @@
 import React from "react";
 import { isUnloaded, Loop, UnloadedTrack } from "../../models/Track";
 import useLoopPlayer from "../../hooks/useLoopPlayer";
-import useTrackData from "../../hooks/useTrackData";
+import useTrackMetadata from "../../hooks/useTrackMetadata";
 import { useVolume } from "../../hooks/useVolume";
 
 import TrackItem from "./TrackItem";
@@ -42,7 +42,7 @@ export default function LoopTrackItem({
     : volume * groupVolume;
   const fileName = isUnloaded(loop) ? undefined : loop.fileName;
   const { isLoaded: isAudioLoaded } = useLoopPlayer(computedVolume, isPlaying, loop.shouldLoad, fileName);
-  useTrackData(id, index, groupIndex, !isUnloaded(loop));
+  useTrackMetadata(loop, groupIndex);
   const dispatch = useDispatch();
 
   if (!isVisible) {

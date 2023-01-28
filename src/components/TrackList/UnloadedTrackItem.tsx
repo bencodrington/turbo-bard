@@ -1,5 +1,5 @@
 import React from "react";
-import useTrackData from "../../hooks/useTrackData";
+import useTrackMetadata from "../../hooks/useTrackMetadata";
 import { UnloadedTrack } from "../../models/Track";
 import { ERROR_TYPE } from "../../models/DatabaseTypes";
 import TrackItem from "./TrackItem";
@@ -29,7 +29,7 @@ export default function UnloadedTrackItem({
     name = '...',
     isPlaying
   } = unloadedTrack;
-  useTrackData(id, index, groupIndex, type === ERROR_TYPE);
+  useTrackMetadata(unloadedTrack, groupIndex);
   const {
     volume,
     setVolume,

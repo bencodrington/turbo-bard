@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import useOneShotPlayer from "../../hooks/useOneShotPlayer";
-import useTrackData from "../../hooks/useTrackData";
+import useTrackMetadata from "../../hooks/useTrackMetadata";
 import { useVolume } from "../../hooks/useVolume";
 import { isUnloaded, OneShot, UnloadedTrack } from "../../models/Track";
 import { setTrackIsPlaying } from "../../slices/groups";
@@ -44,7 +44,7 @@ export default function OneShotTrackItem({
   const computedVolume = isMuted
   ? 0
   : volume * groupVolume;
-  useTrackData(id, index, groupIndex, !isUnloaded(oneShot));
+  useTrackMetadata(oneShot, groupIndex);
   const dispatch = useDispatch();
   const wickRef = useRef(null);
   
