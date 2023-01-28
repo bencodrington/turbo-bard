@@ -1,8 +1,9 @@
 import React from "react";
-import { isLoop, isOneShot, isUnloadedLoop } from "../../models/Track";
+import { isLoop, isOneShot, isUnloaded, isUnloadedLoop } from "../../models/Track";
 import { useGroups } from "../../slices";
 import { constructKey } from "../../utils/tsxUtil";
 import LoopAudio from "./LoopAudio";
+import OneShotAudio from "./OneShotAudio";
 
 /* This component is responsible for making sure audio is playing for the right
     sounds, at the right times, at the right volumes.
@@ -18,22 +19,24 @@ import LoopAudio from "./LoopAudio";
     state with hooks and lifecycle events.
 */
 
-type AudioManagerProps = {
-
-};
-
-export default function AudioManager(props: AudioManagerProps) {
+export default function AudioManager() {
   const groups = useGroups();
   // Make an Audio component for each sound in each group
   return (<>{
     groups.map(group =>
       group.tracks.map(track => {
-        // TODO: keys?
         if (isLoop(track) || isUnloadedLoop(track)) {
-          return <LoopAudio loop={track} groupIndex={group.index} key={constructKey(group, track)} />
-        } else if (isOneShot(track)) {
-          // TODO: return <OneShotAudio />
-          return null;
+          return <LoopAudio
+            loop={track}
+            groupIndex={group.index}
+            key={constructKey(group, track)}
+          />
+        } else if (isOneShot(track) || isUnloaded(track)) {
+          return <OneShotAudio
+            oneShot={track}
+            groupIndex={group.index}
+            key={constructKey(group, track)}
+          />
         }
         return null;
       })

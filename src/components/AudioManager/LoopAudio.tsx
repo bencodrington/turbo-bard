@@ -10,8 +10,8 @@ type LoopAudioProps = {
 export default function LoopAudio({ loop, groupIndex }: LoopAudioProps) {
   const { isPlaying, volume } = loop;
   const fileName = isUnloaded(loop) ? undefined : loop.fileName;
-  // Need to add useTrackMetadata to fetch the filename so we can start loading the
-  //  audio.
+  // Need to add useTrackMetadata to fetch the filename so we can start loading
+  //  the audio.
   useTrackMetadata(loop, groupIndex);
   useLoopPlayer(volume, isPlaying, loop.shouldLoad, fileName);
 
