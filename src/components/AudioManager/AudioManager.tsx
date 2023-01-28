@@ -31,7 +31,7 @@ export default function AudioManager(props: AudioManagerProps) {
         console.log('track', track, isLoop(track));
         // TODO: keys?
         if (isLoop(track) || isUnloadedLoop(track)) {
-          return <LoopAudio loop={track} groupIndex={group.index} key={constructKey(track, group)} />
+          return <LoopAudio loop={track} groupIndex={group.index} key={constructKey(group, track)} />
         } else if (isOneShot(track)) {
           // TODO: return <OneShotAudio />
           return null;
