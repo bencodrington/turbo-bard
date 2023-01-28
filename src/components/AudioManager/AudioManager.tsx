@@ -28,7 +28,6 @@ export default function AudioManager(props: AudioManagerProps) {
   return (<>{
     groups.map(group =>
       group.tracks.map(track => {
-        console.log('track', track, isLoop(track));
         // TODO: keys?
         if (isLoop(track) || isUnloadedLoop(track)) {
           return <LoopAudio loop={track} groupIndex={group.index} key={constructKey(group, track)} />
