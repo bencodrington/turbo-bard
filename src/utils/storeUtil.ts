@@ -64,5 +64,5 @@ export function getTrackByIndex(
 ) {
   return getGroupByIndex(groupIndex, groups)
     ?.tracks
-    .find(track => track.index === trackIndex);
+    ?.find(track => track.index === trackIndex);
 }
