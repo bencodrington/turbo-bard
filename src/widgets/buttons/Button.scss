@@ -56,8 +56,10 @@
   // Force some buttons to be a specific width to look more uniform
   &.header-button-width {
     width: 8rem;
+    padding: 0;
   }
   &.edit-button-width {
     width: 4rem;
+    padding: 0;
   }
 }
