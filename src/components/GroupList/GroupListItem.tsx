@@ -16,7 +16,7 @@ type GroupListItemProps = {
 const computeSoundDisplayString = (tracks: Track[]) => {
   if (tracks.length === 0) return 'No sounds.';
   return (
-    'Sounds:' +
+    'Sounds: ' +
     tracks.map(track => track.name ?? '...').join(', ') +
     '.'
   );

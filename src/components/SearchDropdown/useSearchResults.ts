@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
+import { SearchResult } from "../../models/SearchResult";
+import { fetchSearchResults } from "../../services/database";
 
-export default function useSearchResults<T>(fetchFunction: (searchText: string) => Promise<T[]>) {
-  const [results, setResults] = useState<T[]>([]);
+export default function useSearchResults() {
+  const [results, setResults] = useState<SearchResult[]>([]);
   const [isFetchingResults, setIsFetchingResults] = useState(false);
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     let isCancelled = false;
     async function fetch() {
-      const results = await fetchFunction(searchText);
+      const results = await fetchSearchResults(searchText);
       if (isCancelled) return;
       setResults(results);
       setIsFetchingResults(false);
@@ -19,15 +21,15 @@ export default function useSearchResults<T>(fetchFunction: (searchText: string) 
 
     return () => {
       isCancelled = true;
-    }
-  }, [searchText, fetchFunction]);
+    };
+  }, [searchText]);
 
   function appendSearchText(text: string) {
     if (searchText.trim().length === 0) {
       setSearchText(text);
       return;
     }
-    setSearchText(searchText.trim() + ' ' + text);
+    setSearchText(searchText.trim() + " " + text);
   }
 
   return {
@@ -35,6 +37,6 @@ export default function useSearchResults<T>(fetchFunction: (searchText: string) 
     isFetchingResults,
     searchText,
     setSearchText,
-    appendSearchText
+    appendSearchText,
   };
 }

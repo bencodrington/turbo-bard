@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { fetchSearchResults } from "../../services/database";
 import { useGroups } from "../../slices";
 import AppHeader from "../../widgets/AppHeader";
 import AddSoundsButton from "../../widgets/buttons/AddSoundsButton";
@@ -24,7 +23,7 @@ export default function TrackList({ openAboutPage }: TrackListProps) {
     searchText,
     setSearchText,
     appendSearchText
-  } = useSearchResults(fetchSearchResults);
+  } = useSearchResults();
 
   const addButtonText = 'Add sounds' + (groups.length > 0 ? ' to new group' : '');
 
