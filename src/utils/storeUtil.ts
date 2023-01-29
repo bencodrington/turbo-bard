@@ -66,3 +66,7 @@ export function getTrackByIndex(
     ?.tracks
     ?.find(track => track.index === trackIndex);
 }
+
+export function isGroupPlaying(group: Group) {
+  return group.tracks.some(track => track.isPlaying === true);
+}

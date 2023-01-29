@@ -183,6 +183,17 @@ const groupsSlice = createSlice({
       });
       saveGroups(state);
     },
+    playGroupSolo(state, { payload }: PayloadAction<{ groupIndex: number }>) {
+      const { groupIndex } = payload;
+      state.forEach(group => {
+        group.tracks.forEach(track => {
+          // Play track if it's in the group that triggered this action
+          // Stop track otherwise
+          track.isPlaying = group.index === groupIndex;
+        });
+        saveGroups(state);
+      })
+    },
     setOneShotRange(state, { payload }: PayloadAction<{
       groupIndex: number,
       trackIndex: number,
@@ -227,6 +238,7 @@ export const {
   setTrackIsPlaying,
   startAllInGroup,
   stopAllInGroup,
+  playGroupSolo,
   setOneShotRange,
   loadGroupsFromStorage
 } = groupsSlice.actions;
