@@ -29,7 +29,6 @@ export default function SearchDropdown({
 }: SearchDropdownProps) {
   const dispatch = useDispatch();
   function onSearchItemClick(searchResult: SearchResult) {
-    closeSearchDropdown();
     let groupIndex: undefined | number = undefined;
     if (typeof searchTarget === 'number') {
       groupIndex = searchTarget;

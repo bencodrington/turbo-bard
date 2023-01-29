@@ -23,6 +23,7 @@
     border: 1px solid var(--canary);
     padding: .25rem .5rem;
     color: white;
+    height: 3.5rem;
     @include h2;
     
     &::placeholder {

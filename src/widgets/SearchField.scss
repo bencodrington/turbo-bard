@@ -4,7 +4,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  --border-width: 2px;
 
   .icon {
     position: absolute;
@@ -20,29 +19,25 @@
     --icon-size: 2rem;
     height: 3.5rem;
     flex: 1;
-    border-radius: 8px;
-    border: 2px solid var(--canary);
-    // Required for rounded gradient border
-    border-color: transparent;
-    background-image: linear-gradient(var(--azure-glass), var(--azure-glass)), var(--track);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
+    border: 1px solid var(--azure);
+    border-radius: 3px 0 0 3px;
 
     padding: .25rem;
     padding-left: calc(.5rem + var(--icon-size) + .25rem);
-    color: var(--turbo-blue);
+    color: white;
     @include body;
     
     &::placeholder {
       @include body;
-      font-style: italic;
-      color: rgba(var(--canary--rgb), 70%);
-      opacity: .5;
+      color: var(--faded-white);
     }
   }
 
   .collapse-search-button {
-    background: none;
     height: 3.5rem;
+    border: 1px solid var(--azure);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left-width: 0;
   }
 }

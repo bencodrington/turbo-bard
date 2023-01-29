@@ -1,36 +1,29 @@
 @import '../../mixins.scss';
 
 .search-item-container {
-  margin: 0;
-  margin-top: 0.5rem;
+  padding: 0.5rem 1rem 1rem;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
   min-height: 3rem;
   cursor: pointer;
-  .loading {
-    text-align: center;
+  background: var(--azure-glass);
+
+  &:last-child {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
   }
 
-  h4 {
+  h3 {
     display: inline-block;
     color: var(--canary);
-    line-height: 1.75rem;
-  }
 
-  &:not(.loading):hover h4 {
-    color: white;
+    &:hover {
+      color: white;
+    }
   }
 
   .pack-count {
     @include gradientText;
-    margin-left: 8px;
-
-    .pack-count__number {
-      border: 1px solid var(--turbo-blue);
-      border-radius: 4px;
-      padding: 0 3px;
-      margin-right: 2px;
-    }
+    margin-bottom: .25rem;
   }
 }

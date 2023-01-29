@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef } from "react";
 import searchIcon from "../assets/icon-search.svg";
-import DefaultButton from "./buttons/DefaultButton";
+import Button, { ButtonType } from "./buttons/Button";
 
 import "./SearchField.scss";
 
@@ -43,9 +43,10 @@ export default function SearchField(props: SearchFieldProps) {
         role="searchbox"
         autoFocus
       />
-      <DefaultButton
+      <Button
+        type={ButtonType.Default}
         onClick={props.onCancel}
-        text="Cancel"
+        text="Close"
         className="collapse-search-button"
       />
     </div>

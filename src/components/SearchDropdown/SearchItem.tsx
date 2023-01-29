@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchResult } from "../../models/SearchResult";
-import Tag from "../../widgets/Tag";
+import Tags from "../../widgets/Tags";
 
 import "./SearchItem.scss";
 
@@ -14,8 +14,7 @@ export default function SearchItem({ data, onClick }: SearchItemProps) {
   if (data.tracks !== undefined) {
     packCountElement = (
       <span className="pack-count">
-        <span className="pack-count__number">{data.tracks.length}</span>
-      pack
+        pack of {data.tracks.length} sounds
       </span>
     );
   }
@@ -39,11 +38,9 @@ export default function SearchItem({ data, onClick }: SearchItemProps) {
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
-      <h4>{data.name}</h4>
+      <h3>{data.name}</h3>
       {packCountElement}
-      {filteredTags.map((tag, index) =>
-        <Tag key={index} text={tag} />
-      )}
+      <Tags tags={filteredTags} isReducedEmphasis={false} />
     </li>
   );
 }
