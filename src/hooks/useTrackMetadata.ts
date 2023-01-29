@@ -6,7 +6,7 @@ import { setTrackData } from "../slices/groups";
 import { isUnloaded, Track } from "../models/Track";
 
 export default function useTrackMetadata(track: Track, groupIndex: number) {
-  const [isLoadingData, setIsLoadingData] = useState(false);
+  const [shouldStartLoadingData, setShouldStartLoadingData] = useState(false);
   const dispatch = useDispatch();
   const { id, index } = track;
 
@@ -16,12 +16,16 @@ export default function useTrackMetadata(track: Track, groupIndex: number) {
   //  - we haven't already started loading data
   //  - we haven't already tried and failed to load it
   useEffect(() => {
-    if (isUnloaded(track) && !isLoadingData && !(track.type === ERROR_TYPE)) {
-      setIsLoadingData(true);
+    if (
+      isUnloaded(track) &&
+      !shouldStartLoadingData &&
+      !(track.type === ERROR_TYPE)
+    ) {
+      setShouldStartLoadingData(true);
     }
-  }, [track, isLoadingData]);
+  }, [track, shouldStartLoadingData]);
 
-  // Fetch metadata if `isLoadingData` is true.
+  // Fetch metadata if `shouldStartLoadingData` is true.
   // Save it to the store.
   useEffect(() => {
     let isCancelled = false;
@@ -35,13 +39,12 @@ export default function useTrackMetadata(track: Track, groupIndex: number) {
           trackData: trackData ?? { id, type: ERROR_TYPE },
         })
       );
-      setIsLoadingData(false);
     }
-    if (isLoadingData) {
+    if (shouldStartLoadingData) {
       fetchData();
       return () => {
         isCancelled = true;
       };
     }
-  }, [isLoadingData, id, dispatch, index, groupIndex]);
+  }, [shouldStartLoadingData, id, dispatch, index, groupIndex]);
 }
