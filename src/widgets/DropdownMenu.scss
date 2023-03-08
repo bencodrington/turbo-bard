@@ -1,0 +1,18 @@
+.dropdown-menu-container {
+  list-style-type: none;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid var(--azure);
+  padding: 0;
+
+  li {
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    color: var(--canary);
+    background: var(--azure-glass);
+  }
+}

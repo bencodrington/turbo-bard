@@ -40,6 +40,10 @@
     }
   }
 
+  &.active {
+    background-color: var(--azure);
+  }
+
   &.icon-only {
     padding: .5rem;
     width: 3.5rem;

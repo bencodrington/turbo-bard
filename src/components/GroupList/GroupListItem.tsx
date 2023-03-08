@@ -8,8 +8,10 @@ import caretDownIcon from "../../assets/icon-caret-down.svg";
 
 import "./GroupListItem.scss";
 import { useDispatch } from "react-redux";
-import { playGroupSolo, stopAllInGroup } from "../../slices/groups";
+import { playGroupSolo, stopAllInGroup, startAllInGroup } from "../../slices/groups";
 import { isGroupPlaying } from "../../utils/storeUtil";
+import useBoolean from "../../hooks/useBoolean";
+import DropdownMenu from "../../widgets/DropdownMenu";
 
 type GroupListItemProps = {
   group: Group,
@@ -32,10 +34,14 @@ export default function GroupListItem({ group, editGroup }: GroupListItemProps) 
   const playSolo = () => {
     dispatch(playGroupSolo({ groupIndex: group.index }))
   };
+  const playWithoutStoppingOthers = () => {
+    dispatch(startAllInGroup({ groupIndex: group.index }));
+  }
   const stop = () => {
     dispatch(stopAllInGroup({ groupIndex: group.index }));
   }
-  const toggleDropdown = () => { };
+
+  const [isDropdownOpen, , toggleDropdown] = useBoolean(false);
 
   const soundsDisplayString = computeSoundDisplayString(group.tracks);
 
@@ -72,7 +78,16 @@ export default function GroupListItem({ group, editGroup }: GroupListItemProps) 
               iconAltText="Caret pointing downward"
               onClick={toggleDropdown}
               isEditButtonWidth={true}
+              isActive={isDropdownOpen}
             />
+            {isDropdownOpen && <DropdownMenu
+              className="dropdown"
+              options={[
+                { label: 'Play without stopping others', onClick: () => playWithoutStoppingOthers() }
+              ]}
+              closeDropdown={toggleDropdown}
+            />
+            }
           </div>
       }
     </div>

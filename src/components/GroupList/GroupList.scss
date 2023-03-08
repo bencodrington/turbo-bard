@@ -3,14 +3,16 @@
   flex-direction: column;
   align-items: stretch;
   isolation: isolate;
-
   .editable-group {
     z-index: 1;
   }
 
   main {
     display: flex;
-    flex-direction: column;
+    // Display groups from bottom to top for two reasons:
+    //  - dropdown menus from higher elements overlap lower ones
+    //  - New groups are created at the top of the list
+    flex-direction: column-reverse;
     align-items: stretch;
     padding: 2rem 1rem;
     gap: 3rem;
