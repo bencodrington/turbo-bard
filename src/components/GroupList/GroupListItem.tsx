@@ -21,7 +21,6 @@ type GroupListItemProps = {
 const computeSoundDisplayString = (tracks: Track[]) => {
   if (tracks.length === 0) return 'No sounds.';
   return (
-    'Sounds: ' +
     tracks.map(track => track.name ?? '...').join(', ') +
     '.'
   );
@@ -47,49 +46,53 @@ export default function GroupListItem({ group, editGroup }: GroupListItemProps) 
 
   return (
     <div className="group-list-item-container">
-      <header>
-        <h2>{group.name}</h2>
+      <h2>{group.name}</h2>
+      <div>
+        <h3>Sounds</h3>
+        <p className="sound-display-text">{soundsDisplayString}</p>
+      </div>
+      <div className="buttons">
+        {
+          isGroupPlaying(group)
+            ?
+            <Button
+              text="Stop"
+              icon={stopIcon}
+              iconAltText="Stop icon"
+              onClick={stop}
+            />
+            :
+            <div className="play-stop-buttons">
+              <Button
+                text="Play solo"
+                icon={playIcon}
+                iconAltText="Play icon"
+                onClick={playSolo}
+              />
+              <Button
+                icon={caretDownIcon}
+                iconAltText="Caret pointing downward"
+                onClick={toggleDropdown}
+                isEditButtonWidth={true}
+                isActive={isDropdownOpen}
+              />
+
+              {isDropdownOpen && <DropdownMenu
+                className="dropdown"
+                options={[
+                  { label: 'Play without stopping others', onClick: () => playWithoutStoppingOthers() }
+                ]}
+                closeDropdown={toggleDropdown}
+              />
+              }
+            </div>
+        }
         <Button
           onClick={() => { editGroup(group.index) }}
           text="Edit"
           isEditButtonWidth={true}
         />
-      </header>
-      <p className="sound-display-text">{soundsDisplayString}</p>
-      {
-        isGroupPlaying(group)
-          ?
-          <Button
-            text="Stop"
-            icon={stopIcon}
-            iconAltText="Stop icon"
-            onClick={stop}
-          />
-          :
-          <div className="buttons">
-            <Button
-              text="Play solo"
-              icon={playIcon}
-              iconAltText="Play icon"
-              onClick={playSolo}
-            />
-            <Button
-              icon={caretDownIcon}
-              iconAltText="Caret pointing downward"
-              onClick={toggleDropdown}
-              isEditButtonWidth={true}
-              isActive={isDropdownOpen}
-            />
-            {isDropdownOpen && <DropdownMenu
-              className="dropdown"
-              options={[
-                { label: 'Play without stopping others', onClick: () => playWithoutStoppingOthers() }
-              ]}
-              closeDropdown={toggleDropdown}
-            />
-            }
-          </div>
-      }
+      </div>
     </div>
   );
 }
