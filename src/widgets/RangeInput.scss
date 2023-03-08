@@ -15,12 +15,12 @@
   }
 
   .track {
-    background: var(--canary);
+    background: var(--turbo-blue);
     height: 100%;
   }
 
   .handle {
-    background-color: var(--canary);
+    background-color: var(--turbo-blue);
     width: $handleWidth;
     height: $handleWidth;
     margin-top: ($barWidth - $handleWidth) / 2;

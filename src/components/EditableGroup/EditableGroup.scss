@@ -20,7 +20,7 @@
   header input {
     background: none;
     border-radius: 3px;
-    border: 1px solid var(--canary);
+    border: 1px solid var(--turbo-blue);
     padding: .25rem .5rem;
     color: white;
     height: 3.5rem;
@@ -29,7 +29,7 @@
     &::placeholder {
       @include heading;
       font-style: italic;
-      color: rgba(var(--canary--rgb), 70%);
+      color: var(--faded-white);
       opacity: .5;
     }
   }

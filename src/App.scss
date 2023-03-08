@@ -2,8 +2,6 @@
 
 :root {
   --background: #080C23;
-  --canary: #FFC700;
-  --canary--rgb: 255, 199, 0;
   --turbo-blue: #06CCF8;
   --azure: #0D38D4;
   --azure-glass: #06103D;
@@ -51,7 +49,7 @@ body, p, span {
 }
 
 a {
-  color: var(--canary);
+  color: var(--turbo-blue);
   text-decoration: none;
 
   &:hover {

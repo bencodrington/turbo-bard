@@ -15,7 +15,7 @@
     // To avoid a slight shift when the input's border is shown,
     //  add a transparent one to the static text version as well
     border: 1px solid transparent;
-    color: var(--canary);
+    color: var(--turbo-blue);
   }
 
   .static-text {
@@ -26,7 +26,7 @@
   }
 
   input {
-    border: 1px solid var(--canary);
+    border: 1px solid var(--turbo-blue);
     border-radius: 2px;
   }
 }
