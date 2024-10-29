@@ -6818,5 +6818,630 @@
     "minSecondsBetween": 15,
     "maxSecondsBetween": 30,
     "type": "ONESHOT"
+  },
+  "5f0685a8-19ea-463b-a2c0-66c845ff3c99": {
+    "name": "Ganesha",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "combat",
+      "battle",
+      "pharaoh",
+      "pyramid",
+      "desert",
+      "sand",
+      "mummy",
+      "indian",
+      "hand drums"
+    ],
+    "fileName": "ganesha",
+    "type": "LOOP"
+  },
+  "82a126c1-d3b7-4372-97ba-2f6be9cb0067": {
+    "name": "Coalition",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "combat",
+      "battle",
+      "epic",
+      "dramatic",
+      "preparation",
+      "war",
+      "defiance",
+      "slow",
+      "strings"
+    ],
+    "fileName": "coalition",
+    "type": "LOOP"
+  },
+  "afbb3194-6a1f-4d99-8341-093280c24162": {
+    "name": "Opps",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "combat",
+      "battle",
+      "duel",
+      "fast",
+      "jungle",
+      "chase",
+      "race",
+      "horns"
+    ],
+    "fileName": "opps",
+    "type": "LOOP"
+  },
+  "06308b7e-00d6-466b-8a0a-4ee3950256d0": {
+    "name": "Payback",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "combat",
+      "battle",
+      "choir",
+      "epic",
+      "temple",
+      "god",
+      "divine",
+      "hall",
+      "ancient",
+      "boss",
+      "sinister",
+      "evil",
+      "cathedral"
+    ],
+    "fileName": "payback",
+    "type": "LOOP"
+  },
+  "74b162ef-5344-4538-921c-fa684a2848b2": {
+    "name": "Ship",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "combat",
+      "battle",
+      "pirate",
+      "ocean",
+      "captain",
+      "navy",
+      "strings",
+      "epic",
+      "sailing",
+      "heroic"
+    ],
+    "fileName": "ship",
+    "type": "LOOP"
+  },
+  "da1a033e-5771-4642-9282-6a521b74f65e": {
+    "name": "Alien War Horn",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "combat",
+      "battle",
+      "action",
+      "fast",
+      "intense",
+      "mindflayer",
+      "illithid",
+      "evil",
+      "robot",
+      "chase",
+      "synth"
+    ],
+    "fileName": "alien-war-horn",
+    "type": "LOOP"
+  },
+  "73b75782-847b-4bee-a6cb-cec11a74db26": {
+    "name": "Progressive Overload",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "synth",
+      "sci-fi",
+      "robot",
+      "arcane",
+      "technology",
+      "puzzle"
+    ],
+    "fileName": "progressive-overload",
+    "type": "LOOP"
+  },
+  "08c83e30-8396-42a4-935e-19a9c77e5142": {
+    "name": "Fallen Castle",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "combat",
+      "battle",
+      "strings",
+      "siege",
+      "village",
+      "wildfire",
+      "epic",
+      "disaster",
+      "calamity",
+      "apocalypse"
+    ],
+    "fileName": "fallen-castle",
+    "type": "LOOP"
+  },
+  "399e3380-5303-4e22-b772-0ff43209ed2e": {
+    "name": "Sky Pirates",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "combat",
+      "battle",
+      "fast",
+      "strings",
+      "chase",
+      "arcane",
+      "technology",
+      "sci-fi",
+      "synth",
+      "elemental"
+    ],
+    "fileName": "sky-pirates",
+    "type": "LOOP"
+  },
+  "14804339-2eb6-4d78-bd6b-0026f0dfcbf5": {
+    "name": "Howdy",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "silly",
+      "shenanigans",
+      "ship",
+      "sailing",
+      "town",
+      "farm",
+      "upbeat",
+      "jig",
+      "flute",
+      "bouncy",
+      "halfling",
+      "folk",
+      "cheerful"
+    ],
+    "fileName": "howdy",
+    "type": "LOOP"
+  },
+  "087e7092-ee92-40cf-b4fa-1cf43a59a11c": {
+    "name": "Kingdom",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "town",
+      "village",
+      "carnival",
+      "square",
+      "market",
+      "neutral"
+    ],
+    "fileName": "kingdom",
+    "type": "LOOP"
+  },
+  "933ba79a-10bd-4a8f-b116-c96ce2f9fee6": {
+    "name": "Dublin",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "town",
+      "village",
+      "carnival",
+      "square",
+      "market",
+      "neutral"
+    ],
+    "fileName": "dublin",
+    "type": "LOOP"
+  },
+  "00ce5035-e8c2-4bc9-9e40-37280e4c30a0": {
+    "name": "Newport",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "town",
+      "village",
+      "carnival",
+      "square",
+      "market",
+      "neutral",
+      "peaceful"
+    ],
+    "fileName": "newport",
+    "type": "LOOP"
+  },
+  "ef7c9f88-f6dd-41bb-90f6-a72710606393": {
+    "name": "Becoming",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "uplifting",
+      "zen",
+      "meditation",
+      "monk",
+      "monastery",
+      "church",
+      "temple",
+      "holy",
+      "peace",
+      "calm"
+    ],
+    "fileName": "becoming",
+    "type": "LOOP"
+  },
+  "a20b3f50-b699-4cfa-87ca-f1354a03040f": {
+    "name": "Cathedrals",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "meditation",
+      "monk",
+      "monastery",
+      "church",
+      "temple",
+      "holy",
+      "peace",
+      "calm",
+      "cleric",
+      "paladin",
+      "choir",
+      "angels",
+      "solemn",
+      "funeral"
+    ],
+    "fileName": "cathedrals",
+    "type": "LOOP"
+  },
+  "c99b07e9-f53d-4ea8-aa83-1a1e6b69faf0": {
+    "name": "Disturbance",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "strings",
+      "ominous",
+      "wind",
+      "cavern",
+      "hell",
+      "underdark",
+      "cursed",
+      "dark",
+      "slow",
+      "travel",
+      "boneyard",
+      "dangerous",
+      "cautious"
+    ],
+    "fileName": "disturbance",
+    "type": "LOOP"
+  },
+  "4bc734c5-3c7b-4635-a103-c857fd7da63b": {
+    "name": "Little Pond",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "water",
+      "peaceful",
+      "slow",
+      "undersea",
+      "stasis",
+      "calm",
+      "frozen",
+      "ice",
+      "tranquil",
+      "frozen",
+      "somber",
+      "sad",
+      "funeral"
+    ],
+    "fileName": "little-pond",
+    "type": "LOOP"
+  },
+  "ffc5615d-76bb-4a73-ad77-fd129cccff49": {
+    "name": "The Forest",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "calm",
+      "peaceful",
+      "water",
+      "nature",
+      "druid",
+      "haven",
+      "meditation",
+      "zen",
+      "monk",
+      "monastery",
+      "jungle",
+      "rest",
+      "undersea",
+      "relaxing"
+    ],
+    "fileName": "the-forest",
+    "type": "LOOP"
+  },
+  "c642c0e2-6406-474f-8c27-ee4a68aa34e1": {
+    "name": "Time To Go",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "farewell",
+      "emotional",
+      "dramatic",
+      "slow",
+      "nostalgic",
+      "peaceful",
+      "piano",
+      "strings",
+      "funeral",
+      "field",
+      "forest",
+      "night",
+      "evening",
+      "goodbye"
+    ],
+    "fileName": "time-to-go",
+    "type": "LOOP"
+  },
+  "73275fc0-e9ca-47d1-837e-282d41d49261": {
+    "name": "Hostile",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "combat",
+      "battle",
+      "sci-fi",
+      "intense",
+      "dark",
+      "illithid",
+      "mindflayer",
+      "alien",
+      "dramatic",
+      "evil",
+      "boss fight"
+    ],
+    "fileName": "hostile",
+    "type": "LOOP"
+  },
+  "c5165f00-f40b-4abd-ba3e-cf47607c8812": {
+    "name": "Infiltration",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "intense",
+      "dark",
+      "undercover",
+      "hell",
+      "dramatic",
+      "suspense"
+    ],
+    "fileName": "infiltration",
+    "type": "LOOP"
+  },
+  "bbca503e-2744-497c-b6d4-7f851d3f3910": {
+    "name": "Ghost Town",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "intense",
+      "dark",
+      "undercover",
+      "dramatic",
+      "suspense",
+      "cave",
+      "mysterious",
+      "haunted",
+      "night",
+      "mining",
+      "spooky",
+      "sneaking",
+      "candles",
+      "mansion",
+      "scrying",
+      "preparation",
+      "ritual",
+      "slow"
+    ],
+    "fileName": "ghost-town",
+    "type": "LOOP"
+  },
+  "2d15a849-ea00-4ed8-84b6-0b450b8f575e": {
+    "name": "Revolution",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "big bad",
+      "boss fight",
+      "demon",
+      "vampire",
+      "evil",
+      "epic",
+      "power",
+      "cave",
+      "underdark",
+      "dramatic",
+      "snow",
+      "mountain",
+      "faceoff",
+      "combat",
+      "battle",
+      "space",
+      "alien",
+      "intense",
+      "suspense"
+    ],
+    "fileName": "revolution",
+    "type": "LOOP"
+  },
+  "e871b778-8a58-4908-b7c8-cfae89853378": {
+    "name": "Cyclops",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "cave",
+      "underdark",
+      "dramatic",
+      "mountain",
+      "faceoff",
+      "combat",
+      "battle",
+      "space",
+      "alien",
+      "intense",
+      "suspense",
+      "synth",
+      "sci-fi",
+      "mines",
+      "technology",
+      "ominous"
+    ],
+    "fileName": "cyclops",
+    "type": "LOOP"
+  },
+  "88e17081-8a66-4e4b-a4be-118cc5206ac6": {
+    "name": "Evil Is Coming",
+    "source": {
+      "author": "INeedMusic.co",
+      "urls": [
+        "https://ineedmusic.co/"
+      ]
+    },
+    "tags": [
+      "music",
+      "mysterious",
+      "unsettling",
+      "ominous",
+      "travel",
+      "dark",
+      "haunted",
+      "suspense",
+      "fear",
+      "ghost"
+    ],
+    "fileName": "evil-is-coming",
+    "type": "LOOP"
   }
 }
