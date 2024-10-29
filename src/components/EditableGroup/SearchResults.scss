@@ -13,14 +13,20 @@
     gap: .25rem;
     align-items: center;
 
-    & span {
+    &>span,
+    & .target-group-name {
       font-size: var(--font-size-small);
       color: var(--grey-4);
       flex: 1;
 
-      &.target-group-name {
-        color: var(--grey-5);
-      }
+    }
+
+    & .target-group-name {
+      color: var(--grey-5);
+    }
+
+    & .toggle-container {
+      align-self: stretch;
     }
 
   }
