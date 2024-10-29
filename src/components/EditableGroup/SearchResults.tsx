@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./SearchResults.scss";
 import Button from "../../widgets/buttons/Button";
@@ -7,6 +7,7 @@ import SearchItem from "../SearchDropdown/SearchItem";
 import TabSwitcher, { Tab } from "../TabSwitcher";
 import { SearchResultType } from "../../models/SearchResultType";
 import useBoolean from "../../hooks/useBoolean";
+import Toggle from "../../widgets/Toggle";
 
 interface SearchResultsProps {
   onAddSearchResult: (result: SearchResult, shouldAddToCombatSection: boolean) => void,
@@ -85,10 +86,7 @@ export default function SearchResults({
           />
           <span>Adding to <span className="target-group-name">{targetGroupName}</span>
           </span>
-          <label htmlFor="combat-toggle" style={{ userSelect: 'none' }}>
-            Combat
-            <input type="checkbox" id="combat-toggle" checked={isAddingToCombatSection} onChange={toggleIsAddingToCombatSection}></input>
-          </label>
+          <Toggle id="combat-toggle" label="Add to Combat" isChecked={isAddingToCombatSection} onToggle={toggleIsAddingToCombatSection} icon="hand-fist" />
         </div>
         <div className="search-bar">
           <i className="fa-solid fa-magnifying-glass" />

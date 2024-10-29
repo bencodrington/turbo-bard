@@ -1,0 +1,79 @@
+// Modified from https://www.w3schools.com/howto/howto_css_switch.asp
+.toggle-container {
+  --circle-diameter: 20px;
+  --animation-speed: 0.1s;
+
+  /* The switch - the box around the slider */
+  label {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: var(--font-size-small);
+    color: var(--grey-4);
+    cursor: pointer;
+    gap: 4px;
+  }
+
+  /* Hide default HTML checkbox */
+  label input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    // remove from flex layout
+    position: absolute;
+  }
+
+  /* The slider */
+  .slider {
+    border: 1px solid white;
+    -webkit-transition: .4s;
+    transition: var(--animation-speed);
+    border-radius: var(--circle-diameter);
+    width: calc(2 * var(--circle-diameter));
+    height: var(--circle-diameter);
+    position: relative;
+  }
+
+  .thumb {
+    position: absolute;
+    height: calc(var(--circle-diameter) - 2px);
+    width: calc(var(--circle-diameter) - 2px);
+    left: 0px;
+    bottom: 0px;
+    background-color: white;
+    -webkit-transition: var(--animation-speed);
+    transition: var(--animation-speed);
+    border-radius: 50%;
+
+    i {
+      color: var(--grey-0);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: var(--font-size-small);
+      -webkit-transition: var(--animation-speed);
+      transition: var(--animation-speed);
+      opacity: 0;
+    }
+  }
+
+  input:checked+.slider {
+    background-color: var(--azure);
+  }
+
+  input:focus+.slider {
+    box-shadow: 0 0 1px var(--azure);
+  }
+
+  input:checked+.slider>.thumb {
+    -webkit-transform: translateX(var(--circle-diameter));
+    -ms-transform: translateX(var(--circle-diameter));
+    transform: translateX(var(--circle-diameter));
+
+    i {
+      opacity: 1;
+    }
+  }
+}
