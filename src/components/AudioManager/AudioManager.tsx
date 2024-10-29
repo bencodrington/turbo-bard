@@ -24,7 +24,7 @@ export default function AudioManager() {
   // Make an Audio component for each sound in each group
   return (<>{
     groups.map(group =>
-      group.tracks.map(track => {
+      [...group.tracks, ...group.combatTracks].map(track => {
         if (isLoop(track) || isUnloadedLoop(track)) {
           return <LoopAudio
             loop={track}

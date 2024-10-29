@@ -69,11 +69,36 @@ export function getTrackByIndex(
   groupIndex: number,
   groups: Group[]
 ) {
-  return getGroupByIndex(groupIndex, groups)
-    ?.tracks
-    ?.find(track => track.index === trackIndex);
+  const group = getGroupByIndex(groupIndex, groups);
+  if (group === undefined) {
+    return;
+  }
+  return [...group.tracks, ...group.combatTracks].find(track => track.index === trackIndex);
 }
 
 export function isGroupPlaying(group: Group) {
-  return group.tracks.some(track => track.isPlaying === true);
+  return group.tracks.some(track => track.isPlaying) || group.combatTracks.some(track => track.isPlaying);
+}
+
+export function playGroup(group: Group) {
+  if (group.tracks.length > 0) {
+    // If group has non-combat tracks, play those
+    group.tracks.forEach(track => {
+      track.isPlaying = true;
+    });
+  } else {
+    // Go straight to combat tracks
+    group.combatTracks.forEach(track => {
+      track.isPlaying = true;
+    })
+  }
+}
+
+export function stopGroup(group: Group) {
+  group.tracks.forEach(track => {
+    track.isPlaying = false;
+  });
+  group.combatTracks.forEach(track => {
+    track.isPlaying = false;
+  })
 }

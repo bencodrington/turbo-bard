@@ -8,7 +8,9 @@ import {
   getNextIndex,
   getGroupByIndex,
   getTrackByIndex,
-  DEFAULT_GROUP_VOLUME
+  DEFAULT_GROUP_VOLUME,
+  playGroup,
+  stopGroup
 } from "../utils/storeUtil";
 import { loadGroups, saveGroups } from "../services/localStorage";
 import { ObjectType } from "../models/ObjectTypes";
@@ -75,7 +77,10 @@ const groupsSlice = createSlice({
     }>) {
       const { groupIndex, trackIndex, trackData } = payload;
       const track = getTrackByIndex(trackIndex, groupIndex, state);
-      if (track === undefined) return;
+      if (track === undefined) {
+        console.error(`Unable to find track with index ${trackIndex} in group ${groupIndex} while setting track data.`)
+        return;
+      }
       if (trackData.type === ERROR_TYPE) {
         Object.assign(track, { type: ERROR_TYPE })
         return;
@@ -132,21 +137,6 @@ const groupsSlice = createSlice({
       group.name = name;
       saveGroups(state);
     },
-    setGroupIsPlaying(state, { payload }: PayloadAction<{
-      groupIndex: number,
-      isPlaying: boolean
-    }>) {
-      const { groupIndex, isPlaying } = payload;
-      const group = getGroupByIndex(groupIndex, state);
-      if (group === undefined) return;
-      group.tracks.map(track => {
-        if (isLoop(track) || isOneShot(track)) {
-          track.isPlaying = isPlaying;
-        }
-        return track;
-      });
-      saveGroups(state);
-    },
     setGroupIsExpanded(state, { payload }: PayloadAction<{
       groupIndex: number,
       isExpanded: boolean
@@ -171,28 +161,24 @@ const groupsSlice = createSlice({
       const { groupIndex } = payload;
       const group = getGroupByIndex(groupIndex, state);
       if (group === undefined) return;
-      group.tracks.forEach(track => {
-        track.isPlaying = true;
-      });
+      playGroup(group);
       saveGroups(state);
     },
     stopAllInGroup(state, { payload }: PayloadAction<{ groupIndex: number }>) {
       const { groupIndex } = payload;
       const group = getGroupByIndex(groupIndex, state);
       if (group === undefined) return;
-      group.tracks.forEach(track => {
-        track.isPlaying = false;
-      });
+      stopGroup(group);
       saveGroups(state);
     },
     playGroupSolo(state, { payload }: PayloadAction<{ groupIndex: number }>) {
       const { groupIndex } = payload;
       state.forEach(group => {
-        group.tracks.forEach(track => {
-          // Play track if it's in the group that triggered this action
-          // Stop track otherwise
-          track.isPlaying = group.index === groupIndex;
-        });
+        if (group.index === groupIndex) {
+          playGroup(group);
+        } else {
+          stopGroup(group);
+        }
         saveGroups(state);
       })
     },
@@ -234,7 +220,6 @@ export const {
   setTrackIsMuted,
   removeGroup,
   setGroupName,
-  setGroupIsPlaying,
   setGroupIsExpanded,
   setGroupVolume,
   setTrackIsPlaying,
