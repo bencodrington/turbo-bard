@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SearchResult } from "../models/SearchResult";
 import { Group } from "../models/Group";
-import { isLoop, isOneShot } from "../models/Track";
+import { isOneShot } from "../models/Track";
 import { ERROR_TYPE, TrackData, TrackDataError } from "../models/DatabaseTypes";
 import {
   addSearchResultToGroup,
