@@ -25,6 +25,10 @@ export function loadGroups() {
     if (group.combatTracks === undefined) {
       group.combatTracks = [];
     }
+    group.combatTracks.forEach(track => {
+      track.isPlaying = false;
+      track.shouldLoad = false;
+    });
   });
   return storedGroups;
 }
