@@ -2,6 +2,10 @@
   .source-modal-content {
     margin-top: 2rem;
 
+    & > * {
+      overflow-wrap: break-word;
+    }
+
     p {
       margin-bottom: 0.5rem;
     }

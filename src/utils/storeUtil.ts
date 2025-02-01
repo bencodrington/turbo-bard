@@ -81,17 +81,27 @@ export function isGroupPlaying(group: Group) {
   return group.tracks.some(track => track.isPlaying) || group.combatTracks.some(track => track.isPlaying);
 }
 
-export function playGroup(group: Group) {
-  if (group.tracks.length > 0) {
+export function getPlayingGroup(groups: Group[]) {
+  return groups.find(isGroupPlaying);
+}
+
+export function playGroup(group: Group, startInCombatMode = false) {
+  if (group.tracks.length > 0 && startInCombatMode === false) {
     // If group has non-combat tracks, play those
     group.tracks.forEach(track => {
       track.isPlaying = true;
     });
+    group.combatTracks.forEach(track => {
+      track.isPlaying = false;
+    })
   } else {
     // Go straight to combat tracks
     group.combatTracks.forEach(track => {
       track.isPlaying = true;
     })
+    group.tracks.forEach(track => {
+      track.isPlaying = false;
+    });
   }
 }
 

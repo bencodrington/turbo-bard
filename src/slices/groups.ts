@@ -171,11 +171,11 @@ const groupsSlice = createSlice({
       stopGroup(group);
       saveGroups(state);
     },
-    playGroupSolo(state, { payload }: PayloadAction<{ groupIndex: number }>) {
-      const { groupIndex } = payload;
+    playGroupSolo(state, { payload }: PayloadAction<{ groupIndex: number, isCombatModeActive?: boolean }>) {
+      const { groupIndex, isCombatModeActive = false } = payload;
       state.forEach(group => {
         if (group.index === groupIndex) {
-          playGroup(group);
+          playGroup(group, isCombatModeActive);
         } else {
           stopGroup(group);
         }

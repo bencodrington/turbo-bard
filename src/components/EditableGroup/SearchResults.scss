@@ -1,12 +1,19 @@
 @import "../../mixins.scss";
 
 .search-results-container {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   background: var(--background);
   display: flex;
   flex-direction: column;
+
+  &>header {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: .5rem;
+  }
 
   .title-row {
     display: flex;

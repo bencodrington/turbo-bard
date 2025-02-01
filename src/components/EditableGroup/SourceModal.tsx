@@ -18,6 +18,7 @@ export default function SourceModal({ closeModal, track }: SourceModalProps) {
           {authorName !== undefined && <p>{authorName}</p>}
           {urls.length === null ? null : urls.map(url =>
             <a href={url}
+              key={url}
               target="_blank"
               rel="noopener noreferrer">{url}</a>
           )}

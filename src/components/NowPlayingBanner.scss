@@ -1,0 +1,30 @@
+.now-playing-banner-container {
+  display: flex;
+  padding: .5rem .5rem;
+  align-items: center;
+  position: relative;
+  isolation: isolate;
+
+  // Faded gradient background
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--text-gradient);
+    z-index: -2;
+    opacity: .1;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    height: 1px;
+    bottom: 100%;;
+    background: var(--text-gradient);
+  }
+
+  .environment-name {
+    flex: 1;
+    min-width: 0;
+  }
+}

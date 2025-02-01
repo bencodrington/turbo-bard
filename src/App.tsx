@@ -6,6 +6,7 @@ import AudioManager from './components/AudioManager/AudioManager';
 import GroupList from './components/GroupList/GroupList';
 import useBoolean from './hooks/useBoolean';
 import { loadGroupsFromStorage } from './slices/groups';
+import NowPlayingBanner from './components/NowPlayingBanner';
 
 function App() {
   const [isAboutOpen, setIsAboutOpen] = useBoolean(false);
@@ -35,6 +36,7 @@ function App() {
       <AudioManager />
       {isAboutOpen && <AboutPage closeAboutPage={() => { setIsAboutOpen(false); }} />}
       <GroupList openAboutPage={() => { setIsAboutOpen(true) }} />
+      <NowPlayingBanner />
     </div>
   );
 }

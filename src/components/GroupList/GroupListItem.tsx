@@ -2,6 +2,7 @@ import React from "react";
 import { Group } from "../../models/Group";
 import Button from "../../widgets/buttons/Button";
 
+import "./shared-group-list-styles.scss";
 import "./GroupListItem.scss";
 import PlayGroupButton from "../../widgets/buttons/PlayGroupButton";
 
@@ -16,7 +17,7 @@ export default function GroupListItem({ group, editGroup }: GroupListItemProps) 
   return (
     <div className="group-list-item-container">
       <div className="labelled-group-name">
-        <i className="fa-solid fa-mountain-sun" />
+        <i className="fa-solid fa-mountain-sun group-list-item-icon" />
         <p>{group.name}</p>
       </div>
       <div className="buttons">

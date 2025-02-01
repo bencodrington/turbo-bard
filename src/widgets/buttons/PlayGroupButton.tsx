@@ -8,13 +8,18 @@ import { useDispatch } from "react-redux";
 import { playGroupSolo, stopAllInGroup } from "../../slices/groups";
 
 interface PlayGroupButtonProps {
-  group: Group
+  group: Group;
+  overriddenPlayFunction?: () => void;
 }
-export default function PlayGroupButton({ group }: PlayGroupButtonProps) {
+export default function PlayGroupButton({ group, overriddenPlayFunction }: PlayGroupButtonProps) {
 
   const dispatch = useDispatch();
 
   const playSolo = () => {
+    if (overriddenPlayFunction !== undefined) {
+      overriddenPlayFunction();
+      return;
+    }
     dispatch(playGroupSolo({ groupIndex: group.index }))
   };
   const stop = () => {
