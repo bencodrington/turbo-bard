@@ -39,7 +39,7 @@ export default function useOneShotPlayer(
   useEffect(() => {
     const sources = deserializeSources(serializedSources);
     if (sources.length === 0) return;
-    const newHowls = sources.map(source => new Howl({ src: [source] }));
+    const newHowls = sources.map(source => new Howl({ src: [source], html5: true, }));
     newHowls.forEach(newHowl => {
       // Once loaded, append it to list of loaded audio elements
       const appendToHowlList = () => {

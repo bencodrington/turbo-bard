@@ -28,6 +28,7 @@ export default function useLoopPlayer(
         if (wasDeleted) return;
         setIsLoaded(true);
       },
+      html5: true,
     });
     setHowl(newHowl);
     return () => {
