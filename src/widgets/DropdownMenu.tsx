@@ -25,7 +25,7 @@ export default function DropdownMenu({
   }
 
   return (
-    <ul className={'dropdown-menu-container ' + className ?? ''}>
+    <ul className={'dropdown-menu-container ' + (className ?? '')}>
       {
         options.map(option =>
           <li onClick={() => onOptionClick(option)} key={option.label}>{option.label}</li>

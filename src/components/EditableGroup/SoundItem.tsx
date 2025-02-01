@@ -1,6 +1,6 @@
 import React from "react";
 import { useVolume } from "../../hooks/useVolume";
-import { Track } from "../../models/Track";
+import { isOneShot, Track } from "../../models/Track";
 import Button, { ButtonType } from "../../widgets/buttons/Button";
 import VolumeControls from "../../widgets/VolumeControls";
 
@@ -32,6 +32,15 @@ export default function SoundItem({ track, groupIndex, isMenuOpen, toggleMenuOpe
     dispatch(removeTrack({ groupIndex, trackIndex: index }))
   }
 
+  const options = [
+    // { label: 'Replace', onClick: () => {/* TODO: ... */ } },
+    { label: 'Remove', onClick: remove },
+  ]
+  if (isOneShot(track)) {
+    options.push({ label: 'Adjust timing', onClick: () => {/* TODO: ... */ } })
+  }
+  options.push({ label: 'See source', onClick: showSource })
+
   return (
     <div className='sound-item-container'>
       <div className="column">
@@ -48,13 +57,7 @@ export default function SoundItem({ track, groupIndex, isMenuOpen, toggleMenuOpe
         icon="ellipsis-v"
         type={ButtonType.Default}
       />
-      {/* TODO: options depend on whether this is music, a loop or a one shot */}
-      {isMenuOpen && <DropdownMenu className="sound-item-dropdown" closeDropdown={() => {/* TODO: ... */ }} options={[
-        { label: 'Replace', onClick: () => {/* TODO: ... */ } },
-        { label: 'Remove', onClick: remove },
-        { label: 'Adjust timing', onClick: () => {/* TODO: ... */ } },
-        { label: 'See source', onClick: showSource },
-      ]} />}
+      {isMenuOpen && <DropdownMenu className="sound-item-dropdown" closeDropdown={toggleMenuOpen} options={options} />}
     </div>
     // <TrackItem
     //   isAudioReady={isAudioLoaded}
