@@ -14,9 +14,10 @@ type SoundItemProps = {
   groupIndex: number,
   isMenuOpen: boolean,
   toggleMenuOpen: () => void,
+  showSource: () => void,
 };
 
-export default function SoundItem({ track, groupIndex, isMenuOpen, toggleMenuOpen }: SoundItemProps) {
+export default function SoundItem({ track, groupIndex, isMenuOpen, toggleMenuOpen, showSource }: SoundItemProps) {
   const { name, index, tags } = track;
   const { volume, setVolume } = useVolume({
     initialVolume: track.volume,
@@ -52,7 +53,7 @@ export default function SoundItem({ track, groupIndex, isMenuOpen, toggleMenuOpe
         { label: 'Replace', onClick: () => {/* TODO: ... */ } },
         { label: 'Remove', onClick: remove },
         { label: 'Adjust timing', onClick: () => {/* TODO: ... */ } },
-        { label: 'See source', onClick: () => {/* TODO: ... */ } },
+        { label: 'See source', onClick: showSource },
       ]} />}
     </div>
     // <TrackItem

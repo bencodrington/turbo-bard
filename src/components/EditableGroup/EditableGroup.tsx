@@ -13,6 +13,8 @@ import EmptySection from "./EmptySection";
 import SearchResults from "./SearchResults";
 import { MUSIC_TAG } from "../../models/ObjectTypes";
 import PlayGroupButton from "../../widgets/buttons/PlayGroupButton";
+import SourceModal from "./SourceModal";
+import { findTrackInGroup } from "../../utils/groupUtil";
 
 type EditableGroupProps = {
   className?: string;
@@ -59,6 +61,12 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
     }
   }
 
+
+  const [indexOfTrackWithSourceModalOpen, setIndexOfTrackWithSourceModalOpen] = useState<number | null>(null);
+  const trackWithSourceModalOpen = indexOfTrackWithSourceModalOpen === null
+    ? null
+    : (findTrackInGroup(indexOfTrackWithSourceModalOpen, group) ?? null);
+
   return (
     <div className={`${className ? className + ' ' : ''} editable-group-container`}>
 
@@ -75,6 +83,9 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
         targetGroupId={group.index}
         soundsInGroup={[...group.tracks.map(track => track.id), ...group.combatTracks.map(track => track.id)]}
       />}
+
+
+      {(trackWithSourceModalOpen !== null) && <SourceModal closeModal={() => { setIndexOfTrackWithSourceModalOpen(null); }} track={trackWithSourceModalOpen} />}
 
       <header>
         <div className="header-button-group">
@@ -113,6 +124,7 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
                 groupIndex={group.index}
                 isMenuOpen={trackWithOpenMenu === track.index}
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
+                showSource={() => setIndexOfTrackWithSourceModalOpen(track.index)}
               />
             )}
             {musicTracks.length === 0 && <EmptySection />}
@@ -128,6 +140,7 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
                 groupIndex={group.index}
                 isMenuOpen={trackWithOpenMenu === track.index}
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
+                showSource={() => setIndexOfTrackWithSourceModalOpen(track.index)}
               />
             )}
             {ambianceTracks.length === 0 && <EmptySection isLarge />}
@@ -158,6 +171,7 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
                 groupIndex={group.index}
                 isMenuOpen={trackWithOpenMenu === track.index}
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
+                showSource={() => setIndexOfTrackWithSourceModalOpen(track.index)}
               />
             )}
             {combatMusicTracks.length === 0 && <EmptySection />}
@@ -173,6 +187,7 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
                 groupIndex={group.index}
                 isMenuOpen={trackWithOpenMenu === track.index}
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
+                showSource={() => setIndexOfTrackWithSourceModalOpen(track.index)}
               />
             )}
             {combatAmbianceTracks.length === 0 && <EmptySection isLarge />}

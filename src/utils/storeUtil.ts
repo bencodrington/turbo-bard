@@ -1,5 +1,6 @@
 import { SearchResult } from "../models/SearchResult";
 import { Group } from "../models/Group";
+import { findTrackInGroup } from "./groupUtil";
 
 export const DEFAULT_GROUP_VOLUME = 1;
 export const DEFAULT_TRACK_VOLUME = 0.7;
@@ -73,7 +74,7 @@ export function getTrackByIndex(
   if (group === undefined) {
     return;
   }
-  return [...group.tracks, ...group.combatTracks].find(track => track.index === trackIndex);
+  return findTrackInGroup(trackIndex, group);
 }
 
 export function isGroupPlaying(group: Group) {
