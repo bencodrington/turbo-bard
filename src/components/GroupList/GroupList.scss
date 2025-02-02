@@ -25,10 +25,6 @@
     padding: 1rem .5rem;
     width: 100%;
     background: var(--grey-0);
-
-    & > * {
-      flex: 1;
-      min-width: 0;
-    }
+    justify-content: center;
   }
 }
