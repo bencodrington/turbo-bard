@@ -37,6 +37,10 @@ export default function NowPlayingBanner() {
     if (mostRecentlyPlayedGroup === null) return;
     dispatch(playGroupSolo({ groupIndex: mostRecentlyPlayedGroup.index, isCombatModeActive: isCombatToggleChecked }))
   }
+
+  if (mostRecentlyPlayedGroup === null) {
+    return null;
+  }
   return (
     <div className="now-playing-banner-container">
       <i className="fa-solid fa-mountain-sun group-list-item-icon" />
