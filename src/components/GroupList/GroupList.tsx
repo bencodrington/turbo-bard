@@ -58,11 +58,6 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
           icon="plus"
           onClick={createNewGroup}
         />
-        <Button
-          text="Quick effects"
-          icon="bolt"
-          onClick={createNewGroup}
-        />
       </div>
       }
     </div>
