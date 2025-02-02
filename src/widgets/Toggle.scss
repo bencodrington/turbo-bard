@@ -10,7 +10,7 @@
     flex-direction: column;
     align-items: center;
     font-size: var(--font-size-small);
-    color: var(--grey-4);
+    color: var(--grey-5);
     cursor: pointer;
     gap: 4px;
   }
@@ -75,5 +75,9 @@
     i {
       opacity: 1;
     }
+  }
+
+  .label-text.subdued {
+    color: var(--grey-4);
   }
 }

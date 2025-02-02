@@ -41,7 +41,14 @@ export default function NowPlayingBanner() {
     <div className="now-playing-banner-container">
       <i className="fa-solid fa-mountain-sun group-list-item-icon" />
       <span className="environment-name">{mostRecentlyPlayedGroup?.name}</span>
-      <Toggle id="now-playing-banner-combat-toggle" label="Combat" isChecked={isCombatToggleChecked} onToggle={toggleIsCombatModeActive} icon="hand-fist" />
+      <Toggle
+        id="now-playing-banner-combat-toggle"
+        label="Combat"
+        isChecked={isCombatToggleChecked}
+        onToggle={toggleIsCombatModeActive}
+        icon="hand-fist"
+        isLabelTextColorSubdued={false}
+      />
       {mostRecentlyPlayedGroup !== null && <PlayGroupButton group={mostRecentlyPlayedGroup} overriddenPlayFunction={onPlay} />}
     </div>
   )
