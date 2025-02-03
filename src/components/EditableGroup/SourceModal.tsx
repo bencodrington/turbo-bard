@@ -13,7 +13,7 @@ export default function SourceModal({ closeModal, track }: SourceModalProps) {
   const urls = isUnloaded(track) ? [] : track.source.urls;
   return (
     <div className="source-modal-container">
-      <Modal title="Source" icon="info-circle" onClose={closeModal}>
+      <Modal title="Source" subtitle={track.name ?? undefined} icon="info-circle" onClose={closeModal}>
         <div className="source-modal-content">
           {authorName !== undefined && <p>{authorName}</p>}
           {urls.length === null ? null : urls.map(url =>

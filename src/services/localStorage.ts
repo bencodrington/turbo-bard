@@ -29,6 +29,13 @@ export function loadGroups() {
       track.isPlaying = false;
       track.shouldLoad = false;
     });
+    // February 2025: Add icon and iconColour fields to the data structure.
+    if (group.icon === undefined) {
+      group.icon = null;
+    }
+    if (group.iconColour === undefined) {
+      group.iconColour = null;
+    }
   });
   return storedGroups;
 }

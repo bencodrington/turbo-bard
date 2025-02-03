@@ -20,13 +20,14 @@
 
     &>header {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       padding-left: 1rem;
+      --line-height: 2.5rem;
 
       .icon-and-title {
         display: flex;
         gap: .5rem;
-        align-items: center;
+        align-items: start;
         margin-top: 19px;
         flex: 1;
         min-width: 0;
@@ -34,11 +35,17 @@
 
       i {
         color: var(--grey-4);
+        line-height: var(--line-height);
       }
 
       h2 {
         flex: 1;
         min-width: 0;
+        line-height: var(--line-height);
+      }
+
+      .subtitle {
+        color: var(--grey-4);
       }
     }
 

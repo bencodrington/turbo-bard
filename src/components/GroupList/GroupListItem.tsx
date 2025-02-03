@@ -5,6 +5,7 @@ import Button from "../../widgets/buttons/Button";
 import "./shared-group-list-styles.scss";
 import "./GroupListItem.scss";
 import PlayGroupButton from "../../widgets/buttons/PlayGroupButton";
+import { getIcon, getIconColour } from "../../utils/iconUtil";
 
 type GroupListItemProps = {
   group: Group,
@@ -17,7 +18,7 @@ export default function GroupListItem({ group, editGroup }: GroupListItemProps) 
   return (
     <div className="group-list-item-container">
       <div className="labelled-group-name">
-        <i className="fa-solid fa-mountain-sun group-list-item-icon" />
+        <i className={`${getIcon(group)} group-list-item-icon`} style={{ color: getIconColour(group) }} />
         <p>{group.name}</p>
       </div>
       <div className="buttons">

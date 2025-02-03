@@ -28,7 +28,9 @@ const groupsSlice = createSlice({
         tracks: [],
         combatTracks: [],
         volume: DEFAULT_GROUP_VOLUME,
-        isExpanded: true
+        isExpanded: true,
+        icon: null,
+        iconColour: null,
       });
       saveGroups(state);
     },
@@ -50,7 +52,9 @@ const groupsSlice = createSlice({
           tracks: [],
           combatTracks: [],
           volume: DEFAULT_GROUP_VOLUME,
-          isExpanded: true
+          isExpanded: true,
+          icon: null,
+          iconColour: null,
         };
         state.unshift(group);
       } else {

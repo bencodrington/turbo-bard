@@ -11,13 +11,14 @@
   isolation: isolate;
 
 
-  
+
   .search-results-container,
-  .source-modal-container {
+  .source-modal-container,
+  .edit-icon-modal-container {
     z-index: 2; // Above sounditem dropdowns
   }
 
-  & > header {
+  &>header {
     display: flex;
     flex-direction: column;
     gap: .5rem;

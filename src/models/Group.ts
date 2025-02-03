@@ -8,5 +8,7 @@ export type Group = {
   tracks: Track[],
   combatTracks: Track[],
   volume: number,
-  isExpanded: boolean
+  isExpanded: boolean,
+  icon: string | null,
+  iconColour: string | null,
 };

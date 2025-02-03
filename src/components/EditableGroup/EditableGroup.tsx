@@ -15,6 +15,8 @@ import { MUSIC_TAG } from "../../models/ObjectTypes";
 import PlayGroupButton from "../../widgets/buttons/PlayGroupButton";
 import SourceModal from "./SourceModal";
 import { findTrackInGroup } from "../../utils/groupUtil";
+import EditIconModal from "./EditIconModal";
+import { getIcon } from "../../utils/iconUtil";
 
 type EditableGroupProps = {
   className?: string;
@@ -67,6 +69,8 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
     ? null
     : (findTrackInGroup(indexOfTrackWithSourceModalOpen, group) ?? null);
 
+  const [isEditingIcon, setIsEditingIcon] = useState(false);
+
   return (
     <div className={`${className ? className + ' ' : ''} editable-group-container`}>
 
@@ -84,6 +88,8 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
         soundsInGroup={[...group.tracks.map(track => track.id), ...group.combatTracks.map(track => track.id)]}
       />}
 
+      {isEditingIcon && <EditIconModal closeModal={() => setIsEditingIcon(false)} group={group} />}
+
 
       {(trackWithSourceModalOpen !== null) && <SourceModal closeModal={() => { setIndexOfTrackWithSourceModalOpen(null); }} track={trackWithSourceModalOpen} />}
 
@@ -100,8 +106,8 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
         </div>
         <div className="header-button-group">
           <Button
-            icon="face-smile"
-            onClick={() => console.log('TODO: EDIT ICON')}
+            icon={getIcon(group)}
+            onClick={() => setIsEditingIcon(true)}
           />
           <input
             type='text'

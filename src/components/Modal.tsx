@@ -6,12 +6,14 @@ import Button from "../widgets/buttons/Button";
 type ModalProps = {
   className?: string,
   title: string,
+  subtitle?: string | ReactNode,
   icon: string,
+  iconColour?: string,
   children: ReactNode,
   onClose: () => void,
 }
 
-export default function Modal({ className, title, icon, children, onClose }: ModalProps) {
+export default function Modal({ className, title, subtitle, icon, iconColour, children, onClose }: ModalProps) {
 
   const onClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if ((event.target as HTMLElement).closest(".modal") === null) {
@@ -26,8 +28,17 @@ export default function Modal({ className, title, icon, children, onClose }: Mod
       <div className="modal">
         <header>
           <div className="icon-and-title">
-            <i className={`fa fa-${icon}`} />
-            <h2>{title}</h2>
+            <i className={`fa fa-${icon}`} style={iconColour ? { color: iconColour } : undefined} />
+            <div className="title-and-subtitle">
+              <h2>{title}</h2>
+              {
+                subtitle === undefined
+                  ? null
+                  : typeof subtitle === "string"
+                    ? <p className="subtitle">{subtitle}</p>
+                    : subtitle
+              }
+            </div>
           </div>
           <Button
             onClick={onClose}

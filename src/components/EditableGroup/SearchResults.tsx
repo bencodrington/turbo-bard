@@ -8,6 +8,7 @@ import TabSwitcher, { Tab } from "../TabSwitcher";
 import { SearchResultType } from "../../models/SearchResultType";
 import useBoolean from "../../hooks/useBoolean";
 import Toggle from "../../widgets/Toggle";
+import SearchBar from "../SearchBar";
 
 interface SearchResultsProps {
   onAddSearchResult: (result: SearchResult, shouldAddToCombatSection: boolean) => void,
@@ -88,15 +89,7 @@ export default function SearchResults({
           </span>
           <Toggle id="combat-toggle" label="Add to Combat" isChecked={isAddingToCombatSection} onToggle={toggleIsAddingToCombatSection} icon="hand-fist" />
         </div>
-        <div className="search-bar">
-          <i className="fa-solid fa-magnifying-glass" />
-          <input
-            type='text'
-            value={searchText}
-            onChange={e => setSearchText(e.target.value)}
-            placeholder="Search all sounds"
-          />
-        </div>
+        <SearchBar searchText={searchText} setSearchText={setSearchText} placeholder="Search all sounds" />
         <TabSwitcher
           selectedTabId={searchResultType}
           tabs={TABS}

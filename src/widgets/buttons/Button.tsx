@@ -12,6 +12,7 @@ type ButtonProps = {
   text?: string,
   type?: ButtonType,
   icon?: string, // icon should be a fontawesome class
+  iconColour?: string, // iconColour should be a hex code (with a leading #)
   onClick: () => void,
   className?: string,
   isActive?: boolean,
@@ -22,6 +23,7 @@ export default function Button({
   text,
   type,
   icon,
+  iconColour,
   onClick,
   className,
   isActive,
@@ -30,7 +32,7 @@ export default function Button({
 
   if (text === undefined && icon === undefined) return null;
   const textContent = text === undefined ? null : <span>{text}</span>;
-  const imgContent = icon === undefined ? null : <i className={`fa-solid fa-${icon}`} />;
+  const imgContent = icon === undefined ? null : <i className={`fa-solid fa-${icon}`} style={{ color: iconColour }} />;
 
   const computedClassName = 'button-container '
     + (className ? className + ' ' : '')
