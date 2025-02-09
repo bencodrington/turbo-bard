@@ -141,6 +141,26 @@ const groupsSlice = createSlice({
       group.name = name;
       saveGroups(state);
     },
+    setGroupIcon(state, { payload }: PayloadAction<{
+      groupIndex: number,
+      icon: string
+    }>) {
+      const { groupIndex, icon } = payload;
+      const group = getGroupByIndex(groupIndex, state);
+      if (group === undefined) return;
+      group.icon = icon;
+      saveGroups(state);
+    },
+    setGroupIconColour(state, { payload }: PayloadAction<{
+      groupIndex: number,
+      iconColour: string
+    }>) {
+      const { groupIndex, iconColour } = payload;
+      const group = getGroupByIndex(groupIndex, state);
+      if (group === undefined) return;
+      group.iconColour = iconColour;
+      saveGroups(state);
+    },
     setGroupIsExpanded(state, { payload }: PayloadAction<{
       groupIndex: number,
       isExpanded: boolean
@@ -224,6 +244,8 @@ export const {
   setTrackIsMuted,
   removeGroup,
   setGroupName,
+  setGroupIcon,
+  setGroupIconColour,
   setGroupIsExpanded,
   setGroupVolume,
   setTrackIsPlaying,
