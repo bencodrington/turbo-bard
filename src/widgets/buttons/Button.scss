@@ -10,6 +10,7 @@
   justify-content: center;
   border: 1px solid var(--secondary);
   border-radius: 3px;
+  position: relative;
 
   span {
     font-weight: 500;
@@ -75,5 +76,12 @@
   i {
     font-size: 1.125rem;
     position: relative;
+  }
+
+  i.secondary-icon {
+    font-size: .75rem;
+    position: absolute;
+    bottom: .5rem;
+    right: .5rem;
   }
 }

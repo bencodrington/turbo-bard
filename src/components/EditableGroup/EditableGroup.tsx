@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import Button, { ButtonType } from "../../widgets/buttons/Button";
-import { addSearchResult, removeGroup, setGroupName } from "../../slices/groups";
+import {
+  addSearchResult,
+  removeGroup,
+  setGroupName,
+} from "../../slices/groups";
 import "./EditableGroup.scss";
 import { useDispatch } from "react-redux";
 import { Group } from "../../models/Group";
@@ -16,7 +20,7 @@ import PlayGroupButton from "../../widgets/buttons/PlayGroupButton";
 import SourceModal from "./SourceModal";
 import { findTrackInGroup } from "../../utils/groupUtil";
 import EditIconModal from "./EditIconModal";
-import { getIcon } from "../../utils/iconUtil";
+import { getIcon, getIconColour } from "../../utils/iconUtil";
 
 type EditableGroupProps = {
   className?: string;
@@ -24,17 +28,20 @@ type EditableGroupProps = {
   stopEditingGroup: () => void;
 };
 
-export default function EditableGroup({ className, group, stopEditingGroup }: EditableGroupProps) {
+export default function EditableGroup({
+  className,
+  group,
+  stopEditingGroup,
+}: EditableGroupProps) {
   const dispatch = useDispatch();
   const deleteGroup = () => {
     stopEditingGroup();
-    dispatch(removeGroup({ groupIndex: group.index }))
-  }
+    dispatch(removeGroup({ groupIndex: group.index }));
+  };
 
   const updateGroupName = (newName: string) => {
     dispatch(setGroupName({ groupIndex: group.index, name: newName }));
-  }
-
+  };
 
   const [isSearchOpen, setIsSearchOpen] = useBoolean(false);
   const {
@@ -47,12 +54,22 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
     setSearchResultType,
   } = useSearchResults();
 
-  const musicTracks = group.tracks.filter(track => track.tags?.includes(MUSIC_TAG));
-  const ambianceTracks = group.tracks.filter(track => !track.tags?.includes(MUSIC_TAG));
-  const combatMusicTracks = group.combatTracks.filter(track => track.tags?.includes(MUSIC_TAG));
-  const combatAmbianceTracks = group.combatTracks.filter(track => !track.tags?.includes(MUSIC_TAG));
+  const musicTracks = group.tracks.filter((track) =>
+    track.tags?.includes(MUSIC_TAG)
+  );
+  const ambianceTracks = group.tracks.filter(
+    (track) => !track.tags?.includes(MUSIC_TAG)
+  );
+  const combatMusicTracks = group.combatTracks.filter((track) =>
+    track.tags?.includes(MUSIC_TAG)
+  );
+  const combatAmbianceTracks = group.combatTracks.filter(
+    (track) => !track.tags?.includes(MUSIC_TAG)
+  );
 
-  const [trackWithOpenMenu, setTrackWithOpenMenu] = useState<number | null>(null);
+  const [trackWithOpenMenu, setTrackWithOpenMenu] = useState<number | null>(
+    null
+  );
   const toggleTrackWithOpenMenu = (trackId: number) => {
     if (trackWithOpenMenu === trackId) {
       // Close menu
@@ -61,58 +78,82 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
       // Switch open menu to the new track
       setTrackWithOpenMenu(trackId);
     }
-  }
+  };
 
-
-  const [indexOfTrackWithSourceModalOpen, setIndexOfTrackWithSourceModalOpen] = useState<number | null>(null);
-  const trackWithSourceModalOpen = indexOfTrackWithSourceModalOpen === null
-    ? null
-    : (findTrackInGroup(indexOfTrackWithSourceModalOpen, group) ?? null);
+  const [indexOfTrackWithSourceModalOpen, setIndexOfTrackWithSourceModalOpen] =
+    useState<number | null>(null);
+  const trackWithSourceModalOpen =
+    indexOfTrackWithSourceModalOpen === null
+      ? null
+      : findTrackInGroup(indexOfTrackWithSourceModalOpen, group) ?? null;
 
   const [isEditingIcon, setIsEditingIcon] = useState(false);
 
   return (
-    <div className={`${className ? className + ' ' : ''} editable-group-container`}>
+    <div
+      className={`${className ? className + " " : ""} editable-group-container`}
+    >
+      {isSearchOpen && (
+        <SearchResults
+          onAddSearchResult={(result, shouldAddToCombatSection) =>
+            dispatch(
+              addSearchResult({
+                searchResult: result,
+                groupIndex: group.index,
+                shouldAddToCombatSection,
+              })
+            )
+          }
+          onCloseSearch={() => {
+            setIsSearchOpen(false);
+          }}
+          targetGroupName={group.name}
+          searchText={searchText}
+          setSearchText={setSearchText}
+          searchResultType={searchResultType}
+          setSearchResultType={setSearchResultType}
+          isFetchingResults={isFetchingResults}
+          results={results}
+          targetGroupId={group.index}
+          soundsInGroup={[
+            ...group.tracks.map((track) => track.id),
+            ...group.combatTracks.map((track) => track.id),
+          ]}
+        />
+      )}
 
-      {isSearchOpen && <SearchResults
-        onAddSearchResult={(result, shouldAddToCombatSection) => dispatch(addSearchResult({ searchResult: result, groupIndex: group.index, shouldAddToCombatSection }))}
-        onCloseSearch={() => { setIsSearchOpen(false) }}
-        targetGroupName={group.name}
-        searchText={searchText}
-        setSearchText={setSearchText}
-        searchResultType={searchResultType}
-        setSearchResultType={setSearchResultType}
-        isFetchingResults={isFetchingResults}
-        results={results}
-        targetGroupId={group.index}
-        soundsInGroup={[...group.tracks.map(track => track.id), ...group.combatTracks.map(track => track.id)]}
-      />}
+      {isEditingIcon && (
+        <EditIconModal
+          closeModal={() => setIsEditingIcon(false)}
+          group={group}
+        />
+      )}
 
-      {isEditingIcon && <EditIconModal closeModal={() => setIsEditingIcon(false)} group={group} />}
-
-
-      {(trackWithSourceModalOpen !== null) && <SourceModal closeModal={() => { setIndexOfTrackWithSourceModalOpen(null); }} track={trackWithSourceModalOpen} />}
+      {trackWithSourceModalOpen !== null && (
+        <SourceModal
+          closeModal={() => {
+            setIndexOfTrackWithSourceModalOpen(null);
+          }}
+          track={trackWithSourceModalOpen}
+        />
+      )}
 
       <header>
         <div className="header-button-group">
-          <Button
-            icon="arrow-left"
-            onClick={stopEditingGroup}
-          />
-          <Button
-            icon="trash"
-            onClick={deleteGroup}
-          />
+          <Button icon="arrow-left" onClick={stopEditingGroup} />
+          <Button icon="trash" onClick={deleteGroup} />
         </div>
         <div className="header-button-group">
           <Button
             icon={getIcon(group)}
+            iconColour={getIconColour(group)}
+            secondaryIcon="pencil"
             onClick={() => setIsEditingIcon(true)}
           />
           <input
-            type='text'
+            type="text"
             value={group.name}
-            onChange={e => updateGroupName(e.target.value)}
+            onChange={(e) => updateGroupName(e.target.value)}
           />
           <PlayGroupButton group={group} />
         </div>
@@ -122,33 +163,40 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
         <section>
           <SectionHeader icon="music" text="Music" hasExtraMargin={true} />
           <div className="horizontal-padding">
-
-            {musicTracks.map(track =>
+            {musicTracks.map((track) => (
               <SoundItem
                 key={constructKey(group, track)}
                 track={track}
                 groupIndex={group.index}
                 isMenuOpen={trackWithOpenMenu === track.index}
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
-                showSource={() => setIndexOfTrackWithSourceModalOpen(track.index)}
+                showSource={() =>
+                  setIndexOfTrackWithSourceModalOpen(track.index)
+                }
               />
-            )}
+            ))}
             {musicTracks.length === 0 && <EmptySection />}
           </div>
         </section>
         <section>
-          <SectionHeader icon="cloud-sun-rain" text="Ambiance" hasExtraMargin={true} />
+          <SectionHeader
+            icon="cloud-sun-rain"
+            text="Ambiance"
+            hasExtraMargin={true}
+          />
           <div className="horizontal-padding">
-            {ambianceTracks.map(track =>
+            {ambianceTracks.map((track) => (
               <SoundItem
                 key={constructKey(group, track)}
                 track={track}
                 groupIndex={group.index}
                 isMenuOpen={trackWithOpenMenu === track.index}
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
-                showSource={() => setIndexOfTrackWithSourceModalOpen(track.index)}
+                showSource={() =>
+                  setIndexOfTrackWithSourceModalOpen(track.index)
+                }
               />
-            )}
+            ))}
             {ambianceTracks.length === 0 && <EmptySection isLarge />}
           </div>
         </section>
@@ -158,7 +206,8 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
             <h3>Combat</h3>
           </div>
           <div className="horizontal-padding">
-            <p>Sounds in this section
+            <p>
+              Sounds in this section
               <strong> replace the music </strong>
               and
               <strong> add to the ambiance </strong>
@@ -169,33 +218,40 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
         <section>
           <SectionHeader icon="music" text="Music" hasExtraMargin={true} />
           <div className="horizontal-padding">
-
-            {combatMusicTracks.map(track =>
+            {combatMusicTracks.map((track) => (
               <SoundItem
                 key={constructKey(group, track)}
                 track={track}
                 groupIndex={group.index}
                 isMenuOpen={trackWithOpenMenu === track.index}
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
-                showSource={() => setIndexOfTrackWithSourceModalOpen(track.index)}
+                showSource={() =>
+                  setIndexOfTrackWithSourceModalOpen(track.index)
+                }
               />
-            )}
+            ))}
             {combatMusicTracks.length === 0 && <EmptySection />}
           </div>
         </section>
         <section>
-          <SectionHeader icon="cloud-sun-rain" text="Ambiance" hasExtraMargin={true} />
+          <SectionHeader
+            icon="cloud-sun-rain"
+            text="Ambiance"
+            hasExtraMargin={true}
+          />
           <div className="horizontal-padding">
-            {combatAmbianceTracks.map(track =>
+            {combatAmbianceTracks.map((track) => (
               <SoundItem
                 key={constructKey(group, track)}
                 track={track}
                 groupIndex={group.index}
                 isMenuOpen={trackWithOpenMenu === track.index}
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
-                showSource={() => setIndexOfTrackWithSourceModalOpen(track.index)}
+                showSource={() =>
+                  setIndexOfTrackWithSourceModalOpen(track.index)
+                }
               />
-            )}
+            ))}
             {combatAmbianceTracks.length === 0 && <EmptySection isLarge />}
           </div>
         </section>
@@ -208,7 +264,6 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
           onClick={() => setIsSearchOpen(true)}
         />
       </div>
-
     </div>
   );
 }

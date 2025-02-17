@@ -3,20 +3,21 @@ import React from "react";
 import "./Button.scss";
 
 export enum ButtonType {
-  Default = '',
-  Primary = 'primary',
-  Gradient = 'gradient-outline'
+  Default = "",
+  Primary = "primary",
+  Gradient = "gradient-outline",
 }
 
 type ButtonProps = {
-  text?: string,
-  type?: ButtonType,
-  icon?: string, // icon should be a fontawesome class
-  iconColour?: string, // iconColour should be a hex code (with a leading #)
-  onClick: () => void,
-  className?: string,
-  isActive?: boolean,
-  isSmall?: boolean,
+  text?: string;
+  type?: ButtonType;
+  icon?: string; // icon should be a fontawesome class
+  iconColour?: string; // iconColour should be a hex code (with a leading #)
+  secondaryIcon?: string; // icon should be a fontawesome class
+  onClick: () => void;
+  className?: string;
+  isActive?: boolean;
+  isSmall?: boolean;
 };
 
 export default function Button({
@@ -24,30 +25,36 @@ export default function Button({
   type,
   icon,
   iconColour,
+  secondaryIcon,
   onClick,
   className,
   isActive,
-  isSmall
+  isSmall,
 }: ButtonProps) {
-
   if (text === undefined && icon === undefined) return null;
   const textContent = text === undefined ? null : <span>{text}</span>;
-  const imgContent = icon === undefined ? null : <i className={`fa-solid fa-${icon}`} style={{ color: iconColour }} />;
+  const imgContent =
+    icon === undefined ? null : (
+      <i className={`fa-solid fa-${icon}`} style={{ color: iconColour }} />
+    );
+  const secondaryIconContent =
+    secondaryIcon === undefined ? null : (
+      <i className={`secondary-icon fa-solid fa-${secondaryIcon}`} />
+    );
 
-  const computedClassName = 'button-container '
-    + (className ? className + ' ' : '')
-    + (icon !== undefined && text === undefined ? 'icon-only ' : '')
-    + (isActive ? 'active ' : '')
-    + (isSmall ? 'small ' : '')
-    + (type ? type + ' ' : '')
+  const computedClassName =
+    "button-container " +
+    (className ? className + " " : "") +
+    (icon !== undefined && text === undefined ? "icon-only " : "") +
+    (isActive ? "active " : "") +
+    (isSmall ? "small " : "") +
+    (type ? type + " " : "");
 
   return (
-    <button
-      className={computedClassName}
-      onClick={onClick}
-    >
+    <button className={computedClassName} onClick={onClick}>
       {imgContent}
       {textContent}
+      {secondaryIconContent}
     </button>
-  )
-};
+  );
+}
