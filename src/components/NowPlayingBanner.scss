@@ -4,6 +4,7 @@
   align-items: center;
   position: relative;
   isolation: isolate;
+  gap: .25rem;
 
   // Faded gradient background
   &::before {

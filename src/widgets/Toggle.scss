@@ -33,6 +33,7 @@
     width: calc(2 * var(--circle-diameter));
     height: var(--circle-diameter);
     position: relative;
+    background: var(--grey-0);
   }
 
   .thumb {
