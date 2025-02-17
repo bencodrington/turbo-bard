@@ -33,6 +33,10 @@
 
   &.gradient-outline {
     position: relative;
+    background: none;
+    border: 1px solid var(--gradient-color-1);
+    border-top-color: var(--gradient-color-2);
+    border-right-color: var(--gradient-color-2);
 
     &::before {
       content: '';
@@ -45,11 +49,6 @@
       background: var(--text-gradient);
       opacity: 0.1;
     }
-
-    background: none;
-    border: 1px solid var(--gradient-color-1);
-    border-top-color: var(--gradient-color-2);
-    border-right-color: var(--gradient-color-2);
   }
 
 
@@ -83,5 +82,16 @@
     position: absolute;
     bottom: .5rem;
     right: .5rem;
+    isolation: isolate;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -.125rem;
+      background: var(--grey-0);
+      border-radius: 50%;
+      // background: green;
+      z-index: -1;
+    }
   }
 }
