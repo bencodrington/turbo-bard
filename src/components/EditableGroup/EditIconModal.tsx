@@ -7,6 +7,7 @@ import {
   DEFAULT_ICON_OPTIONS,
   getIcon,
   getIconColour,
+  getIconClassStringFromIconId,
   ICON_COLOUR_OPTIONS,
 } from "../../utils/iconUtil";
 import SearchBar from "../SearchBar";
@@ -81,6 +82,11 @@ export default function EditIconModal({
                 onClick={() => updateGroupIcon(iconId)}
                 icon={iconId}
                 key={iconId}
+                secondaryIcon={
+                  getIconClassStringFromIconId(iconId) === icon ? "check" : undefined
+                }
+                // --primary
+                secondaryIconColour="#0078CE"
               />
             ))}
           </div>

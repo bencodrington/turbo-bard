@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./Button.scss";
+import { getIconClassStringFromIconId } from "../../utils/iconUtil";
 
 export enum ButtonType {
   Default = "",
@@ -14,6 +15,7 @@ type ButtonProps = {
   icon?: string; // icon should be a fontawesome class
   iconColour?: string; // iconColour should be a hex code (with a leading #)
   secondaryIcon?: string; // icon should be a fontawesome class
+  secondaryIconColour?: string; // colour should be a hex code (with a leading #)
   onClick: () => void;
   className?: string;
   isActive?: boolean;
@@ -26,6 +28,7 @@ export default function Button({
   icon,
   iconColour,
   secondaryIcon,
+  secondaryIconColour,
   onClick,
   className,
   isActive,
@@ -35,11 +38,19 @@ export default function Button({
   const textContent = text === undefined ? null : <span>{text}</span>;
   const imgContent =
     icon === undefined ? null : (
-      <i className={`fa-solid fa-${icon}`} style={{ color: iconColour }} />
+      <i
+        className={getIconClassStringFromIconId(icon)}
+        style={{ color: iconColour }}
+      />
     );
   const secondaryIconContent =
     secondaryIcon === undefined ? null : (
-      <i className={`secondary-icon fa-solid fa-${secondaryIcon}`} />
+      <i
+        className={`secondary-icon ${getIconClassStringFromIconId(
+          secondaryIcon
+        )}`}
+        style={{ color: secondaryIconColour ?? "" }}
+      />
     );
 
   const computedClassName =
