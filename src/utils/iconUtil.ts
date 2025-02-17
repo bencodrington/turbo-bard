@@ -3,10 +3,26 @@ import { Group } from "../models/Group";
 const DEFAULT_ENVIRONMENT_ICON = 'mountain-sun';
 const DEFAULT_ENVIRONMENT_ICON_COLOUR = '#A7A7A7'; // grey-5;
 export const DEFAULT_ICON_OPTIONS = [
-  // TODO: flesh out this list
+  'mountain-sun',
   'burst',
   'bell',
-  'snowflake'
+  'snowflake',
+  'fire',
+  'guitar',
+  'leaf',
+  'fish',
+  'wand-sparkles',
+  'poo',
+  'skull',
+  'hat-wizard',
+  'cloud-bolt',
+  'chess-rook',
+  'heart',
+  'hill-rockslide',
+  'drum',
+  'hands-clapping',
+  'campground',
+  'sack-dollar',
 ]
 export const ICON_COLOUR_OPTIONS = [
   DEFAULT_ENVIRONMENT_ICON_COLOUR,

@@ -11,13 +11,20 @@
   .icon-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     flex: 1;
     min-height: 0;;
+    justify-items: center;
   }
 
   .colour-options {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
+    margin-top: 1rem;
+
+    & > .button-container {
+      width: auto;
+    }
   }
 
   .colour-options i {
