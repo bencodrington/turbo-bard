@@ -11,7 +11,10 @@ import {
   ICON_COLOUR_OPTIONS,
 } from "../../utils/iconUtil";
 import SearchBar from "../SearchBar";
-import { searchIcons } from "../../services/fontawesome";
+import {
+  MAX_ICON_SEARCH_RESULT_COUNT,
+  searchIcons,
+} from "../../services/fontawesome";
 import Button from "../../widgets/buttons/Button";
 import { useDispatch } from "react-redux";
 import { setGroupIcon, setGroupIconColour } from "../../slices/groups";
@@ -29,6 +32,7 @@ export default function EditIconModal({
 
   const [searchText, setSearchText] = useState("");
   const [iconSearchResults, setIconSearchResults] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (searchText.length === 0) {
@@ -37,9 +41,10 @@ export default function EditIconModal({
       return;
     }
     async function fetchIconSearchResults() {
-      // TODO: isLoading: true
+      setIsLoading(true);
       const results = await searchIcons(searchText);
       if (!shouldIgnoreResults) {
+        setIsLoading(false);
         setIconSearchResults(results);
       }
     }
@@ -61,6 +66,30 @@ export default function EditIconModal({
     );
   };
 
+  const wereNoResultsFound =
+    iconSearchResults.length === 0 && searchText.length !== 0;
+
+  const gridContent = wereNoResultsFound ? (
+    <p className="empty-state-message">No results found for "{searchText}".</p>
+  ) : isLoading ? (
+    [...Array(MAX_ICON_SEARCH_RESULT_COUNT)].map((index) => (
+      <i className="loading-spinner fa fa-spinner fa-spin" key={index} />
+    ))
+  ) : (
+    iconSearchResults.map((iconId) => (
+      <Button
+        onClick={() => updateGroupIcon(iconId)}
+        icon={iconId}
+        key={iconId}
+        secondaryIcon={
+          getIconClassStringFromIconId(iconId) === icon ? "check" : undefined
+        }
+        // var(--primary)
+        secondaryIconColour="#0078CE"
+      />
+    ))
+  );
+
   return (
     <div className="edit-icon-modal-container">
       <Modal
@@ -76,19 +105,8 @@ export default function EditIconModal({
             setSearchText={setSearchText}
             placeholder="Search for icons"
           />
-          <div className="icon-grid">
-            {iconSearchResults.map((iconId) => (
-              <Button
-                onClick={() => updateGroupIcon(iconId)}
-                icon={iconId}
-                key={iconId}
-                secondaryIcon={
-                  getIconClassStringFromIconId(iconId) === icon ? "check" : undefined
-                }
-                // --primary
-                secondaryIconColour="#0078CE"
-              />
-            ))}
+          <div className={wereNoResultsFound ? "empty-state" : "icon-grid"}>
+            {gridContent}
           </div>
           <div className="colour-options">
             {ICON_COLOUR_OPTIONS.map((hexCode) => (

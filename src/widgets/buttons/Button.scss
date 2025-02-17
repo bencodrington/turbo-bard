@@ -1,7 +1,7 @@
 @import "../../mixins.scss";
 
 .button-container {
-  height: 3rem;
+  height: var(--button-height);
   padding: 0 1rem;
   gap: 0.25rem;
   display: flex;

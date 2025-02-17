@@ -1,4 +1,4 @@
-const MAX_ICON_SEARCH_RESULT_COUNT = 15;
+export const MAX_ICON_SEARCH_RESULT_COUNT = 20;
 const FONT_AWESOME_VERSION = "6.x";
 
 export async function searchIcons(query: string) {
