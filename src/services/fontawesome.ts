@@ -1,4 +1,5 @@
 const MAX_ICON_SEARCH_RESULT_COUNT = 15;
+const FONT_AWESOME_VERSION = "6.x";
 
 export async function searchIcons(query: string) {
   // We can only display free icons that support the "solid" style.
@@ -7,7 +8,7 @@ export async function searchIcons(query: string) {
   const searchApiResultCount = MAX_ICON_SEARCH_RESULT_COUNT * 5;
   const response = await fetch("https://api.fontawesome.com", {
     method: "POST",
-    body: `query { search (version: "6.x", query: "${query}", first:${searchApiResultCount} ) { id familyStylesByLicense { free { style } } } }`,
+    body: `query { search (version: "${FONT_AWESOME_VERSION}", query: "${query}", first:${searchApiResultCount} ) { id familyStylesByLicense { free { style } } } }`,
   });
   const results = (await response.json()) as any;
   if (results.errors !== undefined) {
@@ -21,5 +22,7 @@ export async function searchIcons(query: string) {
     )
   );
   // Return a list of icon IDs only.
-  return freeSolidIcons.map((item: any) => item.id as string).slice(0, MAX_ICON_SEARCH_RESULT_COUNT);
+  return freeSolidIcons
+    .map((item: any) => item.id as string)
+    .slice(0, MAX_ICON_SEARCH_RESULT_COUNT);
 }
