@@ -5,10 +5,12 @@ import { useFadeMultiplier } from "./useFadeMultiplier";
 import { Howl } from "howler";
 const FADE_DURATION_SECONDS = 2;
 
-const SERIALIZATION_DELIMITER = '----';
+const SERIALIZATION_DELIMITER = "----";
 
 function serializeSources(samples: string[]) {
-  return samples.map(filename => getAudioFileUrl(filename)).join(SERIALIZATION_DELIMITER);
+  return samples
+    .map((filename) => getAudioFileUrl(filename))
+    .join(SERIALIZATION_DELIMITER);
 }
 
 function deserializeSources(serializedSources: string) {
@@ -28,7 +30,9 @@ export default function useOneShotPlayer(
   const fadeMultiplier = useFadeMultiplier(isPlaying);
   // The point at which the user clicked play, or when the most recent one-shot
   //  sound was fired (restarting the timer)
-  const [timerStartTimestamp, setTimerStartTimestamp] = useState<number | null>(null);
+  const [timerStartTimestamp, setTimerStartTimestamp] = useState<number | null>(
+    null
+  );
   const [timerDuration, setTimerDuration] = useState<number | null>(null);
 
   // Serializing sources is necessary so that audio elements are only created
@@ -39,24 +43,26 @@ export default function useOneShotPlayer(
   useEffect(() => {
     const sources = deserializeSources(serializedSources);
     if (sources.length === 0) return;
-    const newHowls = sources.map(source => new Howl({ src: [source], html5: true, }));
-    newHowls.forEach(newHowl => {
+    const newHowls = sources.map(
+      (source) => new Howl({ src: [source], html5: true })
+    );
+    newHowls.forEach((newHowl) => {
       // Once loaded, append it to list of loaded audio elements
       const appendToHowlList = () => {
-        setHowls(_howls => [..._howls, newHowl]);
-      }
-      if (newHowl.state() === 'loaded') {
+        setHowls((_howls) => [..._howls, newHowl]);
+      };
+      if (newHowl.state() === "loaded") {
         // Sound is already loaded in howler (probably the same one shot was
         //  added twice)
         appendToHowlList();
         return;
       }
-      newHowl.once('load', appendToHowlList);
+      newHowl.once("load", appendToHowlList);
     });
     return function cleanup() {
-      newHowls.forEach(newHowl => {
+      newHowls.forEach((newHowl) => {
         newHowl.fade(newHowl.volume(), 0, FADE_DURATION_SECONDS * 1000);
-        newHowl.once('fade', () => newHowl.unload());
+        newHowl.once("fade", () => newHowl.unload());
       });
     };
   }, [serializedSources]);
@@ -74,7 +80,10 @@ export default function useOneShotPlayer(
   // timerStartTimestamp is set
   useEffect(() => {
     if (timerStartTimestamp === null) return;
-    const timerLength = randIntBetween(minSecondsBetween * 1000, maxSecondsBetween * 1000);
+    const timerLength = randIntBetween(
+      minSecondsBetween * 1000,
+      maxSecondsBetween * 1000
+    );
     const timeout = setTimeout(() => {
       setShouldPlayNow(true);
       // Restart timer
@@ -82,7 +91,7 @@ export default function useOneShotPlayer(
     }, timerLength);
     setTimerDuration(timerLength);
     return () => clearTimeout(timeout);
-  }, [timerStartTimestamp, minSecondsBetween, maxSecondsBetween])
+  }, [timerStartTimestamp, minSecondsBetween, maxSecondsBetween]);
 
   useEffect(() => {
     // Start wick burning animation
@@ -91,7 +100,8 @@ export default function useOneShotPlayer(
         wickRef.current === null ||
         timerStartTimestamp === null ||
         timerDuration === null
-      ) return;
+      )
+        return;
       const timeElapsed = time - timerStartTimestamp;
       const percentageElapsed = clamp(0, timeElapsed / timerDuration, 1);
       const percentageRemaining = 1 - percentageElapsed;
@@ -103,7 +113,7 @@ export default function useOneShotPlayer(
     return () => cancelAnimationFrame(wickAnimationRafId);
   }, [timerStartTimestamp, timerDuration, wickRef]);
 
-  // Play a sound randomly selected from the sources
+  // Whenever shouldPlayNow is set to true, play a sound randomly selected from the sources
   useEffect(() => {
     if (!shouldPlayNow) return;
     setShouldPlayNow(false);
@@ -118,12 +128,12 @@ export default function useOneShotPlayer(
 
   // Keep audio volume in sync
   useEffect(() => {
-    howls.forEach(howl => {
+    howls.forEach((howl) => {
       howl.volume(fadeMultiplier * volume);
     });
   });
 
   return {
-    playNow: () => setShouldPlayNow(true)
-  }
+    playNow: () => setShouldPlayNow(true),
+  };
 }
