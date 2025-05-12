@@ -35,6 +35,7 @@ export default function AudioManager() {
           return <OneShotAudio
             oneShot={track}
             groupIndex={group.index}
+            oneShotTrackId={constructKey(group, track)}
             key={constructKey(group, track)}
           />
         }

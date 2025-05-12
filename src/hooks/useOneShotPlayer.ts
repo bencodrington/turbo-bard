@@ -1,8 +1,15 @@
-import { RefObject, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAudioFileUrl } from "../utils/audioFileUtil";
-import { clamp, randIntBetween } from "../utils/mathUtil";
+import { randIntBetween } from "../utils/mathUtil";
 import { useFadeMultiplier } from "./useFadeMultiplier";
 import { Howl } from "howler";
+import { useOneShotStates } from "../slices";
+import {
+  setTimerStartTimestamp as _setTimerStartTimestamp,
+  setTimerDuration as _setTimerDuration,
+  setShouldPlayNow as _setShouldPlayNow,
+} from "../slices/oneShotStates";
+import { useDispatch } from "react-redux";
 const FADE_DURATION_SECONDS = 2;
 
 const SERIALIZATION_DELIMITER = "----";
@@ -18,22 +25,35 @@ function deserializeSources(serializedSources: string) {
 }
 
 export default function useOneShotPlayer(
+  // ID for reading and writing to the correct entry in the oneShotStates store
+  oneShotTrackId: string,
   samples: string[],
   volume: number,
   minSecondsBetween: number,
   maxSecondsBetween: number,
-  isPlaying: boolean,
-  wickRef: RefObject<HTMLDivElement>
+  isPlaying: boolean
 ) {
   const [howls, setHowls] = useState<Howl[]>([]);
-  const [shouldPlayNow, setShouldPlayNow] = useState(false);
   const fadeMultiplier = useFadeMultiplier(isPlaying);
-  // The point at which the user clicked play, or when the most recent one-shot
-  //  sound was fired (restarting the timer)
-  const [timerStartTimestamp, setTimerStartTimestamp] = useState<number | null>(
-    null
-  );
-  const [timerDuration, setTimerDuration] = useState<number | null>(null);
+
+  const oneShotStates = useOneShotStates();
+  const { timerStartTimestamp, shouldPlayNow } = oneShotStates[oneShotTrackId];
+
+  const dispatch = useDispatch();
+  const setTimerStartTimestamp = (timestamp: number | null) => {
+    dispatch(
+      _setTimerStartTimestamp({
+        oneShotTrackId,
+        timerStartTimestamp: timestamp,
+      })
+    );
+  };
+  const setTimerDuration = (duration: number) => {
+    dispatch(_setTimerDuration({ oneShotTrackId, timerDuration: duration }));
+  };
+  const setShouldPlayNow = (shouldPlayNow: boolean) => {
+    dispatch(_setShouldPlayNow({ oneShotTrackId, shouldPlayNow }));
+  };
 
   // Serializing sources is necessary so that audio elements are only created
   //  when the sources themselves change. Since useEffect's dependency array
@@ -93,27 +113,29 @@ export default function useOneShotPlayer(
     return () => clearTimeout(timeout);
   }, [timerStartTimestamp, minSecondsBetween, maxSecondsBetween]);
 
-  useEffect(() => {
-    // Start wick burning animation
-    function animateWick(time: number) {
-      if (
-        wickRef.current === null ||
-        timerStartTimestamp === null ||
-        timerDuration === null
-      )
-        return;
-      const timeElapsed = time - timerStartTimestamp;
-      const percentageElapsed = clamp(0, timeElapsed / timerDuration, 1);
-      const percentageRemaining = 1 - percentageElapsed;
-      wickRef.current.style.transform = `scaleX(${percentageRemaining})`;
-      if (percentageRemaining === 0) return;
-      wickAnimationRafId = requestAnimationFrame(animateWick);
-    }
-    let wickAnimationRafId = requestAnimationFrame(animateWick);
-    return () => cancelAnimationFrame(wickAnimationRafId);
-  }, [timerStartTimestamp, timerDuration, wickRef]);
+  // TODO: move this to the rendering component
+  // useEffect(() => {
+  //   // Start wick burning animation
+  //   function animateWick(time: number) {
+  //     if (
+  //       wickRef.current === null ||
+  //       timerStartTimestamp === null ||
+  //       timerDuration === null
+  //     )
+  //       return;
+  //     const timeElapsed = time - timerStartTimestamp;
+  //     const percentageElapsed = clamp(0, timeElapsed / timerDuration, 1);
+  //     const percentageRemaining = 1 - percentageElapsed;
+  //     wickRef.current.style.transform = `scaleX(${percentageRemaining})`;
+  //     if (percentageRemaining === 0) return;
+  //     wickAnimationRafId = requestAnimationFrame(animateWick);
+  //   }
+  //   let wickAnimationRafId = requestAnimationFrame(animateWick);
+  //   return () => cancelAnimationFrame(wickAnimationRafId);
+  // }, [timerStartTimestamp, timerDuration, wickRef]);
 
-  // Whenever shouldPlayNow is set to true, play a sound randomly selected from the sources
+  // Whenever shouldPlayNow is set to true, play a sound randomly selected from
+  //  the sources
   useEffect(() => {
     if (!shouldPlayNow) return;
     setShouldPlayNow(false);
@@ -132,8 +154,4 @@ export default function useOneShotPlayer(
       howl.volume(fadeMultiplier * volume);
     });
   });
-
-  return {
-    playNow: () => setShouldPlayNow(true),
-  };
 }

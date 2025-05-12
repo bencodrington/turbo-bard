@@ -42,23 +42,23 @@ export default function OneShotTrackItem({
   });
   const { name, id, index, tags, isPlaying } = oneShot;
   const computedVolume = isMuted
-  ? 0
-  : volume * groupVolume;
+    ? 0
+    : volume * groupVolume;
   useTrackMetadata(oneShot, groupIndex);
   const dispatch = useDispatch();
   const wickRef = useRef(null);
-  
+
   const samples = isUnloaded(oneShot) ? [] : oneShot.samples;
   const minSecondsBetween = (oneShot as OneShot).minSecondsBetween ?? DEFAULT_MIN_TIME_BETWEEN;
   const maxSecondsBetween = (oneShot as OneShot).maxSecondsBetween ?? DEFAULT_MAX_TIME_BETWEEN;
-  const { playNow } = useOneShotPlayer(
-    samples,
-    computedVolume,
-    minSecondsBetween,
-    maxSecondsBetween,
-    isPlaying,
-    wickRef
-  );
+  // useOneShotPlayer(
+  //   samples[0],
+  //   computedVolume,
+  //   minSecondsBetween,
+  //   maxSecondsBetween,
+  //   isPlaying,
+  //   wickRef
+  // );
 
   if (!isVisible) {
     return null;
@@ -82,7 +82,7 @@ export default function OneShotTrackItem({
     //  because we don't want to trigger the sound when a group's "play all"
     //  button is clicked.
     if (newIsPlayingValue === true) {
-      playNow();
+      // playNow();
     }
     dispatch(setTrackIsPlaying({
       groupIndex,
