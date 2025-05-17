@@ -195,6 +195,7 @@ export default function EditableGroup({
                 key={constructKey(group, track)}
                 track={track}
                 groupIndex={group.index}
+                trackInstanceId={constructKey(group, track)}
                 isMenuOpen={trackWithOpenMenu === track.index}
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
                 showSource={() =>
@@ -220,6 +221,7 @@ export default function EditableGroup({
                 key={constructKey(group, track)}
                 track={track}
                 groupIndex={group.index}
+                trackInstanceId={constructKey(group, track)}
                 isMenuOpen={trackWithOpenMenu === track.index}
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
                 showSource={() =>
@@ -256,6 +258,7 @@ export default function EditableGroup({
                 key={constructKey(group, track)}
                 track={track}
                 groupIndex={group.index}
+                trackInstanceId={constructKey(group, track)}
                 isMenuOpen={trackWithOpenMenu === track.index}
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
                 showSource={() =>
@@ -281,6 +284,7 @@ export default function EditableGroup({
                 key={constructKey(group, track)}
                 track={track}
                 groupIndex={group.index}
+                trackInstanceId={constructKey(group, track)}
                 isMenuOpen={trackWithOpenMenu === track.index}
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
                 showSource={() =>
