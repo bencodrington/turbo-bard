@@ -5,9 +5,9 @@ import { useFadeMultiplier } from "./useFadeMultiplier";
 import { Howl } from "howler";
 import { useOneShotStates } from "../slices";
 import {
-  setTimerStartTimestamp as _setTimerStartTimestamp,
-  setTimerDuration as _setTimerDuration,
-  setShouldPlayNow as _setShouldPlayNow,
+  setTimerStartTimestamp,
+  setTimerDuration,
+  setShouldPlayNow,
 } from "../slices/oneShotStates";
 import { useDispatch } from "react-redux";
 const FADE_DURATION_SECONDS = 2;
@@ -37,23 +37,11 @@ export default function useOneShotPlayer(
   const fadeMultiplier = useFadeMultiplier(isPlaying);
 
   const oneShotStates = useOneShotStates();
-  const { timerStartTimestamp, shouldPlayNow } = oneShotStates[oneShotTrackId];
+  const { timerStartTimestamp, shouldPlayNow } = oneShotStates[
+    oneShotTrackId
+  ] ?? { timerStartTimestamp: null, shouldPlayNow: false };
 
   const dispatch = useDispatch();
-  const setTimerStartTimestamp = (timestamp: number | null) => {
-    dispatch(
-      _setTimerStartTimestamp({
-        oneShotTrackId,
-        timerStartTimestamp: timestamp,
-      })
-    );
-  };
-  const setTimerDuration = (duration: number) => {
-    dispatch(_setTimerDuration({ oneShotTrackId, timerDuration: duration }));
-  };
-  const setShouldPlayNow = (shouldPlayNow: boolean) => {
-    dispatch(_setShouldPlayNow({ oneShotTrackId, shouldPlayNow }));
-  };
 
   // Serializing sources is necessary so that audio elements are only created
   //  when the sources themselves change. Since useEffect's dependency array
@@ -90,11 +78,21 @@ export default function useOneShotPlayer(
   useEffect(() => {
     // Handle start/stop button clicks
     if (isPlaying) {
-      setTimerStartTimestamp(performance.now());
+      dispatch(
+        setTimerStartTimestamp({
+          oneShotTrackId,
+          timerStartTimestamp: performance.now(),
+        })
+      );
     } else {
-      setTimerStartTimestamp(null);
+      dispatch(
+        setTimerStartTimestamp({
+          oneShotTrackId,
+          timerStartTimestamp: null,
+        })
+      );
     }
-  }, [isPlaying]);
+  }, [isPlaying, dispatch, oneShotTrackId]);
 
   // Start a timer whenever a new (non-null)
   // timerStartTimestamp is set
@@ -105,13 +103,24 @@ export default function useOneShotPlayer(
       maxSecondsBetween * 1000
     );
     const timeout = setTimeout(() => {
-      setShouldPlayNow(true);
+      dispatch(setShouldPlayNow({ oneShotTrackId, shouldPlayNow: true }));
       // Restart timer
-      setTimerStartTimestamp(performance.now());
+      dispatch(
+        setTimerStartTimestamp({
+          oneShotTrackId,
+          timerStartTimestamp: performance.now(),
+        })
+      );
     }, timerLength);
-    setTimerDuration(timerLength);
+    dispatch(setTimerDuration({ oneShotTrackId, timerDuration: timerLength }));
     return () => clearTimeout(timeout);
-  }, [timerStartTimestamp, minSecondsBetween, maxSecondsBetween]);
+  }, [
+    timerStartTimestamp,
+    dispatch,
+    minSecondsBetween,
+    maxSecondsBetween,
+    oneShotTrackId,
+  ]);
 
   // TODO: move this to the rendering component
   // useEffect(() => {
@@ -138,7 +147,6 @@ export default function useOneShotPlayer(
   //  the sources
   useEffect(() => {
     if (!shouldPlayNow) return;
-    setShouldPlayNow(false);
     if (howls.length > 0) {
       const randomIndex = Math.floor(Math.random() * howls.length);
       const howl = howls[randomIndex];
@@ -146,7 +154,8 @@ export default function useOneShotPlayer(
       //  is currently playing
       howl.play();
     }
-  }, [shouldPlayNow, howls]);
+    dispatch(setShouldPlayNow({ oneShotTrackId, shouldPlayNow: false }));
+  }, [shouldPlayNow, dispatch, oneShotTrackId, howls]);
 
   // Keep audio volume in sync
   useEffect(() => {

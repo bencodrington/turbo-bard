@@ -41,7 +41,7 @@ export default function OneShotAudio({
       // When this component is removed, delete the store entry
       dispatch(clearOneShotState({ oneShotTrackId }))
     }
-  }, []);
+  }, [dispatch, oneShotTrackId]);
   // Need to add useTrackMetadata to fetch the samples so we can start loading
   //  the audio.
   useTrackMetadata(oneShot, groupIndex);
