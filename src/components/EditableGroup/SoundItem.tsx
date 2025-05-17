@@ -15,9 +15,10 @@ type SoundItemProps = {
   isMenuOpen: boolean,
   toggleMenuOpen: () => void,
   showSource: () => void,
+  showAdjustTimingModal: () => void,
 };
 
-export default function SoundItem({ track, groupIndex, isMenuOpen, toggleMenuOpen, showSource }: SoundItemProps) {
+export default function SoundItem({ track, groupIndex, isMenuOpen, toggleMenuOpen, showSource, showAdjustTimingModal }: SoundItemProps) {
   const { name, index, tags } = track;
   const { volume, setVolume } = useVolume({
     initialVolume: track.volume,
@@ -37,7 +38,7 @@ export default function SoundItem({ track, groupIndex, isMenuOpen, toggleMenuOpe
     { label: 'Remove', onClick: remove },
   ]
   if (isOneShot(track)) {
-    options.push({ label: 'Adjust timing', onClick: () => {/* TODO: ... */ } })
+    options.push({ label: 'Adjust timing', onClick: showAdjustTimingModal })
   }
   options.push({ label: 'See source', onClick: showSource })
 

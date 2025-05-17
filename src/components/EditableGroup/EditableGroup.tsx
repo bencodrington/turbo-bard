@@ -21,6 +21,8 @@ import SourceModal from "./SourceModal";
 import { findTrackInGroup } from "../../utils/groupUtil";
 import EditIconModal from "./EditIconModal";
 import { getIcon, getIconColour } from "../../utils/iconUtil";
+import AdjustTimingModal from "./AdjustTimingModal";
+import { isOneShot } from "../../models/Track";
 
 type EditableGroupProps = {
   className?: string;
@@ -87,6 +89,17 @@ export default function EditableGroup({
       ? null
       : findTrackInGroup(indexOfTrackWithSourceModalOpen, group) ?? null;
 
+  const [indexOfTrackWithAdjustTimingModalOpen, setIndexOfTrackWithAdjustTimingModalOpen] =
+    useState<number | null>(null);
+  const trackWithAdjustTimingModalOpen =
+    indexOfTrackWithAdjustTimingModalOpen === null
+      ? null
+      : findTrackInGroup(indexOfTrackWithAdjustTimingModalOpen, group) ?? null;
+  const oneShotWithAdjustTimingModalOpen =
+    (trackWithAdjustTimingModalOpen !== null && isOneShot(trackWithAdjustTimingModalOpen))
+      ? trackWithAdjustTimingModalOpen
+      : null
+
   const [isEditingIcon, setIsEditingIcon] = useState(false);
 
   return (
@@ -138,6 +151,16 @@ export default function EditableGroup({
         />
       )}
 
+      {oneShotWithAdjustTimingModalOpen !== null && (
+        <AdjustTimingModal
+          closeModal={() => {
+            setIndexOfTrackWithAdjustTimingModalOpen(null);
+          }}
+          oneShot={oneShotWithAdjustTimingModalOpen}
+          oneShotTrackId={constructKey(group, oneShotWithAdjustTimingModalOpen)}
+        />
+      )}
+
       <header>
         <div className="header-button-group">
           <Button icon="arrow-left" onClick={stopEditingGroup} />
@@ -173,6 +196,9 @@ export default function EditableGroup({
                 showSource={() =>
                   setIndexOfTrackWithSourceModalOpen(track.index)
                 }
+                showAdjustTimingModal={() =>
+                  setIndexOfTrackWithAdjustTimingModalOpen(track.index)
+                }
               />
             ))}
             {musicTracks.length === 0 && <EmptySection />}
@@ -194,6 +220,9 @@ export default function EditableGroup({
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
                 showSource={() =>
                   setIndexOfTrackWithSourceModalOpen(track.index)
+                }
+                showAdjustTimingModal={() =>
+                  setIndexOfTrackWithAdjustTimingModalOpen(track.index)
                 }
               />
             ))}
@@ -228,6 +257,9 @@ export default function EditableGroup({
                 showSource={() =>
                   setIndexOfTrackWithSourceModalOpen(track.index)
                 }
+                showAdjustTimingModal={() =>
+                  setIndexOfTrackWithAdjustTimingModalOpen(track.index)
+                }
               />
             ))}
             {combatMusicTracks.length === 0 && <EmptySection />}
@@ -249,6 +281,9 @@ export default function EditableGroup({
                 toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
                 showSource={() =>
                   setIndexOfTrackWithSourceModalOpen(track.index)
+                }
+                showAdjustTimingModal={() =>
+                  setIndexOfTrackWithAdjustTimingModalOpen(track.index)
                 }
               />
             ))}
