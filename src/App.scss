@@ -101,7 +101,10 @@ button {
   appearance: none;
   border: none;
   background: none;
-  cursor: pointer;
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
 input {

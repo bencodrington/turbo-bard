@@ -20,6 +20,7 @@ type ButtonProps = {
   className?: string;
   isActive?: boolean;
   isSmall?: boolean;
+  isDisabled?: boolean;
 };
 
 export default function Button({
@@ -33,6 +34,7 @@ export default function Button({
   className,
   isActive,
   isSmall,
+  isDisabled,
 }: ButtonProps) {
   if (text === undefined && icon === undefined) return null;
   const textContent = text === undefined ? null : <span>{text}</span>;
@@ -62,7 +64,11 @@ export default function Button({
     (type ? type + " " : "");
 
   return (
-    <button className={computedClassName} onClick={onClick}>
+    <button
+      className={computedClassName}
+      onClick={onClick}
+      disabled={isDisabled}
+    >
       {imgContent}
       {textContent}
       {secondaryIconContent}

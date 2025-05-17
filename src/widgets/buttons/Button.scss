@@ -18,7 +18,7 @@
 
   &.small {
     height: 2rem;
-    padding: 0 .5rem;
+    padding: 0 0.5rem;
 
     span {
       font-weight: normal;
@@ -39,7 +39,7 @@
     border-right-color: var(--gradient-color-2);
 
     &::before {
-      content: '';
+      content: "";
       display: block;
       position: absolute;
       top: 0;
@@ -51,25 +51,23 @@
     }
   }
 
-
   &.active {
     background-color: var(--azure);
   }
 
   &.icon-only {
-    padding: .5rem;
+    padding: 0.5rem;
     width: 3rem;
     border-color: transparent;
     color: var(--grey-5);
 
-    &:hover {
+    &:not(:disabled):hover {
       color: white;
 
       i {
         transform: scale(1.1);
       }
     }
-
   }
 
   i {
@@ -78,20 +76,24 @@
   }
 
   i.secondary-icon {
-    font-size: .75rem;
+    font-size: 0.75rem;
     position: absolute;
-    bottom: .5rem;
-    right: .5rem;
+    bottom: 0.5rem;
+    right: 0.5rem;
     isolation: isolate;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
-      inset: -.125rem;
+      inset: -0.125rem;
       background: var(--grey-0);
       border-radius: 50%;
       // background: green;
       z-index: -1;
     }
+  }
+
+  &:disabled {
+    color: var(--grey-2);
   }
 }

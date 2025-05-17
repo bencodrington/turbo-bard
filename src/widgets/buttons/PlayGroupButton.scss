@@ -1,6 +1,9 @@
 .play-group-button-container {
   position: relative;
-  cursor: pointer;
+
+  &:not(.disabled) {
+    cursor: pointer;
+  }
 
   .hexagon {
     position: absolute;
