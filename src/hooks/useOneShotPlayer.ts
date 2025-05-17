@@ -170,7 +170,6 @@ export default function useOneShotPlayer(
       const randomIndex = Math.floor(Math.random() * howls.length);
       const howl = howls[randomIndex];
       howl.volume(volume);
-      console.log("playing", howl, "at", volume);
       // Restart from the beginning, in case the sound
       //  is currently playing
       howl.play();
