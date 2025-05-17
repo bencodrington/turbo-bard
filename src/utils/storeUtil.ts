@@ -7,7 +7,7 @@ export const DEFAULT_TRACK_VOLUME = 0.7;
 
 export function getNextIndex(indexedItems: { index: number }[]) {
   let maxIndex = -1;
-  indexedItems.forEach(indexedItems => {
+  indexedItems.forEach((indexedItems) => {
     if (indexedItems.index > maxIndex) {
       maxIndex = indexedItems.index;
     }
@@ -23,20 +23,20 @@ export function addSearchResultToGroup(
   const { id, name, type, tags, tracks } = searchResult;
   if (tracks !== undefined) {
     // Result is a pack
-    tracks.forEach(track => {
+    tracks.forEach((track) => {
       const { id, volume, oneShotConfig } = track;
       const newTrackObject = {
         id,
         volume,
         isMuted: false,
         index: getNextIndex([...group.tracks, ...group.combatTracks]),
-        isPlaying: false,
+        isPlaying: isGroupPlaying(group),
         shouldLoad: true,
         minSecondsBetween: oneShotConfig?.minSecondsBetween,
         maxSecondsBetween: oneShotConfig?.maxSecondsBetween,
       };
       group.tracks.push(newTrackObject);
-    })
+    });
     return;
   }
   // Result is an individual track
@@ -48,8 +48,8 @@ export function addSearchResultToGroup(
     tags,
     volume: DEFAULT_TRACK_VOLUME,
     isMuted: false,
-    isPlaying: false,
-    shouldLoad: true
+    isPlaying: isGroupPlaying(group),
+    shouldLoad: true,
   };
   if (shouldAddToCombatSection) {
     group.combatTracks.push(newTrackObject);
@@ -58,11 +58,8 @@ export function addSearchResultToGroup(
   }
 }
 
-export function getGroupByIndex(
-  groupIndex: number,
-  groups: Group[]
-) {
-  return groups.find(group => group.index === groupIndex);
+export function getGroupByIndex(groupIndex: number, groups: Group[]) {
+  return groups.find((group) => group.index === groupIndex);
 }
 
 export function getTrackByIndex(
@@ -78,7 +75,10 @@ export function getTrackByIndex(
 }
 
 export function isGroupPlaying(group: Group) {
-  return group.tracks.some(track => track.isPlaying) || group.combatTracks.some(track => track.isPlaying);
+  return (
+    group.tracks.some((track) => track.isPlaying) ||
+    group.combatTracks.some((track) => track.isPlaying)
+  );
 }
 
 export function getPlayingGroup(groups: Group[]) {
@@ -88,28 +88,28 @@ export function getPlayingGroup(groups: Group[]) {
 export function playGroup(group: Group, startInCombatMode = false) {
   if (group.tracks.length > 0 && startInCombatMode === false) {
     // If group has non-combat tracks, play those
-    group.tracks.forEach(track => {
+    group.tracks.forEach((track) => {
       track.isPlaying = true;
     });
-    group.combatTracks.forEach(track => {
+    group.combatTracks.forEach((track) => {
       track.isPlaying = false;
-    })
+    });
   } else {
     // Go straight to combat tracks
-    group.combatTracks.forEach(track => {
+    group.combatTracks.forEach((track) => {
       track.isPlaying = true;
-    })
-    group.tracks.forEach(track => {
+    });
+    group.tracks.forEach((track) => {
       track.isPlaying = false;
     });
   }
 }
 
 export function stopGroup(group: Group) {
-  group.tracks.forEach(track => {
+  group.tracks.forEach((track) => {
     track.isPlaying = false;
   });
-  group.combatTracks.forEach(track => {
+  group.combatTracks.forEach((track) => {
     track.isPlaying = false;
-  })
+  });
 }
