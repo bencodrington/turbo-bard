@@ -1,0 +1,32 @@
+@import "../../mixins.scss";
+
+.adjust-timing-modal-container {
+  p.label {
+    color: var(--grey-5);
+    @include smallcaps;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--grey-1);
+  }
+
+  .big-numbers {
+    @include heading;
+  }
+
+  .summary {
+    color: var(--grey-4);
+    text-align: center;
+
+    .big-numbers {
+      color: white;
+      min-width: 1.5rem;
+      display: inline-block;
+    }
+  }
+
+  .play-once-button {
+    margin-top: 2rem;
+  }
+}

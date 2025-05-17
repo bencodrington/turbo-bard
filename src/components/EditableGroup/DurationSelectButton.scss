@@ -1,0 +1,23 @@
+.duration-select-button-container {
+  display: flex;
+  border: 1px solid var(--grey-1);
+  border-radius: 3px;
+
+  .option {
+    flex: 1;
+    min-width: 0;
+    padding: 0.5rem;
+    color: var(--grey-4);
+    text-align: center;
+    cursor: pointer;
+
+    &:not(:first-child) {
+      border-left: 1px solid var(--grey-1);
+    }
+
+    &.selected {
+      color: white;
+      background: var(--grey-1);
+    }
+  }
+}

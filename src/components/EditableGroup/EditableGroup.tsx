@@ -89,16 +89,19 @@ export default function EditableGroup({
       ? null
       : findTrackInGroup(indexOfTrackWithSourceModalOpen, group) ?? null;
 
-  const [indexOfTrackWithAdjustTimingModalOpen, setIndexOfTrackWithAdjustTimingModalOpen] =
-    useState<number | null>(null);
+  const [
+    indexOfTrackWithAdjustTimingModalOpen,
+    setIndexOfTrackWithAdjustTimingModalOpen,
+  ] = useState<number | null>(null);
   const trackWithAdjustTimingModalOpen =
     indexOfTrackWithAdjustTimingModalOpen === null
       ? null
       : findTrackInGroup(indexOfTrackWithAdjustTimingModalOpen, group) ?? null;
   const oneShotWithAdjustTimingModalOpen =
-    (trackWithAdjustTimingModalOpen !== null && isOneShot(trackWithAdjustTimingModalOpen))
+    trackWithAdjustTimingModalOpen !== null &&
+    isOneShot(trackWithAdjustTimingModalOpen)
       ? trackWithAdjustTimingModalOpen
-      : null
+      : null;
 
   const [isEditingIcon, setIsEditingIcon] = useState(false);
 
@@ -158,6 +161,7 @@ export default function EditableGroup({
           }}
           oneShot={oneShotWithAdjustTimingModalOpen}
           oneShotTrackId={constructKey(group, oneShotWithAdjustTimingModalOpen)}
+          groupIndex={group.index}
         />
       )}
 

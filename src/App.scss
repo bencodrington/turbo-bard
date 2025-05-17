@@ -71,8 +71,7 @@ h2 {
 }
 
 h3 {
-  font-family: var(--font--accent);
-  font-size: 1.125rem;
+  @include heading;
 }
 
 h4 {
@@ -132,4 +131,8 @@ input {
     flex: 1;
     min-height: 0;
   }
+}
+
+.smallcaps {
+  @include smallcaps;
 }
