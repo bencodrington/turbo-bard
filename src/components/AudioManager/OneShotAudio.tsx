@@ -33,14 +33,15 @@ export default function OneShotAudio({
   useEffect(() => {
     const state: OneShotState = {
       shouldPlayNow: false,
+      userTriggeredPlayOnceNow: false,
       timerDuration: null,
       timerStartTimestamp: 0,
-    }
-    dispatch(setOneShotState({ oneShotTrackId, oneShotState: state }))
+    };
+    dispatch(setOneShotState({ oneShotTrackId, oneShotState: state }));
     return () => {
       // When this component is removed, delete the store entry
-      dispatch(clearOneShotState({ oneShotTrackId }))
-    }
+      dispatch(clearOneShotState({ oneShotTrackId }));
+    };
   }, [dispatch, oneShotTrackId]);
   // Need to add useTrackMetadata to fetch the samples so we can start loading
   //  the audio.
@@ -51,7 +52,7 @@ export default function OneShotAudio({
     volume,
     minSecondsBetween,
     maxSecondsBetween,
-    isPlaying,
+    isPlaying
   );
 
   // No need to create DOM elements

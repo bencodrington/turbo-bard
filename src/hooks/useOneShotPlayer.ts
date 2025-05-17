@@ -8,6 +8,7 @@ import {
   setTimerStartTimestamp,
   setTimerDuration,
   setShouldPlayNow,
+  setUserTriggeredPlayOnceNow,
 } from "../slices/oneShotStates";
 import { useDispatch } from "react-redux";
 const FADE_DURATION_SECONDS = 2;
@@ -37,9 +38,12 @@ export default function useOneShotPlayer(
   const fadeMultiplier = useFadeMultiplier(isPlaying);
 
   const oneShotStates = useOneShotStates();
-  const { timerStartTimestamp, shouldPlayNow } = oneShotStates[
-    oneShotTrackId
-  ] ?? { timerStartTimestamp: null, shouldPlayNow: false };
+  const { timerStartTimestamp, shouldPlayNow, userTriggeredPlayOnceNow } =
+    oneShotStates[oneShotTrackId] ?? {
+      timerStartTimestamp: null,
+      shouldPlayNow: false,
+      userTriggeredPlayOnceNow: false,
+    };
 
   const dispatch = useDispatch();
 
@@ -156,6 +160,23 @@ export default function useOneShotPlayer(
     }
     dispatch(setShouldPlayNow({ oneShotTrackId, shouldPlayNow: false }));
   }, [shouldPlayNow, dispatch, oneShotTrackId, howls]);
+
+  // Whenever userTriggeredPlayOnceNow is set to true, play a sound randomly
+  //  selected from the sources, regardless of fade multiplier. Even if the
+  //  containing group is stopped, user triggered plays should be audible.
+  useEffect(() => {
+    if (!userTriggeredPlayOnceNow) return;
+    if (howls.length > 0) {
+      const randomIndex = Math.floor(Math.random() * howls.length);
+      const howl = howls[randomIndex];
+      howl.volume(volume);
+      console.log("playing", howl, "at", volume);
+      // Restart from the beginning, in case the sound
+      //  is currently playing
+      howl.play();
+    }
+    dispatch(setUserTriggeredPlayOnceNow({ oneShotTrackId, newValue: false }));
+  }, [userTriggeredPlayOnceNow, dispatch, oneShotTrackId, howls, volume]);
 
   // Keep audio volume in sync
   useEffect(() => {

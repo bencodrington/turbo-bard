@@ -15,4 +15,8 @@ export type OneShotState = {
 
   // Signals to useOneShotPlayer that a sound should be selected and fired
   shouldPlayNow: boolean;
+
+  // Signals to useOneShotPlayer that a sound should be selected and played
+  //  regardless of whether the containing group is playing
+  userTriggeredPlayOnceNow: boolean;
 }

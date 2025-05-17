@@ -22,11 +22,11 @@ const oneShotStatesSlice = createSlice({
     ) {
       delete state[payload.oneShotTrackId];
     },
-    playOneShotNow(
+    setUserTriggeredPlayOnceNow(
       state,
-      { payload }: PayloadAction<{ oneShotTrackId: string }>
+      { payload }: PayloadAction<{ oneShotTrackId: string; newValue: boolean }>
     ) {
-      state[payload.oneShotTrackId].shouldPlayNow = true;
+      state[payload.oneShotTrackId].userTriggeredPlayOnceNow = payload.newValue;
     },
     setShouldPlayNow(
       state,
@@ -62,7 +62,7 @@ const oneShotStatesSlice = createSlice({
 export const {
   setOneShotState,
   clearOneShotState,
-  playOneShotNow,
+  setUserTriggeredPlayOnceNow,
   setShouldPlayNow,
   setTimerDuration,
   setTimerStartTimestamp,
