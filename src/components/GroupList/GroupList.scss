@@ -5,26 +5,62 @@
   isolation: isolate;
   position: relative;
 
-  .editable-group {
-    z-index: 1;
-  }
-
   & > main {
     display: flex;
-    flex-direction: column;
-    padding: 2.5rem .5rem 4rem;
-    gap: 0.25rem;
+    flex-direction: row;
+    gap: 0.5rem;
     flex: 1;
     min-height: 0;
+  }
+
+  .group-list-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    max-width: calc(400 / 16 * 1rem);
+  }
+
+  .group-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1.5rem 0.5rem 4rem;
     overflow-y: auto;
   }
-  
+
   .floating-button-group {
     display: flex;
-    gap: .5rem;
-    padding: 1rem .5rem;
+    gap: 0.5rem;
+    padding: 3rem 0.5rem;
     width: 100%;
     background: var(--grey-0);
     justify-content: center;
+
+    & > button {
+      flex: 1;
+      min-width: 0;
+      max-width: calc(300 / 16 * 1rem);
+    }
+  }
+
+  .editable-group {
+    position: relative;
+    flex: 2;
+    min-width: 0;
+    max-width: calc(600 / 16 * 1rem);
+    background: var(--background-level-1);
+    border-radius: 6px;
+    overflow: hidden;
+
+    @media (max-width: calc(1000 / 16 * 1rem)) {
+      z-index: 1;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-width: 0;
+    }
   }
 }

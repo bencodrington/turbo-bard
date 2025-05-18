@@ -1,25 +1,29 @@
 .modal-container {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: rgb(from var(--grey-0) r g b / 0.8);
+  background: rgb(from var(--background-level-1) r g b / 0.8);
+  z-index: 5;
 
   .modal {
+    --min-margin-around-modal: 1rem;
     position: absolute;
     background: var(--grey-0);
     border: 2px solid var(--grey-2);
     border-radius: 6px;
     padding: 1rem;
-    max-height: calc(100% - 2rem);
+    padding-bottom: 4rem;
+    max-height: calc(100% - 2 * var(--min-margin-around-modal));
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: 2rem;
     min-height: 450px;
-    width: calc(100% - 2rem);
+    width: calc(100% - 2 * var(--min-margin-around-modal));
+    max-width: calc(800 / 16 * 1rem);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 
-    &>header {
+    & > header {
       display: flex;
       align-items: baseline;
       padding-left: 1rem;
@@ -27,7 +31,7 @@
 
       .icon-and-title {
         display: flex;
-        gap: .5rem;
+        gap: 0.5rem;
         align-items: start;
         margin-top: 19px;
         flex: 1;
@@ -51,7 +55,7 @@
       }
     }
 
-    &>main {
+    & > main {
       flex: 1;
       min-height: 0;
       overflow-y: auto;

@@ -26,7 +26,7 @@
 
   /* The slider */
   .slider {
-    border: 1px solid white;
+    border: 1px solid var(--grey-3);
     -webkit-transition: .4s;
     transition: var(--animation-speed);
     border-radius: var(--circle-diameter);

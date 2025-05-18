@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 
 import "./PlayGroupButton.scss";
 import { Group } from "../../models/Group";
@@ -18,14 +18,16 @@ export default function PlayGroupButton({
 }: PlayGroupButtonProps) {
   const dispatch = useDispatch();
 
-  const playSolo = () => {
+  const playSolo = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     if (overriddenPlayFunction !== undefined) {
       overriddenPlayFunction();
       return;
     }
     dispatch(playGroupSolo({ groupIndex: group.index }));
   };
-  const stop = () => {
+  const stop = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     dispatch(stopAllInGroup({ groupIndex: group.index }));
   };
 
@@ -34,7 +36,6 @@ export default function PlayGroupButton({
       className={`play-group-button-container ${
         isGroupPlayable(group) ? "" : "disabled"
       }`}
-      onClick={isGroupPlaying(group) ? stop : playSolo}
     >
       <svg
         version="1.1"

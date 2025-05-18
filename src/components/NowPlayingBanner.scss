@@ -1,26 +1,27 @@
 .now-playing-banner-container {
   display: flex;
-  padding: .5rem .5rem;
+  padding: 0.5rem 0.5rem;
   align-items: center;
   position: relative;
   isolation: isolate;
-  gap: .25rem;
+  gap: 0.25rem;
 
   // Faded gradient background
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     background: var(--text-gradient);
     z-index: -2;
-    opacity: .1;
+    opacity: 0.1;
   }
+  // Gradient border along the top
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     inset-inline: 0;
     height: 1px;
-    bottom: 100%;;
+    bottom: calc(100% - 1px);
     background: var(--text-gradient);
   }
 

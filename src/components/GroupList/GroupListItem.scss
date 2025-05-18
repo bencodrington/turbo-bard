@@ -2,10 +2,28 @@
   display: flex;
   gap: 1rem;
   align-items: center;
+  padding-block: .25rem;
+  padding-left: 0.5rem;
+  padding-right: 1rem;
+  border-radius: 3px;
 
+  &:hover {
+    background: var(--grey-1);
+    cursor: pointer;
+  }
+
+  &.is-being-edited {
+    background: var(--grey-2);
+  }
 
   .buttons {
     display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    & > i {
+      color: var(--grey-3);
+    }
   }
 
   .labelled-group-name {

@@ -1,9 +1,6 @@
 @import "../../mixins.scss";
 
 .editable-group-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
   background: var(--background);
   display: flex;
   flex-direction: column;
@@ -97,11 +94,6 @@
   }
 
   .floating-button-group {
-    justify-content: center;
-  }
-
-  .floating-button-group > button {
-    flex-grow: 0;
-    flex-basis: auto;
+    background: var(--background-level-1);
   }
 }

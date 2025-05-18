@@ -5,9 +5,10 @@
     height: 2.25rem;
     align-items: center;
     gap: .25rem;
+    padding-inline: .5rem;
 
     &.has-extra-margin {
-        padding: 0 .5rem;
+        padding: 0 1rem;
     }
 
     i {

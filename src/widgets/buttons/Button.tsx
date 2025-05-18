@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 
 import "./Button.scss";
 import { getIconClassStringFromIconId } from "../../utils/iconUtil";
@@ -16,7 +16,7 @@ type ButtonProps = {
   iconColour?: string; // iconColour should be a hex code (with a leading #)
   secondaryIcon?: string; // icon should be a fontawesome class
   secondaryIconColour?: string; // colour should be a hex code (with a leading #)
-  onClick: () => void;
+  onClick: MouseEventHandler<HTMLButtonElement>;
   className?: string;
   isSmall?: boolean;
   isDisabled?: boolean;

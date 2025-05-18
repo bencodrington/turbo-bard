@@ -10,7 +10,7 @@
   --deep-blue: #18123a;
   --secondary: #2154d7;
   --primary: #0078ce;
-  --accent: #ffda22;
+  --accent: #04afed;
   --gradient-color-1: #1f53da;
   --gradient-color-2: #03a2c4;
   --gradient-color-3: #ffd502;
@@ -28,6 +28,7 @@
   --font-size-small: 0.875rem;
 
   --background: var(--grey-0);
+  --background-level-1: black;
 
   --button-height: 3rem;
 
@@ -66,6 +67,7 @@ h2 {
 
 h3 {
   @include heading;
+  font-size: 1.25rem;
 }
 
 h4 {
@@ -121,12 +123,13 @@ input {
 
   // FIXME: deep selector
   .about-page-container {
-    z-index: 1;
+    z-index: 2;
   }
 
   .group-list-container {
     flex: 1;
     min-height: 0;
+    z-index: 1;
   }
 }
 
