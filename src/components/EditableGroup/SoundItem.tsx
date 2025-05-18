@@ -1,7 +1,7 @@
 import React from "react";
 import { useVolume } from "../../hooks/useVolume";
 import { isOneShot, Track } from "../../models/Track";
-import Button, { ButtonType } from "../../widgets/buttons/Button";
+import Button from "../../widgets/buttons/Button";
 import VolumeControls from "../../widgets/VolumeControls";
 
 import "./SoundItem.scss";
