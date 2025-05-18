@@ -13,7 +13,7 @@ export default function GroupListEmptyState({ createNewGroup }: { createNewGroup
       </div>
 
       <main>
-        <p>Spice up your RPGs and immerse your table in rich soundscapes.</p>
+        <h5>Spice up your RPGs and immerse your table in rich soundscapes.</h5>
 
         <ul>
           <li>Fade between locations</li>
