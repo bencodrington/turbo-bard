@@ -29,7 +29,7 @@ export default function SoundItem({
   showAdjustTimingModal,
   trackInstanceId,
 }: SoundItemProps) {
-  const { name, index, tags, id: trackId } = track;
+  const { name, index } = track;
   const { volume, setVolume } = useVolume({
     initialVolume: track.volume,
     isInitiallyMuted: false,
@@ -51,10 +51,7 @@ export default function SoundItem({
     );
   }
 
-  const options = [
-    // { label: 'Replace', onClick: () => {/* TODO: ... */ } },
-    { label: "Remove", onClick: remove },
-  ];
+  const options = [{ label: "Remove", onClick: remove }];
   if (isOneShot(track)) {
     options.push({ label: "Play once right now", onClick: playOnceRightNow });
     options.push({ label: "Adjust timing", onClick: showAdjustTimingModal });

@@ -5,7 +5,6 @@ import { isOneShot } from "../models/Track";
 import { ERROR_TYPE, TrackData, TrackDataError } from "../models/DatabaseTypes";
 import {
   addSearchResultToGroup,
-  getNextIndex,
   getGroupByIndex,
   getTrackByIndex,
   DEFAULT_GROUP_VOLUME,
@@ -13,7 +12,6 @@ import {
   stopGroup,
 } from "../utils/storeUtil";
 import { loadGroups, saveGroups } from "../services/localStorage";
-import { ObjectType } from "../models/ObjectTypes";
 
 const DEFAULT_ENVIRONMENT_NAME = "Untitled environment";
 
