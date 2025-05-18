@@ -18,7 +18,6 @@ type ButtonProps = {
   secondaryIconColour?: string; // colour should be a hex code (with a leading #)
   onClick: () => void;
   className?: string;
-  isActive?: boolean;
   isSmall?: boolean;
   isDisabled?: boolean;
 };
@@ -32,7 +31,6 @@ export default function Button({
   secondaryIconColour,
   onClick,
   className,
-  isActive,
   isSmall,
   isDisabled,
 }: ButtonProps) {
@@ -59,7 +57,6 @@ export default function Button({
     "button-container " +
     (className ? className + " " : "") +
     (icon !== undefined && text === undefined ? "icon-only " : "") +
-    (isActive ? "active " : "") +
     (isSmall ? "small " : "") +
     (type ? type + " " : "");
 

@@ -23,7 +23,7 @@
     &>span,
     & .target-group-name {
       font-size: var(--font-size-small);
-      color: var(--grey-4);
+      color: var(--grey-5);
       flex: 1;
 
     }
@@ -41,14 +41,14 @@
   .message {
     text-align: center;
     padding: 2rem 0;
-    color: var(--faded-white);
+    color: var(--grey-5);
   }
 
   .spinner {
     display: flex;
     justify-content: center;
     padding-top: 2rem;
-    color: var(--faded-white);
+    color: var(--grey-5);
   }
 
   .results {

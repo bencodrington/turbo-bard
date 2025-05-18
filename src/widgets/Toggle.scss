@@ -61,11 +61,11 @@
   }
 
   input:checked+.slider {
-    background-color: var(--azure);
+    background-color: var(--secondary);
   }
 
   input:focus+.slider {
-    box-shadow: 0 0 1px var(--azure);
+    box-shadow: 0 0 1px var(--secondary);
   }
 
   input:checked+.slider>.thumb {

@@ -85,13 +85,5 @@ export default function SoundItem({
         />
       )}
     </div>
-    // <TrackItem
-    //   isAudioReady={isAudioLoaded}
-    //   volume={volume}
-    //   setVolume={setVolume}
-    //   groupIndex={groupIndex}
-    //   trackIndex={loop.index}
-    //   source={source}
-    // />
   );
 }
