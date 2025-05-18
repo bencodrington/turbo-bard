@@ -11,8 +11,10 @@
   li {
     height: 3.5rem;
     display: flex;
+    gap: .5rem;
     align-items: center;
-    padding: 0 2rem;
+    padding-left: 1rem;
+    padding-right: 2rem;
     background: var(--grey-1);
     color: var(--grey-5);
     cursor: pointer;

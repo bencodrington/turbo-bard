@@ -51,12 +51,22 @@ export default function SoundItem({
     );
   }
 
-  const options = [{ label: "Remove", onClick: remove }];
+  const options = [
+    { icon: "info", label: "Source info", onClick: showSource },
+    { icon: "times", label: "Remove", onClick: remove },
+  ];
   if (isOneShot(track)) {
-    options.push({ label: "Play once right now", onClick: playOnceRightNow });
-    options.push({ label: "Adjust timing", onClick: showAdjustTimingModal });
+    options.unshift({
+      icon: "hourglass",
+      label: "Adjust timing",
+      onClick: showAdjustTimingModal,
+    });
+    options.unshift({
+      icon: "play-circle",
+      label: "Play once right now",
+      onClick: playOnceRightNow,
+    });
   }
-  options.push({ label: "See source", onClick: showSource });
 
   return (
     <div className="sound-item-container">

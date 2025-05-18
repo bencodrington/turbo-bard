@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import "./DropdownMenu.scss";
 
 interface DropdownMenuOption {
+  icon: string;
   label: string;
   onClick: () => void;
 }
@@ -18,19 +19,38 @@ export default function DropdownMenu({
   className,
   closeDropdown,
 }: DropdownMenuProps) {
-
   const onOptionClick = (option: DropdownMenuOption) => {
     option.onClick();
     closeDropdown();
-  }
+  };
+
+  const dropdownElementRef = useRef(null);
+
+  useEffect(() => {
+    const onClickOutsideDropdown = (event: MouseEvent) => {
+      const eventPath = event.composedPath();
+      const element = dropdownElementRef.current;
+      if (element !== null && !eventPath.includes(element)) {
+        closeDropdown();
+      }
+    };
+    window.addEventListener("click", onClickOutsideDropdown);
+    return () => {
+      window.removeEventListener("click", onClickOutsideDropdown);
+    };
+  });
 
   return (
-    <ul className={'dropdown-menu-container ' + (className ?? '')}>
-      {
-        options.map(option =>
-          <li onClick={() => onOptionClick(option)} key={option.label}>{option.label}</li>
-        )
-      }
+    <ul
+      className={"dropdown-menu-container " + (className ?? "")}
+      ref={dropdownElementRef}
+    >
+      {options.map((option) => (
+        <li onClick={() => onOptionClick(option)} key={option.label}>
+          <i className={`fa fa-fw fa-${option.icon}`} />
+          {option.label}
+        </li>
+      ))}
     </ul>
   );
 }
