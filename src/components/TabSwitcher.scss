@@ -28,5 +28,9 @@
       cursor: default;
     }
 
+    &:not(.active):hover {
+      background: var(--grey-1);
+    }
+
   }
 }

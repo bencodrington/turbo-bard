@@ -17,7 +17,13 @@
 
     &.selected {
       color: white;
+      background: var(--grey-2);
+      cursor: default;
+    }
+
+    &:not(.selected):hover {
       background: var(--grey-1);
+      color: var(--grey-5);
     }
   }
 }

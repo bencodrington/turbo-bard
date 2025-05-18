@@ -1,13 +1,13 @@
-@import '../../mixins.scss';
+@import "../../mixins.scss";
 
 .search-item-container {
-  padding: .75rem;
+  padding: 0.75rem;
   padding-right: 2rem;
   display: flex;
   min-height: 3rem;
   cursor: pointer;
   align-items: baseline;
-  gap: .25rem;
+  gap: 0.25rem;
 
   .item-icon {
     color: var(--grey-5);
@@ -24,24 +24,29 @@
     .title {
       display: inline-block;
       @include body-medium;
-
-      &:hover {
-        color: white;
-      }
     }
 
     .pack-count {
       font-size: var(--font-size-small);
       color: var(--grey-5);
-      margin-bottom: .25rem;
+      margin-bottom: 0.25rem;
     }
   }
 
   .add-icon {
     align-self: center;
+    color: var(--grey-4);
 
     &.already-added {
       color: var(--grey-3);
+    }
+  }
+
+  &:hover {
+    background: var(--grey-1);
+
+    .add-icon:not(.already-added) {
+      color: white;
     }
   }
 }
