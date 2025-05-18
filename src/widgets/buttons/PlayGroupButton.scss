@@ -1,6 +1,11 @@
 .play-group-button-container {
   position: relative;
 
+  // Don't show a square behind this button on hover.
+  button.button-container:hover {
+    background: none;
+  }
+
   &:not(.disabled) {
     cursor: pointer;
   }
