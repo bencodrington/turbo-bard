@@ -1,10 +1,11 @@
 .now-playing-banner-container {
   display: flex;
-  padding: 0.5rem 0.5rem;
+  padding: 1rem;
+  padding-bottom: 2rem;
   align-items: center;
   position: relative;
   isolation: isolate;
-  gap: 0.25rem;
+  gap: 1rem;
 
   // Faded gradient background
   &::before {

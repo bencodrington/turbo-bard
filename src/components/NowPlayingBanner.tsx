@@ -64,11 +64,13 @@ export default function NowPlayingBanner() {
   }
   return (
     <div className="now-playing-banner-container">
-      <i
-        className={`${getIcon(mostRecentlyPlayedGroup)} group-list-item-icon`}
-        style={{ color: getIconColour(mostRecentlyPlayedGroup) }}
-      />
-      <span className="environment-name">{mostRecentlyPlayedGroup?.name}</span>
+      <span className="environment-name">
+        <i
+          className={`${getIcon(mostRecentlyPlayedGroup)} group-list-item-icon`}
+          style={{ color: getIconColour(mostRecentlyPlayedGroup) }}
+        />
+        {mostRecentlyPlayedGroup?.name}
+      </span>
       <Toggle
         id="now-playing-banner-combat-toggle"
         label="Combat"

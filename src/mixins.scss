@@ -18,7 +18,7 @@
 @mixin smallcaps {
   font-family: var(--font--default);
   font-size: var(--font-size-small);
-  letter-spacing: 0.06rem;
+  letter-spacing: 0.09rem;
   text-transform: uppercase;
   font-weight: 500;
 }

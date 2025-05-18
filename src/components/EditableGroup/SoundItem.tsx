@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { removeTrack } from "../../slices/groups";
 import { setUserTriggeredPlayOnceNow } from "../../slices/oneShotStates";
 
+const HIDE_ON_DESKTOP_CLASS = "hide-on-desktop";
+
 type SoundItemProps = {
   track: Track;
   groupIndex: number;
@@ -52,18 +54,25 @@ export default function SoundItem({
   }
 
   const options = [
-    { icon: "info", label: "Source info", onClick: showSource },
+    {
+      icon: "info-circle",
+      label: "Source",
+      className: HIDE_ON_DESKTOP_CLASS,
+      onClick: showSource,
+    },
     { icon: "times", label: "Remove", onClick: remove },
   ];
   if (isOneShot(track)) {
     options.unshift({
       icon: "hourglass",
       label: "Adjust timing",
+      className: HIDE_ON_DESKTOP_CLASS,
       onClick: showAdjustTimingModal,
     });
     options.unshift({
       icon: "play-circle",
-      label: "Play once right now",
+      label: "Play now",
+      className: HIDE_ON_DESKTOP_CLASS,
       onClick: playOnceRightNow,
     });
   }
@@ -79,11 +88,24 @@ export default function SoundItem({
           toggleIsMuted={() => {}}
         />
       </div>
-      <Button
-        onClick={toggleMenuOpen}
-        icon="ellipsis-v"
-        type={ButtonType.Default}
-      />
+
+      {
+        // HACK: ensure that loop volume sliders aren't longer than one shot
+        //  sliders on desktop. A better solution would use CSS grid.
+        isOneShot(track) ? null : <div className="spacer show-on-desktop" />
+      }
+      {options
+        .filter((option) => option.className === HIDE_ON_DESKTOP_CLASS)
+        .map((option) => (
+          <Button
+            onClick={option.onClick}
+            icon={option.icon}
+            text={option.label}
+            className="show-on-desktop"
+            key={option.label}
+          />
+        ))}
+      <Button onClick={toggleMenuOpen} icon="ellipsis-v" />
       {isMenuOpen && (
         <DropdownMenu
           className="sound-item-dropdown"

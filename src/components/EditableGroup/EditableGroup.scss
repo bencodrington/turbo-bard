@@ -36,7 +36,8 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding-bottom: 8rem;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
     overflow-y: auto;
   }
 
@@ -86,10 +87,17 @@
     &::after {
       content: "";
       display: block;
-      flex: 1;
-      min-width: 0;
       height: 1px;
       background: var(--grey-2);
+    }
+
+    &::before {
+      width: 0.5rem;
+    }
+
+    &::after {
+      flex: 1;
+      min-width: 0;
     }
   }
 

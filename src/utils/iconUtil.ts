@@ -33,7 +33,7 @@ export const ICON_COLOUR_OPTIONS = [
   "#9CC870", // Green
 ];
 
-export const getIconClassStringFromIconId = (id: string) => `fa-solid fa-${id}`;
+export const getIconClassStringFromIconId = (id: string) => `fa-solid fa-fw fa-${id}`;
 export const getIcon = (group: Group) =>
   getIconClassStringFromIconId(group.icon ?? DEFAULT_ENVIRONMENT_ICON);
 export const getIconColour = (group: Group) =>

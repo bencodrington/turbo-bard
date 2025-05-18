@@ -5,6 +5,7 @@ import "./DropdownMenu.scss";
 interface DropdownMenuOption {
   icon: string;
   label: string;
+  className?: string;
   onClick: () => void;
 }
 
@@ -46,7 +47,11 @@ export default function DropdownMenu({
       ref={dropdownElementRef}
     >
       {options.map((option) => (
-        <li onClick={() => onOptionClick(option)} key={option.label}>
+        <li
+          onClick={() => onOptionClick(option)}
+          key={option.label}
+          className={option.className}
+        >
           <i className={`fa fa-fw fa-${option.icon}`} />
           {option.label}
         </li>

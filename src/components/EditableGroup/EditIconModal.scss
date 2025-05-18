@@ -39,6 +39,7 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     margin-top: 1rem;
+    justify-items: center;
 
     & > .button-container {
       width: auto;

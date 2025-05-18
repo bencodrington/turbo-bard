@@ -1,13 +1,15 @@
 .sound-item-container {
   display: flex;
   position: relative;
+  gap: .25rem;
 
   .column {
     flex: 1;
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: .25rem;
+    gap: 0.25rem;
+    margin-right: 1rem;
   }
 
   .sound-item-dropdown {
@@ -15,5 +17,21 @@
     right: 0;
     top: 100%;
     z-index: 1;
+  }
+
+  .spacer {
+    width: 18rem;
+  }
+
+  @media (max-width: calc(1200 / 16 * 1rem)) {
+    .show-on-desktop {
+      display: none;
+    }
+  }
+  @media (min-width: calc(1200 / 16 * 1rem)) {
+    padding: 0.25rem;
+    .hide-on-desktop {
+      display: none;
+    }
   }
 }

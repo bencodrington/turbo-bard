@@ -125,7 +125,7 @@ export default function AdjustTimingModal({
         <Button
           onClick={playNow}
           icon="play-circle"
-          text="Play once right now"
+          text="Play now"
           className="play-once-button"
         />
       </Modal>

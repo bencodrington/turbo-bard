@@ -32,7 +32,7 @@
   .floating-button-group {
     display: flex;
     gap: 0.5rem;
-    padding: 3rem 0.5rem;
+    padding: 1rem 0.5rem;
     width: 100%;
     background: var(--grey-0);
     justify-content: center;
@@ -48,7 +48,7 @@
     position: relative;
     flex: 2;
     min-width: 0;
-    max-width: calc(600 / 16 * 1rem);
+    max-width: calc(1000 / 16 * 1rem);
     background: var(--background-level-1);
     border-radius: 6px;
     overflow: hidden;
