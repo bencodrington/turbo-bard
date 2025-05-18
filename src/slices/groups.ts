@@ -41,32 +41,12 @@ const groupsSlice = createSlice({
       }: PayloadAction<{
         searchResult: SearchResult;
         shouldAddToCombatSection: boolean;
-        groupIndex?: number;
+        groupIndex: number;
       }>
     ) {
       const { searchResult, groupIndex, shouldAddToCombatSection } = payload;
       // Determine which group the new track(s) should be assigned to
-      let group;
-      if (groupIndex === undefined) {
-        const groupName =
-          searchResult.type === ObjectType.PACK
-            ? searchResult.name
-            : DEFAULT_ENVIRONMENT_NAME;
-        // Create new group
-        group = {
-          name: groupName,
-          index: getNextIndex(state),
-          tracks: [],
-          combatTracks: [],
-          volume: DEFAULT_GROUP_VOLUME,
-          isExpanded: true,
-          icon: null,
-          iconColour: null,
-        };
-        state.unshift(group);
-      } else {
-        group = getGroupByIndex(groupIndex, state);
-      }
+      const group = getGroupByIndex(groupIndex, state);
       if (group === undefined) return;
       // Add track(s) to that group
       addSearchResultToGroup(searchResult, group, shouldAddToCombatSection);
