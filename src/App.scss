@@ -51,7 +51,10 @@ strong {
 
 body {
   width: 100vw;
+  // Fallback to vh units
   height: 100vh;
+  // Use dvh units to make sure we're taking up the full screen on mobile
+  height: 100dvh;
 }
 
 h2 {
@@ -116,7 +119,10 @@ input {
 .App {
   // Create a new stacking context
   isolation: isolate;
+  // Fallback to vh units
   height: 100vh;
+  // Use dvh units to make sure we're taking up the full screen on mobile
+  height: 100dvh;
   position: relative;
   display: flex;
   flex-direction: column;
