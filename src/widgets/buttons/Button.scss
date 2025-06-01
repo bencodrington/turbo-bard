@@ -12,7 +12,7 @@
   border-radius: 3px;
   position: relative;
 
-  --hover-transition-duration: 0.0s;
+  --hover-transition-duration: 0s;
 
   transition: background-color var(--hover-transition-duration) ease-out;
 
@@ -47,28 +47,39 @@
   &.gradient-outline {
     position: relative;
     background: none;
-    border: 1px solid var(--gradient-color-1);
-    border-top-color: var(--gradient-color-2);
-    border-right-color: var(--gradient-color-2);
     color: white;
     isolation: isolate;
 
-    &::before {
+    &::before,
+    &::after {
       content: "";
       display: block;
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--text-gradient);
-      opacity: 0.1;
-      transition: opacity var(--hover-transition-duration) ease-out;
-      z-index: -1;
+      inset: 0;
     }
 
-    &:not(:disabled):hover::before {
-      opacity: 0.4;
+    // Border
+    &::before {
+      background: var(--text-gradient);
+      border-radius: 3px;
+      transition: opacity var(--hover-transition-duration) ease-out;
+      z-index: -2;
+    }
+    // Darker gradient background
+    &::after {
+      z-index: -1;
+      --opacity: 80%;
+      background: color-mix(
+        in srgb,
+        transparent,
+        var(--background) var(--opacity)
+      );
+      inset: 1px;
+      border-radius: 4px;
+    }
+
+    &:not(:disabled):hover::after {
+      --opacity: 60%;
     }
   }
 
