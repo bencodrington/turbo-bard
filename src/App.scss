@@ -1,5 +1,11 @@
 @import "./mixins.scss";
 
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 20deg;
+  inherits: false;
+}
+
 :root {
   --grey-0: #121212;
   --grey-1: #202020;
@@ -16,11 +22,19 @@
   --gradient-color-3: #ffd502;
 
   --text-gradient: linear-gradient(
-    20deg,
+    var(--gradient-angle),
     var(--deep-blue) 0%,
     var(--gradient-color-1) 17%,
     var(--gradient-color-2) 53%,
     var(--gradient-color-3) 83%
+  );
+
+  --faded-text-gradient: linear-gradient(
+    var(--gradient-angle),
+    color-mix(in srgb, black, var(--deep-blue) 20%) 0%,
+    color-mix(in srgb, black, var(--gradient-color-1) 20%) 17%,
+    color-mix(in srgb, black, var(--gradient-color-2) 20%) 53%,
+    color-mix(in srgb, black, var(--gradient-color-3) 20%) 83%
   );
 
   --font--default: "Alegreya Sans", sans-serif;
@@ -126,16 +140,21 @@ input {
   position: relative;
   display: flex;
   flex-direction: column;
+  container-type: inline-size;
 
   // FIXME: deep selector
   .about-page-container {
-    z-index: 2;
+    z-index: 3;
   }
 
   .group-list-container {
     flex: 1;
     min-height: 0;
     z-index: 1;
+  }
+
+  .now-playing-banner-container {
+    z-index: 2;
   }
 }
 

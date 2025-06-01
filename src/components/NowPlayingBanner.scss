@@ -4,30 +4,104 @@
   padding-bottom: 2rem;
   align-items: center;
   position: relative;
-  isolation: isolate;
   gap: 1rem;
+  --border-width: 2px;
+  isolation: isolate;
+  background: linear-gradient(to bottom, var(--grey-2) 0 1%, black 1% 100%);
 
-  // Faded gradient background
+  // Bump everything up to avoid negative z-index bugs on iOS
+  & > *,
+  &::before {
+    z-index: 2;
+  }
+
+  // Background needs to be a separate element to let the border go behind it.
   &::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: var(--text-gradient);
-    z-index: -2;
-    opacity: 0.1;
+    background: var(--faded-text-gradient);
+    // Fade in the linear-gradient quickly to cover up the conical gradient
+    //  as soon as possible.
+    transition: opacity 0.05s ease;
   }
-  // Gradient border along the top
+
+  // Gradient border
+  & .border,
+  // Glow effect
   &::after {
     content: "";
     position: absolute;
+    // At small resolutions, only display a top border
+    top: calc(-1 * var(--border-width));
     inset-inline: 0;
-    height: 1px;
-    bottom: calc(100% - 1px);
-    background: var(--text-gradient);
+    animation: 3s spin linear infinite;
+    background: conic-gradient(
+      from var(--gradient-angle),
+      var(--gradient-color-1),
+      var(--gradient-color-2),
+      var(--gradient-color-3),
+      var(--gradient-color-1)
+    );
+    height: 100%;
+    z-index: 1;
+    transition: opacity 1s ease;
+  }
+  &::after {
+    filter: blur(1rem);
+    opacity: 0.5;
+  }
+
+  &:not(.is-playing) {
+    & .border,
+    &::after {
+      opacity: 0;
+      // Fade out conical gradient first so it doesn't show through the
+      //  ::before element
+      transition: opacity 0.5s ease;
+    }
+
+    &::before {
+      opacity: 0;
+      // Fade out linear gradient slower
+      transition: opacity 2s ease;
+    }
   }
 
   .environment-name {
     flex: 1;
     min-width: 0;
+  }
+}
+
+// On larger screens, detach banner from the bottom, cap its size, and display
+//  a border all the way around
+@container (min-width: 40rem) {
+  .now-playing-banner-container {
+    margin: 1rem;
+    padding-bottom: 1rem;
+    align-self: center;
+    width: 40rem;
+    border-radius: 4px;
+    background: black;
+
+    &::before {
+      border-radius: 4px;
+    }
+
+    & .border {
+      height: auto;
+      border-radius: 6px;
+      inset: calc(-1 * var(--border-width));
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    --gradient-angle: 0deg;
+  }
+  to {
+    --gradient-angle: 360deg;
   }
 }

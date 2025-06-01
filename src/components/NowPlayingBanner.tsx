@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 import "./GroupList/shared-group-list-styles.scss";
 import "./NowPlayingBanner.scss";
 import PlayGroupButton from "../widgets/buttons/PlayGroupButton";
-import { getGroupByIndex, getPlayingGroup } from "../utils/storeUtil";
+import {
+  getGroupByIndex,
+  getPlayingGroup,
+  isGroupPlaying,
+} from "../utils/storeUtil";
 import { useGroups } from "../slices";
 import Toggle from "../widgets/Toggle";
 import useBoolean from "../hooks/useBoolean";
@@ -62,8 +66,15 @@ export default function NowPlayingBanner() {
   if (mostRecentlyPlayedGroup === null) {
     return null;
   }
+
+  const isPlaying = isGroupPlaying(mostRecentlyPlayedGroup);
   return (
-    <div className="now-playing-banner-container">
+    <div
+      className={`now-playing-banner-container${
+        isPlaying ? " is-playing" : ""
+      }`}
+    >
+      <div className="border" />
       <span className="environment-name">
         <i
           className={`${getIcon(mostRecentlyPlayedGroup)} group-list-item-icon`}
