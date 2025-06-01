@@ -17,6 +17,7 @@ export default function SearchBar({ placeholder, searchText, setSearchText }: Se
         value={searchText}
         onChange={e => setSearchText(e.target.value)}
         placeholder={placeholder}
+        autoFocus
       />
 
     </div>
