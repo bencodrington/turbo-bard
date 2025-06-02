@@ -12,7 +12,8 @@
     font-size: var(--font-size-small);
     color: var(--grey-5);
     cursor: pointer;
-    gap: 4px;
+    gap: .5rem;
+    padding-top: .25rem;
   }
 
   /* Hide default HTML checkbox */
@@ -76,6 +77,10 @@
     i {
       opacity: 1;
     }
+  }
+
+  .label-text {
+    line-height: 1rem;
   }
 
   .label-text.subdued {

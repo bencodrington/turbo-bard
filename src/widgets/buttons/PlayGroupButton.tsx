@@ -41,7 +41,7 @@ export default function PlayGroupButton({
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         width="44"
-        height="50"
+        height="48"
         viewBox="0 0 173.20508075688772 200"
         className="hexagon"
       >
