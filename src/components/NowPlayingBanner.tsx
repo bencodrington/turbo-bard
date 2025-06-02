@@ -86,6 +86,7 @@ export default function NowPlayingBanner() {
         id="now-playing-banner-combat-toggle"
         label="Combat"
         isChecked={isCombatToggleChecked}
+        isDisabled={isPlaying === false}
         onToggle={toggleIsCombatModeActive}
         icon="hand-fist"
         isLabelTextColorSubdued={false}

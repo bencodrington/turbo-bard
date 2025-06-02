@@ -12,8 +12,8 @@
     font-size: var(--font-size-small);
     color: var(--grey-5);
     cursor: pointer;
-    gap: .5rem;
-    padding-top: .25rem;
+    gap: 0.5rem;
+    padding-top: 0.25rem;
   }
 
   /* Hide default HTML checkbox */
@@ -28,7 +28,7 @@
   /* The slider */
   .slider {
     border: 1px solid var(--grey-3);
-    -webkit-transition: .4s;
+    -webkit-transition: 0.4s;
     transition: var(--animation-speed);
     border-radius: var(--circle-diameter);
     width: calc(2 * var(--circle-diameter));
@@ -61,15 +61,15 @@
     }
   }
 
-  input:checked+.slider {
+  input:checked + .slider {
     background-color: var(--secondary);
   }
 
-  input:focus+.slider {
+  input:focus + .slider {
     box-shadow: 0 0 1px var(--secondary);
   }
 
-  input:checked+.slider>.thumb {
+  input:checked + .slider > .thumb {
     -webkit-transform: translateX(var(--circle-diameter));
     -ms-transform: translateX(var(--circle-diameter));
     transform: translateX(var(--circle-diameter));
@@ -85,5 +85,12 @@
 
   .label-text.subdued {
     color: var(--grey-4);
+  }
+
+  &.is-disabled {
+    opacity: 0.35;
+    label {
+      cursor: default;
+    }
   }
 }
