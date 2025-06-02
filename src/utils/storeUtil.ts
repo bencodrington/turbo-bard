@@ -41,6 +41,13 @@ export function addSearchResultToGroup(
     return;
   }
   // Result is an individual track
+  // Track should be playing if:
+  const shouldStartPlaying =
+    // Some track in the group is playing AND
+    isGroupPlaying(group) &&
+    // Combat mode is active (e.g. all tracks should be playing) OR
+    //  this track isn't being added to the combat section anyway
+    (areCombatTracksPlaying(group) || !shouldAddToCombatSection);
   const newTrackObject = {
     id,
     index: getNextIndex([...group.tracks, ...group.combatTracks]),
@@ -49,7 +56,7 @@ export function addSearchResultToGroup(
     tags,
     volume: DEFAULT_TRACK_VOLUME,
     isMuted: false,
-    isPlaying: isGroupPlaying(group),
+    isPlaying: shouldStartPlaying,
     shouldLoad: true,
   };
   if (shouldAddToCombatSection) {
@@ -78,8 +85,11 @@ export function getTrackByIndex(
 export function isGroupPlaying(group: Group) {
   return (
     group.tracks.some((track) => track.isPlaying) ||
-    group.combatTracks.some((track) => track.isPlaying)
+    areCombatTracksPlaying(group)
   );
+}
+export function areCombatTracksPlaying(group: Group) {
+  return group.combatTracks.some((track) => track.isPlaying);
 }
 
 export function getPlayingGroup(groups: Group[]) {
