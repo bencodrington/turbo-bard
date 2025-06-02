@@ -35,6 +35,11 @@ export default function useOneShotPlayer(
   isPlaying: boolean
 ) {
   const [howls, setHowls] = useState<Howl[]>([]);
+  // We initialize a second copy of each sound to let the user manually play it
+  //  regardless of whether the environment is active or not.
+  const [manuallyTriggeredHowls, setManuallyTriggeredHowls] = useState<Howl[]>(
+    []
+  );
   const fadeMultiplier = useFadeMultiplier(isPlaying);
 
   const oneShotStates = useOneShotStates();
@@ -56,10 +61,19 @@ export default function useOneShotPlayer(
     const sources = deserializeSources(serializedSources);
     if (sources.length === 0) return;
     const newHowls = sources.map((source) => new Howl({ src: [source] }));
-    newHowls.forEach((newHowl) => {
+    const newManuallyTriggeredHowls = sources.map(
+      (source) => new Howl({ src: [source] })
+    );
+    [
+      ...newHowls.map((howl) => ({ howl, setter: setHowls })),
+      ...newManuallyTriggeredHowls.map((howl) => ({
+        howl,
+        setter: setManuallyTriggeredHowls,
+      })),
+    ].forEach(({ howl: newHowl, setter }) => {
       // Once loaded, append it to list of loaded audio elements
       const appendToHowlList = () => {
-        setHowls((_howls) => [..._howls, newHowl]);
+        setter((_howls) => [..._howls, newHowl]);
       };
       if (newHowl.state() === "loaded") {
         // Sound is already loaded in howler (probably the same one shot was
@@ -70,7 +84,7 @@ export default function useOneShotPlayer(
       newHowl.once("load", appendToHowlList);
     });
     return function cleanup() {
-      newHowls.forEach((newHowl) => {
+      [...newHowls, ...newManuallyTriggeredHowls].forEach((newHowl) => {
         newHowl.fade(newHowl.volume(), 0, FADE_DURATION_SECONDS * 1000);
         newHowl.once("fade", () => newHowl.unload());
       });
@@ -164,21 +178,33 @@ export default function useOneShotPlayer(
   //  containing group is stopped, user triggered plays should be audible.
   useEffect(() => {
     if (!userTriggeredPlayOnceNow) return;
-    if (howls.length > 0) {
-      const randomIndex = Math.floor(Math.random() * howls.length);
-      const howl = howls[randomIndex];
-      howl.volume(volume);
+    if (manuallyTriggeredHowls.length > 0) {
+      const randomIndex = Math.floor(
+        Math.random() * manuallyTriggeredHowls.length
+      );
+      const howl = manuallyTriggeredHowls[randomIndex];
       // Restart from the beginning, in case the sound
       //  is currently playing
       howl.play();
     }
     dispatch(setUserTriggeredPlayOnceNow({ oneShotTrackId, newValue: false }));
-  }, [userTriggeredPlayOnceNow, dispatch, oneShotTrackId, howls, volume]);
+  }, [
+    userTriggeredPlayOnceNow,
+    dispatch,
+    oneShotTrackId,
+    manuallyTriggeredHowls,
+    volume,
+  ]);
 
   // Keep audio volume in sync
   useEffect(() => {
     howls.forEach((howl) => {
       howl.volume(fadeMultiplier * volume);
+    });
+    // Manually triggered howls ignore fade multiplier so that they can play
+    //  even while the containing environment is stopped
+    manuallyTriggeredHowls.forEach((howl) => {
+      howl.volume(volume);
     });
   });
 }
