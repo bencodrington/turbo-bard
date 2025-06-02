@@ -1,6 +1,7 @@
 import { SearchResult } from "../models/SearchResult";
 import { Group } from "../models/Group";
 import { findTrackInGroup } from "./groupUtil";
+import { isTrackAmbiance } from "./trackUtil";
 
 export const DEFAULT_GROUP_VOLUME = 1;
 export const DEFAULT_TRACK_VOLUME = 0.7;
@@ -87,7 +88,8 @@ export function getPlayingGroup(groups: Group[]) {
 
 export function playGroup(group: Group, startInCombatMode = false) {
   if (group.tracks.length > 0 && startInCombatMode === false) {
-    // If group has non-combat tracks, play those
+    // If group has non-combat tracks and combat mode is not active,
+    //  play non-combat tracks.
     group.tracks.forEach((track) => {
       track.isPlaying = true;
     });
@@ -95,12 +97,15 @@ export function playGroup(group: Group, startInCombatMode = false) {
       track.isPlaying = false;
     });
   } else {
-    // Go straight to combat tracks
+    // Group has no combat tracks or the combat toggle is active, so play in
+    //  combat mode.
+    // This means play all combat tracks and all non-combat ambience, and stop
+    //  non-combat music.
     group.combatTracks.forEach((track) => {
       track.isPlaying = true;
     });
     group.tracks.forEach((track) => {
-      track.isPlaying = false;
+      track.isPlaying = isTrackAmbiance(track);
     });
   }
 }

@@ -15,7 +15,6 @@ import SoundItem from "./SoundItem";
 import SectionHeader from "../SectionHeader";
 import EmptySection from "./EmptySection";
 import SearchResults from "./SearchResults";
-import { MUSIC_TAG } from "../../models/ObjectTypes";
 import PlayGroupButton from "../../widgets/buttons/PlayGroupButton";
 import SourceModal from "./SourceModal";
 import { findTrackInGroup } from "../../utils/groupUtil";
@@ -23,6 +22,7 @@ import EditIconModal from "./EditIconModal";
 import { getIcon, getIconColour } from "../../utils/iconUtil";
 import AdjustTimingModal from "./AdjustTimingModal";
 import { isOneShot } from "../../models/Track";
+import { isTrackAmbiance, isTrackMusic } from "../../utils/trackUtil";
 
 type EditableGroupProps = {
   className?: string;
@@ -51,23 +51,15 @@ export default function EditableGroup({
     isFetchingResults,
     searchText,
     setSearchText,
-    appendSearchText,
+    // appendSearchText,
     searchResultType,
     setSearchResultType,
   } = useSearchResults();
 
-  const musicTracks = group.tracks.filter((track) =>
-    track.tags?.includes(MUSIC_TAG)
-  );
-  const ambianceTracks = group.tracks.filter(
-    (track) => !track.tags?.includes(MUSIC_TAG)
-  );
-  const combatMusicTracks = group.combatTracks.filter((track) =>
-    track.tags?.includes(MUSIC_TAG)
-  );
-  const combatAmbianceTracks = group.combatTracks.filter(
-    (track) => !track.tags?.includes(MUSIC_TAG)
-  );
+  const musicTracks = group.tracks.filter(isTrackMusic);
+  const ambianceTracks = group.tracks.filter(isTrackAmbiance);
+  const combatMusicTracks = group.combatTracks.filter(isTrackMusic);
+  const combatAmbianceTracks = group.combatTracks.filter(isTrackAmbiance);
 
   const [trackWithOpenMenu, setTrackWithOpenMenu] = useState<number | null>(
     null
