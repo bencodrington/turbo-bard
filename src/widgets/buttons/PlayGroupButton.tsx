@@ -33,9 +33,9 @@ export default function PlayGroupButton({
 
   return (
     <div
-      className={`play-group-button-container ${
-        isGroupPlayable(group) ? "" : "disabled"
-      }`}
+      className={`play-group-button-container${
+        isGroupPlayable(group) ? "" : " disabled"
+      }${isGroupPlaying(group) ? " is-playing" : ""}`}
     >
       <svg
         version="1.1"

@@ -17,13 +17,34 @@
   --secondary: #2154d7;
   --primary: #0078ce;
   --accent: #04afed;
+  --gradient-color-0: var(--deep-blue);
   --gradient-color-1: #1f53da;
   --gradient-color-2: #03a2c4;
   --gradient-color-3: #ffd502;
+  --dark-gradient-color-0: color-mix(
+    in srgb,
+    black,
+    var(--gradient-color-0) 20%
+  );
+  --dark-gradient-color-1: color-mix(
+    in srgb,
+    black,
+    var(--gradient-color-1) 20%
+  );
+  --dark-gradient-color-2: color-mix(
+    in srgb,
+    black,
+    var(--gradient-color-2) 20%
+  );
+  --dark-gradient-color-3: color-mix(
+    in srgb,
+    black,
+    var(--gradient-color-3) 20%
+  );
 
   --text-gradient: linear-gradient(
     var(--gradient-angle),
-    var(--deep-blue) 0%,
+    var(--gradient-color-0) 0%,
     var(--gradient-color-1) 17%,
     var(--gradient-color-2) 53%,
     var(--gradient-color-3) 83%
@@ -31,10 +52,10 @@
 
   --faded-text-gradient: linear-gradient(
     var(--gradient-angle),
-    color-mix(in srgb, black, var(--deep-blue) 20%) 0%,
-    color-mix(in srgb, black, var(--gradient-color-1) 20%) 17%,
-    color-mix(in srgb, black, var(--gradient-color-2) 20%) 53%,
-    color-mix(in srgb, black, var(--gradient-color-3) 20%) 83%
+    var(--dark-gradient-color-0) 0%,
+    var(--dark-gradient-color-1) 17%,
+    var(--dark-gradient-color-2) 53%,
+    var(--dark-gradient-color-3) 83%
   );
 
   --font--default: "Alegreya Sans", sans-serif;

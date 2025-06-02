@@ -20,5 +20,33 @@
   .hexagon path {
     stroke: var(--grey-2);
     fill: var(--grey-0);
+    transition: fill 0.3s ease;
+  }
+
+  &.is-playing {
+   .hexagon path {
+    animation: shimmer 5s linear infinite;
+   } 
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    stroke: var(--gradient-color-1);
+    fill: var(--dark-gradient-color-0)
+  }
+  25% {
+    fill: var(--dark-gradient-color-1)
+  }
+  50% {
+    stroke: var(--gradient-color-2);
+    fill: var(--dark-gradient-color-2)
+  }
+  75% {
+    fill: var(--dark-gradient-color-3)
+  }
+  100% {
+    stroke: var(--gradient-color-1);
+    fill: var(--dark-gradient-color-0)
   }
 }
