@@ -18,7 +18,7 @@ export default function RangeInput({
   min,
   max,
   value,
-  step = 0.02,
+  step = 0.01,
   onValueChange,
   ariaLabel,
   getAriaValueText,
