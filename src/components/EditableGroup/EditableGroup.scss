@@ -49,7 +49,7 @@
   .horizontal-padding {
     display: flex;
     flex-direction: column;
-    padding: 0 1rem;
+    padding: 0 1.25rem;
   }
 
   .combat-section-header {
@@ -57,8 +57,8 @@
     gap: 0.5rem;
 
     p {
-      font-size: var(--font-size-small);
       color: var(--grey-4);
+      text-align: center;
     }
 
     strong {
@@ -77,6 +77,9 @@
 
     i {
       color: var(--grey-4);
+      position: relative;
+      width: 1rem;
+      text-align: center;
     }
 
     h3 {
@@ -87,14 +90,11 @@
     &::after {
       content: "";
       display: block;
-      height: 1px;
+      height: 2px;
       background: var(--grey-2);
     }
 
-    &::before {
-      width: 0.5rem;
-    }
-
+    &::before,
     &::after {
       flex: 1;
       min-width: 0;
