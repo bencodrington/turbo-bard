@@ -16,9 +16,7 @@
   .group-list-column {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    min-width: 0;
-    max-width: calc(400 / 16 * 1rem);
+    flex: 0 1 calc(400 / 16 * 1rem);
   }
 
   .group-list {
@@ -52,6 +50,8 @@
     background: var(--background-level-1);
     border-radius: 6px;
     overflow: hidden;
+    margin: 1rem;
+    margin-top: 0;
 
     @media (max-width: calc(1000 / 16 * 1rem)) {
       z-index: 1;
@@ -61,6 +61,20 @@
       top: 0;
       left: 0;
       border-width: 0;
+      margin: 0;
+
+      &.empty-state {
+        display: none;
+      }
+    }
+
+    &.empty-state {
+      background: color-mix(
+        in srgb,
+        var(--background),
+        var(--background-level-1) 20%
+      );
+      box-shadow: 0px 2px 10px var(--background-level-1) inset;
     }
   }
 }

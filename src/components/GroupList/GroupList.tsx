@@ -58,7 +58,7 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
           {groups.length !== 0 && (
             <div className="floating-button-group">
               <Button
-                text="Add environment"
+                text="Add an environment"
                 type={ButtonType.Primary}
                 icon="plus"
                 onClick={createNewGroup}
@@ -67,12 +67,14 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
           )}
         </div>
 
-        {editableGroup !== null && (
+        {editableGroup !== null ? (
           <EditableGroup
             className="editable-group"
             stopEditingGroup={stopEditingGroup}
             group={editableGroup}
           />
+        ) : (
+          <div className="editable-group empty-state" />
         )}
       </main>
     </div>

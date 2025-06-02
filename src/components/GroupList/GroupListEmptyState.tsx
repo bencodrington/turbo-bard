@@ -31,7 +31,7 @@ export default function GroupListEmptyState({ createNewGroup }: { createNewGroup
       <div className="floating-action">
         <h5>To get started,</h5>
         <Button
-          text="Add environment"
+          text="Add an environment"
           type={ButtonType.Primary}
           icon="plus"
           onClick={createNewGroup}
