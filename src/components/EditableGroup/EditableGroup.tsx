@@ -3,11 +3,13 @@ import Button, { ButtonType } from "../../widgets/buttons/Button";
 import {
   addSearchResult,
   removeGroup,
+  removeTrack,
   setGroupName,
 } from "../../slices/groups";
 import "./EditableGroup.scss";
 import { useDispatch } from "react-redux";
 import { Group } from "../../models/Group";
+import { SearchResult } from "../../models/SearchResult";
 import useBoolean from "../../hooks/useBoolean";
 import useSearchResults from "../SearchDropdown/useSearchResults";
 import { constructKey } from "../../utils/tsxUtil";
@@ -91,11 +93,26 @@ export default function EditableGroup({
       : findTrackInGroup(indexOfTrackWithAdjustTimingModalOpen, group) ?? null;
   const oneShotWithAdjustTimingModalOpen =
     trackWithAdjustTimingModalOpen !== null &&
-    isOneShot(trackWithAdjustTimingModalOpen)
+      isOneShot(trackWithAdjustTimingModalOpen)
       ? trackWithAdjustTimingModalOpen
       : null;
 
   const [isEditingIcon, setIsEditingIcon] = useState(false);
+
+  const removeSearchResult = (result: SearchResult, isModifyingCombatSection: boolean) => {
+    // Find the track by its ID in the group
+    const allTracks = isModifyingCombatSection
+      ? group.combatTracks
+      : group.tracks;
+    const trackToRemove = allTracks.find(track => track.id === result.id);
+
+    if (trackToRemove) {
+      dispatch(removeTrack({
+        groupIndex: group.index,
+        trackIndex: trackToRemove.index
+      }));
+    }
+  };
 
   return (
     <div
@@ -112,6 +129,7 @@ export default function EditableGroup({
               })
             )
           }
+          onRemoveSearchResult={removeSearchResult}
           onCloseSearch={() => {
             setIsSearchOpen(false);
           }}

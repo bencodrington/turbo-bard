@@ -36,17 +36,9 @@
   .add-icon {
     align-self: center;
     color: var(--grey-4);
-
-    &.already-added {
-      color: var(--grey-3);
-    }
   }
 
   &:hover {
     background: var(--grey-1);
-
-    .add-icon:not(.already-added) {
-      color: white;
-    }
   }
 }

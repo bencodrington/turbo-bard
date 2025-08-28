@@ -52,7 +52,7 @@ export default function SearchItem({ data, onClick, isAlreadyAdded }: SearchItem
         {packCountElement}
         <Tags tags={filteredTags} />
       </div>
-      <i className={`add-icon fa-solid fa-${isAlreadyAdded ? 'check' : 'plus'} ${isAlreadyAdded ? 'already-added' : ''}`} />
+      <i className={`add-icon fa-solid fa-${isAlreadyAdded ? 'minus' : 'plus'}`} />
     </li>
   );
 }

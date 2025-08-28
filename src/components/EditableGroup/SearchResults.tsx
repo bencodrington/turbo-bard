@@ -16,6 +16,10 @@ interface SearchResultsProps {
     result: SearchResult,
     shouldAddToCombatSection: boolean
   ) => void;
+  onRemoveSearchResult: (
+    result: SearchResult,
+    shouldAddToCombatSection: boolean
+  ) => void;
   onCloseSearch: () => void;
   targetGroupName: string;
   searchText: string;
@@ -48,6 +52,7 @@ const TABS: Tab[] = [
 
 export default function SearchResults({
   onAddSearchResult,
+  onRemoveSearchResult,
   onCloseSearch,
   targetGroupName,
   searchText,
@@ -59,14 +64,24 @@ export default function SearchResults({
   targetGroupId,
   soundsInGroup,
 }: SearchResultsProps) {
-  const [isAddingToCombatSection, , toggleIsAddingToCombatSection] =
+  const [isModifyingCombatSection, , toggleIsModifyingCombatSection] =
     useBoolean(false);
+
+  const toggleIsSoundInGroup = (result: SearchResult, isModifyingCombatSection: boolean) => {
+    if (soundsInGroup.includes(result.id)) {
+      // Remove from group
+      onRemoveSearchResult(result, isModifyingCombatSection);
+    } else {
+      // Add to group
+      onAddSearchResult(result, isModifyingCombatSection);
+    }
+  }
 
   const resultElements = results.map((result) => (
     <SearchItem
       key={result.id}
       data={result}
-      onClick={() => onAddSearchResult(result, isAddingToCombatSection)}
+      onClick={() => toggleIsSoundInGroup(result, isModifyingCombatSection)}
       isAlreadyAdded={doesGroupContainSearchResult(soundsInGroup, result)}
     />
   ));
@@ -93,8 +108,8 @@ export default function SearchResults({
           <Toggle
             id="combat-toggle"
             label="Add to Combat"
-            isChecked={isAddingToCombatSection}
-            onToggle={toggleIsAddingToCombatSection}
+            isChecked={isModifyingCombatSection}
+            onToggle={toggleIsModifyingCombatSection}
             icon="hand-fist"
           />
         </div>
