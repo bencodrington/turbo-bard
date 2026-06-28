@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAudioFileUrl } from "../utils/audioFileUtil";
 import { useFadeMultiplier } from "./useFadeMultiplier";
 import { Howl } from "howler";
+import { createHowl } from "../utils/howlerUtil";
 const FADE_DURATION_SECONDS = 2;
 
 export default function useLoopPlayer(
@@ -20,14 +21,9 @@ export default function useLoopPlayer(
   useEffect(() => {
     if (src === undefined) return;
     let wasDeleted = false;
-    const newHowl = new Howl({
-      src: [src],
-      loop: true,
-      preload: false,
-      onload: () => {
-        if (wasDeleted) return;
-        setIsLoaded(true);
-      },
+    const newHowl = createHowl(src, true, () => {
+      if (wasDeleted) return;
+      setIsLoaded(true);
     });
     setHowl(newHowl);
     return () => {

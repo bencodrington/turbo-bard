@@ -11,6 +11,7 @@ import {
   setUserTriggeredPlayOnceNow,
 } from "../slices/oneShotStates";
 import { useDispatch } from "react-redux";
+import { createHowl } from "../utils/howlerUtil";
 const FADE_DURATION_SECONDS = 2;
 
 const SERIALIZATION_DELIMITER = "----";
@@ -60,9 +61,9 @@ export default function useOneShotPlayer(
   useEffect(() => {
     const sources = deserializeSources(serializedSources);
     if (sources.length === 0) return;
-    const newHowls = sources.map((source) => new Howl({ src: [source] }));
-    const newManuallyTriggeredHowls = sources.map(
-      (source) => new Howl({ src: [source] })
+    const newHowls = sources.map((source) => createHowl(source, false));
+    const newManuallyTriggeredHowls = sources.map((source) =>
+      createHowl(source, false)
     );
     [
       ...newHowls.map((howl) => ({ howl, setter: setHowls })),
